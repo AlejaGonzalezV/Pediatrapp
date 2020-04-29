@@ -1,4 +1,4 @@
-package com.example.pediatraap;
+package com.example.pediatrapp;
 
 import android.content.Context;
 

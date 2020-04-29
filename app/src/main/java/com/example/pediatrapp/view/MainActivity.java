@@ -1,8 +1,10 @@
-package com.example.pediatraap;
+package com.example.pediatrapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.pediatrapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
