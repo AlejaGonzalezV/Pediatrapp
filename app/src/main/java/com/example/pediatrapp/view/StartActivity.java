@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import android.text.Html;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.ViewPagerAdapter;
@@ -21,14 +24,46 @@ public class StartActivity extends AppCompatActivity {
     private String[] text = {"Aquí puedes llevar el seguimiento del desarrollo y crecimiento de tus hijos.", "Controla las curvas de crecimiento de tu hijo y manten actualizado a tu pediatra", "Podrás que llevar el control de las vacunas de tu hijo siempre en tu celular", "Puedes enviarle mesajes a tu pediatra y si te receta algo, se cargará a la historia clínica"};
     private String[] title = {"¡Bienvenido!","Curvas de crecimiento", "Carnet de vacunas", "Contacta a tu pediatra"};
     private int[] image = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
+    private int colorDot;
+    private TextView[] dots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        colorDot = getResources().getColor(R.color.dot_1);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         dotsLayout = findViewById(R.id.dotsLayout);
+        addDots(0);
         loadViewPager();
+
+    }
+
+    private void addDots(int actual){
+
+        dots=new TextView[title.length];
+
+        dotsLayout.removeAllViews();
+
+        for(int i=0; i<dots.length; i++){
+
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dotsLayout.addView(dots[i]);
+
+            if(i==actual){
+
+                dots[i].setTextColor(colorDot);
+
+            }else {
+
+                dots[i].setTextColor(Color.GRAY);
+
+            }
+
+
+        }
 
     }
 
@@ -42,6 +77,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(pagelistener);
 
     }
 
@@ -57,6 +93,25 @@ public class StartActivity extends AppCompatActivity {
         sd.setArguments(bundle);
         return sd;
     }
+
+    ViewPager.OnPageChangeListener pagelistener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+            addDots(position);
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
 
 }
