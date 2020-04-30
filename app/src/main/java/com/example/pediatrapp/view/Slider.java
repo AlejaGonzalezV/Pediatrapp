@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,21 +57,13 @@ public class Slider extends Fragment {
 
                 (v) -> {
 
-
-                    if(!ya){
-
-                        Toast.makeText(getActivity(), "Termine las instrucciones antes de continuar", Toast.LENGTH_LONG).show();
-
-                    } else {
-
-
-
-
-                    }
+                    Intent login = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(login);
 
                 }
 
         );
+
 
 
 
