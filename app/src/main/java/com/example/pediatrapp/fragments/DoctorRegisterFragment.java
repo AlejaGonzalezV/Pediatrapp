@@ -12,30 +12,28 @@ import androidx.fragment.app.Fragment;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 
-public class ParentRegisterFragment extends Fragment {
+public class DoctorRegisterFragment extends Fragment {
 
     private View view;
-    private EditText name, id, email, password, address, phone;
-    private Button next, back;
     private OnDataSubmitted listener;
+    private EditText name, id, email, password, idDoctor;
+    private Button next, back;
 
     public void setListener(OnDataSubmitted listener){
 
         this.listener = listener;
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_parent_register,container,false);
+        view = inflater.inflate(R.layout.fragment_doctor_register, container, false);
 
         name = view.findViewById(R.id.name);
         id = view.findViewById(R.id.id);
         email = view.findViewById(R.id.date);
         password = view.findViewById(R.id.password);
-        address = view.findViewById(R.id.idDoctor);
-        phone = view.findViewById(R.id.phone);
+        idDoctor = view.findViewById(R.id.idDoctor);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
 
@@ -43,13 +41,11 @@ public class ParentRegisterFragment extends Fragment {
 
                 (v) -> {
 
-                    if(listener != null){
+                    if(listener!= null){
 
-
-                        listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), address.getText().toString(), phone.getText().toString());
+                        listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), idDoctor.getText().toString());
 
                     }
-
 
                 }
 
@@ -64,7 +60,6 @@ public class ParentRegisterFragment extends Fragment {
                         listener.onData(this, "back", null);
 
                     }
-
 
                 }
 

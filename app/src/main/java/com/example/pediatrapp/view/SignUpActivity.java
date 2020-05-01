@@ -12,13 +12,15 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.fragments.ChildRegisterFragment;
+import com.example.pediatrapp.fragments.DoctorPhotoFragment;
+import com.example.pediatrapp.fragments.DoctorRegisterFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
 
 
 public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted {
 
-    private Fragment rolFragment,parentRegisterFragment, childRegisterFragment;
+    private Fragment rolFragment,parentRegisterFragment, childRegisterFragment, doctorRegisterFragment, doctorPhotoFragment;
     private LinearLayout layout;
     private String datos;
 
@@ -34,6 +36,12 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
         ((ParentRegisterFragment) parentRegisterFragment).setListener(this);
         childRegisterFragment = new ChildRegisterFragment();
         ((ChildRegisterFragment) childRegisterFragment).setListener(this);
+        doctorRegisterFragment = new DoctorRegisterFragment();
+        ((DoctorRegisterFragment) doctorRegisterFragment).setListener(this);
+        doctorPhotoFragment = new DoctorPhotoFragment();
+        ((DoctorPhotoFragment) doctorPhotoFragment).setListener(this);
+
+
         showFragment(rolFragment);
 
 
@@ -62,12 +70,14 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             if(type.equals("padre")){
 
+                datos = "";
                 showFragment(parentRegisterFragment);
 
 
             } else if(type.equals("pediatra")){
 
-
+                datos = "";
+                showFragment(doctorRegisterFragment);
 
             } else if(type.equals("back")){
 
@@ -112,6 +122,37 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             }
 
+
+        } else if(fragment.equals(doctorRegisterFragment)){
+
+            if(type.equals("next")){
+
+                showFragment(doctorPhotoFragment);
+                for(int j=0; j<args.length; j++){
+
+                    datos += args[j] + ",";
+
+                }
+
+            } else if(type.equals("back")){
+
+                showFragment(rolFragment);
+
+            }
+
+
+        } else if(fragment.equals(doctorPhotoFragment)){
+
+
+            if(type.equals("next")){
+
+                //LAuncheo a la pag principal y guardo los docs
+
+            }else if(type.equals("back")){
+
+                showFragment(doctorRegisterFragment);
+
+            }
 
         }
 

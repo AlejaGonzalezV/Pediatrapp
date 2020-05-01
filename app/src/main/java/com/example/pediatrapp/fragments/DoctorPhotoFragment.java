@@ -5,18 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 
-public class ParentRegisterFragment extends Fragment {
+public class DoctorPhotoFragment extends Fragment {
 
+    private Button back, next, firma, profilePhoto;
+    private ImageView photoIV;
     private View view;
-    private EditText name, id, email, password, address, phone;
-    private Button next, back;
     private OnDataSubmitted listener;
 
     public void setListener(OnDataSubmitted listener){
@@ -24,29 +24,23 @@ public class ParentRegisterFragment extends Fragment {
         this.listener = listener;
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_parent_register,container,false);
+        view = inflater.inflate(R.layout.fragment_doctor_photo, container, false);
 
-        name = view.findViewById(R.id.name);
-        id = view.findViewById(R.id.id);
-        email = view.findViewById(R.id.date);
-        password = view.findViewById(R.id.password);
-        address = view.findViewById(R.id.idDoctor);
-        phone = view.findViewById(R.id.phone);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
+        firma = view.findViewById(R.id.firma);
+        profilePhoto = view.findViewById(R.id.profilePhoto);
 
         next.setOnClickListener(
 
                 (v) -> {
 
-                    if(listener != null){
+                    if (listener != null) {
 
-
-                        listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), address.getText().toString(), phone.getText().toString());
+                        //Paso las imagenes al SignUpActivity
 
                     }
 
@@ -65,12 +59,35 @@ public class ParentRegisterFragment extends Fragment {
 
                     }
 
+                }
+
+        );
+
+        firma.setOnClickListener(
+
+                (v) -> {
+
+                    //Abre los docs del celular
+
+                }
+
+        );
+
+        profilePhoto.setOnClickListener(
+
+                (v) -> {
+
+                    //Abre la galería
 
                 }
 
         );
 
         return view;
+
     }
+
+
+
 
 }
