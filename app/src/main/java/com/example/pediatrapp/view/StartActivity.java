@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.ViewPagerAdapter;
+import com.example.pediatrapp.fragments.Slider;
 
 
 public class StartActivity extends AppCompatActivity {

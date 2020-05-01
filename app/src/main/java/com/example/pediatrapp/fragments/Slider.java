@@ -1,4 +1,4 @@
-package com.example.pediatrapp.view;
+package com.example.pediatrapp.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.view.LoginActivity;
 
 public class Slider extends Fragment {
 
