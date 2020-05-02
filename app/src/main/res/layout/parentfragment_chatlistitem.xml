@@ -6,20 +6,20 @@
     android:layout_height="100dp">
 
     <TextView
-        android:id="@+id/nombrePadreTV"
+        android:id="@+id/nombrePediatraTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Nombre Padre"
+        android:text="Nombre Pediatra"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@+id/imagePadreIV"
+        app:layout_constraintStart_toEndOf="@+id/imagePediatraCIV"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imagePadreIV"
+        android:id="@+id/imagePediatraCIV"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="10dp"
@@ -29,5 +29,18 @@
         app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ultimoMensajeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lato"
+        android:text="Último Mensaje"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imagePediatraCIV"
+        app:layout_constraintTop_toBottomOf="@+id/nombrePediatraTV" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

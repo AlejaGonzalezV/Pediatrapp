@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ public class PediatraFragment_ChatList extends Fragment {
     private ImageButton SearchChatBT;
     private Switch switchDisp;
     private ListView pediatra_ChatList;
+    private Button FiltroChatBT;
 
     public PediatraFragment_ChatList() {
     }
@@ -36,6 +38,7 @@ public class PediatraFragment_ChatList extends Fragment {
         SearchChatBT = view.findViewById(R.id.SearchChatBT);
         switchDisp = view.findViewById(R.id.switchDisp);
         pediatra_ChatList = view.findViewById(R.id.pediatra_ChatList);
+        FiltroChatBT = view.findViewById(R.id.FiltroChatBT);
 
         SearchChatBT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +47,11 @@ public class PediatraFragment_ChatList extends Fragment {
             }
         });
 
+        FiltroChatBT.setOnClickListener(
+                (v)->{
+                    Log.e(">>>","FiltroChat");
+                }
+        );
         return view;
     }
 }

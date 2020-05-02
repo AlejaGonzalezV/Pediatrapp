@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/pediatras"
+        android:title="Pediatras"
+        android:icon="@drawable/ic_people_black_24dp"/>
+
+    <item android:id="@+id/historial"
+        android:title="Historial"
+        android:icon="@drawable/ic_timeline_black_24dp"/>
+
+    <item android:id="@+id/chatPa"
+        android:title="Chat"
+        android:icon="@drawable/ic_chat_black_24dp"/>
+
+    <item android:id="@+id/perfilPa"
+        android:title="Perfil"
+        android:icon="@drawable/ic_account_circle_black_24dp"/>
+
+
+</menu>
