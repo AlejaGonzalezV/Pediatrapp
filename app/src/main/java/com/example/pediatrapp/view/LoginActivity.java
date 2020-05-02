@@ -27,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 (v) -> {
 
-
+                    Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+                    startActivity(intent);
 
                 }
 
