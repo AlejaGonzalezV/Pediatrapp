@@ -1,9 +1,6 @@
 package com.example.pediatrapp.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,15 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
+import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.utilities.Utilities;
-
-
-import java.io.File;
+import com.google.firebase.storage.FirebaseStorage;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,12 +25,12 @@ public class DoctorPhotoFragment extends Fragment {
 
     private Utilities utilities;
     private Button back, next, firma, profilePhoto;
-    private ImageView photoIV;
+    private ImageView photoIV, checkP, checkF;
     private View view;
     private OnDataSubmitted listener;
-    private Uri uri;
-    private String firma1;
-    private String foto;
+    private Uri uriP, uriF;
+    private String data;
+    private Pediatra pediatra;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -49,6 +43,10 @@ public class DoctorPhotoFragment extends Fragment {
         utilities = new Utilities();
         view = inflater.inflate(R.layout.fragment_doctor_photo, container, false);
 
+        checkP = view.findViewById(R.id.checkP);
+        checkP.setVisibility(View.GONE);
+        checkF = view.findViewById(R.id.checkF);
+        checkF.setVisibility(View.GONE);
         photoIV = view.findViewById(R.id.photoIV);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -61,7 +59,9 @@ public class DoctorPhotoFragment extends Fragment {
 
                     if (listener != null) {
 
-                        //Paso las imagenes al SignUpActivity
+
+                        listener.onData(this,"next", uriP.toString(),uriF.toString());
+
 
                     }
 
@@ -121,12 +121,28 @@ public class DoctorPhotoFragment extends Fragment {
         if(requestCode == GALLERY_CALLBACK && resultCode == RESULT_OK){
 
             Log.e("<<<<<<<<<<<", "IMAGEN AQUI");
-            uri = data.getData();
-            photoIV.setImageURI(uri);
+            uriP = data.getData();
+            if(uriP != null){
+
+                photoIV.setImageURI(uriP);
+                checkF.setVisibility(View.VISIBLE);
+                //FirebaseStorage storage = FirebaseStorage.getInstance();
+                //storage.getReference().child("ProfilePhotoDoctor").child()
+
+
+            }
+
 
         } else if(requestCode == GALLERY_CALLBACK2 && resultCode == RESULT_OK){
 
-            Uri elec = data.getData();
+            uriF = data.getData();
+
+            if(uriF != null){
+
+                checkF.setVisibility(View.VISIBLE);
+
+            }
+
 
 
         }

@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +16,9 @@ import com.example.pediatrapp.fragments.DoctorPhotoFragment;
 import com.example.pediatrapp.fragments.DoctorRegisterFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.UUID;
 
 
 public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted {
@@ -146,6 +149,13 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             if(type.equals("next")){
 
+                for(int j=0; j<args.length; j++){
+
+                    datos += args[j] + ",";
+
+                }
+
+                crearUser("Pediatra");
                 //LAuncheo a la pag principal y guardo los docs
 
             }else if(type.equals("back")){
@@ -156,6 +166,40 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
         }
 
+
+
+    }
+
+    public void crearUser(String type){
+
+        if(type.equals("Pediatra")){
+
+            String[] str = datos.split(",");
+            String id = UUID.randomUUID().toString();
+            String nombre = str[0];
+            String cedula = str[1];
+            String email = str[2];
+            String password = str[3];
+            String idV = str[4];
+            String foto = str[5];
+            String firma = str[6];
+
+            Uri uriP = Uri.parse(foto);
+            Uri uriF = Uri.parse(firma);
+
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            storage.getReference().child("Doctor").child(id).putFile();
+
+            //Pediatra pediatra = new Pediatra();
+
+
+        }else {
+
+
+
+
+        }
 
 
     }

@@ -126,5 +126,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePhoto" />
 
+    <ImageView
+        android:id="@+id/checkP"
+        android:layout_width="33dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/photoIV"
+        app:srcCompat="@drawable/done" />
+
+    <ImageView
+        android:id="@+id/checkF"
+        android:layout_width="33dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/firma"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@drawable/done" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

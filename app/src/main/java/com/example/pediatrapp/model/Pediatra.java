@@ -2,20 +2,22 @@ package com.example.pediatrapp.model;
 
 public class Pediatra {
 
+    private String id;
     private String nombre;
     private String cedula;
     private String correo;
     private String contrasena;
-    private String id;
+    private String idV;
     private String firma;
     private String foto;
 
-    public Pediatra(String nombre, String cedula, String correo, String contrasena, String id, String firma, String foto) {
+    public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto) {
+        this.id = id;
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
         this.contrasena = contrasena;
-        this.id = id;
+        this.idV = idV;
         this.firma = firma;
         this.foto = foto;
     }
@@ -74,5 +76,13 @@ public class Pediatra {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getIdV() {
+        return idV;
+    }
+
+    public void setIdV(String idV) {
+        this.idV = idV;
     }
 }
