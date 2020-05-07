@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "669684967428",
+    "firebase_url": "https://pediatrapp-cb6c9.firebaseio.com",
+    "project_id": "pediatrapp-cb6c9",
+    "storage_bucket": "pediatrapp-cb6c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669684967428:android:0eddcbd9dc7f0843b6ad51",
+        "android_client_info": {
+          "package_name": "com.example.pediatraap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669684967428-1v44ba0demdi0bacacge5i19lccegr9b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pediatraap",
+            "certificate_hash": "2c5af8de757b16be1ffd68a499f906f574a207fb"
+          }
+        },
+        {
+          "client_id": "669684967428-rsmsquv50bknmoup6kj48aigbbcrtmu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCScq4GUiFfCqQGsheQG9bJhavGgP9z81A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669684967428-rsmsquv50bknmoup6kj48aigbbcrtmu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
