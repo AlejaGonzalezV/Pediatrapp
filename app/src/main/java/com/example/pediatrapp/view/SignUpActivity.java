@@ -189,7 +189,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            storage.getReference().child("Doctor").child(id).putFile();
+            //storage.getReference().child("Doctor").child(id).putFile();
 
             //Pediatra pediatra = new Pediatra();
 
