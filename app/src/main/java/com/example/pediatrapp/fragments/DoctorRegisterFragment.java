@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -41,9 +42,14 @@ public class DoctorRegisterFragment extends Fragment {
 
                 (v) -> {
 
-                    if(listener!= null){
+                    boolean correcto = name.getText().toString()!=null && id.getText().toString()!=null&&email.getText().toString()!=null&&password.getText().toString()!=null&&idDoctor.getText().toString()!=null;
+                    if(listener!= null && correcto){
 
                         listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), idDoctor.getText().toString());
+
+                    } else {
+
+                        Toast.makeText(getContext(),"Debe completar todos los campos", Toast.LENGTH_LONG);
 
                     }
 

@@ -1,5 +1,7 @@
 package com.example.pediatrapp.model;
 
+import java.util.ArrayList;
+
 public class Pediatra {
 
     private String id;
@@ -10,6 +12,9 @@ public class Pediatra {
     private String idV;
     private String firma;
     private String foto;
+    private ArrayList<String> chats;
+    private ArrayList<String> chats_grupales;
+    private ArrayList<String> padres_asignados;
 
     public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto) {
         this.id = id;
@@ -20,6 +25,9 @@ public class Pediatra {
         this.idV = idV;
         this.firma = firma;
         this.foto = foto;
+        chats = new ArrayList<String>();
+        chats_grupales = new ArrayList<String>();
+        padres_asignados = new ArrayList<String>();
     }
 
     public String getNombre() {
@@ -84,5 +92,47 @@ public class Pediatra {
 
     public void setIdV(String idV) {
         this.idV = idV;
+    }
+
+    public ArrayList<String> getChats() {
+        return chats;
+    }
+
+    public void setChats(ArrayList<String> chats) {
+        this.chats = chats;
+    }
+
+    public ArrayList<String> getChats_grupales() {
+        return chats_grupales;
+    }
+
+    public void setChats_grupales(ArrayList<String> chats_grupales) {
+        this.chats_grupales = chats_grupales;
+    }
+
+    public ArrayList<String> getPadres_asignados() {
+        return padres_asignados;
+    }
+
+    public void setPadres_asignados(ArrayList<String> padres_asignados) {
+        this.padres_asignados = padres_asignados;
+    }
+
+    public void addChat(String id){
+
+        chats.add(id);
+
+    }
+
+    public void addChatGrupal(String id){
+
+        chats_grupales.add(id);
+
+    }
+
+    public void addPadres(String id){
+
+        padres_asignados.add(id);
+
     }
 }

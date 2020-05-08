@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +17,8 @@ import com.example.pediatrapp.fragments.DoctorPhotoFragment;
 import com.example.pediatrapp.fragments.DoctorRegisterFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
+import com.example.pediatrapp.model.Pediatra;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.UUID;
@@ -147,7 +150,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
         } else if(fragment.equals(doctorPhotoFragment)){
 
 
-            if(type.equals("next")){
+            if(type.equals("nextF")){
 
                 for(int j=0; j<args.length; j++){
 
@@ -155,12 +158,22 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 }
 
-                crearUser("Pediatra");
+                createUserDoctorF();
                 //LAuncheo a la pag principal y guardo los docs
 
             }else if(type.equals("back")){
 
                 showFragment(doctorRegisterFragment);
+
+            }else if(type.equals("next")){
+
+                for(int j=0; j<args.length; j++) {
+
+                    datos += args[j] + ",";
+
+                }
+
+                createUserDoctor();
 
             }
 
@@ -170,12 +183,9 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
     }
 
-    public void crearUser(String type){
-
-        if(type.equals("Pediatra")){
+    public void createUserDoctorF(){
 
             String[] str = datos.split(",");
-            String id = UUID.randomUUID().toString();
             String nombre = str[0];
             String cedula = str[1];
             String email = str[2];
@@ -187,20 +197,55 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             Uri uriP = Uri.parse(foto);
             Uri uriF = Uri.parse(firma);
 
+            String id = FirebaseDatabase.getInstance().getReference().child("Pediatras").push().getKey();
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            //storage.getReference().child("Doctor").child(id).putFile();
+            storage.getReference().child("Doctor").child(id+"*"+"Foto").putFile(uriP);
+            storage.getReference().child("Doctor").child(id+"*"+"Firma").putFile(uriF);
+            foto=storage.getReference().child("Doctor").child(id+"*"+"Foto").getDownloadUrl().toString();
+            firma=storage.getReference().child("Doctor").child(id+"*"+"Firma").getDownloadUrl().toString();
 
-            //Pediatra pediatra = new Pediatra();
+            Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto);
 
+            //Escribir en la base de datos
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
+            pediatra.addPadres("1007554028");
+            pediatra.addChat("chat1");
+            pediatra.addChatGrupal("chatGrupal1");
 
-        }else {
+            String keyChat = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").push().getKey();
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(keyChat).setValue(pediatra.getChats());
 
+            String keyChatG = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").push().getKey();
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").child(keyChatG).setValue(pediatra.getChats_grupales());
 
+            String keyPadres = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").push().getKey();
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").child(keyPadres).setValue(pediatra.getPadres_asignados() );
 
+    }
 
-        }
+    public void createUserDoctor(){
 
+        String[] str = datos.split(",");
+        String nombre = str[0];
+        String cedula = str[1];
+        String email = str[2];
+        String password = str[3];
+        String idV = str[4];
+        String firma = str[6];
+
+        Uri uriF = Uri.parse(firma);
+
+        String id = FirebaseDatabase.getInstance().getReference().child("Pediatras").push().getKey();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storage.getReference().child("Doctor").child(id+"*"+"Firma").putFile(uriF);
+        firma=storage.getReference().child("Doctor").child(id+"*"+"Firma").getDownloadUrl().toString();
+
+        Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,null);
+
+        //Escribir en la base de datos
+        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
 
     }
 }

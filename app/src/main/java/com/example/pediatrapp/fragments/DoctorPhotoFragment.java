@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
@@ -57,11 +59,21 @@ public class DoctorPhotoFragment extends Fragment {
 
                 (v) -> {
 
-                    if (listener != null) {
+                    boolean correcto=uriF!=null;
+                    boolean fPerfil=uriP!=null;
+                    if (listener != null && correcto && fPerfil) {
 
 
-                        listener.onData(this,"next", uriP.toString(),uriF.toString());
+                        listener.onData(this,"nextF", uriP.toString(),uriF.toString());
 
+
+                    }else if(listener!=null && correcto){
+
+                        listener.onData(this, "next", uriF.toString());
+
+                    } else if(!correcto){
+
+                        Toast.makeText(getContext(), "Debe subir una firma electrónica para continuar", Toast.LENGTH_LONG);
 
                     }
 
@@ -120,12 +132,12 @@ public class DoctorPhotoFragment extends Fragment {
 
         if(requestCode == GALLERY_CALLBACK && resultCode == RESULT_OK){
 
-            Log.e("<<<<<<<<<<<", "IMAGEN AQUI");
             uriP = data.getData();
             if(uriP != null){
 
                 photoIV.setImageURI(uriP);
-                checkF.setVisibility(View.VISIBLE);
+                checkP.setVisibility(View.VISIBLE);
+
                 //FirebaseStorage storage = FirebaseStorage.getInstance();
                 //storage.getReference().child("ProfilePhotoDoctor").child()
 
