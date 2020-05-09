@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -34,7 +35,7 @@ public class ParentRegisterFragment extends Fragment {
         id = view.findViewById(R.id.id);
         email = view.findViewById(R.id.date);
         password = view.findViewById(R.id.password);
-        address = view.findViewById(R.id.idDoctor);
+        address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -43,10 +44,15 @@ public class ParentRegisterFragment extends Fragment {
 
                 (v) -> {
 
-                    if(listener != null){
+                    boolean correcto = name.getText().toString()!="" && id.getText().toString()!="" && email.getText().toString()!="" && password.getText().toString()!="" && address.getText().toString()!="" && phone.getText().toString()!="";
+                    if(listener != null && correcto){
 
 
                         listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), address.getText().toString(), phone.getText().toString());
+
+                    }else {
+
+                        Toast.makeText(getContext(), "Debe llenar todos los campos antes de continuar", Toast.LENGTH_LONG);
 
                     }
 

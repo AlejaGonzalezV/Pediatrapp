@@ -67,7 +67,7 @@ public class DoctorPhotoFragment extends Fragment {
                         listener.onData(this,"nextF", uriP.toString(),uriF.toString());
 
 
-                    }else if(listener!=null && correcto){
+                    }else if(listener!=null && correcto && !fPerfil){
 
                         listener.onData(this, "next", uriF.toString());
 
