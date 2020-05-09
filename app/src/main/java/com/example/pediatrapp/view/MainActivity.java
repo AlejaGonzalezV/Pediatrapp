@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottomNav2);
+        bottomNavigationView.setSelectedItemId(R.id.chatPa);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_PediatraList()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_ChatList()).commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

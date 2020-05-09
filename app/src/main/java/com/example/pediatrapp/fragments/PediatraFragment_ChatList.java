@@ -14,6 +14,7 @@ import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 
@@ -22,7 +23,7 @@ public class PediatraFragment_ChatList extends Fragment {
     private EditText SearchChatET;
     private ImageButton SearchChatBT;
     private Switch switchDisp;
-    private ListView pediatra_ChatList;
+    private RecyclerView pediatra_ChatList;
     private Button FiltroChatBT;
 
     public PediatraFragment_ChatList() {

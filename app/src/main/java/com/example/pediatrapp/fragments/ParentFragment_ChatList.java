@@ -13,6 +13,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 
@@ -20,7 +21,7 @@ public class ParentFragment_ChatList extends Fragment {
 
     private EditText SearchChatPaET;
     private ImageButton SearchChatPaBT;
-    private ListView padre_ChatList;
+    private RecyclerView padre_ChatList;
     private Button FiltroChatPaBT;
 
     public ParentFragment_ChatList() {

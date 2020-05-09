@@ -23,9 +23,10 @@ public class ActivityMainPediatra extends AppCompatActivity {
         setContentView(R.layout.activity_main_pediatra);
 
         bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setSelectedItemId(R.id.chat);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_PadreLista()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_ChatList()).commit();
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

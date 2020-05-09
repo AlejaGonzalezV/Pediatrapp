@@ -13,15 +13,28 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.adapter.PediatraAdapter_PadreList;
+import com.example.pediatrapp.model.Padre;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PediatraFragment_PadreLista extends Fragment {
 
     private EditText SearchPadreET;
     private Button FiltroBT;
     private ImageButton SearchPadreBT;
-    private ListView pediatra_padresList;
+    private RecyclerView pediatra_padresList;
+    private PediatraAdapter_PadreList adapter_padreList;
+    private List<Padre> padres;
 
     public PediatraFragment_PadreLista() {
     }
@@ -36,6 +49,13 @@ public class PediatraFragment_PadreLista extends Fragment {
         FiltroBT = view.findViewById(R.id.FiltroBT);
         SearchPadreBT = view.findViewById(R.id.SearchPadreBT);
         pediatra_padresList = view.findViewById(R.id.pediatra_padresList);
+
+        pediatra_padresList.setHasFixedSize(true);
+        pediatra_padresList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        padres = new ArrayList<Padre>();
+        
+        readParents();
 
         FiltroBT.setOnClickListener(
                 (v)->{
@@ -53,5 +73,13 @@ public class PediatraFragment_PadreLista extends Fragment {
 
 
         return view;
+    }
+
+    private void readParents() {
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+       // DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+
     }
 }

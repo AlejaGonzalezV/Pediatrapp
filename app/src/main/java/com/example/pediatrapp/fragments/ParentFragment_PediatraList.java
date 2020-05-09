@@ -13,6 +13,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 
@@ -21,7 +22,7 @@ public class ParentFragment_PediatraList extends Fragment {
     private EditText SearchPediatraET;
     private ImageButton SearchPediatraBT;
     private Button FiltroPaBT;
-    private ListView padre_pediatraList;
+    private RecyclerView padre_pediatraList;
 
     public ParentFragment_PediatraList() {
     }
