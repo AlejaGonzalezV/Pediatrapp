@@ -2,16 +2,17 @@ package com.example.pediatrapp.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ChatGrupal {
 
     private LocalDate fecha_creacion;
     private String id_padre;
-    private ArrayList<String> pediatras;
-    private ArrayList<Mensaje> mensajes;
+    private HashMap<String, String> pediatras;
+    private HashMap<String, Mensaje> mensajes;
     private String id;
 
-    public ChatGrupal(LocalDate fecha_creacion, String id_padre, ArrayList<String> pediatras, ArrayList<Mensaje> mensajes, String id) {
+    public ChatGrupal(LocalDate fecha_creacion, String id_padre, HashMap<String, String> pediatras, HashMap<String, Mensaje> mensajes, String id) {
         this.fecha_creacion = fecha_creacion;
         this.id_padre = id_padre;
         this.pediatras = pediatras;
@@ -46,19 +47,19 @@ public class ChatGrupal {
         this.id_padre = id_padre;
     }
 
-    public ArrayList<String> getPediatras() {
+    public HashMap<String, String> getPediatras() {
         return pediatras;
     }
 
-    public void setPediatras(ArrayList<String> pediatras) {
+    public void setPediatras(HashMap<String, String> pediatras) {
         this.pediatras = pediatras;
     }
 
-    public ArrayList<Mensaje> getMensajes() {
+    public HashMap<String, Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(ArrayList<Mensaje> mensajes) {
+    public void setMensajes(HashMap<String, Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 }

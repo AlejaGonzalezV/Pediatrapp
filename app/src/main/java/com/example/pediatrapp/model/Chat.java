@@ -1,6 +1,7 @@
 package com.example.pediatrapp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Chat {
 
@@ -10,10 +11,10 @@ public class Chat {
     private String nombre_pediatra;
     private String id_padre;
     private String id_pediatra;
-    private ArrayList<Mensaje> mensajes;
+    private HashMap<String, Mensaje> mensajes;
     private String id;
 
-    public Chat(String foto_padre, String foto_pediatra, String nombre_padre, String nombre_pediatra, String id_padre, String id_pediatra, ArrayList<Mensaje> mensajes, String id) {
+    public Chat(String foto_padre, String foto_pediatra, String nombre_padre, String nombre_pediatra, String id_padre, String id_pediatra, HashMap<String, Mensaje> mensajes, String id) {
         this.foto_padre = foto_padre;
         this.foto_pediatra = foto_pediatra;
         this.nombre_padre = nombre_padre;
@@ -75,11 +76,11 @@ public class Chat {
         this.id_pediatra = id_pediatra;
     }
 
-    public ArrayList<Mensaje> getMensajes() {
+    public HashMap<String, Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(ArrayList<Mensaje> mensajes) {
+    public void setMensajes(HashMap<String, Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 

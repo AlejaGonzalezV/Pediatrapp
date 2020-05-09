@@ -60,7 +60,7 @@ public class Slider extends Fragment {
 
                     Intent login = new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(login);
-
+                    getActivity().finish();
                 }
 
         );

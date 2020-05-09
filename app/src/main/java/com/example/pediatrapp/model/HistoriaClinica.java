@@ -1,14 +1,14 @@
 package com.example.pediatrapp.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HistoriaClinica {
 
     private String id_hijo;
-    private ArrayList<Diagnostico> diagnosticos;
-    private ArrayList<FormulaMedica> formulaMedicas;
+    private HashMap<String, Diagnostico> diagnosticos;
+    private HashMap<String, FormulaMedica> formulaMedicas;
 
-    public HistoriaClinica(String id_hijo, ArrayList<Diagnostico> diagnosticos, ArrayList<FormulaMedica> formulaMedicas) {
+    public HistoriaClinica(String id_hijo, HashMap<String, Diagnostico> diagnosticos, HashMap<String, FormulaMedica> formulaMedicas) {
         this.id_hijo = id_hijo;
         this.diagnosticos = diagnosticos;
         this.formulaMedicas = formulaMedicas;
@@ -25,19 +25,19 @@ public class HistoriaClinica {
         this.id_hijo = id_hijo;
     }
 
-    public ArrayList<Diagnostico> getDiagnosticos() {
+    public HashMap<String, Diagnostico> getDiagnosticos() {
         return diagnosticos;
     }
 
-    public void setDiagnosticos(ArrayList<Diagnostico> diagnosticos) {
+    public void setDiagnosticos(HashMap<String, Diagnostico> diagnosticos) {
         this.diagnosticos = diagnosticos;
     }
 
-    public ArrayList<FormulaMedica> getFormulaMedicas() {
+    public HashMap<String, FormulaMedica> getFormulaMedicas() {
         return formulaMedicas;
     }
 
-    public void setFormulaMedicas(ArrayList<FormulaMedica> formulaMedicas) {
+    public void setFormulaMedicas(HashMap<String, FormulaMedica> formulaMedicas) {
         this.formulaMedicas = formulaMedicas;
     }
 }

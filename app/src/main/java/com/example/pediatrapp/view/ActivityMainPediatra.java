@@ -11,11 +11,13 @@ import com.example.pediatrapp.R;
 import com.example.pediatrapp.fragments.PediatraFragment_ChatList;
 import com.example.pediatrapp.fragments.PediatraFragment_PadreLista;
 import com.example.pediatrapp.fragments.PediatraFragment_Perfil;
+import com.example.pediatrapp.model.Pediatra;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ActivityMainPediatra extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private Pediatra pediatra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

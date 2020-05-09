@@ -12,11 +12,13 @@ import com.example.pediatrapp.fragments.ParentFragment_ChatList;
 import com.example.pediatrapp.fragments.ParentFragment_Historial;
 import com.example.pediatrapp.fragments.ParentFragment_PediatraList;
 import com.example.pediatrapp.fragments.ParentFragment_Perfil;
+import com.example.pediatrapp.model.Padre;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private Padre padre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
