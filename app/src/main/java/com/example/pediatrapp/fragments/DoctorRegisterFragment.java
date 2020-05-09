@@ -42,7 +42,7 @@ public class DoctorRegisterFragment extends Fragment {
 
                 (v) -> {
 
-                    boolean correcto = name.getText().toString()!=null && id.getText().toString()!=null&&email.getText().toString()!=null&&password.getText().toString()!=null&&idDoctor.getText().toString()!=null;
+                    boolean correcto = name.getText().toString()!="" && id.getText().toString()!=""&&email.getText().toString()!=""&&password.getText().toString()!=""&&idDoctor.getText().toString()!="";
                     if(listener!= null && correcto){
 
                         listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), idDoctor.getText().toString());

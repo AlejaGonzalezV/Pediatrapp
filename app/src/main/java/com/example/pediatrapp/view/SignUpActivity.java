@@ -179,8 +179,6 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
         }
 
-
-
     }
 
     public void createUserDoctorF(){
@@ -208,19 +206,20 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto);
 
             //Escribir en la base de datos
+
             FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
-            pediatra.addPadres("1007554028");
-            pediatra.addChat("chat1");
-            pediatra.addChatGrupal("chatGrupal1");
+            //pediatra.addPadres("1007554028");
+            //pediatra.addChat("chat1");
+            //pediatra.addChatGrupal("chatGrupal1");
 
-            String keyChat = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(keyChat).setValue(pediatra.getChats());
+            //String keyChat = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").push().getKey();
+            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(keyChat).setValue(pediatra.getChats());
 
-            String keyChatG = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").child(keyChatG).setValue(pediatra.getChats_grupales());
+            //String keyChatG = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").push().getKey();
+            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").child(keyChatG).setValue(pediatra.getChats_grupales());
 
-            String keyPadres = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").child(keyPadres).setValue(pediatra.getPadres_asignados() );
+            //String keyPadres = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").push().getKey();
+            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").child(keyPadres).setValue(pediatra.getPadres_asignados() );
 
     }
 
@@ -248,4 +247,6 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
 
     }
+
+
 }
