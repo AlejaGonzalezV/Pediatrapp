@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.StartActivity"
-    android:background="#FFFFFF">
-
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[3]" />
+        tools:srcCompat="@drawable/i3" />
 
 
     <Button
@@ -43,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Curvas de crecimiento"
+        android:text="Carnet de Vacunas"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +53,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/lato_bold"
         android:gravity="center"
-        android:text="Controla las curvas de crecimiento de tu hijo y manten actualizado a tu pediatra"
+        android:text="Podrás que llevar el control de las vacunas de tu hijo siempre en tu celular."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
