@@ -11,20 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Hijo;
 
 import java.util.List;
 
-public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapter.ViewHolderVacunasHijo>  {
+public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter.ViewHolderCurvasHijo>{
 
 
     private Context context;
     private View.OnClickListener listener;
     private List<Hijo> hijos;
 
-    public HijosVacunasAdapter(Context context, List<Hijo> hijos) {
+    public HijosCurvasAdapter(Context context, List<Hijo> hijos) {
         this.context = context;
         this.hijos = hijos;
 
@@ -48,14 +47,14 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
 
     @NonNull
     @Override
-    public HijosVacunasAdapter.ViewHolderVacunasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hijos_vacunas, null, false);
+    public HijosCurvasAdapter.ViewHolderCurvasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hijos_curvas, null, false);
 
-        return new ViewHolderVacunasHijo(view);
+        return new HijosCurvasAdapter.ViewHolderCurvasHijo(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HijosVacunasAdapter.ViewHolderVacunasHijo holder, int position) {
+    public void onBindViewHolder(@NonNull HijosCurvasAdapter.ViewHolderCurvasHijo holder, int position) {
 
         holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
         holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getNacimiento());
@@ -83,7 +82,7 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
 
 
 
-    public class  ViewHolderVacunasHijo extends RecyclerView.ViewHolder{
+    public class  ViewHolderCurvasHijo extends RecyclerView.ViewHolder{
 
         TextView nombreHijoVa;
         TextView edadHijoVa;
@@ -91,13 +90,13 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
         ImageView imagenHijava;
 
 
-        public ViewHolderVacunasHijo(@NonNull View itemView) {
+        public ViewHolderCurvasHijo(@NonNull View itemView) {
             super(itemView);
 
-            nombreHijoVa = itemView.findViewById(R.id.nombreHijoVa);
-            edadHijoVa = itemView.findViewById(R.id.edadHijoVa);
-             verVa = itemView.findViewById(R.id.verVa);
-            imagenHijava = itemView.findViewById(R.id.imageHijoVa);
+            nombreHijoVa = itemView.findViewById(R.id.nombreHijoCurvas);
+            edadHijoVa = itemView.findViewById(R.id.edadHijoCurvas);
+            verVa = itemView.findViewById(R.id.verCurvas);
+            imagenHijava = itemView.findViewById(R.id.imageHijoCurvas);
         }
     }
 }

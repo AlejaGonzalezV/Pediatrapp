@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.pediatrapp.R;
+
 import java.util.List;
 
 public class ListaVacunasAdpater extends BaseAdapter {
@@ -40,8 +42,10 @@ public class ListaVacunasAdpater extends BaseAdapter {
 
 
         String laVacuna = (String) getItem(position);
-       // convertView = LayoutInflater.from(context).inflate(layout.item_listvacuna, null);
+        convertView = LayoutInflater.from(context).inflate(R.layout.item_listvacuna, null, false);
 
+       /* ImageView image = convertView.findViewById(R.id.imagenCacion1);
+        TextView nombreCancion = convertView.findViewById(R.id.nombreCacion);*/
         return convertView;
     }
 }
