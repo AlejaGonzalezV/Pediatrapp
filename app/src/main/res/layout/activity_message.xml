@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.pediatrapp.view.MessageActivity"
-    android:background="@drawable/chatfondo">
+    android:background="@drawable/fondchat">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"

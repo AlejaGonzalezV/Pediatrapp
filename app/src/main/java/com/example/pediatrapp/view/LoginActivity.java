@@ -35,12 +35,12 @@ public class LoginActivity extends AppCompatActivity {
                                     authResult -> {
 
                                         //Si es user normal
-//                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-//                                        startActivity(intent);
+                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                        startActivity(intent);
 
                                         //Si es pediatra
-                                        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                                        startActivity(intent);
+//                                        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+//                                        startActivity(intent);
 
                                     }
                             ).addOnFailureListener(e->{

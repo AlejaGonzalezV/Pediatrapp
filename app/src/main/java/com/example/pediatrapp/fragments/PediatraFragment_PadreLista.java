@@ -57,6 +57,8 @@ public class PediatraFragment_PadreLista extends Fragment {
         pediatra_padresList.setHasFixedSize(true);
         pediatra_padresList.setLayoutManager(new LinearLayoutManager(getContext()));
         padres = new ArrayList<Padre>();
+
+        Log.e(">>>", "Set");
         adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
         pediatra_padresList.setAdapter(adapter_padreList);
 
@@ -124,21 +126,24 @@ public class PediatraFragment_PadreLista extends Fragment {
         Log.e(">>>", "Entra");
         for(int i = 0; i< idpadres.size(); i++){
 
+            Log.e(">>>", idpadres.get(i));
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(idpadres.get(i));
 
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    for(DataSnapshot snapshot : dataSnapshot){
 
-                        Padre padre = snapshot.getValue(Padre.class);
+//                        Log.e(">>>", snapshot.getValue(String.class));
+                        Padre padre = dataSnapshot.getValue(Padre.class);
                         if(padre != null){
-                            Log.e(">>>", "Añade");
-                            padres.add(padre);
+                            Log.e(">>>", "Añade" + padre.getNombre());
+                         //   padres.add(padre);
+                            adapter_padreList.addPadre(padre);
                         }
 
-                    }
+//                    }
                 }
 
                 @Override
@@ -151,8 +156,6 @@ public class PediatraFragment_PadreLista extends Fragment {
         }
 
        //set
-        adapter_padreList.setPadres(padres);
-
 
 
     }
