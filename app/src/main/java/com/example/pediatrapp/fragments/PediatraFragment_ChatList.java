@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.view.ActivityMainPediatra;
 
 public class PediatraFragment_ChatList extends Fragment {
@@ -26,9 +28,10 @@ public class PediatraFragment_ChatList extends Fragment {
     private Switch switchDisp;
     private RecyclerView pediatra_ChatList;
     private Button FiltroChatBT;
+    private Pediatra pediatra;
 
-    public PediatraFragment_ChatList() {
-
+    public PediatraFragment_ChatList(Pediatra pediatra) {
+        this.pediatra = pediatra;
     }
 
     @Nullable

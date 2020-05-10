@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.chatPa);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_ChatList()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_ChatList(padre)).commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()) {
                     case R.id.pediatras:
-                        fragment = new ParentFragment_PediatraList();
+                        fragment = new ParentFragment_PediatraList(padre);
                         break;
                     case R.id.historial:
                         fragment = new ParentFragment_Historial();
                         break;
                     case R.id.chatPa:
-                        fragment = new ParentFragment_ChatList();
+                        fragment = new ParentFragment_ChatList(padre);
                         break;
                     case R.id.perfilPa:
                         fragment = new ParentFragment_Perfil();
