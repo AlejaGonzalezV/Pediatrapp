@@ -17,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ActivityMainPediatra extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private Pediatra pediatra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class ActivityMainPediatra extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.chat);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_ChatList(pediatra)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_ChatList()).commit();
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -37,10 +36,10 @@ public class ActivityMainPediatra extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.padres:
-                        fragment = new PediatraFragment_PadreLista(pediatra);
+                        fragment = new PediatraFragment_PadreLista();
                     break;
                     case R.id.chat:
-                        fragment = new PediatraFragment_ChatList(pediatra);
+                        fragment = new PediatraFragment_ChatList();
                         break;
                     case R.id.perfil:
                         fragment = new PediatraFragment_Perfil();

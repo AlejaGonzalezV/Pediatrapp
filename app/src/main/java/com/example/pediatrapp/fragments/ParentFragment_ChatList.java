@@ -25,10 +25,8 @@ public class ParentFragment_ChatList extends Fragment {
     private ImageButton SearchChatPaBT;
     private RecyclerView padre_ChatList;
     private Button FiltroChatPaBT;
-    private Padre padre;
 
-    public ParentFragment_ChatList(Padre padre) {
-        this.padre = padre;
+    public ParentFragment_ChatList() {
     }
 
     @Nullable

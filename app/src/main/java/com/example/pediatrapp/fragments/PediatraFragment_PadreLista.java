@@ -39,10 +39,8 @@ public class PediatraFragment_PadreLista extends Fragment {
     private RecyclerView pediatra_padresList;
     private PediatraAdapter_PadreList adapter_padreList;
     private List<Padre> padres;
-    private Pediatra pediatra;
 
-    public PediatraFragment_PadreLista(Pediatra pediatra) {
-        this.pediatra = pediatra;
+    public PediatraFragment_PadreLista() {
     }
 
     @Nullable
@@ -87,7 +85,7 @@ public class PediatraFragment_PadreLista extends Fragment {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(firebaseUser.getUid()).child("padres_asignados");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
