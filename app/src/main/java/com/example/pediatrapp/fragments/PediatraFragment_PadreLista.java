@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.PediatraAdapter_PadreList;
 import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +36,10 @@ public class PediatraFragment_PadreLista extends Fragment {
     private RecyclerView pediatra_padresList;
     private PediatraAdapter_PadreList adapter_padreList;
     private List<Padre> padres;
+    private Pediatra pediatra;
 
-    public PediatraFragment_PadreLista() {
+    public PediatraFragment_PadreLista(Pediatra pediatra) {
+        this.pediatra = pediatra;
     }
 
     @Nullable

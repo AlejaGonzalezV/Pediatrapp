@@ -3,7 +3,6 @@ package com.example.pediatrapp.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.utilities.Utilities;
-import com.google.firebase.storage.FirebaseStorage;
 
 import static android.app.Activity.RESULT_OK;
 

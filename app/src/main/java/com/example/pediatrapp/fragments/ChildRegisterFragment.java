@@ -1,11 +1,7 @@
 package com.example.pediatrapp.fragments;
 
-import android.app.DownloadManager;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.service.autofill.Dataset;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +20,6 @@ import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;

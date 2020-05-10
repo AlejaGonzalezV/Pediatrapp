@@ -28,7 +28,7 @@ public class ActivityMainPediatra extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.chat);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_ChatList()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PediatraFragment_ChatList(pediatra)).commit();
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -37,10 +37,10 @@ public class ActivityMainPediatra extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.padres:
-                        fragment = new PediatraFragment_PadreLista();
+                        fragment = new PediatraFragment_PadreLista(pediatra);
                     break;
                     case R.id.chat:
-                        fragment = new PediatraFragment_ChatList();
+                        fragment = new PediatraFragment_ChatList(pediatra);
                         break;
                     case R.id.perfil:
                         fragment = new PediatraFragment_Perfil();
