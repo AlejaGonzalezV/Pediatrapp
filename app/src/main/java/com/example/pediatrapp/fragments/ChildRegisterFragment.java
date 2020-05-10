@@ -1,9 +1,6 @@
 package com.example.pediatrapp.fragments;
 
-import android.app.DownloadManager;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.service.autofill.Dataset;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +20,6 @@ import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -54,7 +50,7 @@ public class ChildRegisterFragment extends Fragment implements AdapterView.OnIte
         id = view.findViewById(R.id.id);
         date = view.findViewById(R.id.date);
         doctor = view.findViewById(R.id.doctor);
-        next = view.findViewById(R.id.next);
+        next = view.findViewById(R.id.consultar_btn);
         back = view.findViewById(R.id.back);
         gender = view.findViewById(R.id.gender);
         ids = new ArrayList<String>();
