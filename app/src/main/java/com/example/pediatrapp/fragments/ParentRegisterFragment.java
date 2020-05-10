@@ -38,7 +38,7 @@ public class ParentRegisterFragment extends Fragment {
         password = view.findViewById(R.id.password);
         address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
-        next = view.findViewById(R.id.next);
+        next = view.findViewById(R.id.consultar_btn);
         back = view.findViewById(R.id.back);
 
         next.setOnClickListener(
