@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 
 public class ParentFragment_PediatraList extends Fragment {
 
@@ -23,8 +25,11 @@ public class ParentFragment_PediatraList extends Fragment {
     private ImageButton SearchPediatraBT;
     private Button FiltroPaBT;
     private RecyclerView padre_pediatraList;
+    private Padre padre;
 
-    public ParentFragment_PediatraList() {
+
+    public ParentFragment_PediatraList(Padre padre) {
+        this.padre = padre;
     }
 
     @Nullable
