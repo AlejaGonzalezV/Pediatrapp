@@ -1,6 +1,8 @@
 package com.example.pediatrapp.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
+
+import org.w3c.dom.Text;
 
 public class DoctorRegisterFragment extends Fragment {
 
@@ -42,14 +46,41 @@ public class DoctorRegisterFragment extends Fragment {
 
                 (v) -> {
 
-                    boolean correcto = name.getText().toString()!="" && id.getText().toString()!=""&&email.getText().toString()!=""&&password.getText().toString()!=""&&idDoctor.getText().toString()!="";
-                    if(listener!= null && correcto){
+                    boolean nombre = TextUtils.isEmpty(name.getText().toString().trim());
+                    boolean ident = TextUtils.isEmpty(id.getText().toString().trim());
+                    boolean correo = TextUtils.isEmpty(id.getText().toString().trim());
+                    boolean pass = TextUtils.isEmpty(password.getText().toString().trim());
+                    boolean idDoc = TextUtils.isEmpty(idDoctor.getText().toString().trim());
+                    boolean valid = Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches();
+
+                    if(listener!= null && !nombre && !ident && !correo && !pass && !idDoc && valid){
 
                         listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), idDoctor.getText().toString());
 
                     } else {
 
-                        Toast.makeText(getContext(),"Debe completar todos los campos", Toast.LENGTH_LONG);
+                        if(nombre){
+                            name.setError("Este campo no puede estar vacío");
+                        }
+                        if(ident){
+                            id.setError("Este campo no puede estar vacío");
+                        }
+                        if(correo){
+                            email.setError("Este campo no puede estar vacío");
+                        }
+                        if(pass){
+                            password.setError("Este campo no puede estar vacío");
+                        }
+                        if(idDoc){
+                            idDoctor.setError("Este campo no puede estar vacío");
+                        }
+                        if(!valid){
+                            email.setError("Debe ingresar un correo válido");
+                        }
+                        if(password.getText().toString().length() < 6){
+                            password.setError("La contraseña debe tener al menos 6 caracteres");
+                        }
+
 
                     }
 

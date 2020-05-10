@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.pediatrapp.R;
@@ -20,6 +22,7 @@ import com.example.pediatrapp.fragments.RolFragment;
 import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -169,7 +172,8 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 }
 
                 createUserDoctorF();
-                //LAuncheo a la pag principal y guardo los docs
+                Intent intent = new Intent(this, ActivityMainPediatra.class);
+                startActivity(intent);
 
             }else if(type.equals("back")){
 
@@ -225,6 +229,12 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
             FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(padreAsigId).setValue(id);
 
+            //Registro en firebase
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            }).addOnFailureListener(e -> {
+            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            });
+
     }
 
     public void createUserDoctorF(){
@@ -249,11 +259,21 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             foto=storage.getReference().child("Doctor").child(id+"*"+"Foto").getDownloadUrl().toString();
             firma=storage.getReference().child("Doctor").child(id+"*"+"Firma").getDownloadUrl().toString();
 
-            Pediatra pediatra = new Pediatra(foto,cedula,email,password,idV,id,firma,nombre);
+            Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto);
 
             //Escribir en la base de datos
 
-        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
+
+            //Registrar en firebase
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            }).addOnFailureListener(e -> {
+            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            });
+
+
+
+
             //pediatra.addPadres("1007554028");
             //pediatra.addChat("chat1");
             //pediatra.addChatGrupal("chatGrupal1");
@@ -291,6 +311,12 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
         //Escribir en la base de datos
         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
+
+        //Registrar en firebase
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        });
 
     }
 
