@@ -1,6 +1,7 @@
 package com.example.pediatrapp.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,16 +38,17 @@ public class ParentRegisterFragment extends Fragment {
         password = view.findViewById(R.id.password);
         address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
-        next = view.findViewById(R.id.next);
+        next = view.findViewById(R.id.consultar_btn);
         back = view.findViewById(R.id.back);
 
         next.setOnClickListener(
 
                 (v) -> {
 
-                    boolean correcto = name.getText().toString()!="" && id.getText().toString()!="" && email.getText().toString()!="" && password.getText().toString()!="" && address.getText().toString()!="" && phone.getText().toString()!="";
-                    if(listener != null && correcto){
 
+                    boolean correcto = name.getText().toString()!=null;
+                    Log.e("CAMPOS VACIOS", correcto + "");
+                    if(listener != null && correcto){
 
                         listener.onData(this, "next", name.getText().toString(), id.getText().toString(), email.getText().toString(), password.getText().toString(), address.getText().toString(), phone.getText().toString());
 

@@ -3,7 +3,6 @@ package com.example.pediatrapp.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.utilities.Utilities;
-import com.google.firebase.storage.FirebaseStorage;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -50,7 +48,7 @@ public class DoctorPhotoFragment extends Fragment {
         checkF = view.findViewById(R.id.checkF);
         checkF.setVisibility(View.GONE);
         photoIV = view.findViewById(R.id.photoIV);
-        next = view.findViewById(R.id.next);
+        next = view.findViewById(R.id.consultar_btn);
         back = view.findViewById(R.id.back);
         firma = view.findViewById(R.id.firma);
         profilePhoto = view.findViewById(R.id.profilePhoto);

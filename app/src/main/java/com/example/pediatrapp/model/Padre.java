@@ -1,6 +1,6 @@
 package com.example.pediatrapp.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Padre {
 
@@ -14,12 +14,14 @@ public class Padre {
     private String foto;
     private String chat_grupal_id;
     private String pediatraTemp;
-    private ArrayList<String> pediatras_asig;
-    private ArrayList<Hijo> hijos;
-    private ArrayList<String> chats;
+    private HashMap<String, String> pediatras_asig;
+    private HashMap<String, Hijo> hijos;
+    private HashMap<String, String> chats;
 
+    public Padre(String id, String cedula, String nombre, String correo, String contrasena, String direccion,
+                 String telefono, String foto, String chat_grupal_id, String pediatraTemp,
+                 HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos, HashMap<String, String> chats) {
 
-    public Padre(String id, String cedula, String nombre, String correo, String contrasena, String direccion, String telefono) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -27,8 +29,30 @@ public class Padre {
         this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono = telefono;
-        hijos = new ArrayList<Hijo>();
-        chats = new ArrayList<String>();
+        this.foto = foto;
+        this.chat_grupal_id = chat_grupal_id;
+        this.pediatraTemp = pediatraTemp;
+        this.pediatras_asig = pediatras_asig;
+        this.hijos = hijos;
+        this.chats = chats;
+    }
+
+    public Padre(String id, String cedula, String nombre, String correo, String contrasena,
+                 String direccion, String telefono, String foto, String chat_grupal_id, String pediatraTemp) {
+
+        this.id = id;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.foto = foto;
+        this.chat_grupal_id = chat_grupal_id;
+        this.pediatraTemp = pediatraTemp;
+        pediatras_asig = new HashMap<String, String>();
+        chats = new HashMap<String, String>();
+        hijos = new HashMap<String, Hijo>();
 
     }
 
@@ -104,15 +128,35 @@ public class Padre {
         this.chat_grupal_id = chat_grupal_id;
     }
 
-    public void addHijos(Hijo hijo){
-
-        hijos.add(hijo);
-
+    public String getPediatraTemp() {
+        return pediatraTemp;
     }
 
-    public void addChat(String id){
+    public void setPediatraTemp(String pediatraTemp) {
+        this.pediatraTemp = pediatraTemp;
+    }
 
-        chats.add(id);
+    public HashMap<String, String> getPediatras_asig() {
+        return pediatras_asig;
+    }
 
+    public void setPediatras_asig(HashMap<String, String> pediatras_asig) {
+        this.pediatras_asig = pediatras_asig;
+    }
+
+    public HashMap<String, Hijo> getHijos() {
+        return hijos;
+    }
+
+    public void setHijos(HashMap<String, Hijo> hijos) {
+        this.hijos = hijos;
+    }
+
+    public HashMap<String, String> getChats() {
+        return chats;
+    }
+
+    public void setChats(HashMap<String, String> chats) {
+        this.chats = chats;
     }
 }

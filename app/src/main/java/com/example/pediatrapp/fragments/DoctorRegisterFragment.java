@@ -35,7 +35,7 @@ public class DoctorRegisterFragment extends Fragment {
         email = view.findViewById(R.id.date);
         password = view.findViewById(R.id.password);
         idDoctor = view.findViewById(R.id.idDoctor);
-        next = view.findViewById(R.id.next);
+        next = view.findViewById(R.id.consultar_btn);
         back = view.findViewById(R.id.back);
 
         next.setOnClickListener(

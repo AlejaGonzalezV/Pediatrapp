@@ -106,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             } else if(type.equals("back")){
 
+                datos = null;
                 showFragment(rolFragment);
 
             }
@@ -123,6 +124,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 }
 
             } else if(type.equals("back")){
+
 
                 showFragment(parentRegisterFragment);
 
@@ -142,6 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             } else if(type.equals("back")){
 
+                datos = null;
                 showFragment(rolFragment);
 
             }
@@ -181,6 +184,14 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
     }
 
+    public void createUserParent(){
+
+
+
+
+
+    }
+
     public void createUserDoctorF(){
 
             String[] str = datos.split(",");
@@ -203,7 +214,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             foto=storage.getReference().child("Doctor").child(id+"*"+"Foto").getDownloadUrl().toString();
             firma=storage.getReference().child("Doctor").child(id+"*"+"Firma").getDownloadUrl().toString();
 
-            Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto);
+            Pediatra pediatra = new Pediatra(foto,cedula,email,password,idV,id,firma,nombre);
 
             //Escribir en la base de datos
 
