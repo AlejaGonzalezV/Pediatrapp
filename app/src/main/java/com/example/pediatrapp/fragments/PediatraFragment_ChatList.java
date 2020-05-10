@@ -28,10 +28,9 @@ public class PediatraFragment_ChatList extends Fragment {
     private Switch switchDisp;
     private RecyclerView pediatra_ChatList;
     private Button FiltroChatBT;
-    private Pediatra pediatra;
 
-    public PediatraFragment_ChatList(Pediatra pediatra) {
-        this.pediatra = pediatra;
+    public PediatraFragment_ChatList() {
+
     }
 
     @Nullable

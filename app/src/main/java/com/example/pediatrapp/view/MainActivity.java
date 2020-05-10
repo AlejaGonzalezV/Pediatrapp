@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private Padre padre;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.chatPa);
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_ChatList(padre)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer2, new ParentFragment_ChatList()).commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()) {
                     case R.id.pediatras:
-                        fragment = new ParentFragment_PediatraList(padre);
+                        fragment = new ParentFragment_PediatraList();
                         break;
                     case R.id.historial:
                         fragment = new ParentFragment_Historial();
                         break;
                     case R.id.chatPa:
-                        fragment = new ParentFragment_ChatList(padre);
+                        fragment = new ParentFragment_ChatList();
                         break;
                     case R.id.perfilPa:
                         fragment = new ParentFragment_Perfil();

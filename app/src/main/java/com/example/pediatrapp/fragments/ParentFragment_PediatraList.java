@@ -25,11 +25,9 @@ public class ParentFragment_PediatraList extends Fragment {
     private ImageButton SearchPediatraBT;
     private Button FiltroPaBT;
     private RecyclerView padre_pediatraList;
-    private Padre padre;
 
 
-    public ParentFragment_PediatraList(Padre padre) {
-        this.padre = padre;
+    public ParentFragment_PediatraList() {
     }
 
     @Nullable
