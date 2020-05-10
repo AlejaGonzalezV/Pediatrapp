@@ -149,7 +149,7 @@ public class ChildRegisterFragment extends Fragment {
     public void configureSpinner(){
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, names);
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, names);
         doctor.setAdapter(adapter);
         doctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

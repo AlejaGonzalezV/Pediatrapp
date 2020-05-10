@@ -60,28 +60,31 @@ public class ParentRegisterFragment extends Fragment {
                     }else {
 
                         if(correo){
-                            email.setError("Debe ingresar un correo válido");
+                            email.setError("Este campo no puede estar vacío");
                         }
                         if(nombre){
-                            name.setError("Debe llenar este campo para continuar");
+                            name.setError("Este campo no puede estar vacío");
                         }
                         if(correo){
-                            email.setError("Debe ingresar este campo para continuar");
+                            email.setError("Este campo no puede estar vacío");
                         }
                         if(ident){
-                            id.setError("Debe ingresar este campo para continuar");
+                            id.setError("Este campo no puede estar vacío");
                         }
                         if(pass){
-                            password.setError("Debe ingresar este campo para continuar");
+                            password.setError("Este campo no puede estar vacío");
                         }
                         if(addr){
-                            address.setError("Debe ingresar este campo para continuar");
+                            address.setError("Este campo no puede estar vacío");
                         }
                         if(ph){
-                            phone.setError("Debe ingresar este campo para continuar");
+                            phone.setError("Este campo no puede estar vacío");
                         }
                         if(valid){
                             email.setError("Debe ingresar una dirección de correo válida");
+                        }
+                        if(password.getText().toString().length() < 6){
+                            password.setError("La contraseña debe tener al menos 6 caracteres");
                         }
 
                     }
