@@ -19,7 +19,7 @@ public class Padre {
     private HashMap<String, String> chats;
 
     public Padre(String id, String cedula, String nombre, String correo, String contrasena, String direccion,
-                 String telefono, HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos) {
+                 String telefono, String foto, HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos) {
 
         this.id = id;
         this.cedula = cedula;
@@ -28,8 +28,7 @@ public class Padre {
         this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.chat_grupal_id = chat_grupal_id;
-        this.pediatraTemp = pediatraTemp;
+        this.foto = foto;
         this.pediatras_asig = pediatras_asig;
         this.hijos = hijos;
     }
