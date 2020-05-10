@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MessageActivity"></activity>
+        <activity android:name=".view.ListaVacunasActivity"></activity>
+        <activity android:name=".view.VacunasActivity" />
+        <activity android:name=".view.MessageActivity" />
         <activity android:name=".view.ActivityMainPediatra" />
         <activity android:name=".view.SignUpActivity" />
         <activity android:name=".view.LoginActivity" />
