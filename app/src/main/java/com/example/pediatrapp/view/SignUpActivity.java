@@ -17,10 +17,13 @@ import com.example.pediatrapp.fragments.DoctorPhotoFragment;
 import com.example.pediatrapp.fragments.DoctorRegisterFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
+import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -123,6 +126,10 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 }
 
+                createUserParent();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
             } else if(type.equals("back")){
 
 
@@ -177,6 +184,8 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 }
 
                 createUserDoctor();
+                Intent intent = new Intent(this, ActivityMainPediatra.class);
+                startActivity(intent);
 
             }
 
@@ -186,9 +195,35 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
     public void createUserParent(){
 
+            String[] str = datos.split(",");
+            String nombre = str[0];
+            String cedula = str[1];
+            String email = str[2];
+            String password = str[3];
+            String direccion = str[4];
+            String cel = str[5];
+            String nombreH = str[6];
+            String identH = str[7];
+            String fechaH = str[8];
+            String generoH = str[9];
+            String idDoc = str[10];
 
+            String id = FirebaseDatabase.getInstance().getReference().child("Padres").push().getKey();
+            String padreAsigId = FirebaseDatabase.getInstance().getReference().child("Pediatras").child("Padres_asignados").push().getKey();
+            String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(id).child("Hijos").push().getKey();
 
+            Hijo hijo = new Hijo(idH, identH, fechaH, generoH, nombreH);
 
+            HashMap<String, Hijo> hijos = new HashMap<>();
+            hijos.put(idH, hijo);
+
+            HashMap<String,String> pediatrasAsig = new HashMap<>();
+            pediatrasAsig.put(idDoc, idDoc);
+
+            Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,pediatrasAsig, hijos);
+
+            FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
+            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(padreAsigId).setValue(id);
 
     }
 
@@ -218,7 +253,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             //Escribir en la base de datos
 
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
+        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
             //pediatra.addPadres("1007554028");
             //pediatra.addChat("chat1");
             //pediatra.addChatGrupal("chatGrupal1");

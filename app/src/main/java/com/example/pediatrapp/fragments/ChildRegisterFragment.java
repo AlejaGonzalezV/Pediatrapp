@@ -1,7 +1,7 @@
 package com.example.pediatrapp.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +26,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChildRegisterFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ChildRegisterFragment extends Fragment {
 
     private OnDataSubmitted listener;
     private View view;
     private Button next, back;
     private EditText name, id, date;
     private Spinner doctor, gender;
-    private ArrayAdapter<String> adapter;
     private ArrayList<String> ids;
     private ArrayList<String> names;
+    private String selected;
+    private int indice;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -49,32 +50,50 @@ public class ChildRegisterFragment extends Fragment implements AdapterView.OnIte
         name = view.findViewById(R.id.name);
         id = view.findViewById(R.id.id);
         date = view.findViewById(R.id.date);
-        doctor = view.findViewById(R.id.doctor);
-        next = view.findViewById(R.id.consultar_btn);
+        doctor = (Spinner) view.findViewById(R.id.doctor);
+        next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         gender = view.findViewById(R.id.gender);
         ids = new ArrayList<String>();
         names = new ArrayList<String>();
+        names.add("Pediatra asignado");
 
         fillDoctors();
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, names);
-        doctor.setAdapter(adapter);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        doctor.setOnItemSelectedListener(this);
-
-
         next.setOnClickListener(
 
                 (v) -> {
 
-                    boolean correcto = name.getText().toString()!="" && id.getText().toString()!="" && date.getText().toString()!="" && doctor.getSelectedItem().toString()!="" && gender.getSelectedItem().toString()!="";
-                    if(listener != null && correcto){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), date.getText().toString(), doctor.getSelectedItem().toString(), gender.getSelectedItem().toString());
+                    boolean nombre = TextUtils.isEmpty(name.getText().toString().trim());
+                    boolean ident = TextUtils.isEmpty(id.getText().toString().trim());
+                    boolean fecha = TextUtils.isEmpty(date.getText().toString().trim());
+                    boolean doc = doctor.getSelectedItem().toString().equals("Pediatra asignado");
+                    boolean gen = gender.getSelectedItem().toString().equals("Género");
+
+
+                    if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
+
+                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), date.getText().toString(), gender.getSelectedItem().toString(),ids.get(indice-1));
 
                     }else {
 
-                        Toast.makeText(getContext(), "Debe completar todos los campos para continuar", Toast.LENGTH_LONG).show();
+                        if(nombre){
+                            name.setError("Debe ingresar este campo para continuar");
+                        }
+                        if(ident){
+                            id.setError("Debe ingresar este campo para continuar");
+                        }
+                        if(fecha){
+                            date.setError("Debe ingresar este campo para continuar");
+                        }
+                        if(doc){
+                            Toast.makeText(getContext(), "Debe seleccionar un doctor asignado", Toast.LENGTH_LONG).show();
+                        }
+                        if(gen){
+                            Toast.makeText(getContext(), "Debe seleccionar un género", Toast.LENGTH_LONG).show();
+                        }
+
+
 
                     }
 
@@ -103,9 +122,8 @@ public class ChildRegisterFragment extends Fragment implements AdapterView.OnIte
 
     public void fillDoctors(){
 
-
         Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
-        query.addValueEventListener(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -115,6 +133,9 @@ public class ChildRegisterFragment extends Fragment implements AdapterView.OnIte
                     names.add(pediatra.getNombre());
                     ids.add(child.getKey());
                 }
+
+                configureSpinner();
+
             }
 
             @Override
@@ -125,16 +146,28 @@ public class ChildRegisterFragment extends Fragment implements AdapterView.OnIte
 
     }
 
+    public void configureSpinner(){
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        Log.e("SELECTED" ,position +"");
+        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, names);
+        doctor.setAdapter(adapter);
+        doctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                selected = doctor.getSelectedItem().toString();
+                indice = doctor.getSelectedItemPosition();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
 }
