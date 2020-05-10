@@ -56,8 +56,10 @@ public class PediatraFragment_PadreLista extends Fragment {
 
         pediatra_padresList.setHasFixedSize(true);
         pediatra_padresList.setLayoutManager(new LinearLayoutManager(getContext()));
-
         padres = new ArrayList<Padre>();
+        adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
+        pediatra_padresList.setAdapter(adapter_padreList);
+
         
         readParents();
 
@@ -84,18 +86,21 @@ public class PediatraFragment_PadreLista extends Fragment {
         ArrayList<String> idPadresAsignados = new ArrayList<>();
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(firebaseUser.getUid()).child("padres_asignados");
+        Log.e(">>>", firebaseUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(firebaseUser.getUid()).child("Padres_asignados");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 idPadresAsignados.clear();
 
+                Log.e(">>>", "Busca");
+
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                     String id = snapshot.getValue(String.class);
                     if(id != null){
+                        Log.e(">>>", "Encuentra");
                         idPadresAsignados.add(id);
                     }
 
@@ -116,7 +121,7 @@ public class PediatraFragment_PadreLista extends Fragment {
 
     private void loadParents(ArrayList<String> idpadres) {
         padres.clear();
-
+        Log.e(">>>", "Entra");
         for(int i = 0; i< idpadres.size(); i++){
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(idpadres.get(i));
@@ -129,6 +134,7 @@ public class PediatraFragment_PadreLista extends Fragment {
 
                         Padre padre = snapshot.getValue(Padre.class);
                         if(padre != null){
+                            Log.e(">>>", "Añade");
                             padres.add(padre);
                         }
 
@@ -144,8 +150,8 @@ public class PediatraFragment_PadreLista extends Fragment {
 
         }
 
-        adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
-        pediatra_padresList.setAdapter(adapter_padreList);
+       //set
+        adapter_padreList.setPadres(padres);
 
 
 

@@ -42,6 +42,7 @@ public class PediatraAdapter_PadreList extends RecyclerView.Adapter<PediatraAdap
 
     public void setPadres(List<Padre> padres) {
         this.padres = padres;
+        notifyDataSetChanged();
     }
 
     @NonNull
