@@ -22,8 +22,11 @@ import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +83,73 @@ public class PediatraFragment_PadreLista extends Fragment {
 
     private void readParents() {
 
+        ArrayList<String> idPadresAsignados = new ArrayList<>();
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-       // DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                idPadresAsignados.clear();
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    String id = snapshot.getValue(String.class);
+                    if(id != null){
+                        idPadresAsignados.add(id);
+                    }
+
+
+                }
+
+                loadParents(idPadresAsignados);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void loadParents(ArrayList<String> idpadres) {
+        padres.clear();
+
+        for(int i = 0; i< idpadres.size(); i++){
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(idpadres.get(i));
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                        Padre padre = snapshot.getValue(Padre.class);
+                        if(padre != null){
+                            padres.add(padre);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+
+        adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
+        pediatra_padresList.setAdapter(adapter_padreList);
+
+
 
     }
 }
