@@ -6,14 +6,24 @@ public class Hijo {
 
     private String id;
     private String documento;
-    private Date nacimiento;
+    private String nacimiento;
     private String sexo;
+    private String nombre;
 
-    public Hijo(String id, String documento, Date nacimiento, String sexo) {
+    public Hijo(String id, String documento, String nacimiento, String sexo, String nombre) {
         this.id = id;
         this.documento = documento;
         this.nacimiento = nacimiento;
         this.sexo = sexo;
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getId() {
@@ -32,11 +42,11 @@ public class Hijo {
         this.documento = documento;
     }
 
-    public Date getNacimiento() {
+    public String getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 

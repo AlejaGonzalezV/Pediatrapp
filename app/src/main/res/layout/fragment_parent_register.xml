@@ -28,7 +28,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/lato_bold"
         android:text="Bienvenido"
         android:textColor="#000000"
@@ -94,7 +94,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Dirección"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -180,9 +180,10 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/address"
         app:layout_constraintTop_toBottomOf="@+id/imageView17"
-        app:srcCompat="@drawable/dir"
-        tools:layout_editor_absoluteX="80dp" />
+        app:srcCompat="@drawable/dir" />
 
     <ImageView
         android:id="@+id/imageView19"
