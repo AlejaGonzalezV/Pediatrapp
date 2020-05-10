@@ -48,7 +48,7 @@ public class DoctorPhotoFragment extends Fragment {
         checkF = view.findViewById(R.id.checkF);
         checkF.setVisibility(View.GONE);
         photoIV = view.findViewById(R.id.photoIV);
-        next = view.findViewById(R.id.consultar_btn);
+        next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         firma = view.findViewById(R.id.firma);
         profilePhoto = view.findViewById(R.id.profilePhoto);
