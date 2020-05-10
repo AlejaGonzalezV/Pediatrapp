@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,10 @@ public class MessageActivity extends AppCompatActivity {
 
     private FirebaseUser fuser;
     private DatabaseReference reference;
+
+    private EditText text_send;
+    private ImageButton btn_send;
+    private ImageButton btn_media;
 
     private Intent intent;
 
@@ -53,6 +59,20 @@ public class MessageActivity extends AppCompatActivity {
 
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
+        text_send = findViewById(R.id.text_send);
+        btn_send = findViewById(R.id.btn_send);
+        btn_media = findViewById(R.id.btn_media);
+
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String body = text_send.getText().toString();
+                if(!body.equals("")){
+                    sendMessage(body, null, fuser.getUid());
+                }
+                text_send.setText("");
+            }
+        });
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(userid);
@@ -76,6 +96,15 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public void sendMessage(String body, String roomChat, String idUser){
+        //MIN 6:38
+        //Generar ID
+        //MIRAR SESION QUE NO SE CIERRA
+
+
 
     }
 }
