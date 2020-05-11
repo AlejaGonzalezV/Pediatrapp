@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.CurvasGraficoActivity"></activity>
+        <activity android:name=".view.AddCurvaActivity"></activity>
+        <activity android:name=".view.AddVacunaActivity" />
+        <activity android:name=".view.CurvasGraficoActivity" />
         <activity android:name=".view.CurvasCrecimientoActivity" />
         <activity android:name=".view.ListaVacunasActivity" />
         <activity android:name=".view.VacunasActivity" />

@@ -18,8 +18,8 @@ public class VacunasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacunas);
 
-        buscarBtn = findViewById(R.id.searchHijoVaBT);
-         buscarET = findViewById(R.id.searchHijoVaET);
+        buscarBtn = findViewById(R.id.searchHijoVacunaBT);
+         buscarET = findViewById(R.id.searchHijoVacunaET);
     }
 
     public ImageButton getBuscarBtn() {

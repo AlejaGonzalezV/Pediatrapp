@@ -6,35 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.pediatrapp.view.CurvasCrecimientoActivity">
 
-
     <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="264dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/imageView8"
+        android:layout_width="419dp"
+        android:layout_height="131dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo1" />
+        app:srcCompat="@drawable/fondolistas" />
 
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo11" />
 
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="74dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/curva"
         app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
         app:layout_constraintHorizontal_bias="0.844"
@@ -79,13 +66,12 @@
         android:id="@+id/searchHijoCurvasBT"
         android:layout_width="58dp"
         android:layout_height="56dp"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/lupabt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/searchHijoCurvasET"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+        tools:layout_editor_absoluteY="170dp" />
 
     <EditText
         android:id="@+id/searchHijoCurvasET"

@@ -7,39 +7,26 @@
     tools:context="com.example.pediatrapp.view.CurvasGraficoActivity">
 
     <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="264dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/imageView8"
+        android:layout_width="419dp"
+        android:layout_height="131dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo1" />
+        app:srcCompat="@drawable/fondolistas" />
 
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo11" />
 
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="74dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/curva"
         app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
         app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_Curvass"
         android:layout_width="wrap_content"
@@ -79,15 +66,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="nombre Hijo"
+        android:fontFamily="@font/lato_bold"
+        android:text="nombre hijo"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Curvass" />
 
     <FrameLayout
         android:id="@+id/fragmentContainerCurvas"
-        android:layout_width="407dp"
-        android:layout_height="499dp"
+        android:layout_width="408dp"
+        android:layout_height="479dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,11 +89,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="28dp"
         android:background="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreHijoCurvasGrafico"
         app:menu="@menu/menu3" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="127dp"
+        android:layout_height="28dp"
+        android:background="@drawable/boton"
+        android:fontFamily="@font/lato_bold"
+        android:text="Agregar curva"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
