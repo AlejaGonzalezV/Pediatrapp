@@ -33,6 +33,8 @@ public class Padre {
         this.hijos = hijos;
     }
 
+    public Padre() {
+    }
 
     public String getId() {
         return id;

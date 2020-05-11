@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(intent);
 
                                         //Si es pediatra
-                                        //Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                                        //startActivity(intent);
+//                                        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+//                                        startActivity(intent);
 
                                     }
                             ).addOnFailureListener(e->{

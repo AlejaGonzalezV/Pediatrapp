@@ -18,6 +18,9 @@ public class Hijo {
         this.nombre = nombre;
     }
 
+    public Hijo() {
+    }
+
     public String getNombre() {
         return nombre;
     }
