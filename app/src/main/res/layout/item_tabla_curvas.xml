@@ -41,7 +41,6 @@
             android:layout_height="46dp"
             android:background="@drawable/rectangle"
             android:fontFamily="@font/lato_bold"
-            android:outlineAmbientShadowColor="4AA5EA"
             android:text="Edad"
             android:textColor="#000000"
             android:textSize="21sp"

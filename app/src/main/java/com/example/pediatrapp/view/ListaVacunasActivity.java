@@ -19,8 +19,8 @@ public class ListaVacunasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vacunas);
 
-        buscarBtn = findViewById(R.id.searchHijoVaListaBT);
-        buscarET = findViewById(R.id.searchHijoVaListET);
+       // buscarBtn = findViewById(R.id.searchHijoVaListaBT);
+       //  buscarET = findViewById(R.id.searchHijoVaListET);
         nombreHijo = findViewById(R.id.nombreHijoVaList);
     }
 
