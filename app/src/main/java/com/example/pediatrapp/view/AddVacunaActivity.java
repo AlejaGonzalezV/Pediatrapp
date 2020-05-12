@@ -19,6 +19,7 @@ public class AddVacunaActivity extends AppCompatActivity {
     private EditText fechaET;
     private Button guardarBTN;
     private Button cancelarBTN;
+    private ListaVacunasActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,26 @@ public class AddVacunaActivity extends AppCompatActivity {
         guardarBTN = findViewById(R.id.guardarBTN);
         cancelarBTN = findViewById(R.id.cancelarBTN);
 
+
+        guardarBTN.setOnClickListener(
+
+                (v)->{
+
+
+                }
+        );
+        cancelarBTN.setOnClickListener(
+
+                (v)->{
+
+                        this.finish();
+                }
+        );
+
     }
+
+
+
 
     public Spinner getNombreVacunaSpinner() {
         return nombreVacunaSpinner;

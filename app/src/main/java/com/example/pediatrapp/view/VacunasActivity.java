@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -41,7 +42,7 @@ public class VacunasActivity extends AppCompatActivity {
         //Hijo de prueba
         listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Melqui"));
 
-        adapter = new HijosVacunasAdapter(this,listaHijos );
+
 
          buscarBtn.setOnClickListener(
                  (v)->{
@@ -49,6 +50,8 @@ public class VacunasActivity extends AppCompatActivity {
                      Toast.makeText(this, "Buscar Hijo en Vacunas", Toast.LENGTH_LONG).show();
                      if(buscarET.getText() != null) {
                          nombreHijo = buscarET.getText().toString();
+
+                         Log.e(">>>>>>>>>", ""+nombreHijo);
                      }else{
 
                          Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_LONG).show();
@@ -59,6 +62,22 @@ public class VacunasActivity extends AppCompatActivity {
 
          );
 
+        adapter = new HijosVacunasAdapter(this,listaHijos );
+        recycler.setAdapter(adapter);
+
+        adapter.setOnclickListener(
+
+                (v)->{
+
+                    String nombreHijo = listaHijos.get(recycler.getChildAdapterPosition(v)).getNombre();
+                    Toast.makeText(this, nombreHijo, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(this, ListaVacunasActivity.class);
+                   startActivity(intent);
+
+                }
+
+        );
 
 
     }

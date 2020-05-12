@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_Vacunas2" />
 
     <ListView
-        android:id="@+id/listaVaunas"
+        android:id="@+id/listaVacunasAgregadas"
         android:layout_width="407dp"
         android:layout_height="485dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,14 +79,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/agregarVacunaLista"
         android:layout_width="221dp"
         android:layout_height="43dp"
         android:background="@drawable/boton"
         android:text="Agregar vacuna"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/listaVaunas"
+        app:layout_constraintBottom_toTopOf="@+id/listaVacunasAgregadas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreHijoVaList"
@@ -96,11 +96,11 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="24dp"
         android:fontFamily="@font/lato_bold"
         android:text="Lista de vacunas"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/listaVaunas"
+        app:layout_constraintBottom_toTopOf="@+id/listaVacunasAgregadas"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

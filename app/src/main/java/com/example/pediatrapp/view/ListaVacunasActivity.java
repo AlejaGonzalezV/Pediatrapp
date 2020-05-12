@@ -2,43 +2,73 @@ package com.example.pediatrapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.adapter.ListaVacunasAdpater;
+import com.example.pediatrapp.model.Vacuna;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaVacunasActivity extends AppCompatActivity {
 
-    private ImageButton buscarBtn;
-    private EditText buscarET;
+    private Button agregarVaunaBTN;
     private TextView nombreHijo;
+    private ListView listView;
+    private ArrayList<Vacuna> listaVacunas;
+    private ListaVacunasAdpater adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vacunas);
 
-       // buscarBtn = findViewById(R.id.searchHijoVaListaBT);
-       //  buscarET = findViewById(R.id.searchHijoVaListET);
-        nombreHijo = findViewById(R.id.nombreHijoVaList);
+       agregarVaunaBTN = findViewById(R.id.agregarVacunaLista);
+       nombreHijo = findViewById(R.id.nombreHijoVaList);
+       listView = findViewById(R.id.listaVacunasAgregadas);
+       listaVacunas = new ArrayList<>() ;
+
+       adapter = new ListaVacunasAdpater( listaVacunas,this);
+       listView.setAdapter(adapter);
+
+
+       agregarVaunaBTN.setOnClickListener(
+
+               (v)->{
+
+                   Intent intent = new Intent(this, AddVacunaActivity.class);
+                   startActivity(intent);
+
+               }
+
+       );
+
+
     }
 
-    public ImageButton getBuscarBtn() {
-        return buscarBtn;
+    //Agrega una vacuna a la lista
+
+    public void AgregarVacunaALista(Vacuna vacuna){
+
+        listaVacunas.add(vacuna);
     }
 
-    public void setBuscarBtn(ImageButton buscarBtn) {
-        this.buscarBtn = buscarBtn;
+    public Button getAgregarVaunaBTN() {
+        return agregarVaunaBTN;
     }
 
-    public EditText getBuscarET() {
-        return buscarET;
+    public void setAgregarVaunaBTN(Button agregarVaunaBTN) {
+        this.agregarVaunaBTN = agregarVaunaBTN;
     }
 
-    public void setBuscarET(EditText buscarET) {
-        this.buscarET = buscarET;
-    }
 
     public TextView getNombreHijo() {
         return nombreHijo;

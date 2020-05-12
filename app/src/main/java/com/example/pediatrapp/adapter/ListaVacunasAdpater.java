@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Vacuna;
 
 import java.util.List;
 
 public class ListaVacunasAdpater extends BaseAdapter {
 
-    private List<String> listaVacunas;
+    private List<Vacuna> listaVacunas;
     private Context context;
 
-    public ListaVacunasAdpater(List<String> listaVacunas, Context context) {
+    public ListaVacunasAdpater(List<Vacuna> listaVacunas, Context context) {
         this.listaVacunas = listaVacunas;
         this.context = context;
     }

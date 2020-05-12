@@ -17,7 +17,7 @@ import com.example.pediatrapp.model.Hijo;
 
 import java.util.List;
 
-public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapter.ViewHolderVacunasHijo>  {
+public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapter.ViewHolderVacunasHijo> implements View.OnClickListener {
 
 
     private Context context;
@@ -51,6 +51,7 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
     public HijosVacunasAdapter.ViewHolderVacunasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hijos_vacunas, null, false);
 
+        view.setOnClickListener(this);
         return new ViewHolderVacunasHijo(view);
     }
 
@@ -81,6 +82,23 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
     }
 
 
+    public void setOnclickListener(View.OnClickListener listener){
+
+        this.listener = listener;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        if(listener != null){
+
+            listener.onClick(v);
+
+
+        }
+
+    }
 
 
     public class  ViewHolderVacunasHijo extends RecyclerView.ViewHolder{

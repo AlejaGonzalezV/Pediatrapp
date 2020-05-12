@@ -192,7 +192,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:background="@drawable/boton"
-        android:text="Guardar"
+        android:text="Agregar"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/cancelarBTN"
