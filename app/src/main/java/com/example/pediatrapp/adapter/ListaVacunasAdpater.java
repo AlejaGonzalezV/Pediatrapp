@@ -42,7 +42,7 @@ public class ListaVacunasAdpater extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-        String laVacuna = (String) getItem(position);
+        Vacuna laVacuna = (Vacuna) getItem(position);
         convertView = LayoutInflater.from(context).inflate(R.layout.item_listvacuna, null, false);
 
        /* ImageView image = convertView.findViewById(R.id.imagenCacion1);

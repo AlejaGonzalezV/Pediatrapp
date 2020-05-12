@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#FFFFFF"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,27 +16,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageHijoVa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="25sp"
+            android:layout_width="107dp"
+            android:layout_height="117dp"
+            android:layout_marginStart="32dp"
+            android:src="@drawable/ic_launcher_background"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintVertical_bias="0.146" />
 
         <TextView
             android:id="@+id/nombreHijoVa"
             android:layout_width="210dp"
             android:layout_height="38dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="28dp"
             android:fontFamily="@font/lato_bold"
             android:text="Nombre Hijo"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,20 +45,23 @@
             android:id="@+id/edadHijoVa"
             android:layout_width="119dp"
             android:layout_height="37dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/lato_bold"
             android:text="TextView"
             android:textColor="#2F80ED"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/verVa"
-            app:layout_constraintTop_toBottomOf="@+id/nombreHijoVa" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageHijoVa"
+            app:layout_constraintTop_toBottomOf="@+id/nombreHijoVa"
+            app:layout_constraintVertical_bias="0.042" />
 
         <Button
             android:id="@+id/verVa"
             android:layout_width="67dp"
             android:layout_height="27dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
             android:background="#00FFFFFF"
             android:fontFamily="@font/lato_bold"
             android:stateListAnimator="@null"

@@ -1,8 +1,9 @@
 package com.example.pediatrapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Vacuna {
+public class Vacuna implements Serializable {
 
     private String dosis;
     private String edad_aplicacion;

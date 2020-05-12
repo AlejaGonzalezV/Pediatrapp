@@ -28,6 +28,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="Fecha"
+        android:textSize="20sp"
         android:fontFamily="@font/lato_bold"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
