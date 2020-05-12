@@ -117,8 +117,8 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="162dp"
-        android:layout_height="42dp"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="44dp"
         android:ems="10"
@@ -129,22 +129,20 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="155dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="104dp"
+        android:layout_width="163dp"
+        android:layout_height="38dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/guardarBTN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
-        app:layout_constraintStart_toEndOf="@+id/textView24" />
+        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        tools:layout_editor_absoluteY="399dp" />
 
     <Button
         android:id="@+id/cancelarBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="80dp"
         android:background="@drawable/boton_blanco"
         android:text="Cancelar"
@@ -152,14 +150,13 @@
         android:textColor="#2F80ED"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintVertical_bias="0.463" />
 
     <Button
         android:id="@+id/guardarBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
         android:background="@drawable/boton"
         android:text="Añadir"
         android:textAllCaps="false"
@@ -168,7 +165,30 @@
         app:layout_constraintEnd_toStartOf="@+id/cancelarBTN"
         app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Fecha: "
+        android:textColor="#000000"
+        android:textSize="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="167dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="477dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

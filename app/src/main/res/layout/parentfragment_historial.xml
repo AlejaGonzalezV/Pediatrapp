@@ -43,15 +43,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_curvas2"
+        android:id="@+id/vacunasGeneralBTN"
         android:layout_width="384dp"
         android:layout_height="71dp"
 
         android:layout_marginTop="20dp"
 
         android:backgroundTint="#00FFFFFF"
-        android:drawableLeft="@drawable/inyeccion"
-        android:drawableRight="@drawable/ver"
         android:fontFamily="@font/lato_bold"
         android:paddingStart="20dp"
         android:paddingLeft="20dp"
@@ -66,16 +64,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_historial" />
 
+    <ImageView
+        android:id="@+id/imageView26"
+        android:layout_width="85dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="176dp"
+        android:src="@drawable/vaccine_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:id="@+id/btn_curvas"
+        android:id="@+id/curvasGeneralBTN"
         android:layout_width="384dp"
         android:layout_height="71dp"
 
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
 
         android:backgroundTint="#00FFFFFF"
         android:drawableLeft="@drawable/curva"
-        android:drawableRight="@drawable/ver"
         android:fontFamily="@font/lato_bold"
         android:paddingStart="20dp"
         android:paddingLeft="20dp"
@@ -87,7 +94,8 @@
         android:textColor="#3E8AF8"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_curvas2" />
+        app:layout_constraintTop_toBottomOf="@+id/vacunasGeneralBTN" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

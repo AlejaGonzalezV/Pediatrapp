@@ -25,11 +25,11 @@
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="47dp"
+            android:layout_width="97dp"
             android:layout_height="47dp"
             android:background="@drawable/rectangle"
             android:fontFamily="@font/lato_bold"
-            android:text="#"
+            android:text="Fecha"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,19 +37,17 @@
 
         <TextView
             android:id="@+id/textView28"
+            android:layout_width="83dp"
+            android:layout_height="46dp"
             android:background="@drawable/rectangle"
-            android:layout_width="119dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="2dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Edad"
             android:outlineAmbientShadowColor="4AA5EA"
+            android:text="Edad"
             android:textColor="#000000"
             android:textSize="21sp"
 
             app:layout_constraintStart_toEndOf="@+id/textView25"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.875" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView29"

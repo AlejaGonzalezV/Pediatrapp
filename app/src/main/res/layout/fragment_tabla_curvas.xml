@@ -22,10 +22,10 @@
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="47dp"
+            android:layout_width="97dp"
             android:layout_height="47dp"
             android:fontFamily="@font/lato_bold"
-            android:text="#"
+            android:text="Fecha"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,17 +33,16 @@
 
         <TextView
             android:id="@+id/textView28"
-            android:layout_width="119dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="2dp"
+            android:layout_width="83dp"
+            android:layout_height="46dp"
             android:fontFamily="@font/lato_bold"
+            android:outlineAmbientShadowColor="4AA5EA"
             android:text="Edad"
             android:textColor="#000000"
             android:textSize="21sp"
 
             app:layout_constraintStart_toEndOf="@+id/textView25"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.875" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView29"
@@ -59,21 +58,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
+            android:id="@+id/listaTablaVacunas"
             android:layout_width="409dp"
-            android:layout_height="678dp"
+            android:layout_height="682dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView30"
-            android:layout_width="405dp"
-            android:layout_height="2dp"
-            android:text="TextView"
-            android:background="#2F80ED"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
