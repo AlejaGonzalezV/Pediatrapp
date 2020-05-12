@@ -11,49 +11,36 @@
         android:id="@+id/nombre_pediatra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/lato_bold"
         android:text="Nombre de Pediatra"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Información"
-        android:textColor="#3E8AF8"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="417dp"
-        android:layout_height="201dp"
-        android:layout_marginBottom="564dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/imageView8"
+        android:layout_width="419dp"
+        android:layout_height="131dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/fondolistas" />
-
-    <ImageView
-        android:id="@+id/pediatra_foto"
-        android:layout_width="96dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/fondolistas" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imagePediatraCIV"
+        android:layout_width="117dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backPerfil"
@@ -83,15 +70,15 @@
         android:layout_height="280dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="196dp"
 
+        android:layout_marginBottom="144dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nombre_pediatra"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.931">
 
         <TextView
             android:id="@+id/textView13"
@@ -160,7 +147,7 @@
             android:layout_marginLeft="130dp"
             android:layout_marginTop="100dp"
             android:fontFamily="@font/lato_bold"
-            android:text="12 años de servicio"
+            android:text="Correo electrónico"
             android:textAlignment="center"
             android:textColor="#3E8AF8"
             android:textSize="12sp"
@@ -185,20 +172,18 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/consultar_btn"
-        android:layout_width="214dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="128dp"
-        android:background="@drawable/boton"
-        android:text="Consultar"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Información"
+        android:textColor="#3E8AF8"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.781" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
