@@ -65,6 +65,7 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
              //   hijos.get(position).get
         ).centerCrop().into(holder.imagenHijava); */
 
+        /*
         holder.verVa.setOnClickListener(
 
                 (v)->{
@@ -72,7 +73,7 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
 
 
                 }
-        );
+        );*/
 
     }
 
