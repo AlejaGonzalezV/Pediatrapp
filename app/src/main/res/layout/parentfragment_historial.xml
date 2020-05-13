@@ -31,10 +31,10 @@
 
     <Button
         android:id="@+id/vacunasGeneralBTN"
-        android:layout_width="321dp"
+        android:layout_width="328dp"
         android:layout_height="66dp"
 
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/lato_bold"
@@ -50,25 +50,25 @@
         app:layout_constraintBottom_toTopOf="@+id/curvasGeneralBTN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.963" />
+        app:layout_constraintVertical_bias="0.962" />
 
     <ImageView
         android:id="@+id/imageView26"
-        android:layout_width="70dp"
+        android:layout_width="64dp"
         android:layout_height="38dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/vaccine_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/vacunasGeneralBTN"
+        app:layout_constraintStart_toStartOf="@+id/vacunasGeneralBTN"
+        app:layout_constraintTop_toTopOf="@+id/vacunasGeneralBTN" />
 
     <Button
         android:id="@+id/curvasGeneralBTN"
-        android:layout_width="321dp"
-        android:layout_height="66dp"
+        android:layout_width="326dp"
+        android:layout_height="79dp"
 
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="376dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="372dp"
         android:backgroundTint="#00FFFFFF"
         android:drawableLeft="@drawable/curva"
         android:fontFamily="@font/lato_bold"

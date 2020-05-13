@@ -88,10 +88,12 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
                             Vacuna laVacuna = new Vacuna(dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, localDate);
 
-                            Intent intent = new Intent(this, ListaVacunasActivity.class);
-                            intent.putExtra("nuevaVacuna", laVacuna);
+                            Intent i = new Intent();
+                            i.putExtra("marcador", laVacuna);
+                            setResult(RESULT_OK, i);
+                            finish();
+
                             // Toast.makeText(this, "Se añadió: " + laVacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
-                            this.finish();
                         }
                     }
                 }
@@ -288,3 +290,39 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
         this.cancelarBTN = cancelarBTN;
     }
 }
+/*
+* [10:35 PM, 5/12/2020] Valentina: floatingActionButton.setOnClickListener(
+                (v)->{
+                    if(tempo !=null) {
+                        Intent i = new Intent(this, AddMarkers.class);
+                        Marcador m = new Marcador( tempo.getTitle());
+                        i.putExtra("marcador", m);
+                        startActivityForResult(i, 11);
+                    }
+                }
+        );
+[10:36 PM, 5/12/2020] Valentina: protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 11 && resultCode == RESULT_OK){
+
+            if(data != null){
+
+                Serializable serializable = data.getExtras().getSerializable("marcador");
+                Marcador marcador = (Marcador) serializable;
+[10:36 PM, 5/12/2020] Valentina: Activity Add Marker
+[10:36 PM, 5/12/2020] Valentina: Btn_agregar.setOnClickListener(
+                (v) -> {
+                    if(editText_name.getText().toString()!=null) {
+                        Intent i = new Intent();
+                        marcador.setTitulo(editText_name.getText().toString());
+                        i.putExtra("marcador", marcador);
+                        setResult(RESULT_OK, i);
+                        finish();
+                    }
+                }
+        );
+[10:36 PM, 5/12/2020] Valentina: marcador = (Marcador) getIntent().getExtras().getSerializable("marcador");
+*
+*
+* */

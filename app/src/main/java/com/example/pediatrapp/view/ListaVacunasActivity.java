@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,9 +45,9 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
         listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
 
-        adapter = new ListaVacunasAdpater( listaVacunas,this);
-        recyclerView.setAdapter(adapter);
-
+         adapter = new ListaVacunasAdpater( listaVacunas,this);
+         recyclerView.setAdapter(adapter);
+/*
         Vacuna vacuna  =   (Vacuna) getIntent().getExtras().getSerializable("nuevaVacuna");
 
         if(vacuna != null) {
@@ -61,7 +62,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
             Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();
         }
-
+*/
 
        agregarVaunaBTN.setOnClickListener(
 
@@ -69,8 +70,10 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
                   // AddVacunaActivity añadir = new AddVacunaActivity(this);
 
-                   Intent intent = new Intent(this, AddVacunaActivity.class);
-                   startActivity(intent);
+                   Intent i= new Intent(this, AddVacunaActivity.class);
+                   /*Marcador m = new Marcador( tempo.getTitle());
+                   i.putExtra("marcador", m);*/
+                   startActivityForResult(i, 11);
 
                }
 
@@ -88,12 +91,15 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     //Agrega una vacuna a la lista
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        if ((requestCode == request_code) && (resultCode == RESULT_OK)){
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            agregarVacunaALista(data);
+        if (requestCode == 11 && resultCode == RESULT_OK) {
 
+            if (data != null) {
+
+                agregarVacunaALista(data);
+            }
         }
     }
 
@@ -101,14 +107,14 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
         //Vacuna vacuna =  (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
 
-        Vacuna vacuna  =   (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
+        Vacuna vacuna  =   (Vacuna) data.getExtras().getSerializable("marcador");
 
         if(vacuna != null) {
             listaVacunas.add(vacuna);
-            ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
+           ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
 
-            setListaVacunas(listaVacunas);
-            setAdapter(adapter);
+            //setListaVacunas(listaVacunas);
+            setAdapter(adapter2);
 
             Toast.makeText(this,"Se añadió: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }else{
