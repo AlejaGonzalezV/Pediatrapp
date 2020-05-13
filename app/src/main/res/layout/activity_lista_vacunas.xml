@@ -11,7 +11,7 @@
         android:id="@+id/tv_nameVaccine2"
         android:layout_width="194dp"
         android:layout_height="24dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
         android:text="Nombre de la Vacuna"
         android:textAlignment="textStart"
         android:textColor="#000000"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listaVacunasAgregadas"
         app:layout_constraintEnd_toStartOf="@+id/tv_nameVaccine"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -86,14 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Vacunas2" />
 
-    <ListView
-        android:id="@+id/listaVacunasAgregadas"
-        android:layout_width="401dp"
-        android:layout_height="491dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/agregarVacunaLista"
         android:layout_width="221dp"
@@ -113,7 +105,7 @@
         android:layout_width="60dp"
         android:layout_height="23dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
         android:text="Fecha"
         android:textAlignment="textStart"
         android:textColor="#000000"
@@ -121,5 +113,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listaVacunasAgregadas"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaVacunasAgregadas"
+        android:layout_width="361dp"
+        android:layout_height="541dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

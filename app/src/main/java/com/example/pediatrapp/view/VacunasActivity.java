@@ -69,7 +69,7 @@ public class VacunasActivity extends AppCompatActivity {
 
         );
 
-
+/*
         adapter.setOnclickListener(
 
 
@@ -88,7 +88,7 @@ public class VacunasActivity extends AppCompatActivity {
     }
 
 
-        );
+        );*/
 
 
     }

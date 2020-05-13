@@ -1,15 +1,13 @@
 package com.example.pediatrapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,15 +17,13 @@ import com.example.pediatrapp.adapter.ListaVacunasAdpater;
 import com.example.pediatrapp.model.Vacuna;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListaVacunasActivity extends AppCompatActivity implements Serializable {
 
     private Button agregarVaunaBTN,  backBTN;
     private TextView nombreHijo;
-    private ListView listView;
+    private RecyclerView recyclerView;
     private ArrayList<Vacuna> listaVacunas;
     private ListaVacunasAdpater adapter;
 
@@ -39,7 +35,8 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
        agregarVaunaBTN = findViewById(R.id.agregarVacunaLista);
        nombreHijo = findViewById(R.id.nombreHijoVaList);
-       listView = findViewById(R.id.listaVacunasAgregadas);
+       recyclerView = findViewById(R.id.listaVacunasAgregadas);
+       recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
        backBTN = findViewById(R.id.backVacunasLista);
        listaVacunas = new ArrayList<>() ;
        //Recibe nombre del Hijo
@@ -48,8 +45,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
 
         adapter = new ListaVacunasAdpater( listaVacunas,this);
-        listView.setLayoutTransition(new LayoutTransition( ));
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         Vacuna vacuna  =   (Vacuna) getIntent().getExtras().getSerializable("nuevaVacuna");
 
@@ -129,8 +125,8 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         this.adapter = adapter;
     }
 
-    public void setListView(ListView listView) {
-        this.listView = listView;
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
     }
 
     public Button getAgregarVaunaBTN() {
