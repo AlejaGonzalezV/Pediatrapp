@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,7 +28,7 @@ public class VacunasActivity extends AppCompatActivity {
     private RecyclerView recycler;
     private HijosVacunasAdapter adapter;
     private ArrayList<Hijo> listaHijos;
-    private Button backBTN;
+    private Button backBTN, verHijoBTn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class VacunasActivity extends AppCompatActivity {
          buscarET = findViewById(R.id.searchHijoVacunaET);
          nombreHijo = "";
          backBTN = findViewById(R.id.backVacunas);
+         verHijoBTn = findViewById(R.id.verVa);
         recycler = findViewById(R.id.recyclerListaHijosVacuna);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listaHijos = new ArrayList<>();
@@ -52,15 +54,8 @@ public class VacunasActivity extends AppCompatActivity {
          buscarBtn.setOnClickListener(
                  (v)->{
 
-                     if(buscarET.getText().toString() != null) {
-                         nombreHijo = buscarET.getText().toString();
-
-                         Log.e(">>>>>>>>>", ""+nombreHijo);
-                     }else{
 
                          Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_LONG).show();
-
-                     }
 
                  }
 
@@ -77,15 +72,21 @@ public class VacunasActivity extends AppCompatActivity {
 
         adapter.setOnclickListener(
 
+
                 (v)->{
 
-                    String nombreHijo = listaHijos.get(recycler.getChildAdapterPosition(v)).getNombre();
-                    Toast.makeText(this, nombreHijo, Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(this, ListaVacunasActivity.class);
-                    startActivity(intent);
+                            String nombreHijo = listaHijos.get(recycler.getChildAdapterPosition(v)).getNombre();
 
-                }
+
+                            Toast.makeText(this, nombreHijo, Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
+                            intent.putExtra("elnombre", nombreHijo);
+                            VacunasActivity.this.startActivity(intent);
+
+    }
+
 
         );
 

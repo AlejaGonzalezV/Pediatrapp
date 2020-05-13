@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Vacuna;
@@ -45,8 +46,11 @@ public class ListaVacunasAdpater extends BaseAdapter {
         Vacuna laVacuna = (Vacuna) getItem(position);
         convertView = LayoutInflater.from(context).inflate(R.layout.item_listvacuna, null, false);
 
-       /* ImageView image = convertView.findViewById(R.id.imagenCacion1);
-        TextView nombreCancion = convertView.findViewById(R.id.nombreCacion);*/
+        TextView nombreVacuna = convertView.findViewById(R.id.tv_nameVaccine);
+        TextView fecha = convertView.findViewById(R.id.fechaItemVacuna);
+
+        nombreVacuna.setText(laVacuna.getNombre_vacuna());
+        fecha.setText(laVacuna.getIps());
         return convertView;
     }
 }

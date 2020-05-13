@@ -2,6 +2,7 @@ package com.example.pediatrapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,17 +19,18 @@ import com.example.pediatrapp.adapter.ListaVacunasAdpater;
 import com.example.pediatrapp.model.Vacuna;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaVacunasActivity extends AppCompatActivity implements Serializable {
 
-    private Button agregarVaunaBTN;
+    private Button agregarVaunaBTN,  backBTN;
     private TextView nombreHijo;
     private ListView listView;
     private ArrayList<Vacuna> listaVacunas;
     private ListaVacunasAdpater adapter;
-    private Button backBTN;
+
     public static final int request_code = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,29 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
        listView = findViewById(R.id.listaVacunasAgregadas);
        backBTN = findViewById(R.id.backVacunasLista);
        listaVacunas = new ArrayList<>() ;
+       //Recibe nombre del Hijo
+        nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
-       listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
+        listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
 
-       adapter = new ListaVacunasAdpater( listaVacunas,this);
-       listView.setAdapter(adapter);
+        adapter = new ListaVacunasAdpater( listaVacunas,this);
+        listView.setLayoutTransition(new LayoutTransition( ));
+        listView.setAdapter(adapter);
+
+        Vacuna vacuna  =   (Vacuna) getIntent().getExtras().getSerializable("nuevaVacuna");
+
+        if(vacuna != null) {
+            listaVacunas.add(vacuna);
+            ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
+
+            setListaVacunas(listaVacunas);
+            setAdapter(adapter);
+
+            Toast.makeText(this,"Se añadió: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
+        }else{
+
+            Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();
+        }
 
 
        agregarVaunaBTN.setOnClickListener(
@@ -67,6 +87,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         );
 
 
+
     }
 
     //Agrega una vacuna a la lista
@@ -82,12 +103,34 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     public void agregarVacunaALista(Intent data){
 
-        Vacuna vacuna =  (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
+        //Vacuna vacuna =  (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
+
+        Vacuna vacuna  =   (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
 
         if(vacuna != null) {
             listaVacunas.add(vacuna);
+            ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
+
+            setListaVacunas(listaVacunas);
+            setAdapter(adapter);
+
             Toast.makeText(this,"Se añadió: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
+        }else{
+
+            Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void setListaVacunas(ArrayList<Vacuna> listaVacunas) {
+        this.listaVacunas = listaVacunas;
+    }
+
+    public void setAdapter(ListaVacunasAdpater adapter) {
+        this.adapter = adapter;
+    }
+
+    public void setListView(ListView listView) {
+        this.listView = listView;
     }
 
     public Button getAgregarVaunaBTN() {
