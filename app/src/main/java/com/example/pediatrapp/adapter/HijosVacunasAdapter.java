@@ -1,6 +1,7 @@
 package com.example.pediatrapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.view.ListaVacunasActivity;
+import com.example.pediatrapp.view.VacunasActivity;
 
 import java.util.List;
 
@@ -64,10 +67,13 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
              //   hijos.get(position).get
         ).centerCrop().into(holder.imagenHijava); */
 
+
         holder.verVa.setOnClickListener(
 
                 (v)->{
-
+                    Intent intent = new Intent(context, ListaVacunasActivity.class);
+                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
+                    context.startActivity(intent);
 
 
                 }
@@ -80,6 +86,11 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
         return hijos.size();
     }
 
+
+    public void setOnclickListener(View.OnClickListener listener){
+
+        this.listener = listener;
+    }
 
 
 

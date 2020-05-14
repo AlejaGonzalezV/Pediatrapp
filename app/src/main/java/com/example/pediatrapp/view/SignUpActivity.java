@@ -217,7 +217,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 HashMap<String,String> pediatrasAsig = new HashMap<>();
                 pediatrasAsig.put(idDoc, idDoc);
-                
+
                 Uri uriP = Uri.parse("android.resource://" + this.getPackageName()
                         + "/" + R.drawable.user);
 

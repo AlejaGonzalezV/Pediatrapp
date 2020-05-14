@@ -3,6 +3,7 @@ package com.example.pediatrapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -12,6 +13,7 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
 
     private ImageButton buscarBtn;
     private EditText buscarET;
+    private Button backBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,14 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
 
         buscarBtn = findViewById(R.id.searchHijoCurvasBT);
         buscarET = findViewById(R.id.searchHijoCurvasET );
+        backBTN = findViewById(R.id.backCurvas);
+
+        backBTN.setOnClickListener(
+                (v)->{
+                    this.finish();
+                }
+
+        );
     }
 
     public ImageButton getBuscarBtn() {

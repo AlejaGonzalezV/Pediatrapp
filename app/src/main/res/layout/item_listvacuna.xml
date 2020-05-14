@@ -9,36 +9,45 @@
 
     <TextView
         android:id="@+id/tv_nameVaccine"
-        android:layout_width="222dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="196dp"
+        android:layout_height="36dp"
         android:layout_marginTop="16dp"
         android:text="Nombre de la Vacuna"
         android:textAlignment="textStart"
-        android:textColor="#4AA5EA"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textColor="#2F80ED"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/textView10"
-        android:layout_width="47dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/fechaItemVacuna"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato_bold"
         android:text="Fecha"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:textColor="#2F80ED"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/tv_nameVaccine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/verListaVa"
+        android:layout_width="34dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/lato_bold"
+        android:stateListAnimator="@null"
+        android:text="Ver"
+        android:textColor="#2F80ED"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/fechaItemVacuna"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

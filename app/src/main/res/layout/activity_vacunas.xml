@@ -2,35 +2,34 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.pediatrapp.view.VacunasActivity">
 
 
     <ImageView
-        android:id="@+id/imageViewVacunas1"
-        android:layout_width="264dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView21"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:id="@+id/imageView8"
+        android:layout_width="419dp"
+        android:layout_height="131dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo1" />
+        app:srcCompat="@drawable/fondolistas" />
 
     <ImageView
-        android:id="@+id/imageViewVacunas2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:id="@+id/imageView26"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/vaccine_1"
+        app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
+        app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo11" />
-
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/tv_Vacunas"
+        android:id="@+id/tv_Vacunas2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
@@ -42,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <ImageView
-        android:id="@+id/imageViewVacunas3"
+        android:id="@+id/imageViewVacunas3Lista"
         android:layout_width="49dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
@@ -62,36 +61,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/searchHijoVaBT"
+        android:id="@+id/searchHijoVacunaBT"
         android:layout_width="58dp"
         android:layout_height="56dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/lupabt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
-        app:layout_constraintStart_toEndOf="@+id/searchHijoVaET"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewVacunas2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        tools:ignore="UnknownId" />
 
     <EditText
-        android:id="@+id/searchHijoVaET"
+        android:id="@+id/searchHijoVacunaET"
         android:layout_width="270dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Buscar"
+        android:hint="Buscar hijo"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/hijosVacunas"
+        app:layout_constraintEnd_toStartOf="@+id/searchHijoVacunaBT"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Vacunas"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/hijosVacunas"
-        android:layout_width="394dp"
-        android:layout_height="489dp"
+        android:id="@+id/recyclerListaHijosVacuna"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchHijoVacunaET" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:paddingStart="20dp"
-    android:paddingLeft="20dp"
     tools:context="com.example.pediatrapp.fragments.ParentFragment_Historial">
 
     <ImageView
@@ -49,20 +47,22 @@
         android:layout_width="384dp"
         android:layout_height="71dp"
 
-        android:layout_marginTop="16dp"
-        android:background="@drawable/boton_blanco"
+        android:layout_marginTop="20dp"
+
+        android:backgroundTint="#00FFFFFF"
         android:drawableLeft="@drawable/inyeccion"
         android:drawableRight="@drawable/ver"
         android:fontFamily="@font/lato_bold"
+        android:paddingStart="20dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="15dp"
         android:text="Vacunas"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#3E8AF8"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_historial" />
 
@@ -73,19 +73,20 @@
 
         android:layout_marginTop="8dp"
 
-        android:background="@drawable/boton_blanco"
+        android:backgroundTint="#00FFFFFF"
         android:drawableLeft="@drawable/curva"
         android:drawableRight="@drawable/ver"
         android:fontFamily="@font/lato_bold"
+        android:paddingStart="20dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="15dp"
         android:text="Curvas de crecimiento"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#3E8AF8"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_curvas2" />
 
