@@ -8,14 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
-
-import org.w3c.dom.Text;
 
 public class DoctorRegisterFragment extends Fragment {
 

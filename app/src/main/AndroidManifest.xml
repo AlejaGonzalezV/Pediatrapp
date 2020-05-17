@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.AddCurvaActivity"></activity>
+        <activity android:name=".view.InitialActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.AddCurvaActivity" />
         <activity android:name=".view.AddVacunaActivity" />
         <activity android:name=".view.CurvasGraficoActivity" />
         <activity android:name=".view.CurvasCrecimientoActivity" />
@@ -19,13 +26,7 @@
         <activity android:name=".view.ActivityMainPediatra" />
         <activity android:name=".view.SignUpActivity" />
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".view.StartActivity" />
         <activity android:name=".view.MainActivity" />
 
         <meta-data
