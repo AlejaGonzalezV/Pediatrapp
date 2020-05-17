@@ -8,27 +8,13 @@
     tools:context="com.example.pediatrapp.fragments.ParentFragment_Historial">
 
     <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="264dp"
-        android:layout_height="129dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/imageView8"
+        android:layout_width="419dp"
+        android:layout_height="131dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo1" />
-
-    <ImageView
-        android:id="@+id/imageView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo11" />
-
+        app:srcCompat="@drawable/fondolistas" />
     <TextView
         android:id="@+id/tv_historial"
         android:layout_width="wrap_content"
@@ -43,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_curvas2"
+        android:id="@+id/vacunasGeneralBTN"
         android:layout_width="384dp"
         android:layout_height="71dp"
 
@@ -67,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_historial" />
 
     <Button
-        android:id="@+id/btn_curvas"
+        android:id="@+id/curvasGeneralBTN"
         android:layout_width="384dp"
         android:layout_height="71dp"
 
@@ -88,6 +74,6 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_curvas2" />
+        app:layout_constraintTop_toBottomOf="@+id/vacunasGeneralBTN" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

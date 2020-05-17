@@ -47,22 +47,8 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
          adapter = new ListaVacunasAdpater( listaVacunas,this);
          recyclerView.setAdapter(adapter);
-/*
-        Vacuna vacuna  =   (Vacuna) getIntent().getExtras().getSerializable("nuevaVacuna");
 
-        if(vacuna != null) {
-            listaVacunas.add(vacuna);
-            ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
 
-            setListaVacunas(listaVacunas);
-            setAdapter(adapter);
-
-            Toast.makeText(this,"Se añadió: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
-        }else{
-
-            Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();
-        }
-*/
 
        agregarVaunaBTN.setOnClickListener(
 
@@ -71,6 +57,8 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
                   // AddVacunaActivity añadir = new AddVacunaActivity(this);
 
                    Intent i= new Intent(this, AddVacunaActivity.class);
+                   //Vacuna va = new Vacuna();
+                   //i.putExtra("marcador")
                    /*Marcador m = new Marcador( tempo.getTitle());
                    i.putExtra("marcador", m);*/
                    startActivityForResult(i, 11);
@@ -116,7 +104,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
             //setListaVacunas(listaVacunas);
             setAdapter(adapter2);
 
-            Toast.makeText(this,"Se añadió: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Se añadióZZZZZZ: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }else{
 
             Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();
@@ -142,8 +130,6 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
     public void setAgregarVaunaBTN(Button agregarVaunaBTN) {
         this.agregarVaunaBTN = agregarVaunaBTN;
     }
-
-
     public TextView getNombreHijo() {
         return nombreHijo;
     }
