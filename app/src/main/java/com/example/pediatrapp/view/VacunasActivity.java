@@ -28,7 +28,7 @@ public class VacunasActivity extends AppCompatActivity {
     private RecyclerView recycler;
     private HijosVacunasAdapter adapter;
     private ArrayList<Hijo> listaHijos;
-    private Button backBTN, verHijoBTn;
+    private Button backBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,9 @@ public class VacunasActivity extends AppCompatActivity {
 
         buscarBtn = findViewById(R.id.searchHijoVacunaBT);
          buscarET = findViewById(R.id.searchHijoVacunaET);
+        backBTN = findViewById(R.id.backVacunas);
          nombreHijo = "";
-         backBTN = findViewById(R.id.backVacunas);
-         verHijoBTn = findViewById(R.id.verVa);
+
         recycler = findViewById(R.id.recyclerListaHijosVacuna);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listaHijos = new ArrayList<>();
@@ -68,27 +68,6 @@ public class VacunasActivity extends AppCompatActivity {
                 }
 
         );
-
-/*
-        adapter.setOnclickListener(
-
-
-                (v)->{
-
-
-                            String nombreHijo = listaHijos.get(recycler.getChildAdapterPosition(v)).getNombre();
-
-
-                            Toast.makeText(this, nombreHijo, Toast.LENGTH_LONG).show();
-
-                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
-                            intent.putExtra("elnombre", nombreHijo);
-                            VacunasActivity.this.startActivity(intent);
-
-    }
-
-
-        );*/
 
 
     }
