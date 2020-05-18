@@ -2,20 +2,24 @@ package com.example.pediatrapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.dialog.DatePickerFragment;
 import com.example.pediatrapp.model.Vacuna;
 
 import java.io.Serializable;
@@ -86,7 +90,7 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                             LocalDate localDate = (LocalDate) LocalDate.now();
 
-                            Vacuna laVacuna = new Vacuna(dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, localDate);
+                            Vacuna laVacuna = new Vacuna(dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, fechaET.getText().toString());
 
                             Intent i = new Intent();
                             i.putExtra("marcador", laVacuna);
@@ -114,6 +118,32 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
                     this.finish();
                 }
         );
+
+        fechaET.setOnClickListener(
+
+                (v)->{
+
+                    showDatePickerDialog();
+                }
+
+        );
+    }
+
+    //muestra el DatePicker
+    private void showDatePickerDialog() {
+
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker, year, month, day) -> {
+            // +1 because January is zero
+            String selectedDate =  day + "/" + (month+1) + "/" + year;
+
+            Log.e(">>>>>>>", selectedDate);
+            //Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
+            fechaET.setText(selectedDate);
+        });
+
+
+        newFragment.show(this.getSupportFragmentManager(), "datePicker");
     }
 
     public boolean validarDatos(){
@@ -122,6 +152,8 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
         String ips = ipsET.getText().toString();
         String aplicador = nombreAplicadorET.getText().toString();
+        String fecha= fechaET.getText().toString();
+
         if(dosisSelected.equals("Seleccionar")){
 
             ((TextView)dosisSpinner.getSelectedView()).setError("");
@@ -139,6 +171,11 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
             ((TextView)nombreVacunaSpinner.getSelectedView()).setError("");
              ((TextView)nombreVacunaSpinner.getSelectedView()).setTextColor(Color.RED);
+            retorno = false;
+        }
+        if(fecha.isEmpty()){
+
+            fechaET.setError("");
             retorno = false;
         }
 

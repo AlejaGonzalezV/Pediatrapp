@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,12 +41,13 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
        //Recibe nombre del Hijo
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
-        listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
+         listaVacunas.add(new Vacuna("res","12","hoy ","Jair","Ejmeplo","hoy"));
 
-         adapter = new ListaVacunasAdpater( listaVacunas,this);
-         recyclerView.setAdapter(adapter);
+        // Con este método se cargan todas las vacunas de la base de datos
+        cargarVacunas();
 
-
+        //Actualiza la lista de vacunas cuando se agraga una nueva
+        actualizarVacunas();
 
        agregarVaunaBTN.setOnClickListener(
 
@@ -57,10 +56,6 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
                   // AddVacunaActivity añadir = new AddVacunaActivity(this);
 
                    Intent i= new Intent(this, AddVacunaActivity.class);
-                   //Vacuna va = new Vacuna();
-                   //i.putExtra("marcador")
-                   /*Marcador m = new Marcador( tempo.getTitle());
-                   i.putExtra("marcador", m);*/
                    startActivityForResult(i, 11);
 
                }
@@ -77,7 +72,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     }
 
-    //Agrega una vacuna a la lista
+    //Aquí se recibe la nueva vacuna que va a ser agragada a la lista
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -91,6 +86,30 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         }
     }
 
+    // Método para Cargar Vacunas de base de datos
+
+    public void cargarVacunas(){
+
+
+
+
+    }
+
+    public void actualizarVacunas(){
+
+       /// listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
+
+        if(listaVacunas.size() != 0) {
+
+            adapter = new ListaVacunasAdpater(listaVacunas, this);
+            recyclerView.setAdapter(adapter);
+        }
+
+
+    }
+
+    //Este método agraga una nueva vacuna a la lista.
+
     public void agregarVacunaALista(Intent data){
 
         //Vacuna vacuna =  (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
@@ -100,10 +119,8 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         if(vacuna != null) {
             listaVacunas.add(vacuna);
            ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
-
-            //setListaVacunas(listaVacunas);
-            setAdapter(adapter2);
-
+           setAdapter(adapter2);
+            actualizarVacunas();
             Toast.makeText(this,"Se añadióZZZZZZ: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }else{
 
