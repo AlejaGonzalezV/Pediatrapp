@@ -217,7 +217,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 HashMap<String,String> pediatrasAsig = new HashMap<>();
                 pediatrasAsig.put(idDoc, idDoc);
-                
+
                 Uri uriP = Uri.parse("android.resource://" + this.getPackageName()
                         + "/" + R.drawable.user);
 
@@ -233,27 +233,6 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 }).addOnFailureListener(e -> {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 });
-
-            /*
-            String id = FirebaseDatabase.getInstance().getReference().child("Padres").push().getKey();
-            String padreAsigId = FirebaseDatabase.getInstance().getReference().child("Pediatras").child("Padres_asignados").push().getKey();
-
-
-            Hijo hijo = new Hijo(idH, identH, fechaH, generoH, nombreH);
-
-            HashMap<String, Hijo> hijos = new HashMap<>();
-            hijos.put(idH, hijo);
-
-            HashMap<String,String> pediatrasAsig = new HashMap<>();
-            pediatrasAsig.put(idDoc, idDoc);
-
-            Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,pediatrasAsig, hijos);
-
-            FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(padreAsigId).setValue(id);
-
-
-             */
 
 
     }
@@ -296,70 +275,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             });
 
-
-            //String id = FirebaseDatabase.getInstance().getReference().child("Pediatras").push().getKey();
-
-            //pediatra.addPadres("1007554028");
-            //pediatra.addChat("chat1");
-            //pediatra.addChatGrupal("chatGrupal1");
-
-            //String keyChat = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").push().getKey();
-            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(keyChat).setValue(pediatra.getChats());
-
-            //String keyChatG = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").push().getKey();
-            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats_grupales").child(keyChatG).setValue(pediatra.getChats_grupales());
-
-            //String keyPadres = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").push().getKey();
-            //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("padres_asignados").child(keyPadres).setValue(pediatra.getPadres_asignados() );
-
     }
-
-    /*
-    public void createUserDoctor(){
-
-        String[] str = datos.split(",");
-        String nombre = str[0];
-        String cedula = str[1];
-        String email = str[2];
-        String password = str[3];
-        String idV = str[4];
-
-
-        //String id = FirebaseDatabase.getInstance().getReference().child("Pediatras").push().getKey();
-
-
-        //Registrar en firebase
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-
-            FirebaseUser user = auth.getCurrentUser();
-            String id = user.getUid();
-
-            String firma = str[6];
-            Uri uriF = Uri.parse(firma);
-
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            storage.getReference().child("Doctor").child(id+"*"+"Firma").putFile(uriF);
-            firma=storage.getReference().child("Doctor").child(id+"*"+"Firma").getDownloadUrl().toString();
-
-            Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,null);
-            FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
-
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-        });
-
-
-
-
-        //Escribir en la base de datos
-
-
-
-
-    }
-
-     */
 
 
 }

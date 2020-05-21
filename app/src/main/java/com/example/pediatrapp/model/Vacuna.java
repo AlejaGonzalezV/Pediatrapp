@@ -1,19 +1,24 @@
 package com.example.pediatrapp.model;
 
-public class Vacuna {
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Vacuna implements Serializable {
 
     private String dosis;
     private String edad_aplicacion;
     private String ips;
     private String nombre_aplicador;
     private String nombre_vacuna;
+    private String fecha_aplicacion;
 
-    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna) {
+    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion) {
         this.dosis = dosis;
         this.edad_aplicacion = edad_aplicacion;
         this.ips = ips;
         this.nombre_aplicador = nombre_aplicador;
         this.nombre_vacuna = nombre_vacuna;
+        this.fecha_aplicacion = fecha_aplicacion;
     }
 
     public Vacuna() {
@@ -57,5 +62,13 @@ public class Vacuna {
 
     public void setNombre_vacuna(String nombre_vacuna) {
         this.nombre_vacuna = nombre_vacuna;
+    }
+
+    public String getFecha_aplicacion() {
+        return fecha_aplicacion;
+    }
+
+    public void setFecha_aplicacion(String fecha_aplicacion) {
+        this.fecha_aplicacion = fecha_aplicacion;
     }
 }
