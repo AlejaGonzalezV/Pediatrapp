@@ -6,12 +6,21 @@ public class Mensaje {
     private String body;
     private String nombre_usuario;
     private String user_id;
+    private long timestamp;
 
-    public Mensaje(long id, String body, String nombre_usuario, String user_id) {
+    public Mensaje(long id, String body, String user_id, long timestamp) {
+        this.id = id;
+        this.body = body;
+        this.user_id = user_id;
+        this.timestamp = timestamp;
+    }
+
+    public Mensaje(long id, String body, String nombre_usuario, String user_id, long timestamp) {
         this.id = id;
         this.body = body;
         this.nombre_usuario = nombre_usuario;
         this.user_id = user_id;
+        this.timestamp = timestamp;
     }
 
     public Mensaje() {
@@ -47,5 +56,13 @@ public class Mensaje {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

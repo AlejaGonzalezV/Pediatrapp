@@ -6,6 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.pediatrapp.view.AddCurvaActivity">
+
+    <EditText
+        android:id="@+id/tallaCurvaET2"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:ems="10"
+        android:hint="Talla"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerEdadCurva"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="419dp"
@@ -51,7 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/backVacunas"
+        android:id="@+id/backAddCurva"
         android:layout_width="60dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
@@ -61,88 +74,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="68dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="60dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Edad:"
-        android:textColor="#000000"
-        android:textSize="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView23"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.975" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="56dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Peso (grs):"
-        android:textColor="#000000"
-        android:textSize="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView24"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Altura (cm):"
-        android:textColor="#000000"
-        android:textSize="19dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="399dp"
-        tools:ignore="MissingConstraints" />
-
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerEdadCurva"
         android:layout_width="157dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
-        app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Curvass"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/pesoCurvaET"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/alturaCurvaET"
         android:layout_width="163dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
         android:ems="10"
+        android:hint="Medida Cabeza"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toEndOf="@+id/textView24" />
+        app:layout_constraintBottom_toTopOf="@+id/fechaCurvaET"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/fechaCurvaET"
+        android:layout_width="167dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="52dp"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Año/Mes/Día"
+        android:inputType="date"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/guardarCurvaBTN"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/pesoCurvaET"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:hint="Peso"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/alturaCurvaET"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/cancelarBTN"
+        android:id="@+id/cancelarCurvaBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="80dp"
@@ -152,46 +133,22 @@
         android:textColor="#2F80ED"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/fechaCurvaET"
         app:layout_constraintVertical_bias="0.463" />
 
     <Button
-        android:id="@+id/guardarBTN"
+        android:id="@+id/guardarCurvaBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/boton"
         android:text="Añadir"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cancelarBTN"
-        app:layout_constraintHorizontal_bias="0.564"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Fecha: "
-        android:textColor="#000000"
-        android:textSize="19dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="167dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="76dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/guardarBTN"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/cancelarCurvaBTN"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

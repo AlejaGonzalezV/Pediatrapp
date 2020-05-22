@@ -61,10 +61,10 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
         listaDosis.add("Seleccionar");
         listaEdades.add("Seleccionar");
 
-        for (int i= 0; i<5;i++){
+        for (int i= 1; i<18;i++){
 
             listaNombresVacunas.add("Vacuna: "+ i);
-            listaEdades.add("Edad: "+i);
+            listaEdades.add(""+i);
             listaDosis.add("dosis: "+i);
         }
 
@@ -156,38 +156,38 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
         if(dosisSelected.equals("Seleccionar")){
 
-            ((TextView)dosisSpinner.getSelectedView()).setError("");
+            ((TextView)dosisSpinner.getSelectedView()).setError("Vacío");
            ((TextView)dosisSpinner.getSelectedView()).setTextColor(Color.RED);
 
             retorno = false;
         }
        if(edadSelected.equals("Seleccionar")){
 
-           ((TextView)edadSpinner.getSelectedView()).setError("");
+           ((TextView)edadSpinner.getSelectedView()).setError("Vacío");
            ((TextView)edadSpinner.getSelectedView()).setTextColor(Color.RED);
             retorno = false;
         }
         if(vacunaSelected.equals("Seleccionar")){
 
-            ((TextView)nombreVacunaSpinner.getSelectedView()).setError("");
+            ((TextView)nombreVacunaSpinner.getSelectedView()).setError("Vacío");
              ((TextView)nombreVacunaSpinner.getSelectedView()).setTextColor(Color.RED);
             retorno = false;
         }
         if(fecha.isEmpty()){
 
-            fechaET.setError("");
+            fechaET.setError("Vacío");
             retorno = false;
         }
 
         if(ips.isEmpty()){
 
-            ipsET.setError("");
+            ipsET.setError("Vacío");
             retorno = false;
 
         }
         if(aplicador.isEmpty()){
 
-            nombreAplicadorET.setError("");
+            nombreAplicadorET.setError("Vacío");
             retorno = false;
 
         }
