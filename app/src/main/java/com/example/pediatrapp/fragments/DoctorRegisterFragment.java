@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8897a140cfed08b24090d620c42d0076b0a4ae03
 import androidx.fragment.app.Fragment;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
