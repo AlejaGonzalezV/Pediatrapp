@@ -45,7 +45,7 @@ public class TablaCurvasFragment extends Fragment {
        // agregarCurvaBtn = view2.findViewById(R.id.agregarCurva);
         listaCurvas = new ArrayList<>();
 
-        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14, "16"));
+        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14));
 
         if(nuevaCurva != null){
 
