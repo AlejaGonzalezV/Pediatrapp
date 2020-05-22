@@ -14,14 +14,13 @@ public class Chat {
     private HashMap<String, Mensaje> mensajes;
     private String id;
 
-    public Chat(String foto_padre, String foto_pediatra, String nombre_padre, String nombre_pediatra, String id_padre, String id_pediatra, HashMap<String, Mensaje> mensajes, String id) {
+    public Chat(String foto_padre, String foto_pediatra, String nombre_padre, String nombre_pediatra, String id_padre, String id_pediatra, String id) {
         this.foto_padre = foto_padre;
         this.foto_pediatra = foto_pediatra;
         this.nombre_padre = nombre_padre;
         this.nombre_pediatra = nombre_pediatra;
         this.id_padre = id_padre;
         this.id_pediatra = id_pediatra;
-        this.mensajes = mensajes;
         this.id = id;
     }
 
@@ -90,5 +89,11 @@ public class Chat {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void addMensaje(String key, Mensaje msj){
+
+        mensajes.put(key,msj);
+
     }
 }
