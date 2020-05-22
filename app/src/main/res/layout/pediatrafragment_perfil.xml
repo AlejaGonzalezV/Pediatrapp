@@ -11,7 +11,7 @@
         android:id="@+id/nombre_pediatra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/lato_bold"
         android:text="Nombre de Pediatra"
         android:textColor="#000000"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/fondolistas" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imagePediatraCIV"
+        android:id="@+id/pediatra_foto"
         android:layout_width="117dp"
         android:layout_height="109dp"
         android:layout_marginTop="52dp"
@@ -66,71 +66,38 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="354dp"
-        android:layout_height="280dp"
+        android:layout_width="353dp"
+        android:layout_height="220dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
 
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="192dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.931">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/cedula_pediatraCV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Horarios de atención"
+            android:text="Cédula "
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
-
-        <TextView
-            android:id="@+id/nombre_pediatraCV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="Nombre de Pediatra"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
-
-        <TextView
-            android:id="@+id/horarioAtencion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="200dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="8:00 AM   -   6:00 PM"
-            android:textAlignment="center"
-            android:textColor="#3E8AF8"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
+             />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="95dp"
             android:fontFamily="@font/lato_bold"
             android:text="Pediatra"
             android:textAlignment="center"
@@ -138,14 +105,14 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
+           />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/email_pediatra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="125dp"
             android:fontFamily="@font/lato_bold"
             android:text="Correo electrónico"
             android:textAlignment="center"
@@ -153,30 +120,29 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
+             />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/numeroID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="150dp"
             android:fontFamily="@font/lato_bold"
-            android:text="________________________________________________"
+            android:text="Número único de identificación"
             android:textAlignment="center"
             android:textColor="#3E8AF8"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pediatra_foto" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="124dp"
         android:fontFamily="@font/lato_bold"
         android:text="Información"
         android:textColor="#3E8AF8"
@@ -186,4 +152,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
+    <Button
+        android:id="@+id/cerrarSesionBTN"
+        android:layout_width="214dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="116dp"
+        android:background="@drawable/boton"
+        android:text="Cerrar Sesión"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -17,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ActivityMainPediatra extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private Pediatra pediatra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

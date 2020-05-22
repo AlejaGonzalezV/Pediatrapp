@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 
 public class ParentFragment_ChatList extends Fragment {
 

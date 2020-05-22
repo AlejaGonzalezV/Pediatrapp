@@ -19,10 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.PediatraAdapter_PadreList;
 import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +56,12 @@ public class PediatraFragment_PadreLista extends Fragment {
 
         pediatra_padresList.setHasFixedSize(true);
         pediatra_padresList.setLayoutManager(new LinearLayoutManager(getContext()));
-
         padres = new ArrayList<Padre>();
+
+        Log.e(">>>", "Set");
+        adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
+        pediatra_padresList.setAdapter(adapter_padreList);
+
         
         readParents();
 
@@ -77,9 +85,78 @@ public class PediatraFragment_PadreLista extends Fragment {
 
     private void readParents() {
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        ArrayList<String> idPadresAsignados = new ArrayList<>();
 
-       // DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e(">>>", firebaseUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(firebaseUser.getUid()).child("Padres_asignados");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                idPadresAsignados.clear();
+
+                Log.e(">>>", "Busca");
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    String id = snapshot.getValue(String.class);
+                    if(id != null){
+                        Log.e(">>>", "Encuentra");
+                        idPadresAsignados.add(id);
+                    }
+
+
+                }
+
+                loadParents(idPadresAsignados);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void loadParents(ArrayList<String> idpadres) {
+        padres.clear();
+        Log.e(">>>", "Entra");
+        for(int i = 0; i< idpadres.size(); i++){
+
+            Log.e(">>>", idpadres.get(i));
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(idpadres.get(i));
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+//                    for(DataSnapshot snapshot : dataSnapshot){
+
+//                        Log.e(">>>", snapshot.getValue(String.class));
+                        Padre padre = dataSnapshot.getValue(Padre.class);
+                        if(padre != null){
+                            Log.e(">>>", "Añade" + padre.getNombre());
+                         //   padres.add(padre);
+                            adapter_padreList.addPadre(padre);
+                        }
+
+//                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+
+       //set
+
 
     }
 }

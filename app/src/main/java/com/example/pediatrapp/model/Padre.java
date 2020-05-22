@@ -19,8 +19,7 @@ public class Padre {
     private HashMap<String, String> chats;
 
     public Padre(String id, String cedula, String nombre, String correo, String contrasena, String direccion,
-                 String telefono, String foto, String chat_grupal_id, String pediatraTemp,
-                 HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos, HashMap<String, String> chats) {
+                 String telefono, String foto, HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos) {
 
         this.id = id;
         this.cedula = cedula;
@@ -30,30 +29,11 @@ public class Padre {
         this.direccion = direccion;
         this.telefono = telefono;
         this.foto = foto;
-        this.chat_grupal_id = chat_grupal_id;
-        this.pediatraTemp = pediatraTemp;
         this.pediatras_asig = pediatras_asig;
         this.hijos = hijos;
-        this.chats = chats;
     }
 
-    public Padre(String id, String cedula, String nombre, String correo, String contrasena,
-                 String direccion, String telefono, String foto, String chat_grupal_id, String pediatraTemp) {
-
-        this.id = id;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contrasena = contrasena;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.foto = foto;
-        this.chat_grupal_id = chat_grupal_id;
-        this.pediatraTemp = pediatraTemp;
-        pediatras_asig = new HashMap<String, String>();
-        chats = new HashMap<String, String>();
-        hijos = new HashMap<String, Hijo>();
-
+    public Padre() {
     }
 
     public String getId() {

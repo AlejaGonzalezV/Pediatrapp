@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pediatrapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,9 +29,24 @@ public class LoginActivity extends AppCompatActivity {
 
                 (v) -> {
 
-//                    Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    startActivity(intent);
+
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnSuccessListener(
+                                    authResult -> {
+
+                                        //Si es user normal
+                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                        startActivity(intent);
+
+                                        //Si es pediatra
+//                                        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+//                                        startActivity(intent);
+
+                                    }
+                            ).addOnFailureListener(e->{
+                        Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    });
+
 
                 }
 

@@ -48,7 +48,7 @@ public class DoctorPhotoFragment extends Fragment {
         checkF = view.findViewById(R.id.checkF);
         checkF.setVisibility(View.GONE);
         photoIV = view.findViewById(R.id.photoIV);
-        next = view.findViewById(R.id.consultar_btn);
+        next = view.findViewById(R.id.cerrarSesionBTN);
         back = view.findViewById(R.id.back);
         firma = view.findViewById(R.id.firma);
         profilePhoto = view.findViewById(R.id.profilePhoto);
@@ -62,12 +62,13 @@ public class DoctorPhotoFragment extends Fragment {
                     if (listener != null && correcto && fPerfil) {
 
 
-                        listener.onData(this,"nextF", uriP.toString(),uriF.toString());
+                        listener.onData(this,"next", uriP.toString(),uriF.toString());
 
 
                     }else if(listener!=null && correcto && !fPerfil){
 
-                        listener.onData(this, "next", uriF.toString());
+                        uriFromResource();
+                        listener.onData(this,"next", uriP.toString(),uriF.toString());
 
                     } else if(!correcto){
 
@@ -125,6 +126,13 @@ public class DoctorPhotoFragment extends Fragment {
 
     }
 
+    public void uriFromResource(){
+
+        uriP = Uri.parse("android.resource://" + getContext().getPackageName()
+                + "/" + R.drawable.user);
+
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
@@ -136,10 +144,6 @@ public class DoctorPhotoFragment extends Fragment {
                 photoIV.setImageURI(uriP);
                 checkP.setVisibility(View.VISIBLE);
 
-                //FirebaseStorage storage = FirebaseStorage.getInstance();
-                //storage.getReference().child("ProfilePhotoDoctor").child()
-
-
             }
 
 
@@ -150,6 +154,7 @@ public class DoctorPhotoFragment extends Fragment {
             if(uriF != null){
 
                 checkF.setVisibility(View.VISIBLE);
+
 
             }
 
