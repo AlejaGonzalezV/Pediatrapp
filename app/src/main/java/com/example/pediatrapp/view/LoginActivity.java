@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,36 +37,39 @@ public class LoginActivity extends AppCompatActivity {
 
                 (v) -> {
 
+                    boolean mail = TextUtils.isEmpty(email.getText().toString().trim());
+                    boolean pass = TextUtils.isEmpty(password.getText().toString().trim());
+                    if(mail == false && pass == false){
 
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                            .addOnSuccessListener(
-                                    authResult -> {
+                        FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                                .addOnSuccessListener(
+                                        authResult -> {
 
-                                        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                            String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                                        Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
-                                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+                                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                for(DataSnapshot child: dataSnapshot.getChildren()){
+                                                    for(DataSnapshot child: dataSnapshot.getChildren()){
 
-                                                    if(child.getKey().equals(id)){
+                                                        if(child.getKey().equals(id)){
 
-                                                        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                                                        startActivity(intent);
+                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+                                                            startActivity(intent);
+
+                                                        }
 
                                                     }
 
                                                 }
 
-                                            }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
-                                        });
+                                                }
+                                            });
 
                                             Query query2 = FirebaseDatabase.getInstance().getReference().child("Padres");
                                             query2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -91,11 +95,16 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                             });
 
-                                    }
-                            ).addOnFailureListener(e->{
-                        Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                    });
+                                        }
+                                ).addOnFailureListener(e->{
+                            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        });
 
+                    }else {
+
+                        Toast.makeText(getApplicationContext(), "Ingrese sus datos de usuario o regístrese para continuar", Toast.LENGTH_LONG).show();
+
+                    }
 
                 }
 

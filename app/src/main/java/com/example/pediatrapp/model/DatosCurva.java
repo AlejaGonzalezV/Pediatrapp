@@ -11,6 +11,7 @@ public class DatosCurva implements Serializable {
     private int peso;
     private int talla;
 
+
     public DatosCurva(String fecha, int medida_cabeza, int peso, int talla) {
         this.fecha = fecha;
         this.medida_cabeza = medida_cabeza;
@@ -20,6 +21,7 @@ public class DatosCurva implements Serializable {
 
     public DatosCurva() {
     }
+
 
     public String getFecha() {
         return fecha;
