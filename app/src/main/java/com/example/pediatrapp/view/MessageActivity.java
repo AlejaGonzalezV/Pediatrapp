@@ -6,13 +6,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.controller.MessageController;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,22 +34,22 @@ public class MessageActivity extends AppCompatActivity {
     private CircleImageView profile_image;
     private TextView username;
 
-    private FirebaseUser fuser;
-    private DatabaseReference reference;
+
 
     private EditText text_send;
     private ImageButton btn_send;
     private ImageButton btn_media;
     private String type;
-
-    private Intent intent;
+    private String userid;
+    private ListView message_list;
+    private MessageController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        intent = getIntent();
-        String userid = intent.getStringExtra("userid");
+        Intent intent = getIntent();
+         userid = intent.getStringExtra("userid");
         type = intent.getStringExtra("type");
 
         Toolbar toolbar = findViewById(R.id.toolBar);
@@ -56,6 +59,7 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e(">>>", "tooooooolbaaaar pop");
                 finish();
                 //CREO QUE AQUI ES DONDE SE PUEDE DECIR QUE ABRA LA VISTA DEL PERFIL DEL USUARIO CON EL QUE HABLA
             }
@@ -66,71 +70,81 @@ public class MessageActivity extends AppCompatActivity {
         text_send = findViewById(R.id.text_send);
         btn_send = findViewById(R.id.btn_send);
         btn_media = findViewById(R.id.btn_media);
+        message_list = findViewById(R.id.message_list);
 
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String body = text_send.getText().toString();
-                if(!body.equals("")){
-                    sendMessage(body, null, fuser.getUid());
-                }
-                text_send.setText("");
-            }
-        });
-
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(type.equals("padre")){
-            reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(userid);
-        }else {
-            reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(userid);
-        }
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if(type.equals("padre")){
-                    Padre padre = dataSnapshot.getValue(Padre.class);
-                    username.setText(padre.getNombre());
-
-                    storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
-                            uri -> {
-                                Glide.with(MessageActivity.this).load(uri).centerCrop().into(profile_image);
-                            }
-                    );
-                }else{
-                    Pediatra pediatra = dataSnapshot.getValue(Pediatra.class);
-                    username.setText(pediatra.getNombre());
-
-                    storage.getReference().child("Padre").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
-                            uri -> {
-                                Glide.with(MessageActivity.this).load(uri).centerCrop().into(profile_image);
-                            }
-                    );
-
-                }
-
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        controller = new MessageController(this);
 
     }
 
-    public void sendMessage(String body, String roomChat, String idUser){
-        //MIN 6:38
-        //Generar ID
-        //MIRAR SESION QUE NO SE CIERRA
+    public CircleImageView getProfile_image() {
+        return profile_image;
+    }
 
+    public void setProfile_image(CircleImageView profile_image) {
+        this.profile_image = profile_image;
+    }
 
+    public TextView getUsername() {
+        return username;
+    }
 
+    public void setUsername(TextView username) {
+        this.username = username;
+    }
+
+    public EditText getText_send() {
+        return text_send;
+    }
+
+    public void setText_send(EditText text_send) {
+        this.text_send = text_send;
+    }
+
+    public ImageButton getBtn_send() {
+        return btn_send;
+    }
+
+    public void setBtn_send(ImageButton btn_send) {
+        this.btn_send = btn_send;
+    }
+
+    public ImageButton getBtn_media() {
+        return btn_media;
+    }
+
+    public void setBtn_media(ImageButton btn_media) {
+        this.btn_media = btn_media;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public MessageController getController() {
+        return controller;
+    }
+
+    public void setController(MessageController controller) {
+        this.controller = controller;
+    }
+
+    public ListView getMessage_list() {
+        return message_list;
+    }
+
+    public void setMessage_list(ListView message_list) {
+        this.message_list = message_list;
     }
 }

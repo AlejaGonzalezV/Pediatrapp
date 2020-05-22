@@ -39,12 +39,16 @@
         
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
+        android:id="@+id/message_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view"
+        android:layout_above="@+id/separacion"
         android:layout_below="@+id/bar_layout"
-        android:layout_above="@+id/separacion"/>
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
 
     <TextView
         android:layout_width="match_parent"
