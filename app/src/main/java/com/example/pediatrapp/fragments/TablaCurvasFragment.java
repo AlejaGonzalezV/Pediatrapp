@@ -26,7 +26,8 @@ public class TablaCurvasFragment extends Fragment {
     private RecyclerView recyclerView;
     private ItemTablaCurvasAdpater adapter;
     private ArrayList<DatosCurva> listaCurvas;
-    private Button agregarCurvaBtn;
+    private DatosCurva nuevaCurva;
+  //  private Button agregarCurvaBtn;
 
     public TablaCurvasFragment() {
         // Required empty public constructor
@@ -40,26 +41,19 @@ public class TablaCurvasFragment extends Fragment {
         recyclerView = view.findViewById(R.id.listaCurvasAgregadas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
 
-        agregarCurvaBtn = view2.findViewById(R.id.agregarCurva);
+       nuevaCurva = (DatosCurva) this.getActivity().getIntent().getExtras().getSerializable("nuevaCurva");
+       // agregarCurvaBtn = view2.findViewById(R.id.agregarCurva);
         listaCurvas = new ArrayList<>();
 
-        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14));
+        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14, "16"));
+
+        if(nuevaCurva != null){
+
+            listaCurvas.add(nuevaCurva);
+        }
 
         cargarDatosCurvas();
         actualizarTablaCurvas();
-
-
-        agregarCurvaBtn.setOnClickListener(
-
-                (v)->{
-
-                    Intent intent = new Intent(this.getContext(), AddCurvaActivity.class);
-                    //intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
-                    this.startActivity(intent);
-
-                }
-
-        );
 
         // Inflate the layout for this fragment
         return view;
@@ -71,6 +65,8 @@ public class TablaCurvasFragment extends Fragment {
 
 
     }
+
+
 
     //Este método actualizará las curvas que se agreguen
 

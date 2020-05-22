@@ -7,18 +7,29 @@ import java.io.Serializable;
 public class DatosCurva implements Serializable {
 
     private String fecha;
+    private String edad;
     private int medida_cabeza;
     private int peso;
     private int talla;
 
-    public DatosCurva(String fecha, int medida_cabeza, int peso, int talla) {
+
+    public DatosCurva(String fecha, int medida_cabeza, int peso, int talla, String edad) {
         this.fecha = fecha;
         this.medida_cabeza = medida_cabeza;
         this.peso = peso;
         this.talla = talla;
+        this.edad = edad;
     }
 
     public DatosCurva() {
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
     }
 
     public String getFecha() {
