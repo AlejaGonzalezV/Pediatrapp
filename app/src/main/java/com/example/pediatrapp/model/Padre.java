@@ -19,7 +19,7 @@ public class Padre {
     private HashMap<String, String> chats;
 
     public Padre(String id, String cedula, String nombre, String correo, String contrasena, String direccion,
-                 String telefono, String foto, HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos) {
+                 String telefono, String foto, HashMap<String, String> pediatras_asig, HashMap<String, Hijo> hijos, HashMap<String, String> chats) {
 
         this.id = id;
         this.cedula = cedula;
@@ -31,6 +31,7 @@ public class Padre {
         this.foto = foto;
         this.pediatras_asig = pediatras_asig;
         this.hijos = hijos;
+        this.chats = chats;
     }
 
     public Padre() {

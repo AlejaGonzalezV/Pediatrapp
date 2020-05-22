@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -19,12 +20,17 @@ import com.example.pediatrapp.fragments.DoctorPhotoFragment;
 import com.example.pediatrapp.fragments.DoctorRegisterFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
+import com.example.pediatrapp.model.Chat;
 import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
@@ -225,10 +231,45 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 storage.getReference().child("Padre").child(id).putFile(uriP);
                 String foto= storage.getReference().child("Padre").child(id).getDownloadUrl().toString();
 
-                Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,foto,pediatrasAsig, hijos);
+                //Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,foto,pediatrasAsig, hijos);
 
-                FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
-                FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
+                //FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
+                //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
+
+
+                Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                            Pediatra ped = child.getValue(Pediatra.class);
+
+                            if(ped.getId().equals(idDoc)){
+
+                                String idc = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
+                                Chat chat = new Chat(foto, ped.getFoto(), nombre, ped.getNombre(), id, idDoc, idc);
+                                HashMap<String, String> hashChat = new HashMap<>();
+                                hashChat.put(idc,idc);
+                                Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,foto,pediatrasAsig, hijos, hashChat);
+                                FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
+                                FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
+                                FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("chats").child(idc).setValue(idc);
+                                FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
+
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 }).addOnFailureListener(e -> {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
