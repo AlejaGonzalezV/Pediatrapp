@@ -74,7 +74,7 @@ public class AddCurvaActivity extends AppCompatActivity {
                     if (validarDatos()) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-                            DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()), edadSelected);
+                            DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()));
 
                             Intent i = new Intent();
                             i.putExtra("laCurva", laCurva);
