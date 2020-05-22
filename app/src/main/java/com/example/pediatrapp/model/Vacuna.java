@@ -10,9 +10,9 @@ public class Vacuna implements Serializable {
     private String ips;
     private String nombre_aplicador;
     private String nombre_vacuna;
-    private LocalDate fecha_aplicacion;
+    private String fecha_aplicacion;
 
-    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, LocalDate fecha_aplicacion) {
+    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion) {
         this.dosis = dosis;
         this.edad_aplicacion = edad_aplicacion;
         this.ips = ips;
@@ -64,11 +64,11 @@ public class Vacuna implements Serializable {
         this.nombre_vacuna = nombre_vacuna;
     }
 
-    public LocalDate getFecha_aplicacion() {
+    public String getFecha_aplicacion() {
         return fecha_aplicacion;
     }
 
-    public void setFecha_aplicacion(LocalDate fecha_aplicacion) {
+    public void setFecha_aplicacion(String fecha_aplicacion) {
         this.fecha_aplicacion = fecha_aplicacion;
     }
 }

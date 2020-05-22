@@ -1,16 +1,18 @@
 package com.example.pediatrapp.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
 
-public class DatosCurva {
 
-    private LocalDate fecha;
+public class DatosCurva implements Serializable {
+
+    private String fecha;
     private int medida_cabeza;
     private int peso;
     private int talla;
 
-    public DatosCurva(LocalDate fecha, int medida_cabeza, int peso, int talla) {
+
+    public DatosCurva(String fecha, int medida_cabeza, int peso, int talla) {
         this.fecha = fecha;
         this.medida_cabeza = medida_cabeza;
         this.peso = peso;
@@ -20,11 +22,12 @@ public class DatosCurva {
     public DatosCurva() {
     }
 
-    public LocalDate getFecha() {
+
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

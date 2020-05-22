@@ -2,17 +2,25 @@ package com.example.pediatrapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Vacuna;
+import com.example.pediatrapp.view.ListaVacunasActivity;
+import com.example.pediatrapp.view.VerVacunaActivity;
 
 import java.util.List;
 
-public class ListaVacunasAdpater extends BaseAdapter {
+public class ListaVacunasAdpater extends  RecyclerView.Adapter<ListaVacunasAdpater.ViewHolderListaVacunas>  {
 
     private List<Vacuna> listaVacunas;
     private Context context;
@@ -22,22 +30,74 @@ public class ListaVacunasAdpater extends BaseAdapter {
         this.context = context;
     }
 
+    public List<Vacuna> getListaVacunas() {
+        return listaVacunas;
+    }
+
+    public void setListaVacunas(List<Vacuna> listaVacunas) {
+        this.listaVacunas = listaVacunas;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    @NonNull
     @Override
-    public int getCount() {
+    public ListaVacunasAdpater.ViewHolderListaVacunas onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listvacuna, null, false);
+
+
+        return new ViewHolderListaVacunas(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ListaVacunasAdpater.ViewHolderListaVacunas holder, int position) {
+
+        holder.nombreVacuna.setText(listaVacunas.get(position).getNombre_vacuna());
+        holder.fecha.setText(listaVacunas.get(position).getFecha_aplicacion());
+        holder.verBtn.setOnClickListener(
+                (v)->{
+
+                    Vacuna laVacuna = listaVacunas.get(position);
+                    Intent intent = new Intent(context, VerVacunaActivity.class);
+                    intent.putExtra("verVacuna", laVacuna);
+                    context.startActivity(intent);
+
+
+                }
+
+        );
+
+    }
+
+    @Override
+    public int getItemCount() {
         return listaVacunas.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return listaVacunas.get(position);
+
+    public class ViewHolderListaVacunas extends RecyclerView.ViewHolder {
+
+        TextView nombreVacuna;
+        TextView fecha;
+        Button verBtn;
+        public ViewHolderListaVacunas(@NonNull View itemView) {
+            super(itemView);
+
+             nombreVacuna = itemView.findViewById(R.id.tv_nameVaccine);
+             fecha = itemView.findViewById(R.id.fechaItemVacuna);
+             verBtn = itemView.findViewById(R.id.verListaVa);
+        }
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
-    @SuppressLint("ViewHolder")
+
+    /*
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -45,8 +105,11 @@ public class ListaVacunasAdpater extends BaseAdapter {
         Vacuna laVacuna = (Vacuna) getItem(position);
         convertView = LayoutInflater.from(context).inflate(R.layout.item_listvacuna, null, false);
 
-       /* ImageView image = convertView.findViewById(R.id.imagenCacion1);
-        TextView nombreCancion = convertView.findViewById(R.id.nombreCacion);*/
+        TextView nombreVacuna = convertView.findViewById(R.id.tv_nameVaccine);
+        TextView fecha = convertView.findViewById(R.id.fechaItemVacuna);
+
+        nombreVacuna.setText(laVacuna.getNombre_vacuna());
+        fecha.setText(laVacuna.getIps());
         return convertView;
-    }
+    }*/
 }

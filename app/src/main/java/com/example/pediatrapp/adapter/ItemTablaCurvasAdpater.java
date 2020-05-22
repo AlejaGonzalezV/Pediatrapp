@@ -4,45 +4,52 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.DatosCurva;
 
 import java.util.List;
 
-public class ItemTablaCurvasAdpater extends BaseAdapter {
+public class ItemTablaCurvasAdpater extends RecyclerView.Adapter<ItemTablaCurvasAdpater.ViewHolderTablaCurva> {
 
 
-    private List<String> listaVacunas;
+    private List<DatosCurva> listaCurvas;
     private Context context;
 
-    public ItemTablaCurvasAdpater(List<String> listaVacunas, Context context) {
-        this.listaVacunas = listaVacunas;
+    public ItemTablaCurvasAdpater(List<DatosCurva> listaVacunas, Context context) {
+        this.listaCurvas = listaVacunas;
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return listaVacunas.size();
+    public ItemTablaCurvasAdpater.ViewHolderTablaCurva onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tabla_curvas, null, false);
+
+        return new ItemTablaCurvasAdpater.ViewHolderTablaCurva(view);
+
     }
 
     @Override
-    public Object getItem(int position) {
-        return listaVacunas.get(position);
+    public void onBindViewHolder(@NonNull ItemTablaCurvasAdpater.ViewHolderTablaCurva holder, int position) {
+
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public int getItemCount() {
+        return listaCurvas.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        String laVacuna = (String) getItem(position);
-        convertView = LayoutInflater.from(context).inflate(R.layout.item_tabla_curvas, null, false);
-
-       /* ImageView image = convertView.findViewById(R.id.imagenCacion1);*/
-        return null;
+    public class ViewHolderTablaCurva extends RecyclerView.ViewHolder {
+        public ViewHolderTablaCurva(@NonNull View itemView) {
+            super(itemView);
+        }
     }
+
+
+    //convertView = LayoutInflater.from(context).inflate(R.layout.item_tabla_curvas, null, false);
 }
