@@ -18,12 +18,13 @@ import com.example.pediatrapp.fragments.TablaCurvasFragment;
 import com.example.pediatrapp.model.DatosCurva;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class CurvasGraficoActivity extends AppCompatActivity {
     private TextView nombreHijo;
     private Button backBTN, agregarCurvaBtn;
     private BottomNavigationView bottomNavigationView;
-    private DatosCurva nuevaCurva;
-
+    private ArrayList<DatosCurva> listaCurvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +36,20 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavCurvas);
         bottomNavigationView.setSelectedItemId(R.id.tabla);
         agregarCurvaBtn = findViewById(R.id.agregarCurva);
-        nuevaCurva = null;
+        listaCurvas = new ArrayList<>();
 
+        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14));
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, new TablaCurvasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, new TablaCurvasFragment(listaCurvas)).commit();
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             Fragment fragment = null;
 
             switch (menuItem.getItemId()) {
                 case R.id.tabla:
-                    fragment = new TablaCurvasFragment();
-
-                    if(nuevaCurva != null){
-
-                        Toast.makeText(this,"Curva no null", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(this, TablaCurvasFragment.class);
-                        intent.putExtra("nuevaCurva", nuevaCurva);
-
-                    }else{
-
-                        Toast.makeText(this,"Curva  null", Toast.LENGTH_SHORT).show();
-                    }
-
+                    fragment = new TablaCurvasFragment(listaCurvas);
                     break;
                 case R.id.grafica:
                     fragment = new GraficoCurvasFragment();
@@ -106,12 +95,10 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         DatosCurva curva  =   (DatosCurva) data.getExtras().getSerializable("laCurva");
 
         if(curva != null) {
+            listaCurvas.add(curva);
 
-            nuevaCurva = curva;
-           // listaVacunas.add(vacuna);
-            //ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
-            //setAdapter(adapter2);
-            //actualizarVacunas();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, new TablaCurvasFragment(listaCurvas)).commit();
+
             Toast.makeText(this,"Se añadió Curva: "+ curva.getPeso(), Toast.LENGTH_SHORT).show();
         }else{
 

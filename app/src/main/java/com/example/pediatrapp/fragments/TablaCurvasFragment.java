@@ -26,31 +26,24 @@ public class TablaCurvasFragment extends Fragment {
     private RecyclerView recyclerView;
     private ItemTablaCurvasAdpater adapter;
     private ArrayList<DatosCurva> listaCurvas;
-    private DatosCurva nuevaCurva;
+   // private DatosCurva nuevaCurva;
   //  private Button agregarCurvaBtn;
 
-    public TablaCurvasFragment() {
+    public TablaCurvasFragment(ArrayList<DatosCurva> listaCurvas) {
         // Required empty public constructor
+       this.listaCurvas = listaCurvas;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tabla_curvas, container, false);
-        View view2 = inflater.inflate(R.layout.activity_curvas_grafico, container, false);
+      //  View view2 = inflater.inflate(R.layout.activity_curvas_grafico, container, false);
         recyclerView = view.findViewById(R.id.listaCurvasAgregadas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
 
-       nuevaCurva = (DatosCurva) this.getActivity().getIntent().getExtras().getSerializable("nuevaCurva");
+      // nuevaCurva = (DatosCurva) this.getActivity().getIntent().getExtras().getSerializable("nuevaCurva");
        // agregarCurvaBtn = view2.findViewById(R.id.agregarCurva);
-        listaCurvas = new ArrayList<>();
-
-        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14));
-
-        if(nuevaCurva != null){
-
-            listaCurvas.add(nuevaCurva);
-        }
 
         cargarDatosCurvas();
         actualizarTablaCurvas();
@@ -66,9 +59,15 @@ public class TablaCurvasFragment extends Fragment {
 
     }
 
+    public ArrayList<DatosCurva> getListaCurvas() {
+        return listaCurvas;
+    }
 
+    public void setListaCurvas(ArrayList<DatosCurva> listaCurvas) {
+        this.listaCurvas = listaCurvas;
+    }
 
-    //Este método actualizará las curvas que se agreguen
+//Este método actualizará las curvas que se agreguen
 
     private void actualizarTablaCurvas() {
 

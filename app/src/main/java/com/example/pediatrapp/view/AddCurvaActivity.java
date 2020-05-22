@@ -74,13 +74,15 @@ public class AddCurvaActivity extends AppCompatActivity {
                     if (validarDatos()) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
+                            if( valiTiposDatos()){
+
                             DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()));
 
                             Intent i = new Intent();
                             i.putExtra("laCurva", laCurva);
                             setResult(RESULT_OK, i);
                             this.finish();
-
+                        }
                             // Toast.makeText(this, "Se añadió: " + laVacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -129,7 +131,37 @@ public class AddCurvaActivity extends AppCompatActivity {
         newFragment.show(this.getSupportFragmentManager(), "datePicker");
     }
 
+    public boolean valiTiposDatos(){
 
+        boolean retorno = true;
+       if( isNumeric(medidaCabeza.getText().toString()) == false){
+
+           medidaCabeza.setError("Ingrese números");
+           retorno = false;
+       }
+
+        if( isNumeric(peso.getText().toString()) == false){
+
+            peso.setError("Ingrese números");
+            retorno = false;
+        }
+        if( isNumeric(talla.getText().toString()) == false){
+
+            talla.setError("Ingrese números");
+            retorno = false;
+        }
+
+        return  retorno;
+    }
+
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
     public boolean validarDatos(){
 
         Boolean retorno = true;
