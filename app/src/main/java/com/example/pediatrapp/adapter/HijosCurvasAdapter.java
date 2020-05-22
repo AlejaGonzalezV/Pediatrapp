@@ -1,6 +1,7 @@
 package com.example.pediatrapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.view.CurvasGraficoActivity;
+import com.example.pediatrapp.view.ListaVacunasActivity;
 
 import java.util.List;
 
@@ -67,7 +70,9 @@ public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter
 
                 (v)->{
 
-
+                    Intent intent = new Intent(context, CurvasGraficoActivity.class);
+                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
+                    context.startActivity(intent);
 
                 }
         );

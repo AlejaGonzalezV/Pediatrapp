@@ -132,13 +132,14 @@
         android:id="@+id/editText2"
         android:layout_width="163dp"
         android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        tools:layout_editor_absoluteY="399dp" />
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toEndOf="@+id/textView24" />
 
     <Button
         android:id="@+id/cancelarBTN"
@@ -186,10 +187,11 @@
         android:layout_width="167dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="76dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="477dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guardarBTN"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

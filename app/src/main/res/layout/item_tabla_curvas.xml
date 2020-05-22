@@ -14,9 +14,9 @@
 
         <TextView
             android:id="@+id/textView26"
-            android:layout_width="119dp"
+            android:layout_width="115dp"
+            android:layout_height="32dp"
             android:background="@drawable/rectangle"
-            android:layout_height="47dp"
             android:fontFamily="@font/lato_bold"
             android:text="Altura (cm)"
             android:textColor="#000000"
@@ -26,20 +26,20 @@
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="97dp"
-            android:layout_height="47dp"
+            android:layout_width="112dp"
+            android:layout_height="32dp"
             android:background="@drawable/rectangle"
             android:fontFamily="@font/lato_bold"
             android:text="Fecha"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="21sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView28"
-            android:layout_width="83dp"
-            android:layout_height="46dp"
+            android:layout_width="73dp"
+            android:layout_height="32dp"
             android:background="@drawable/rectangle"
             android:fontFamily="@font/lato_bold"
             android:text="Edad"
@@ -52,10 +52,10 @@
         <TextView
             android:id="@+id/textView29"
             android:layout_width="119dp"
-            android:layout_height="47dp"
+            android:layout_height="32dp"
+            android:background="@drawable/rectangle"
             android:fontFamily="@font/lato_bold"
             android:text="Peso (grs)"
-            android:background="@drawable/rectangle"
             android:textColor="#000000"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"

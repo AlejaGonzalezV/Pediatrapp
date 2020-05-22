@@ -31,9 +31,8 @@ public class ParentFragment_Historial extends Fragment {
 
         view = inflater.inflate(R.layout.parentfragment_historial, container, false);
 
-        //Estas lineas dan error
-        //vacunasGeneralBTN = view.findViewById(R.id.vacunasGeneralBTN);
-        //curvasGeneralBTN = view.findViewById(R.id.curvasGeneralBTN);
+        vacunasGeneralBTN = view.findViewById(R.id.vacunasGeneralBTN);
+        curvasGeneralBTN = view.findViewById(R.id.curvasGeneralBTN);
 
 
         
