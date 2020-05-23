@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     boolean pass = TextUtils.isEmpty(password.getText().toString().trim());
                     if(mail == false && pass == false){
 
-                        FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                          FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                                 .addOnSuccessListener(
                                         authResult -> {
 
@@ -57,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                                         if(child.getKey().equals(id)){
 
-                                                            Pediatra pediatra = child.getValue(Pediatra.class);
-                                                            //Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                                                            //startActivity(intent);
+                                                            //Pediatra pediatra = child.getValue(Pediatra.class);
+                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+                                                            startActivity(intent);
 
                                                         }
 
