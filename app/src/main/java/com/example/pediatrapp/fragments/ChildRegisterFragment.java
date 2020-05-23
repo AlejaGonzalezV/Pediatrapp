@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,8 +38,6 @@ public class ChildRegisterFragment extends Fragment {
     private Spinner doctor, gender;
     private ArrayList<String> ids;
     private ArrayList<String> names;
-    private String selected;
-    private int indice;
 
     public void setListener(OnDataSubmitted listener){
 

@@ -1,6 +1,7 @@
 package com.example.pediatrapp.model;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Diagnostico {
 
@@ -8,12 +9,24 @@ public class Diagnostico {
     private LocalDate fecha;
     private String id_pediatra;
     private String nombre_pediatra;
+    private String titulo;
+    private HashMap<String, FormulaMedica> formula_medica;
 
-    public Diagnostico(String diagnostico, LocalDate fecha, String id_pediatra, String nombre_pediatra) {
+    public Diagnostico(String diagnostico, LocalDate fecha, String id_pediatra, String nombre_pediatra, String titulo, HashMap<String, FormulaMedica> formula_medica) {
         this.diagnostico = diagnostico;
         this.fecha = fecha;
         this.id_pediatra = id_pediatra;
         this.nombre_pediatra = nombre_pediatra;
+        this.titulo = titulo;
+        this.formula_medica = formula_medica;
+    }
+
+    public Diagnostico(String diagnostico, LocalDate fecha, String id_pediatra, String nombre_pediatra, String titulo) {
+        this.diagnostico = diagnostico;
+        this.fecha = fecha;
+        this.id_pediatra = id_pediatra;
+        this.nombre_pediatra = nombre_pediatra;
+        this.titulo = titulo;
     }
 
     public Diagnostico() {
