@@ -69,6 +69,12 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         profile_image = findViewById(R.id.profile_image);
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(">>>", "IMAGEN DE PERFIL");
+            }
+        });
         username = findViewById(R.id.username);
         text_send = findViewById(R.id.text_send);
         btn_send = findViewById(R.id.btn_send);
