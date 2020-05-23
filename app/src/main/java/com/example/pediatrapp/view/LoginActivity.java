@@ -57,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                                         if(child.getKey().equals(id)){
 
-                                                            Pediatra pediatra = child.getValue(Pediatra.class);
-                                                            //Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-                                                            //startActivity(intent);
+                                                            //Pediatra pediatra = child.getValue(Pediatra.class);
+                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+                                                            startActivity(intent);
 
                                                         }
 
