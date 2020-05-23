@@ -352,14 +352,17 @@ public class MessageController implements View.OnClickListener{
 
     public void beforeResume() {
         //MESSAGE CLOUD
-        FirebaseMessaging.getInstance().subscribeToTopic(chatroom).addOnCompleteListener(
-                task -> {
-                    if(task.isSuccessful()){
-                        Log.e(">>>", "Suscritooooo");
+        if(chatroom != null){
+            FirebaseMessaging.getInstance().subscribeToTopic(chatroom).addOnCompleteListener(
+                    task -> {
+                        if(task.isSuccessful()){
+                            Log.e(">>>", "Suscritooooo");
+                        }
                     }
-                }
 
-        );
+            );
+        }
+
     }
 
     public void beforePause() {
