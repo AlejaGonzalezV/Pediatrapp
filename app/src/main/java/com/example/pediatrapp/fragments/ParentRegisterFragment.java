@@ -38,7 +38,7 @@ public class ParentRegisterFragment extends Fragment {
         password = view.findViewById(R.id.password);
         address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
-        next = view.findViewById(R.id.cerrarSesionBTN);
+        next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
 
         next.setOnClickListener(
@@ -80,7 +80,7 @@ public class ParentRegisterFragment extends Fragment {
                         if(ph){
                             phone.setError("Este campo no puede estar vacío");
                         }
-                        if(valid){
+                        if(!valid){
                             email.setError("Debe ingresar una dirección de correo válida");
                         }
                         if(password.getText().toString().length() < 6){

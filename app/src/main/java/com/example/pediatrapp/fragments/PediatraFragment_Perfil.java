@@ -23,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 public class PediatraFragment_Perfil extends Fragment {
 
     private ImageView pediatra_foto;
@@ -48,7 +46,7 @@ public class PediatraFragment_Perfil extends Fragment {
         cedula_pediatra = view.findViewById(R.id.cedula_pediatraCV);
         email_pediatra = view.findViewById(R.id.email_pediatra);
         numeroUnico_pediatra = view.findViewById(R.id.numeroID);
-        cerrarSesion = view.findViewById(R.id.cerrarSesionBTN);
+        cerrarSesion = view.findViewById(R.id.next);
 
 
 

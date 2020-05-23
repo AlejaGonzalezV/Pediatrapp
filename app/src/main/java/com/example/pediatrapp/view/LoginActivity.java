@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
                                             Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
                                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                         if(child.getKey().equals(id)){
 
+                                                            //Pediatra pediatra = child.getValue(Pediatra.class);
                                                             Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
                                                             startActivity(intent);
 

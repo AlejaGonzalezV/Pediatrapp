@@ -9,20 +9,12 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo1" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo11" />
+        app:srcCompat="@drawable/fondooo" />
 
     <TextView
         android:id="@+id/textView4"
@@ -43,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="Nombre completo"
         android:inputType="textPersonName"
@@ -139,7 +131,7 @@
         app:srcCompat="@drawable/key" />
 
     <Button
-        android:id="@+id/cerrarSesionBTN"
+        android:id="@+id/next"
         android:layout_width="214dp"
         android:layout_height="36dp"
         android:layout_marginTop="68dp"
@@ -177,7 +169,7 @@
         android:id="@+id/imageView14"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/textView4"

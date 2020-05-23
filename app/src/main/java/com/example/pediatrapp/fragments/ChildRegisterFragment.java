@@ -2,12 +2,14 @@ package com.example.pediatrapp.fragments;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 
 public class ChildRegisterFragment extends Fragment {
 
+    private ArrayAdapter<String> doctorsAdapter;
     private OnDataSubmitted listener;
     private View view;
     private Button next, back;
@@ -35,8 +38,6 @@ public class ChildRegisterFragment extends Fragment {
     private Spinner doctor, gender;
     private ArrayList<String> ids;
     private ArrayList<String> names;
-    private String selected;
-    private int indice;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -50,15 +51,19 @@ public class ChildRegisterFragment extends Fragment {
         name = view.findViewById(R.id.name);
         id = view.findViewById(R.id.id);
         date = view.findViewById(R.id.date);
-        doctor = (Spinner) view.findViewById(R.id.doctor);
-        next = view.findViewById(R.id.cerrarSesionBTN);
+        doctor = view.findViewById(R.id.doctor);
+        next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         gender = view.findViewById(R.id.gender);
         ids = new ArrayList<String>();
         names = new ArrayList<String>();
         names.add("Pediatra asignado");
 
+
+        configureSpinner();
         fillDoctors();
+
+
         next.setOnClickListener(
 
                 (v) -> {
@@ -73,7 +78,8 @@ public class ChildRegisterFragment extends Fragment {
 
                     if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), date.getText().toString(), gender.getSelectedItem().toString(),ids.get(indice-1));
+                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), date.getText().toString(), gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1));
+                        Log.e("<<<<<<<", String.valueOf(doctor.getSelectedItemPosition()-1));
 
                     }else {
 
@@ -134,7 +140,8 @@ public class ChildRegisterFragment extends Fragment {
                     ids.add(child.getKey());
                 }
 
-                configureSpinner();
+                //configureSpinner();
+                doctorsAdapter.notifyDataSetChanged();
 
             }
 
@@ -146,6 +153,14 @@ public class ChildRegisterFragment extends Fragment {
 
     }
 
+    public void configureSpinner(){
+
+        doctorsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, names);
+        doctor.setAdapter(doctorsAdapter);
+
+    }
+
+    /*
     public void configureSpinner(){
 
 
@@ -168,6 +183,8 @@ public class ChildRegisterFragment extends Fragment {
         });
 
     }
+
+     */
 
 
 }

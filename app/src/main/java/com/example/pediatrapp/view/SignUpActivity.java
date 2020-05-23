@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
@@ -235,6 +236,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 //FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
                 //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
+
 
 
                 Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
