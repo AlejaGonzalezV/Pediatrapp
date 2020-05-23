@@ -337,8 +337,9 @@ public class MessageController implements View.OnClickListener{
                 if(!body.equals("")){
                     sendMessage(body, chatroom, fuser.getUid(), Calendar.getInstance().getTime().getTime());
                     activity.getText_send().setText("");
+                }else {
+                    Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_media:
                 Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
@@ -352,6 +353,14 @@ public class MessageController implements View.OnClickListener{
 
     public void beforeResume() {
         //MESSAGE CLOUD
+        if(chatroom != null) {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+            Log.e(">>>", "no suscrito");
+        }
+    }
+
+    public void beforePause() {
+
         if(chatroom != null){
             FirebaseMessaging.getInstance().subscribeToTopic(chatroom).addOnCompleteListener(
                     task -> {
@@ -362,11 +371,6 @@ public class MessageController implements View.OnClickListener{
 
             );
         }
-
-    }
-
-    public void beforePause() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
