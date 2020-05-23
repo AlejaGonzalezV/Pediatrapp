@@ -1,5 +1,6 @@
 package com.example.pediatrapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.view.ActivityMainPediatra;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -41,7 +50,40 @@ public class PediatraFragment_Perfil extends Fragment {
         numeroUnico_pediatra = view.findViewById(R.id.numeroID);
         cerrarSesion = view.findViewById(R.id.cerrarSesionBTN);
 
+
+
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    if(child.getKey().equals(id)){
+
+                        Pediatra pediatra = child.getValue(Pediatra.class);
+                        cedula_pediatra.setText(pediatra.getCedula());
+                        email_pediatra.setText(pediatra.getCorreo());
+                        numeroUnico_pediatra.setText(pediatra.getIdV());
+                        nombre_pediatra.setText(pediatra.getNombre());
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         return view;
+
+
 
     }
 

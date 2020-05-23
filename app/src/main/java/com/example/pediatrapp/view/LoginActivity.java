@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     boolean pass = TextUtils.isEmpty(password.getText().toString().trim());
                     if(mail == false && pass == false){
 
-                        FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                          FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                                 .addOnSuccessListener(
                                         authResult -> {
 
