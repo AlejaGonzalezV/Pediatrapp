@@ -1,14 +1,22 @@
 package com.example.pediatrapp.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ThemedSpinnerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Mensaje;
+import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
+import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MessageListAdapter extends BaseAdapter {
@@ -49,7 +57,51 @@ public class MessageListAdapter extends BaseAdapter {
         TextView message_row = root.findViewById(R.id.message_row);
         message_row.setText(messages.get(position).getBody());
 
+        if(messages.get(position).getType() == Mensaje.TYPE_IMAGE){
+            ImageView imageRow = root.findViewById(R.id.imageRow);
+            imageRow.setVisibility(View.VISIBLE);
+
+            String nameImage = messages.get(position).getId();
+
+            File imageFile = new File(parent.getContext().getExternalFilesDir(null) + "/" + nameImage);
+
+            if(imageFile.exists()){
+                loadImage(imageRow, imageFile);
+
+            }else {
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                storage.getReference().child("chats").child(nameImage).getDownloadUrl().addOnSuccessListener(
+                        uri -> {
+                            File f = new File(parent.getContext().getExternalFilesDir(null) + "/" + nameImage);
+
+                            new Thread(
+                                    ()->{
+                                        HTTPSWebUtilDomi utilDomi = new HTTPSWebUtilDomi();
+                                        utilDomi.saveURLImageOnFile(uri.toString(), f);
+
+                                        root.post(
+                                                ()->{
+                                                    loadImage(imageRow, f);
+                                                }
+                                        );
+
+                                    }
+                            ).start();
+
+
+                          //  Glide.with(parent).load(uri).centerCrop().into(imageRow);
+                        }
+                );
+            }
+        }
+
         return root ;
+    }
+
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
+
     }
 
     public void addMessage(Mensaje mensaje){

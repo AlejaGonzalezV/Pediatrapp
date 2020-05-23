@@ -1,6 +1,7 @@
 package com.example.pediatrapp.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,6 +41,7 @@ public class MessageActivity extends AppCompatActivity {
     private EditText text_send;
     private ImageButton btn_send;
     private ImageButton btn_media;
+    private ImageView messageIV;
     private String type;
     private String userid;
     private ListView message_list;
@@ -71,6 +74,7 @@ public class MessageActivity extends AppCompatActivity {
         btn_send = findViewById(R.id.btn_send);
         btn_media = findViewById(R.id.btn_media);
         message_list = findViewById(R.id.message_list);
+        messageIV = findViewById(R.id.messageIV);
 
         controller = new MessageController(this);
 
@@ -146,5 +150,38 @@ public class MessageActivity extends AppCompatActivity {
 
     public void setMessage_list(ListView message_list) {
         this.message_list = message_list;
+    }
+
+    public ImageView getMessageIV() {
+        return messageIV;
+    }
+
+    public void setMessageIV(ImageView messageIV) {
+        this.messageIV = messageIV;
+    }
+
+    @Override
+    protected void onPause() {
+        controller.beforePause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        controller.beforeResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        controller.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void hideImage(){
+        messageIV.setVisibility(View.GONE);
+    }
+
+    public void showImage(){
+        messageIV.setVisibility(View.VISIBLE);
     }
 }

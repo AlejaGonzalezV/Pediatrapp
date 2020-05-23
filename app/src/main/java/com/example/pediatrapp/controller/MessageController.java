@@ -1,5 +1,9 @@
 package com.example.pediatrapp.controller;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -11,9 +15,13 @@ import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.MessageListAdapter;
 import com.example.pediatrapp.model.Chat;
+import com.example.pediatrapp.model.FCMMessage;
 import com.example.pediatrapp.model.Mensaje;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.services.FCMService;
+import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
+import com.example.pediatrapp.utilities.UtilDomi;
 import com.example.pediatrapp.view.MessageActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,12 +32,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.gson.Gson;
 
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MessageController implements View.OnClickListener{
+
+    public static final int GALLERY_CALLBACK = 1;
 
     private MessageActivity activity;
     private FirebaseUser fuser;
@@ -39,6 +55,7 @@ public class MessageController implements View.OnClickListener{
     private Padre padre;
     private Pediatra pediatra;
     private MessageListAdapter adapter;
+    private Uri tempUri;
 
     public MessageController(MessageActivity activity) {
         this.activity = activity;
@@ -200,14 +217,51 @@ public class MessageController implements View.OnClickListener{
             }
         });
 
-        //MESSAGE CLOUD
+
     }
 
     public void sendMessage(String body, String roomChat, String idUser, long time){
         //video 11.5 min 15:18 ejemplo
         //Generar ID
         //MIRAR SESION QUE NO SE CIERRA
+        //LO PRIMERO ES EL ID
+        Mensaje message = new Mensaje(
+                tempUri == null ? Mensaje.TYPE_TEXT : Mensaje.TYPE_IMAGE,
+                "id del mensaje", body, idUser, time);
 
+
+        FCMMessage fcmMessage = new FCMMessage();
+        fcmMessage.setTo("/topics/"+roomChat);
+        fcmMessage.setData(message);
+        Gson gson = new Gson();
+        String json = gson.toJson(fcmMessage);
+
+        new Thread(
+                ()->{
+                    HTTPSWebUtilDomi utilDomi = new HTTPSWebUtilDomi();
+                    utilDomi.POSTtoFCM(FCMService.API_KEY,json);
+                }
+        ).start();
+
+        if(tempUri != null){
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            storage.getReference().child("chats").child(message.getId()).putFile(tempUri).addOnCompleteListener(
+                    task -> {
+                        if(task.isSuccessful()){
+
+                            //ENVIAR MENSAJE PONER RESTO O LO QUE SEA XDXD
+                            FirebaseDatabase.getInstance().getReference().child("chat").child(chatroom).child("mensajes");
+                        }
+                    }
+            );
+        }else{
+            //enviar mensaje sin guardar nada en el storage
+
+            
+        }
+
+        activity.hideImage();
+        tempUri = null;
     }
 
 
@@ -223,9 +277,38 @@ public class MessageController implements View.OnClickListener{
                 activity.getText_send().setText("");
                 break;
             case R.id.btn_media:
-                Log.e(">>>", "boton mediaaaa");
+                Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
+                gallery.setType("image/*");
+                activity.startActivityForResult(gallery, GALLERY_CALLBACK);
+
                 break;
 
+        }
+    }
+
+    public void beforeResume() {
+        //MESSAGE CLOUD
+        FirebaseMessaging.getInstance().subscribeToTopic(chatroom).addOnCompleteListener(
+                task -> {
+                    if(task.isSuccessful()){
+                        Log.e(">>>", "Suscritooooo");
+                    }
+                }
+
+        );
+    }
+
+    public void beforePause() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == GALLERY_CALLBACK && resultCode == RESULT_OK){
+            tempUri = data.getData();
+            File file = new File(UtilDomi.getPath(activity, tempUri));
+            Bitmap image = BitmapFactory.decodeFile(file.toString());
+            activity.getMessageIV().setImageBitmap(image);
+            activity.showImage();
         }
     }
 }
