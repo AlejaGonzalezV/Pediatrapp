@@ -66,15 +66,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="353dp"
-        android:layout_height="220dp"
+        android:layout_width="358dp"
+        android:layout_height="144dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
 
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="268dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -82,57 +83,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/lato_bold"
             android:text="Cédula "
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-             />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="70dp"
             android:fontFamily="@font/lato_bold"
             android:text="Pediatra"
             android:textAlignment="center"
             android:textColor="#3E8AF8"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-           />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/email_pediatra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="100dp"
             android:fontFamily="@font/lato_bold"
             android:text="Correo electrónico"
             android:textAlignment="center"
             android:textColor="#3E8AF8"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-             />
-
-        <TextView
-            android:id="@+id/numeroID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="150dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="Número único de identificación"
-            android:textAlignment="center"
-            android:textColor="#3E8AF8"
-            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -153,17 +137,17 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/chatearBTN"
         android:layout_width="214dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="180dp"
         android:background="@drawable/boton"
-        android:text="Cerrar Sesión"
+        android:text="Enviar Mensaje"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 

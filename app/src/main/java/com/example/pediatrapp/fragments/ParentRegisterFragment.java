@@ -80,7 +80,7 @@ public class ParentRegisterFragment extends Fragment {
                         if(ph){
                             phone.setError("Este campo no puede estar vacío");
                         }
-                        if(valid){
+                        if(!valid){
                             email.setError("Debe ingresar una dirección de correo válida");
                         }
                         if(password.getText().toString().length() < 6){
