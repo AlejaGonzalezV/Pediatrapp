@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.view.ActivityMainPediatra;
@@ -23,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 public class HistoriaPediatraFragment extends Fragment {
 
     private View view;
+    private Button back,addRegistro;
+    private ListView lista;
 
     private OnDataSubmitted listener;
 
@@ -34,9 +39,10 @@ public class HistoriaPediatraFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
          view = inflater.inflate(R.layout.fragment_historia_pediatra, container, false);
         return view;
+
 
 
     }
