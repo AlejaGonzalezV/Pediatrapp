@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -56,6 +58,9 @@ public class MessageController implements View.OnClickListener{
     private Pediatra pediatra;
     private MessageListAdapter adapter;
     private Uri tempUri;
+    private Pediatra CurrentPed;
+    private Padre CurrentPad;
+
 
     public MessageController(MessageActivity activity) {
         this.activity = activity;
@@ -115,7 +120,7 @@ public class MessageController implements View.OnClickListener{
 
             ChatReference = FirebaseDatabase.getInstance().getReference().child("chat");
 
-            reference.addValueEventListener(new ValueEventListener() {
+            ChatReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.e(">>>", "BuscaChatroom");
@@ -127,8 +132,40 @@ public class MessageController implements View.OnClickListener{
                             if (activity.getUserid().equals(chat.getId_padre()) && fuser.getUid().equals(chat.getId_pediatra())) {
                                 Log.e(">>>", "Encuentra chatroom");
                                 chatroom = snapshot.getKey();
+                                loadMessages();
                             }
                         }
+
+                    }
+
+                    if(chatroom == null){
+
+
+                        //CREAR SALA DE CHAT Y SUBIR A LA FIREBASE
+
+                        DatabaseReference referenceCurrent = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(fuser.getUid());
+
+                        referenceCurrent.addValueEventListener(new ValueEventListener() {
+                                                                   @Override
+                                                                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                       CurrentPed = dataSnapshot.getValue(Pediatra.class);
+
+                                                                       String idc = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
+                                                                       Chat chat = new Chat(padre.getFoto(), CurrentPed.getFoto(), padre.getNombre(), CurrentPed.getNombre(), padre.getId(), CurrentPed.getId(), idc);
+
+                                                                       FirebaseDatabase.getInstance().getReference().child("Padres").child(padre.getId()).child("chats").child(idc).setValue(idc);
+                                                                       FirebaseDatabase.getInstance().getReference().child("Pediatras").child(CurrentPed.getId()).child("chats").child(idc).setValue(idc);
+                                                                       FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
+                                                                       chatroom = idc;
+
+                                                                   }
+
+                                                                   @Override
+                                                                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                   }
+                                                               });
+
 
                     }
 
@@ -143,7 +180,7 @@ public class MessageController implements View.OnClickListener{
         }else {
 
             ChatReference = FirebaseDatabase.getInstance().getReference().child("chat");
-            reference.addValueEventListener(new ValueEventListener() {
+            ChatReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.e(">>>", "BuscaChatroom");
@@ -163,6 +200,29 @@ public class MessageController implements View.OnClickListener{
                     if(chatroom == null){
 
                         //CREAR SALA DE CHAT Y SUBIR A LA FIREBASE
+
+                        DatabaseReference referenceCurrent = FirebaseDatabase.getInstance().getReference().child("Padres").child(fuser.getUid());
+
+                        referenceCurrent.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                CurrentPad = dataSnapshot.getValue(Padre.class);
+
+                                String idc = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
+                                Chat chat = new Chat(CurrentPad.getFoto(), pediatra.getFoto(), padre.getNombre(), pediatra.getNombre(), CurrentPad.getId(), pediatra.getId(), idc);
+
+                                FirebaseDatabase.getInstance().getReference().child("Padres").child(CurrentPad.getId()).child("chats").child(idc).setValue(idc);
+                                FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(idc).setValue(idc);
+                                FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
+                                chatroom = idc;
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }
 
@@ -225,9 +285,12 @@ public class MessageController implements View.OnClickListener{
         //Generar ID
         //MIRAR SESION QUE NO SE CIERRA
         //LO PRIMERO ES EL ID
+
+        String idMensaje = FirebaseDatabase.getInstance().getReference().child("chat").child(chatroom).child("mensajes").push().getKey();
+
         Mensaje message = new Mensaje(
                 tempUri == null ? Mensaje.TYPE_TEXT : Mensaje.TYPE_IMAGE,
-                "id del mensaje", body, idUser, time);
+                idMensaje, body, idUser, time);
 
 
         FCMMessage fcmMessage = new FCMMessage();
@@ -250,13 +313,13 @@ public class MessageController implements View.OnClickListener{
                         if(task.isSuccessful()){
 
                             //ENVIAR MENSAJE PONER RESTO O LO QUE SEA XDXD
-                            FirebaseDatabase.getInstance().getReference().child("chat").child(chatroom).child("mensajes");
+                            FirebaseDatabase.getInstance().getReference().child("chat").child(chatroom).child("mensajes").child(idMensaje).setValue(message);
                         }
                     }
             );
         }else{
             //enviar mensaje sin guardar nada en el storage
-
+            FirebaseDatabase.getInstance().getReference().child("chat").child(chatroom).child("mensajes").child(idMensaje).setValue(message);
 
         }
 
@@ -273,8 +336,9 @@ public class MessageController implements View.OnClickListener{
                 String body = activity.getText_send().getText().toString();
                 if(!body.equals("")){
                     sendMessage(body, chatroom, fuser.getUid(), Calendar.getInstance().getTime().getTime());
+                    activity.getText_send().setText("");
                 }
-                activity.getText_send().setText("");
+                Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_media:
                 Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
