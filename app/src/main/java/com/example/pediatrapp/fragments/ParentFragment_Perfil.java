@@ -19,6 +19,6 @@ public class ParentFragment_Perfil extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.parentfragment_perfil, container, false);
+        return inflater.inflate(R.layout.parentfragment_perfil_hijos, container, false);
     }
 }
