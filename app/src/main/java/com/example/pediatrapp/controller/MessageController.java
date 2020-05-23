@@ -200,7 +200,7 @@ public class MessageController implements View.OnClickListener{
             }
         });
 
-
+        //MESSAGE CLOUD
     }
 
     public void sendMessage(String body, String roomChat, String idUser, long time){
