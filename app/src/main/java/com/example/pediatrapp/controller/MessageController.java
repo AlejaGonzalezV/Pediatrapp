@@ -90,7 +90,7 @@ public class MessageController implements View.OnClickListener{
                     pediatra = dataSnapshot.getValue(Pediatra.class);
                     activity.getUsername().setText(pediatra.getNombre());
 
-                    storage.getReference().child("Padre").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
+                    storage.getReference().child("Doctor").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
                             uri -> {
                                 Glide.with(activity).load(uri).centerCrop().into(activity.getProfile_image());
                             }
@@ -257,7 +257,7 @@ public class MessageController implements View.OnClickListener{
         }else{
             //enviar mensaje sin guardar nada en el storage
 
-            
+
         }
 
         activity.hideImage();
