@@ -64,6 +64,7 @@ public class MessageController implements View.OnClickListener{
 
     public MessageController(MessageActivity activity) {
         this.activity = activity;
+        Log.e(">>>", "Controller");
         activity.getBtn_send().setOnClickListener(this);
         activity.getBtn_media().setOnClickListener(this);
 
@@ -120,7 +121,7 @@ public class MessageController implements View.OnClickListener{
 
             ChatReference = FirebaseDatabase.getInstance().getReference().child("chat");
 
-            ChatReference.addValueEventListener(new ValueEventListener() {
+            ChatReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.e(">>>", "BuscaChatroom");
@@ -132,6 +133,13 @@ public class MessageController implements View.OnClickListener{
                             if (activity.getUserid().equals(chat.getId_padre()) && fuser.getUid().equals(chat.getId_pediatra())) {
                                 Log.e(">>>", "Encuentra chatroom");
                                 chatroom = snapshot.getKey();
+
+
+                                //NUEVO
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+                                Log.e(">>>", "no suscrito");
+
+
                                 loadMessages();
                             }
                         }
@@ -145,7 +153,7 @@ public class MessageController implements View.OnClickListener{
 
                         DatabaseReference referenceCurrent = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(fuser.getUid());
 
-                        referenceCurrent.addValueEventListener(new ValueEventListener() {
+                        referenceCurrent.addListenerForSingleValueEvent(new ValueEventListener() {
                                                                    @Override
                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                                        CurrentPed = dataSnapshot.getValue(Pediatra.class);
@@ -157,6 +165,10 @@ public class MessageController implements View.OnClickListener{
                                                                        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(CurrentPed.getId()).child("chats").child(idc).setValue(idc);
                                                                        FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
                                                                        chatroom = idc;
+                                                                        //NUEVO
+
+                                                                       FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+                                                                       Log.e(">>>", "no suscrito");
 
                                                                    }
 
@@ -177,10 +189,14 @@ public class MessageController implements View.OnClickListener{
                 }
             });
 
+//            if(chatroom != null) {
+//                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+//                Log.e(">>>", "no suscrito");
+//            }
         }else {
 
             ChatReference = FirebaseDatabase.getInstance().getReference().child("chat");
-            ChatReference.addValueEventListener(new ValueEventListener() {
+            ChatReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.e(">>>", "BuscaChatroom");
@@ -192,6 +208,12 @@ public class MessageController implements View.OnClickListener{
                             if (activity.getUserid().equals(chat.getId_pediatra()) && fuser.getUid().equals(chat.getId_padre())) {
                                 Log.e(">>>", "Encuentra chatroom");
                                 chatroom = snapshot.getKey();
+
+                                //NUEVOOO
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+                                Log.e(">>>", "no suscrito");
+
+
                                 loadMessages();
                             }
                         }
@@ -203,7 +225,7 @@ public class MessageController implements View.OnClickListener{
 
                         DatabaseReference referenceCurrent = FirebaseDatabase.getInstance().getReference().child("Padres").child(fuser.getUid());
 
-                        referenceCurrent.addValueEventListener(new ValueEventListener() {
+                        referenceCurrent.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 CurrentPad = dataSnapshot.getValue(Padre.class);
@@ -216,6 +238,9 @@ public class MessageController implements View.OnClickListener{
                                 FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
                                 chatroom = idc;
 
+                                //NUEVOOOO
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+                                Log.e(">>>", "no suscrito");
                             }
 
                             @Override
@@ -235,6 +260,10 @@ public class MessageController implements View.OnClickListener{
 
                 }
             });
+//            if(chatroom != null) {
+//                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+//                Log.e(">>>", "no suscrito");
+//            }
         }
 
 
@@ -337,8 +366,9 @@ public class MessageController implements View.OnClickListener{
                 if(!body.equals("")){
                     sendMessage(body, chatroom, fuser.getUid(), Calendar.getInstance().getTime().getTime());
                     activity.getText_send().setText("");
+                }else {
+                    Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_media:
                 Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
@@ -352,6 +382,14 @@ public class MessageController implements View.OnClickListener{
 
     public void beforeResume() {
         //MESSAGE CLOUD
+        if(chatroom != null) {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
+            Log.e(">>>", "no suscrito");
+        }
+    }
+
+    public void beforePause() {
+
         if(chatroom != null){
             FirebaseMessaging.getInstance().subscribeToTopic(chatroom).addOnCompleteListener(
                     task -> {
@@ -362,11 +400,6 @@ public class MessageController implements View.OnClickListener{
 
             );
         }
-
-    }
-
-    public void beforePause() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
