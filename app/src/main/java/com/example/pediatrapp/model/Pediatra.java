@@ -114,4 +114,11 @@ public class Pediatra {
         this.idV = idV;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

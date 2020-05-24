@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -61,6 +62,28 @@ public class PediatraFragment_ChatList extends Fragment {
         pediatra_ChatList = view.findViewById(R.id.pediatra_ChatList);
         FiltroChatBT = view.findViewById(R.id.FiltroChatBT);
 
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(fuser.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Pediatra ped = dataSnapshot.getValue(Pediatra.class);
+                if(ped.getEstado().equals("offline")){
+                    switchDisp.setChecked(false);
+                }else{
+                    switchDisp.setChecked(true);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         padres = new ArrayList<Padre>();
         adapter = new PediatraAdapter_ChatList();
@@ -70,6 +93,16 @@ public class PediatraFragment_ChatList extends Fragment {
 
         readParents();
 
+        switchDisp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    changeEstado("online");
+                }else{
+                    changeEstado("offline");
+                }
+            }
+        });
 
         pediatra_ChatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -218,5 +251,10 @@ public class PediatraFragment_ChatList extends Fragment {
         return  resultado;
     }
 
+    public void changeEstado(String estado){
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(fuser.getUid()).child("estado").setValue(estado);
+
+    }
 
 }

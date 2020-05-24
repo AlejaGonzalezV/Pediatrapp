@@ -66,7 +66,15 @@ public class PadreAdapter_ChatList extends BaseAdapter {
 
 
         TextView nombrePediatraTV = root.findViewById(R.id.nombrePediatraTV);
+        TextView Ped_Estatus = root.findViewById(R.id.Ped_Estatus);
+
         nombrePediatraTV.setText(pediatra.getNombre());
+        if(pediatra.getEstado().equals("offline")){
+            Ped_Estatus.setText("No Disponible");
+        }else{
+            Ped_Estatus.setText("Disponible");
+        }
+
         CircleImageView imagePediatraCIV = root.findViewById(R.id.imagePediatraCIV);
 
 
