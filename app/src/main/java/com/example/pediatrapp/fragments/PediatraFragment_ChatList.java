@@ -72,8 +72,13 @@ public class PediatraFragment_ChatList extends Fragment {
                 Pediatra ped = dataSnapshot.getValue(Pediatra.class);
                 if(ped.getEstado().equals("offline")){
                     switchDisp.setChecked(false);
+                    String txt = switchDisp.getTextOff().toString();
+                    switchDisp.setText(txt);
+
                 }else{
                     switchDisp.setChecked(true);
+                    String txt = switchDisp.getTextOn().toString();
+                    switchDisp.setText(txt);
                 }
 
             }
@@ -98,8 +103,12 @@ public class PediatraFragment_ChatList extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     changeEstado("online");
+                    String txt = switchDisp.getTextOn().toString();
+                    switchDisp.setText(txt);
                 }else{
                     changeEstado("offline");
+                    String txt = switchDisp.getTextOff().toString();
+                    switchDisp.setText(txt);
                 }
             }
         });
