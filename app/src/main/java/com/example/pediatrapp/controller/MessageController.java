@@ -92,7 +92,7 @@ public class MessageController implements View.OnClickListener{
 
                     storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
                             uri -> {
-                                Glide.with(activity).load(uri).centerCrop().into(activity.getProfile_image());
+                                Glide.with(activity.getApplicationContext()).load(uri).centerCrop().into(activity.getProfile_image());
                             }
                     );
                 }else{
@@ -101,7 +101,7 @@ public class MessageController implements View.OnClickListener{
 
                     storage.getReference().child("Doctor").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
                             uri -> {
-                                Glide.with(activity).load(uri).centerCrop().into(activity.getProfile_image());
+                                Glide.with(activity.getApplicationContext()).load(uri).centerCrop().into(activity.getProfile_image());
                             }
                     );
 
