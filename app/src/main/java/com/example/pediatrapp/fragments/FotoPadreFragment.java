@@ -21,8 +21,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class FotoPadreFragment extends Fragment {
 
+    //Agregar back
     public static final int GALLERY_CALLBACK = 1;
-    public static final int GALLERY_CALLBACK2 = 2;
     private View view;
     private Button profilePhoto, next;
     private ImageView photoIV, checkP;

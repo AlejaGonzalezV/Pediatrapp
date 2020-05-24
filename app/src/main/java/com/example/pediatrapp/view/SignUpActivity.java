@@ -21,6 +21,7 @@ import com.example.pediatrapp.fragments.FotoPadreFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
 import com.example.pediatrapp.model.Chat;
+import com.example.pediatrapp.model.ChatGrupal;
 import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
@@ -308,7 +309,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             String password = str[3];
             String idV = str[4];
 
-            //Registrar en firebase
+
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                 FirebaseUser user = auth.getCurrentUser();
@@ -326,10 +327,43 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 foto= id+"*"+"Foto";
                 firma= id+"*"+"Firma";
 
-                Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto, "offline");
+                HashMap<String,String>chatsGrupales = new HashMap<>();
+                HashMap<String, ChatGrupal>objChatGrupal = new HashMap<>();
 
-                //Escribir en la base de datos
+                Query query = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                         @Override
+                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                                                             for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                                                 chatsGrupales.put(child.getKey(),child.getKey());
+                                                                 objChatGrupal.put(child.getKey(), child.getValue(ChatGrupal.class));
+
+
+                                                             }
+
+
+                                                         }
+
+                                                         @Override
+                                                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                         }
+                                                     });
+
+                        Pediatra pediatra = new Pediatra(id, nombre, cedula, email, password, idV, firma, foto, "offline", chatsGrupales);
+
+
+                        //Recorrido hash por revisar
+                for(ChatGrupal chat: objChatGrupal.values()){
+
+                    chat.addPediatra(id, id);
+
+                }
+
+                //Se sube hash chat grupal. por revisar
+                FirebaseDatabase.getInstance().getReference().child("Chat_grupal").setValue(objChatGrupal);
                 FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
 
 

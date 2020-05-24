@@ -56,7 +56,7 @@ public class HijosAdapter extends BaseAdapter {
 
         } else {
 
-            edad.setText(hijos.get(position).getEdad()+ " años"); 
+            edad.setText(hijos.get(position).getEdad()+ " años");
 
         }
 
