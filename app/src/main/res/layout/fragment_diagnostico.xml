@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondooo" />
+        app:srcCompat="@drawable/fondolistas" />
 
     <Button
         android:id="@+id/back"
@@ -40,15 +40,14 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/lato_bold"
         android:text="Agregar registro"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView15"
@@ -67,7 +66,7 @@
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Título del registro"
         android:inputType="textPersonName"
@@ -94,12 +93,14 @@
         android:id="@+id/diagnostico"
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:textSize="15sp"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
+        android:hint="Escribe aquí tu diagnóstico"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 

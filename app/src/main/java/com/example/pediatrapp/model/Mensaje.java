@@ -1,21 +1,29 @@
 package com.example.pediatrapp.model;
 
+import com.example.pediatrapp.fragments.ParentRegisterFragment;
+
 public class Mensaje {
 
-    private long id;
+    public static final int TYPE_TEXT = 0;
+    public static final int TYPE_IMAGE = 1;
+
+    private int type;
+    private String id;
     private String body;
     private String nombre_usuario;
     private String user_id;
     private long timestamp;
 
-    public Mensaje(long id, String body, String user_id, long timestamp) {
+    public Mensaje(int type, String id, String body, String user_id, long timestamp) {
+        this.type = type;
         this.id = id;
         this.body = body;
         this.user_id = user_id;
         this.timestamp = timestamp;
     }
 
-    public Mensaje(long id, String body, String nombre_usuario, String user_id, long timestamp) {
+    public Mensaje(int type, String id, String body, String nombre_usuario, String user_id, long timestamp) {
+        this.type = type;
         this.id = id;
         this.body = body;
         this.nombre_usuario = nombre_usuario;
@@ -26,11 +34,11 @@ public class Mensaje {
     public Mensaje() {
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,5 +72,13 @@ public class Mensaje {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

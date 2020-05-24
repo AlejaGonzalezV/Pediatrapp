@@ -52,6 +52,8 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         consultaFormulaFragment = new ConsultaFormulaFragment();
         ((ConsultaFormulaFragment) consultaFormulaFragment).setListener(this);
 
+        findUser();
+
     }
 
     public void showFragment(Fragment fragment){
@@ -118,6 +120,8 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
     @Override
     public void onData(Fragment fragment, String type, String... args) {
+
+
 
     }
 }
