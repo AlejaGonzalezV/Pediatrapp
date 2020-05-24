@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/Lista"
+        android:id="@+id/ListaHijos"
         android:layout_width="409dp"
         android:layout_height="598dp"
         app:layout_constraintEnd_toEndOf="parent"
