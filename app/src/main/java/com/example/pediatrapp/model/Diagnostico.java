@@ -5,31 +5,58 @@ import java.util.HashMap;
 
 public class Diagnostico {
 
+    private String id;
     private String diagnostico;
-    private LocalDate fecha;
+    private String fecha;
     private String id_pediatra;
     private String nombre_pediatra;
     private String titulo;
     private HashMap<String, FormulaMedica> formula_medica;
 
-    public Diagnostico(String diagnostico, LocalDate fecha, String id_pediatra, String nombre_pediatra, String titulo, HashMap<String, FormulaMedica> formula_medica) {
+    public Diagnostico(String id, String diagnostico, String fecha, String id_pediatra, String nombre_pediatra, String titulo, HashMap<String, FormulaMedica> formula_medica) {
         this.diagnostico = diagnostico;
         this.fecha = fecha;
         this.id_pediatra = id_pediatra;
         this.nombre_pediatra = nombre_pediatra;
         this.titulo = titulo;
         this.formula_medica = formula_medica;
+        this.id = id;
     }
 
-    public Diagnostico(String diagnostico, LocalDate fecha, String id_pediatra, String nombre_pediatra, String titulo) {
+    public Diagnostico(String id, String diagnostico, String fecha, String id_pediatra, String nombre_pediatra, String titulo) {
         this.diagnostico = diagnostico;
         this.fecha = fecha;
         this.id_pediatra = id_pediatra;
         this.nombre_pediatra = nombre_pediatra;
         this.titulo = titulo;
+        this.id = id;
     }
 
     public Diagnostico() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public HashMap<String, FormulaMedica> getFormula_medica() {
+        return formula_medica;
+    }
+
+    public void setFormula_medica(HashMap<String, FormulaMedica> formula_medica) {
+        this.formula_medica = formula_medica;
     }
 
     public String getDiagnostico() {
@@ -40,11 +67,11 @@ public class Diagnostico {
         this.diagnostico = diagnostico;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

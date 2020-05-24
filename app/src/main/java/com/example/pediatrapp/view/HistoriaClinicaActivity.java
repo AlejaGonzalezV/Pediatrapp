@@ -122,6 +122,21 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
     public void onData(Fragment fragment, String type, String... args) {
 
 
+        if(fragment.equals(historiaPediatraFragment)){
+
+            if(type.equals("ver")){
+
+
+
+            } else if(type.equals("back")){
+
+
+
+            }
+
+
+        }
+
 
     }
 }

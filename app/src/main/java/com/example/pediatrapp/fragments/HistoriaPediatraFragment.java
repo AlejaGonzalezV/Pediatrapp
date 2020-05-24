@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.adapter.HistoriaAdapter;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
+import com.example.pediatrapp.model.Diagnostico;
 import com.example.pediatrapp.view.ActivityMainPediatra;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +30,7 @@ public class HistoriaPediatraFragment extends Fragment {
     private View view;
     private Button back,addRegistro;
     private ListView lista;
-
+    private HistoriaAdapter adapter;
     private OnDataSubmitted listener;
 
     public void setListener(OnDataSubmitted listener){
@@ -40,10 +42,20 @@ public class HistoriaPediatraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-         view = inflater.inflate(R.layout.fragment_historia_pediatra, container, false);
+        view = inflater.inflate(R.layout.fragment_historia_pediatra, container, false);
+        back = view.findViewById(R.id.back);
+        addRegistro = view.findViewById(R.id.addRegistro);
+        lista = view.findViewById(R.id.lista);
+        adapter = new HistoriaAdapter(this);
+        lista.setAdapter(adapter);
+
         return view;
 
+    }
 
+    public void showRegistro(String id){
+
+        listener.onData(this, "ver", id);
 
     }
 
