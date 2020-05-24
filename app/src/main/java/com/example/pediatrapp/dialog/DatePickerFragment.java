@@ -26,7 +26,6 @@ public class DatePickerFragment extends DialogFragment {
     }
 
 
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

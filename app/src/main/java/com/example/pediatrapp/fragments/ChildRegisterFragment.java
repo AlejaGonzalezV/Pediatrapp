@@ -1,5 +1,6 @@
 package com.example.pediatrapp.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
+import com.example.pediatrapp.dialog.DatePickerFragment;
 import com.example.pediatrapp.model.Pediatra;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChildRegisterFragment extends Fragment {
+public class ChildRegisterFragment extends Fragment implements View.OnClickListener {
 
     private ArrayAdapter<String> doctorsAdapter;
     private OnDataSubmitted listener;
@@ -38,6 +40,7 @@ public class ChildRegisterFragment extends Fragment {
     private Spinner doctor, gender;
     private ArrayList<String> ids;
     private ArrayList<String> names;
+    private String fechaNac;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -59,6 +62,8 @@ public class ChildRegisterFragment extends Fragment {
         names = new ArrayList<String>();
         names.add("Pediatra asignado");
 
+        date.setOnClickListener(this);
+
 
         configureSpinner();
         fillDoctors();
@@ -78,7 +83,7 @@ public class ChildRegisterFragment extends Fragment {
 
                     if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), date.getText().toString(), gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1));
+                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1));
                         Log.e("<<<<<<<", String.valueOf(doctor.getSelectedItemPosition()-1));
 
                     }else {
@@ -157,6 +162,31 @@ public class ChildRegisterFragment extends Fragment {
 
         doctorsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, names);
         doctor.setAdapter(doctorsAdapter);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.date:
+                showDatePickerDialog();
+                break;
+        }
+    }
+
+    public void showDatePickerDialog(){
+
+        DatePickerFragment datePicker = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+
+                fechaNac = day + "/" + (month+1) + "/" + year;
+                date.setText(fechaNac);
+
+            }
+        });
+
+        datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
 
     }
 

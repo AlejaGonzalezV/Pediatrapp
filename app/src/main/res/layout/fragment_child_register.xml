@@ -74,6 +74,8 @@
         android:ems="10"
         android:hint="Fecha de nacimiento"
         android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id" />
 
