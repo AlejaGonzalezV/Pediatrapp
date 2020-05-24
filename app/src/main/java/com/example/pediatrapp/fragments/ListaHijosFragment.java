@@ -56,18 +56,6 @@ public class ListaHijosFragment extends Fragment {
         hijos = new ArrayList<>();
         cargarHijos();
 
-        /*
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Hijo hijo = (Hijo) lista.getOnItemClickListener();
-                ident = hijo.getId();
-                Log.e("<<<<<<<<<", "PRESIONOoo");
-                enviar();
-            }
-        });
-
-         */
 
         back.setOnClickListener(
 
@@ -98,7 +86,7 @@ public class ListaHijosFragment extends Fragment {
         listener.onData(this, "next", ident);
 
     }
-    
+
 
     public void cargarHijos(){
 

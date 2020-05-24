@@ -52,19 +52,11 @@ public class HistoriaPadreFragment extends Fragment {
         nombre = view.findViewById(R.id.nombre);
         lista = view.findViewById(R.id.lista);
         back = view.findViewById(R.id.back);
-        adapter = new HistoriaAdapter();
+        adapter = new HistoriaAdapter(this);
         lista.setAdapter(adapter);
         obtenerHijo();
+        nombre.setText(hijo.getNombre());
         obtenerRegistros();
-
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Diagnostico diagn = (Diagnostico) lista.getOnItemClickListener();
-                idDiag = diagn.getId();
-
-            }
-        });
 
         back.setOnClickListener(
 
@@ -78,6 +70,14 @@ public class HistoriaPadreFragment extends Fragment {
         );
 
         return view;
+    }
+
+    public void recibo(int pos){
+
+        Diagnostico diagn = (Diagnostico) lista.getOnItemClickListener();
+        idDiag = diagn.getId();
+        enviar();
+
     }
 
     public void enviar(){

@@ -229,13 +229,6 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 storage.getReference().child("Padre").child(id).putFile(uriP);
                 String foto= id;
 
-                //Padre padre = new Padre(id,cedula,nombre,email,password,direccion,cel,foto,pediatrasAsig, hijos);
-
-                //FirebaseDatabase.getInstance().getReference().child("Padres").child(id).setValue(padre);
-                //FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
-
-
-
                 Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
