@@ -1,5 +1,6 @@
 package com.example.pediatrapp.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class HijosAdapter extends BaseAdapter {
 
     public void addHijos(Hijo hijo){
 
+        Log.e("<<<<<<<<", "NUEVO HIJO");
         hijos.add(hijo);
         notifyDataSetChanged();
 

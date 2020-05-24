@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.view.CurvasCrecimientoActivity;
+import com.example.pediatrapp.view.HistoriaClinicaActivity;
 import com.example.pediatrapp.view.VacunasActivity;
 
 public class ParentFragment_Historial extends Fragment {
@@ -35,9 +36,6 @@ public class ParentFragment_Historial extends Fragment {
         vacunasGeneralBTN = view.findViewById(R.id.vacunasGeneralBTN);
         curvasGeneralBTN = view.findViewById(R.id.curvasGeneralBTN);
         historiaClinica = view.findViewById(R.id.historiaClinica);
-
-
-        
         
         vacunasGeneralBTN.setOnClickListener(
 
@@ -62,7 +60,8 @@ public class ParentFragment_Historial extends Fragment {
 
                 (v)->{
 
-                    //Fragment con la lista de hijos
+                    Intent intent = new Intent(view.getContext(), HistoriaClinicaActivity.class);
+                    startActivity(intent);
 
                 }
 

@@ -12,13 +12,14 @@ public class Pediatra {
     private String idV;
     private String firma;
     private String foto;
+    private String estado;
     private HashMap<String, String> chats;
     private HashMap<String, String> chats_grupales;
     private HashMap<String, String> padres_asignados;
 
     public Pediatra(String id, String nombre, String cedula, String correo, String contrasena,
                     String idV, String firma, String foto, HashMap<String, String> chats,
-                    HashMap<String, String> chats_grupales, HashMap<String, String> padres_asignados) {
+                    HashMap<String, String> chats_grupales, HashMap<String, String> padres_asignados, String estado) {
 
         this.id = id;
         this.nombre = nombre;
@@ -31,9 +32,10 @@ public class Pediatra {
         this.chats = chats;
         this.chats_grupales = chats_grupales;
         this.padres_asignados = padres_asignados;
+        this.estado = estado;
     }
 
-    public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto) {
+    public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.cedula = cedula;
@@ -42,6 +44,7 @@ public class Pediatra {
         this.idV = idV;
         this.firma = firma;
         this.foto = foto;
+        this.estado = estado;
     }
 
     public Pediatra() {

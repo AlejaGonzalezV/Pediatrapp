@@ -14,6 +14,7 @@ import com.example.pediatrapp.fragments.DiagnosticoFragment;
 import com.example.pediatrapp.fragments.FormulaFragment;
 import com.example.pediatrapp.fragments.HistoriaPadreFragment;
 import com.example.pediatrapp.fragments.HistoriaPediatraFragment;
+import com.example.pediatrapp.fragments.ListaHijosFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +28,9 @@ import android.os.Bundle;
 public class HistoriaClinicaActivity extends AppCompatActivity implements OnDataSubmitted {
 
     private Fragment historiaPadreFragment, historiaPediatraFragment, diagnosticoFragment, formulaFragment,
-            consultaRegistroFragment, consultaFormulaFragment;
+            consultaRegistroFragment, consultaFormulaFragment, listaHijosFragment;
+
+    private String hijoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
         consultaFormulaFragment = new ConsultaFormulaFragment();
         ((ConsultaFormulaFragment) consultaFormulaFragment).setListener(this);
+
+        listaHijosFragment = new ListaHijosFragment();
+        ((ListaHijosFragment) listaHijosFragment).setListener(this);
 
         findUser();
 
@@ -102,7 +108,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                     if(child.getKey().equals(id)){
 
-                        showFragment(historiaPadreFragment);
+                        showFragment(listaHijosFragment);
 
                     }
 
@@ -122,15 +128,20 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
     public void onData(Fragment fragment, String type, String... args) {
 
 
-        if(fragment.equals(historiaPediatraFragment)){
+        if(fragment.equals(listaHijosFragment)){
 
-            if(type.equals("ver")){
+            if(type.equals("next")){
+
+                hijoId = args[0];
+
+                showFragment(historiaPadreFragment);
 
 
 
             } else if(type.equals("back")){
 
-
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
             }
 
@@ -138,5 +149,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         }
 
 
+    }
+
+    public String getHijoId() {
+        return hijoId;
     }
 }
