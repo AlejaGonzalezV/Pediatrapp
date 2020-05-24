@@ -3,6 +3,7 @@ package com.example.pediatrapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
@@ -17,11 +18,15 @@ public class ParentPerfil extends AppCompatActivity {
     private ViewPager viewPager;
     private TabItem tab1, tab2 ;
     private PagerController pagerAdapater;
+    private String idParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_perfil);
+
+        Intent intent = getIntent();
+        idParent = intent.getStringExtra("userid");
 
         tabLayout = findViewById(R.id.tabLayout_parent);
         viewPager = findViewById(R.id.viewPager);

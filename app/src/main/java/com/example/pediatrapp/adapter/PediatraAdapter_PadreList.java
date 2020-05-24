@@ -2,10 +2,13 @@ package com.example.pediatrapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,38 +18,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
 import com.example.pediatrapp.view.MessageActivity;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PediatraAdapter_PadreList extends RecyclerView.Adapter<PediatraAdapter_PadreList.ViewHol> {
+public class PediatraAdapter_PadreList extends BaseAdapter {
 
-    private Context context;
-    private List<Padre> padres;
+    private ArrayList<Padre> padres;
 
-    public PediatraAdapter_PadreList(Context context, List<Padre> padres) {
-        this.context = context;
-        this.padres = padres;
+    public PediatraAdapter_PadreList() {
+        this.padres = new ArrayList<>();
     }
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    @Override
-    public int getItemCount() {
-        return padres.size();
-    }
-
-    public List<Padre> getPadres() {
+    public ArrayList<Padre> getPadres() {
         return padres;
+    }
+
+    public void setPadres(ArrayList<Padre> padres) {
+        this.padres = padres;
+        notifyDataSetChanged();
     }
 
     public void addPadre(Padre padre){
@@ -54,65 +50,73 @@ public class PediatraAdapter_PadreList extends RecyclerView.Adapter<PediatraAdap
         notifyDataSetChanged();
     }
 
-    public void setPadres(List<Padre> padres) {
-        this.padres = padres;
-        notifyDataSetChanged();
-    }
-
-    @NonNull
     @Override
-    public ViewHol onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pediatrafragment_padrelistitem, parent, false);
-
-        return new PediatraAdapter_PadreList.ViewHol(view);
+    public int getCount() {
+        return padres.size();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PediatraAdapter_PadreList.ViewHol holder, int position) {
+    public Object getItem(int position) {
+        return padres.get(position);
+    }
 
-        Log.e(">>>", "entra y añade");
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View root = inflater.inflate(R.layout.pediatrafragment_padrelistitem, null);
+
         Padre padre = padres.get(position);
-        holder.nombrePadreTV.setText(padre.getNombre());
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
-        storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
-                uri -> {
-                    Glide.with(holder.itemView).load(uri).centerCrop().into(holder.imagePadreIV);
-                }
-        );
+        TextView nombrePadreTV = root.findViewById(R.id.nombrePadreTV);
+        nombrePadreTV.setText(padre.getNombre());
+        CircleImageView imagePadreIV = root.findViewById(R.id.imagePadreIV);
 
 
-//        if(padre.getFoto().equals("default")){
-//            holder.imagePadreIV.setImageResource(R.mipmap.ic_launcher);
-//        }else{
+        String nameImage = padre.getFoto();
 
-//        }
+        File imageFile = new File(parent.getContext().getExternalFilesDir(null) + "/" + nameImage);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MessageActivity.class);
-                intent.putExtra("userid", padre.getId());
-                intent.putExtra("type", "padre");
-                context.startActivity(intent);
-            }
-        });
+        if(imageFile.exists()){
+            loadImage(imagePadreIV, imageFile);
 
-    }
+        }else {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            storage.getReference().child("Padre").child(nameImage).getDownloadUrl().addOnSuccessListener(
+                    uri -> {
+                        File f = new File(parent.getContext().getExternalFilesDir(null) + "/" + nameImage);
 
+                        new Thread(
+                                ()->{
+                                    HTTPSWebUtilDomi utilDomi = new HTTPSWebUtilDomi();
+                                    utilDomi.saveURLImageOnFile(uri.toString(), f);
 
-    public class ViewHol extends RecyclerView.ViewHolder{
+                                    root.post(
+                                            ()->{
+                                                loadImage(imagePadreIV, f);
+                                            }
+                                    );
 
-        TextView nombrePadreTV;
-        CircleImageView imagePadreIV;
+                                }
+                        ).start();
 
-        public ViewHol(@NonNull View itemView) {
-            super(itemView);
-
-            nombrePadreTV = itemView.findViewById(R.id.nombrePadreTV);
-            imagePadreIV = itemView.findViewById(R.id.imagePadreIV);
+                    }
+            );
         }
+
+
+        return root ;
     }
+
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
+
+    }
+
 }

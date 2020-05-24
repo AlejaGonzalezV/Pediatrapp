@@ -70,17 +70,6 @@ public class PediatraFragment_ChatList extends Fragment {
 
         readParents();
 
-        //PASAR A LA ACTIVIDAD
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, MessageActivity.class);
-//                intent.putExtra("userid", padre.getId());
-//                intent.putExtra("type", "padre");
-//                context.startActivity(intent);
-//            }
-//        });
 
         pediatra_ChatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,14 +95,15 @@ public class PediatraFragment_ChatList extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.e(">>>", "Buscar");
-                
-
+                String nombre = SearchChatET.getText().toString();
+                adapter.setPadres(buscarChat(nombre));
             }
         });
 
         FiltroChatBT.setOnClickListener(
                 (v)->{
                     Log.e(">>>","FiltroChat");
+                    adapter.setPadres(padres);
                 }
         );
         return view;
@@ -212,9 +202,6 @@ public class PediatraFragment_ChatList extends Fragment {
 
 
         }
-
-        //set
-
 
     }
 

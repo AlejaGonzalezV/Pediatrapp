@@ -24,6 +24,7 @@ import com.example.pediatrapp.services.FCMService;
 import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
 import com.example.pediatrapp.utilities.UtilDomi;
 import com.example.pediatrapp.view.MessageActivity;
+import com.example.pediatrapp.view.ParentPerfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -67,6 +68,8 @@ public class MessageController implements View.OnClickListener{
         Log.e(">>>", "Controller");
         activity.getBtn_send().setOnClickListener(this);
         activity.getBtn_media().setOnClickListener(this);
+        activity.getProfile_image().setOnClickListener(this);
+
 
         adapter = new MessageListAdapter();
         activity.getMessage_list().setAdapter(adapter);
@@ -374,6 +377,19 @@ public class MessageController implements View.OnClickListener{
                 Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
                 gallery.setType("image/*");
                 activity.startActivityForResult(gallery, GALLERY_CALLBACK);
+                break;
+            case R.id.profile_image:
+                if(activity.getType().equals("padre")){
+                    Intent intent = new Intent(activity, ParentPerfil.class);
+                    intent.putExtra("userid", activity.getUserid());
+////                    intent.putExtra("type", "padre");
+                    Log.e(">>>", "inicioIntent");
+                    activity.startActivity(intent);
+
+                }else{
+
+                    //LLAMAR PERFIL DEL PEDIATRA
+                }
 
                 break;
 

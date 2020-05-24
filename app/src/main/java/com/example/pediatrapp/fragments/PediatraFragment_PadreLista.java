@@ -1,10 +1,12 @@
 package com.example.pediatrapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,6 +22,7 @@ import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.PediatraAdapter_PadreList;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.view.MessageActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,9 +39,9 @@ public class PediatraFragment_PadreLista extends Fragment {
     private EditText SearchPadreET;
     private Button FiltroBT;
     private ImageButton SearchPadreBT;
-    private RecyclerView pediatra_padresList;
-    private PediatraAdapter_PadreList adapter_padreList;
-    private List<Padre> padres;
+    private ListView pediatra_padresList;
+    private PediatraAdapter_PadreList adapter;
+    private ArrayList<Padre> padres;
 
     public PediatraFragment_PadreLista() {
     }
@@ -54,20 +57,38 @@ public class PediatraFragment_PadreLista extends Fragment {
         SearchPadreBT = view.findViewById(R.id.SearchPadreBT);
         pediatra_padresList = view.findViewById(R.id.pediatra_padresList);
 
-        pediatra_padresList.setHasFixedSize(true);
-        pediatra_padresList.setLayoutManager(new LinearLayoutManager(getContext()));
-        padres = new ArrayList<Padre>();
-
         Log.e(">>>", "Set");
-        adapter_padreList = new PediatraAdapter_PadreList(getContext(), padres);
-        pediatra_padresList.setAdapter(adapter_padreList);
+
+        padres = new ArrayList<Padre>();
+        adapter = new PediatraAdapter_PadreList();
+        pediatra_padresList.setAdapter(adapter);
 
         
         readParents();
 
+        pediatra_padresList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Padre p = (Padre) adapter.getItem(i);
+                new Thread(
+                        () ->{
+
+                            Intent intent = new Intent(getActivity(), MessageActivity.class);
+                            intent.putExtra("userid", p.getId());
+                            intent.putExtra("type", "padre");
+                            Log.e(">>>", "inicioIntent");
+                            getActivity().startActivity(intent);
+                        }
+                ).start();
+
+            }
+        });
+
         FiltroBT.setOnClickListener(
                 (v)->{
                     Log.e(">>>", "Filtro");
+                    adapter.setPadres(padres);
                 }
         );
 
@@ -75,6 +96,8 @@ public class PediatraFragment_PadreLista extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.e(">>>", "Search");
+                String nombre = SearchPadreET.getText().toString();
+                adapter.setPadres(buscarChat(nombre));
             }
         });
 
@@ -140,7 +163,27 @@ public class PediatraFragment_PadreLista extends Fragment {
                         if(padre != null){
                             Log.e(">>>", "Añade" + padre.getNombre());
                          //   padres.add(padre);
-                            adapter_padreList.addPadre(padre);
+                            int pos = 0;
+                            boolean exist = false;
+                            for (int i = 0; i< adapter.getPadres().size() && !exist; i++){
+
+                                if(adapter.getPadres().get(i).getId().equals(padre.getId())){
+                                    pos = i;
+                                    exist = true;
+                                }
+
+                            }
+
+                            if(exist){
+                                adapter.getPadres().remove(pos);
+                                padres.remove(pos);
+                                adapter.addPadre(padre);
+                                padres.add(padre);
+                            }else{
+                                adapter.addPadre(padre);
+                                padres.add(padre);
+                                Log.e(">>>", "size: "+padres.size());
+                            }
                         }
 
 //                    }
@@ -155,8 +198,17 @@ public class PediatraFragment_PadreLista extends Fragment {
 
         }
 
-       //set
+    }
 
+    public ArrayList<Padre> buscarChat(String nombre){
+        ArrayList<Padre> resultado = new ArrayList<>();
 
+        for(int i = 0; i< adapter.getPadres().size(); i++){
+            if(adapter.getPadres().get(i).getNombre().contains(nombre)){
+                resultado.add(adapter.getPadres().get(i));
+            }
+        }
+
+        return  resultado;
     }
 }
