@@ -174,6 +174,7 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        Log.e(">>>", "On Resume");
         controller.beforeResume();
         super.onResume();
     }
