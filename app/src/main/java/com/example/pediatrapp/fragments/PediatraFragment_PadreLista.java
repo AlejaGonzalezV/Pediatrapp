@@ -89,6 +89,7 @@ public class PediatraFragment_PadreLista extends Fragment {
                 (v)->{
                     Log.e(">>>", "Filtro");
                     adapter.setPadres(padres);
+                    SearchPadreET.setText("");
                 }
         );
 

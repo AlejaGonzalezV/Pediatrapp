@@ -104,6 +104,7 @@ public class PediatraFragment_ChatList extends Fragment {
                 (v)->{
                     Log.e(">>>","FiltroChat");
                     adapter.setPadres(padres);
+                    SearchChatET.setText("");
                 }
         );
         return view;

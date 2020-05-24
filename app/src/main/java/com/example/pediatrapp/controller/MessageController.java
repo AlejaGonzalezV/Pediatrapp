@@ -234,7 +234,7 @@ public class MessageController implements View.OnClickListener{
                                 CurrentPad = dataSnapshot.getValue(Padre.class);
 
                                 String idc = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
-                                Chat chat = new Chat(CurrentPad.getFoto(), pediatra.getFoto(), padre.getNombre(), pediatra.getNombre(), CurrentPad.getId(), pediatra.getId(), idc);
+                                Chat chat = new Chat(CurrentPad.getFoto(), pediatra.getFoto(), CurrentPad.getNombre(), pediatra.getNombre(), CurrentPad.getId(), pediatra.getId(), idc);
 
                                 FirebaseDatabase.getInstance().getReference().child("Padres").child(CurrentPad.getId()).child("chats").child(idc).setValue(idc);
                                 FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pediatra.getId()).child("chats").child(idc).setValue(idc);

@@ -1,10 +1,7 @@
 package com.example.pediatrapp.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +9,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
-import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
-import com.example.pediatrapp.view.MessageActivity;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PadreAdapter_PediatraList extends BaseAdapter {
+public class PadreAdapter_ChatList extends BaseAdapter {
 
     private ArrayList<Pediatra> pediatras;
 
-    public PadreAdapter_PediatraList() {
+    public PadreAdapter_ChatList() {
         this.pediatras = new ArrayList<>();
     }
 
@@ -70,14 +60,14 @@ public class PadreAdapter_PediatraList extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View root = inflater.inflate(R.layout.parentfragment_pediatraslistitem, null);
+        View root = inflater.inflate(R.layout.parentfragment_chatlistitem, null);
 
         Pediatra pediatra = pediatras.get(position);
 
 
         TextView nombrePediatraTV = root.findViewById(R.id.nombrePediatraTV);
         nombrePediatraTV.setText(pediatra.getNombre());
-        CircleImageView imagePediatraIV = root.findViewById(R.id.imagePediatraIV);
+        CircleImageView imagePediatraCIV = root.findViewById(R.id.imagePediatraCIV);
 
 
         String nameImage = pediatra.getFoto();
@@ -85,7 +75,7 @@ public class PadreAdapter_PediatraList extends BaseAdapter {
         File imageFile = new File(parent.getContext().getExternalFilesDir(null) + "/" + nameImage);
 
         if(imageFile.exists()){
-            loadImage(imagePediatraIV, imageFile);
+            loadImage(imagePediatraCIV, imageFile);
 
         }else {
             FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -100,7 +90,7 @@ public class PadreAdapter_PediatraList extends BaseAdapter {
 
                                     root.post(
                                             ()->{
-                                                loadImage(imagePediatraIV, f);
+                                                loadImage(imagePediatraCIV, f);
                                             }
                                     );
 
