@@ -49,15 +49,21 @@ public class ListaHijosFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_lista_hijos, container, false);
-        adapter = new HijosAdapter();
-        lista = view.findViewById(R.id.Lista);
         back = view.findViewById(R.id.back);
+        lista = view.findViewById(R.id.ListaHijos);
+        adapter = new HijosAdapter();
         lista.setAdapter(adapter);
         hijos = new ArrayList<>();
         cargarHijos();
-        cargarHijosLista();
 
-
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Hijo hijo = (Hijo) lista.getOnItemClickListener();
+                ident = hijo.getId();
+                enviar();
+            }
+        });
 
         back.setOnClickListener(
 
@@ -71,7 +77,7 @@ public class ListaHijosFragment extends Fragment {
 
         );
 
-        //listener.onData(this, "next", ident);
+
         return view;
     }
 
@@ -83,11 +89,15 @@ public class ListaHijosFragment extends Fragment {
 
     public void cargarHijosLista(){
 
+        Log.e("OTRO SIZE", hijos.size()+"");
+
         for(int i=0; i<hijos.size(); i++){
 
             adapter.addHijos(hijos.get(i));
 
         }
+
+
 
     }
 
@@ -102,10 +112,7 @@ public class ListaHijosFragment extends Fragment {
                 for(DataSnapshot child: dataSnapshot.getChildren()){
 
                     Hijo hijo = child.getValue(Hijo.class);
-                    hijos.add(hijo);
-                    Log.e("<<<<<<<<<<<", hijos.size()+"");
-
-
+                    adapter.addHijos(hijo);
 
                 }
 

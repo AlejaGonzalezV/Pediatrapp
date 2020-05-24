@@ -23,28 +23,31 @@ public class HijosAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return hijos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return hijos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View row = inflater.inflate(R.layout.list_item_hijos, null, false);
         ImageView imagen = row.findViewById(R.id.fotoHijo);
         TextView nombre = row.findViewById(R.id.nombreHijoTV);
-
         nombre.setText(hijos.get(position).getNombre());
+
+        Log.e("NOMBRE", hijos.get(position).getNombre());
+        Log.e("GENERO", hijos.get(position).getSexo());
+
         if(hijos.get(position).getSexo().equals("Femenino")){
 
             imagen.setImageResource(R.drawable.girl);
@@ -60,9 +63,10 @@ public class HijosAdapter extends BaseAdapter {
 
     public void addHijos(Hijo hijo){
 
-        Log.e("<<<<<<<<", "NUEVO HIJO");
         hijos.add(hijo);
         notifyDataSetChanged();
+        Log.e("<<<<<<<<<<<", hijo.getNombre());
+
 
     }
 }
