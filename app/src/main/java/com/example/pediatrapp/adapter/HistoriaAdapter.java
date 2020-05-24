@@ -48,9 +48,6 @@ public class HistoriaAdapter extends BaseAdapter {
         TextView fecha = row.findViewById(R.id.fecha);
         titulo.setText(diagnosticos.get(position).getTitulo());
         fecha.setText(diagnosticos.get(position).getFecha());
-
-
-
         return row;
     }
 

@@ -5,19 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.fragments.ListaHijosFragment;
 import com.example.pediatrapp.model.Hijo;
 import java.util.ArrayList;
 
 public class HijosAdapter extends BaseAdapter {
 
     private ArrayList<Hijo> hijos;
+    private ListaHijosFragment view;
 
-    public HijosAdapter() {
+    public HijosAdapter(ListaHijosFragment view) {
 
         hijos = new ArrayList<>();
+        this.view = view;
 
     }
 
@@ -47,6 +51,18 @@ public class HijosAdapter extends BaseAdapter {
 
         Log.e("NOMBRE", hijos.get(position).getNombre());
         Log.e("GENERO", hijos.get(position).getSexo());
+
+        Button verHijoBTN = row.findViewById(R.id.verHijoBTN);
+
+        verHijoBTN.setOnClickListener(
+
+                (v) -> {
+
+                        view.recibo(position);
+
+                }
+
+        );
 
         if(hijos.get(position).getSexo().equals("Femenino")){
 

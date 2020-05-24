@@ -51,19 +51,23 @@ public class ListaHijosFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_lista_hijos, container, false);
         back = view.findViewById(R.id.back);
         lista = view.findViewById(R.id.ListaHijos);
-        adapter = new HijosAdapter();
+        adapter = new HijosAdapter(this);
         lista.setAdapter(adapter);
         hijos = new ArrayList<>();
         cargarHijos();
 
+        /*
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Hijo hijo = (Hijo) lista.getOnItemClickListener();
                 ident = hijo.getId();
+                Log.e("<<<<<<<<<", "PRESIONOoo");
                 enviar();
             }
         });
+
+         */
 
         back.setOnClickListener(
 
@@ -81,25 +85,20 @@ public class ListaHijosFragment extends Fragment {
         return view;
     }
 
+    public void recibo(int id){
+
+        Hijo hijo = (Hijo) lista.getItemAtPosition(id);
+        ident = hijo.getId();
+        enviar();
+
+    }
+
     public void enviar(){
 
         listener.onData(this, "next", ident);
 
     }
-
-    public void cargarHijosLista(){
-
-        Log.e("OTRO SIZE", hijos.size()+"");
-
-        for(int i=0; i<hijos.size(); i++){
-
-            adapter.addHijos(hijos.get(i));
-
-        }
-
-
-
-    }
+    
 
     public void cargarHijos(){
 

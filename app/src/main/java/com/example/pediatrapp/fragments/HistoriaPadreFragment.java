@@ -6,7 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.adapter.HistoriaAdapter;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
+import com.example.pediatrapp.model.Diagnostico;
 import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.view.HistoriaClinicaActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +35,8 @@ public class HistoriaPadreFragment extends Fragment {
     private Button back;
     private ListView lista;
     private Hijo hijo;
+    private HistoriaAdapter adapter;
+    private String idDiag;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -47,6 +52,19 @@ public class HistoriaPadreFragment extends Fragment {
         nombre = view.findViewById(R.id.nombre);
         lista = view.findViewById(R.id.lista);
         back = view.findViewById(R.id.back);
+        adapter = new HistoriaAdapter();
+        lista.setAdapter(adapter);
+        obtenerHijo();
+        obtenerRegistros();
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Diagnostico diagn = (Diagnostico) lista.getOnItemClickListener();
+                idDiag = diagn.getId();
+
+            }
+        });
 
         back.setOnClickListener(
 
@@ -55,12 +73,40 @@ public class HistoriaPadreFragment extends Fragment {
 
                     listener.onData(this, "back", null);
 
-
                 }
 
         );
 
         return view;
+    }
+
+    public void enviar(){
+
+        listener.onData(this, "next", idDiag);
+
+    }
+
+    public void obtenerRegistros(){
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    Diagnostico diag = child.getValue(Diagnostico.class);
+                    adapter.addDiagnostico(diag);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void obtenerHijo(){
@@ -72,6 +118,7 @@ public class HistoriaPadreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 hijo = dataSnapshot.getValue(Hijo.class);
+                nombre.setText(hijo.getNombre());
 
             }
 
