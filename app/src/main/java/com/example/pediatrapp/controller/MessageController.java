@@ -42,6 +42,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -312,7 +313,7 @@ public class MessageController implements View.OnClickListener{
 
     }
 
-    public void sendMessage(String body, String roomChat, String idUser, long time){
+    public void sendMessage(String body, String roomChat, String idUser, String time){
         //video 11.5 min 15:18 ejemplo
         //Generar ID
         //MIRAR SESION QUE NO SE CIERRA
@@ -367,7 +368,26 @@ public class MessageController implements View.OnClickListener{
             case R.id.btn_send:
                 String body = activity.getText_send().getText().toString();
                 if(!body.equals("")){
-                    sendMessage(body, chatroom, fuser.getUid(), Calendar.getInstance().getTime().getTime());
+
+                    int second, minute, hour, z;
+                    GregorianCalendar date = new GregorianCalendar();
+
+                    minute = date.get(Calendar.MINUTE);
+                    hour = date.get(Calendar.HOUR);
+                    z = date.get(Calendar.AM_PM);
+                    String pm_am = "";
+                    if(z == Calendar.AM){
+                        pm_am = "a.m.";
+                    }else{
+                        pm_am = "p.m.";
+                    }
+                    String   data  =(hour+ ":"+ +minute+" "+pm_am);
+//                    Log.e(">>>>>>>>", Calendar.AM+"");
+//                    Log.e(">>>>>>>>", Calendar.PM+"");
+//                    Log.e(">>>>", z+"");
+//                    Log.e(">>>", data);
+
+                    sendMessage(body, chatroom, fuser.getUid(), data);
                     activity.getText_send().setText("");
                 }else {
                     Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();

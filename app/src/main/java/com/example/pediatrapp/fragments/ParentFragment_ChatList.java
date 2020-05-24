@@ -40,6 +40,7 @@ public class ParentFragment_ChatList extends Fragment {
     private Button FiltroChatPaBT;
     private ArrayList<Pediatra> pediatras;
     private PadreAdapter_ChatList adapter;
+    private ListView padre_chatGrupal;
 
     public ParentFragment_ChatList() {
     }
@@ -54,6 +55,7 @@ public class ParentFragment_ChatList extends Fragment {
         SearchChatPaBT = view.findViewById(R.id.SearchChatPaBT);
         padre_ChatList = view.findViewById(R.id.padre_ChatList);
         FiltroChatPaBT = view.findViewById(R.id.FiltroChatPaBT);
+        padre_chatGrupal = view.findViewById(R.id.padre_chatGrupal);
 
         pediatras = new ArrayList<>();
         adapter = new PadreAdapter_ChatList();
