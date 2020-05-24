@@ -304,7 +304,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 foto= id+"*"+"Foto";
                 firma= id+"*"+"Firma";
 
-                Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto);
+                Pediatra pediatra = new Pediatra(id,nombre,cedula,email,password,idV,firma,foto, "offline");
 
                 //Escribir en la base de datos
 
