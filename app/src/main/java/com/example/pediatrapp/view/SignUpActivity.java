@@ -1,18 +1,17 @@
 package com.example.pediatrapp.view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.fragments.ChildRegisterFragment;
@@ -31,11 +30,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 
 public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted {

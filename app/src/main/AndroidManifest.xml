@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.HistoriaClinicaActivity"></activity>
+        <activity android:name=".view.ParentPerfil"></activity>
+        <activity android:name=".view.HistoriaClinicaActivity" />
         <activity android:name=".view.VerVacunaActivity" />
         <activity android:name=".view.InitialActivity">
             <intent-filter>
