@@ -1,6 +1,8 @@
 package com.example.pediatrapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.pediatrapp.R;
@@ -28,6 +31,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ChildRegisterFragment extends Fragment implements View.OnClickListener {
@@ -41,6 +47,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
     private ArrayList<String> ids;
     private ArrayList<String> names;
     private String fechaNac;
+    private String edad;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -83,8 +90,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
 
                     if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1));
-                        Log.e("<<<<<<<", String.valueOf(doctor.getSelectedItemPosition()-1));
+                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1), edad);
 
                     }else {
 
@@ -145,7 +151,6 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
                     ids.add(child.getKey());
                 }
 
-                //configureSpinner();
                 doctorsAdapter.notifyDataSetChanged();
 
             }
@@ -165,6 +170,8 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
 
     }
 
+    @SuppressLint("NewApi")
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -174,19 +181,46 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     public void showDatePickerDialog(){
 
         DatePickerFragment datePicker = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
 
-                fechaNac = day + "/" + (month+1) + "/" + year;
-                date.setText(fechaNac);
+                if((month+1) >= 10){
+
+                    fechaNac = day + "/" + (month+1) + "/" + year;
+                    date.setText(fechaNac);
+
+                } else {
+
+                    fechaNac = day + "/" + "0" + (month+1) + "/" + year;
+                    date.setText(fechaNac);
+
+                }
+
+                Log.e("<<<<<<<<<<<", fechaNac);
+                calcularEdad();
 
             }
         });
 
         datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
+
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void calcularEdad(){
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaN = LocalDate.parse(fechaNac, fmt);
+        LocalDate hoy = LocalDate.now();
+
+        Period periodo = Period.between(fechaN, hoy);
+        edad = String.valueOf(periodo.getYears());
 
     }
 

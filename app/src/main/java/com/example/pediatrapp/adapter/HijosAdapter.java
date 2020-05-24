@@ -47,10 +47,19 @@ public class HijosAdapter extends BaseAdapter {
         View row = inflater.inflate(R.layout.list_item_hijos, null, false);
         ImageView imagen = row.findViewById(R.id.fotoHijo);
         TextView nombre = row.findViewById(R.id.nombreHijoTV);
+        TextView edad = row.findViewById(R.id.edadHijoTV);
         nombre.setText(hijos.get(position).getNombre());
 
-        Log.e("NOMBRE", hijos.get(position).getNombre());
-        Log.e("GENERO", hijos.get(position).getSexo());
+        if(hijos.get(position).getEdad() == "1"){
+
+            edad.setText(hijos.get(position).getEdad()+ " año");
+
+        } else {
+
+            edad.setText(hijos.get(position).getEdad()+ " años"); 
+
+        }
+
 
         Button verHijoBTN = row.findViewById(R.id.verHijoBTN);
 

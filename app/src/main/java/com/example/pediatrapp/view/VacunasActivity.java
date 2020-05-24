@@ -47,7 +47,7 @@ public class VacunasActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
         //Hijo de prueba
-        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Melqui"));
+        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Melqui", "3"));
 
 
 

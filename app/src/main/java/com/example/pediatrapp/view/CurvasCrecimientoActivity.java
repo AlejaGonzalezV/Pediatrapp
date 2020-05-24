@@ -44,7 +44,7 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
         adapter = new HijosCurvasAdapter(this,listaHijos );
         recycler.setAdapter(adapter);
 
-        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Jair"));
+        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Jair", "3"));
 
 
 
