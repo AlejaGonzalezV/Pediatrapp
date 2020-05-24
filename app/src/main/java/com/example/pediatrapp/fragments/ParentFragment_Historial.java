@@ -20,6 +20,7 @@ public class ParentFragment_Historial extends Fragment {
 
     private Button vacunasGeneralBTN;
     private Button curvasGeneralBTN;
+    private Button historiaClinica;
     private View view;
 
     public ParentFragment_Historial() {
@@ -33,6 +34,7 @@ public class ParentFragment_Historial extends Fragment {
 
         vacunasGeneralBTN = view.findViewById(R.id.vacunasGeneralBTN);
         curvasGeneralBTN = view.findViewById(R.id.curvasGeneralBTN);
+        historiaClinica = view.findViewById(R.id.historiaClinica);
 
 
         
@@ -52,6 +54,16 @@ public class ParentFragment_Historial extends Fragment {
 
                     Intent intent = new Intent(view.getContext(), CurvasCrecimientoActivity.class);
                     startActivity(intent);
+                }
+
+        );
+
+        historiaClinica.setOnClickListener(
+
+                (v)->{
+
+                    //Fragment con la lista de hijos
+
                 }
 
         );
