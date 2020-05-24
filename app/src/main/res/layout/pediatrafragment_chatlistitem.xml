@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/lato_bold"
         android:text="Nombre Padre"
         android:textColor="#000000"
@@ -30,16 +30,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/ultimoMensajeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/lato"
-        android:text="Último Mensaje"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imagePadreCIV"
-        app:layout_constraintTop_toBottomOf="@+id/nombrePadreTV" />
+<!--    <TextView-->
+<!--        android:id="@+id/ultimoMensajeTV"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:fontFamily="@font/lato"-->
+<!--        android:text="Último Mensaje"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/imagePadreCIV"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nombrePadreTV" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
