@@ -17,6 +17,7 @@ import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.fragments.ChildRegisterFragment;
 import com.example.pediatrapp.fragments.DoctorPhotoFragment;
 import com.example.pediatrapp.fragments.DoctorRegisterFragment;
+import com.example.pediatrapp.fragments.FotoPadreFragment;
 import com.example.pediatrapp.fragments.ParentRegisterFragment;
 import com.example.pediatrapp.fragments.RolFragment;
 import com.example.pediatrapp.model.Chat;
@@ -37,7 +38,7 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted {
 
-    private Fragment rolFragment,parentRegisterFragment, childRegisterFragment, doctorRegisterFragment, doctorPhotoFragment;
+    private Fragment rolFragment,parentRegisterFragment, childRegisterFragment, doctorRegisterFragment, doctorPhotoFragment, fotoPadreFragment;
     private LinearLayout layout;
     private String datos;
 
@@ -57,6 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
         ((DoctorRegisterFragment) doctorRegisterFragment).setListener(this);
         doctorPhotoFragment = new DoctorPhotoFragment();
         ((DoctorPhotoFragment) doctorPhotoFragment).setListener(this);
+        fotoPadreFragment = new FotoPadreFragment();
+        ((FotoPadreFragment) fotoPadreFragment).setListener(this);
 
 
         showFragment(rolFragment);
@@ -127,16 +130,15 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             if(type.equals("next")){
 
-                //Se hace launch a la nueva actividad donde esté el chat
+
                 for(int j=0; j<args.length; j++){
 
                     datos += args[j] + ",";
+                    showFragment(fotoPadreFragment);
 
                 }
 
-                createUserParent();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+
 
             } else if(type.equals("back")){
 
@@ -186,6 +188,17 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
             }
 
+        } else if(fragment.equals(fotoPadreFragment)){
+
+            if(type.equals("next")){
+
+                datos += args[0];
+                createUserParent();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+            }
+
         }
 
     }
@@ -204,6 +217,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             String fechaH = str[8];
             String generoH = str[9];
             String idDoc = str[10];
+            String foto1 = str[11];
 
 
             //Registro en firebase
@@ -222,11 +236,25 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 HashMap<String,String> pediatrasAsig = new HashMap<>();
                 pediatrasAsig.put(idDoc, idDoc);
 
-                Uri uriP = Uri.parse("android.resource://" + this.getPackageName()
-                        + "/" + R.drawable.user);
+                Uri uriP;
 
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                storage.getReference().child("Padre").child(id).putFile(uriP);
+                if(foto1.equals("no")){
+
+                    uriP = Uri.parse("android.resource://" + this.getPackageName()
+                            + "/" + R.drawable.user);
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    storage.getReference().child("Padre").child(id).putFile(uriP);
+
+                } else {
+
+                    uriP = Uri.parse(foto1);
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    storage.getReference().child("Padre").child(id).putFile(uriP);
+
+                }
+
+
+
                 String foto= id;
 
                 Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
