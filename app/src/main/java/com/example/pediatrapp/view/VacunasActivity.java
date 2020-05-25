@@ -22,8 +22,6 @@ import java.util.List;
 
 public class VacunasActivity extends AppCompatActivity {
 
-    private ImageButton buscarBtn;
-    private EditText buscarET;
     private String nombreHijo;
     private RecyclerView recycler;
     private HijosVacunasAdapter adapter;
@@ -35,8 +33,6 @@ public class VacunasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacunas);
 
-        buscarBtn = findViewById(R.id.searchHijoVacunaBT);
-         buscarET = findViewById(R.id.searchHijoVacunaET);
         backBTN = findViewById(R.id.backVacunas);
          nombreHijo = "";
 
@@ -47,19 +43,11 @@ public class VacunasActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
         //Hijo de prueba
-        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Melqui", "3"));
+        listaHijos.add(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
 
 
 
-         buscarBtn.setOnClickListener(
-                 (v)->{
 
-
-                         Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_LONG).show();
-
-                 }
-
-         );
 
 
         backBTN.setOnClickListener(
@@ -77,23 +65,6 @@ public class VacunasActivity extends AppCompatActivity {
     public void buscarHijoVacunas(String nombreHijo){
 
 
-    }
-
-
-    public ImageButton getBuscarBtn() {
-        return buscarBtn;
-    }
-
-    public void setBuscarBtn(ImageButton buscarBtn) {
-        this.buscarBtn = buscarBtn;
-    }
-
-    public EditText getBuscarET() {
-        return buscarET;
-    }
-
-    public void setBuscarET(EditText buscarET) {
-        this.buscarET = buscarET;
     }
 
     public String getNombreHijo() {

@@ -20,11 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/fechaItemVacuna"
         android:layout_width="110dp"
         android:layout_height="37dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato_bold"
         android:text="Fecha"
@@ -33,7 +34,6 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/tv_nameVaccine"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/verListaVa"

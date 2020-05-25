@@ -76,7 +76,7 @@ public class AddCurvaActivity extends AppCompatActivity {
 
                             if( valiTiposDatos()){
 
-                            DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()));
+                            DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),Integer.parseInt(edadSelected) );
 
                             Intent i = new Intent();
                             i.putExtra("laCurva", laCurva);
