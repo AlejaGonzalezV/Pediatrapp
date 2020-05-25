@@ -84,13 +84,6 @@ public class FotoPadreFragment extends Fragment {
         return view;
     }
 
-    public void uriFromResource(){
-
-        uri = Uri.parse("android.resource://" + getContext().getPackageName()
-                + "/" + R.drawable.user);
-
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
         if(requestCode == GALLERY_CALLBACK && resultCode == RESULT_OK){
