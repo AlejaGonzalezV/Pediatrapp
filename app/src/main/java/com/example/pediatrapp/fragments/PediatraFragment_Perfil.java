@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Pediatra;
@@ -30,7 +32,8 @@ public class PediatraFragment_Perfil extends Fragment {
     private TextView cedula_pediatra;
     private TextView email_pediatra;
     private TextView numeroUnico_pediatra;
-    private Button cerrarSesion;
+    private Button cerrarSesion, editarFoto;
+    private Fragment fragmentFoto;
 
     public PediatraFragment_Perfil() {
     }
@@ -46,9 +49,25 @@ public class PediatraFragment_Perfil extends Fragment {
         cedula_pediatra = view.findViewById(R.id.cedula_pediatraCV);
         email_pediatra = view.findViewById(R.id.email_pediatra);
         numeroUnico_pediatra = view.findViewById(R.id.numeroID);
-        cerrarSesion = view.findViewById(R.id.next);
+        cerrarSesion = view.findViewById(R.id.cerrarSesion);
+        editarFoto = view.findViewById(R.id.editarFoto);
 
 
+        editarFoto.setOnClickListener(
+
+                (v) -> {
+
+                    fragmentFoto = new ChangePhotoFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, fragmentFoto);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+
+                }
+
+        );
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

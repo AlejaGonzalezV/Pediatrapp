@@ -48,6 +48,8 @@ public class Pediatra {
         this.chats_grupales = chats_grupales;
     }
 
+
+
     public Pediatra() {
     }
 

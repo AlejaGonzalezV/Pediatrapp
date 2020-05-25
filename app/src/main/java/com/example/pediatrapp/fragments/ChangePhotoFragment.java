@@ -7,7 +7,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +39,7 @@ public class ChangePhotoFragment extends Fragment {
     private ImageView photoIV, checkP;
     private Button profilePhoto, cambiar, back;
     private Uri uri;
+    private Fragment pediatraPerfil;
 
 
     @Override
@@ -83,8 +87,12 @@ public class ChangePhotoFragment extends Fragment {
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
                                         storage.getReference().child("Doctor").child(id+"*"+"Foto").putFile(uri);
                                         Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
-                                        Intent intent = new Intent(getContext(), ActivityMainPediatra.class);
-                                        startActivity(intent);
+                                        pediatraPerfil = new PediatraFragment_Perfil();
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                        fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
+                                        fragmentTransaction.addToBackStack(null);
+                                        fragmentTransaction.commit();
 
                                     }
 
@@ -140,9 +148,13 @@ public class ChangePhotoFragment extends Fragment {
 
                 (v) ->{
 
-
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+                    Log.e("<<<<<<<<<<<<", "BACK");
+                    pediatraPerfil = new PediatraFragment_Perfil();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
                 }
 
