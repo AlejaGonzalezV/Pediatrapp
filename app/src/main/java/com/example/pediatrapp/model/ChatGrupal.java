@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class ChatGrupal {
 
-    private LocalDate fecha_creacion;
+    private String fecha_creacion;
     private String id_padre;
     private HashMap<String, String> pediatras;
     private HashMap<String, Mensaje> mensajes;
     private String id;
 
-    public ChatGrupal(LocalDate fecha_creacion, String id_padre, HashMap<String, String> pediatras, HashMap<String, Mensaje> mensajes, String id) {
+    public ChatGrupal(String fecha_creacion, String id_padre, HashMap<String, String> pediatras, HashMap<String, Mensaje> mensajes, String id) {
         this.fecha_creacion = fecha_creacion;
         this.id_padre = id_padre;
         this.pediatras = pediatras;
@@ -31,11 +31,11 @@ public class ChatGrupal {
     public ChatGrupal() {
     }
 
-    public LocalDate getFecha_creacion() {
+    public String getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFecha_creacion(LocalDate fecha_creacion) {
+    public void setFecha_creacion(String fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
 
@@ -61,5 +61,10 @@ public class ChatGrupal {
 
     public void setMensajes(HashMap<String, Mensaje> mensajes) {
         this.mensajes = mensajes;
+    }
+
+    public void addPediatra(String key, String value){
+
+        pediatras.put(key, value);
     }
 }
