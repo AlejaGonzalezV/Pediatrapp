@@ -35,7 +35,7 @@ public class Pediatra {
         this.estado = estado;
     }
 
-    public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto, String estado) {
+    public Pediatra(String id, String nombre, String cedula, String correo, String contrasena, String idV, String firma, String foto, String estado, HashMap<String, String> chats_grupales) {
         this.id = id;
         this.nombre = nombre;
         this.cedula = cedula;
@@ -45,7 +45,10 @@ public class Pediatra {
         this.firma = firma;
         this.foto = foto;
         this.estado = estado;
+        this.chats_grupales = chats_grupales;
     }
+
+
 
     public Pediatra() {
     }

@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class CurvasCrecimientoActivity extends AppCompatActivity {
 
-    private ImageButton buscarBtn;
-    private EditText buscarET;
     private Button backBTN;
     private String nombreHijo;
     private RecyclerView recycler;
@@ -32,8 +30,6 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curvas_crecimiento);
 
-        buscarBtn = findViewById(R.id.searchHijoCurvasBT);
-        buscarET = findViewById(R.id.searchHijoCurvasET );
         backBTN = findViewById(R.id.backCurvas);
 
         nombreHijo = "";
@@ -44,7 +40,7 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
         adapter = new HijosCurvasAdapter(this,listaHijos );
         recycler.setAdapter(adapter);
 
-        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Jair"));
+        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Jair", "3"));
 
 
 
@@ -55,30 +51,7 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
                 }
 
         );
-        buscarBtn.setOnClickListener(
-                (v)->{
 
-
-                    Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_LONG).show();
-
-                }
-
-        );
     }
 
-    public ImageButton getBuscarBtn() {
-        return buscarBtn;
-    }
-
-    public void setBuscarBtn(ImageButton buscarBtn) {
-        this.buscarBtn = buscarBtn;
-    }
-
-    public EditText getBuscarET() {
-        return buscarET;
-    }
-
-    public void setBuscarET(EditText buscarET) {
-        this.buscarET = buscarET;
-    }
 }

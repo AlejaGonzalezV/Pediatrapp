@@ -52,7 +52,7 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
     @NonNull
     @Override
     public HijosVacunasAdapter.ViewHolderVacunasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hijos_vacunas, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_hijos, null, false);
 
         return new ViewHolderVacunasHijo(view);
     }
@@ -61,11 +61,15 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
     public void onBindViewHolder(@NonNull HijosVacunasAdapter.ViewHolderVacunasHijo holder, int position) {
 
         holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getNacimiento());
-        /*
-        Glide.with(context).load(
-             //   hijos.get(position).get
-        ).centerCrop().into(holder.imagenHijava); */
+        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getEdad());
+
+        if(hijos.get(position).getSexo().equals("Femenino")){
+
+            holder.imagenHijava.setImageResource(R.drawable.girl);
+        }else{
+
+            holder.imagenHijava.setImageResource(R.drawable.boy);
+        }
 
 
         holder.verVa.setOnClickListener(
@@ -105,10 +109,10 @@ public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapt
         public ViewHolderVacunasHijo(@NonNull View itemView) {
             super(itemView);
 
-            nombreHijoVa = itemView.findViewById(R.id.nombreHijoVa);
-            edadHijoVa = itemView.findViewById(R.id.edadHijoVa);
-             verVa = itemView.findViewById(R.id.verVa);
-            imagenHijava = itemView.findViewById(R.id.imageHijoVa);
+            nombreHijoVa = itemView.findViewById(R.id.nombreHijoTV);
+            edadHijoVa = itemView.findViewById(R.id.edadHijoTV);
+             verVa = itemView.findViewById(R.id.verHijoBTN);
+            imagenHijava = itemView.findViewById(R.id.fotoHijo);
         }
     }
 }

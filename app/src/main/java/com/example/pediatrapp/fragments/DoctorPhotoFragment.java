@@ -23,14 +23,11 @@ public class DoctorPhotoFragment extends Fragment {
     public static final int GALLERY_CALLBACK = 1;
     public static final int GALLERY_CALLBACK2 = 2;
 
-    private Utilities utilities;
     private Button back, next, firma, profilePhoto;
     private ImageView photoIV, checkP, checkF;
     private View view;
     private OnDataSubmitted listener;
     private Uri uriP, uriF;
-    private String data;
-    private Pediatra pediatra;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -40,7 +37,6 @@ public class DoctorPhotoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        utilities = new Utilities();
         view = inflater.inflate(R.layout.fragment_doctor_photo, container, false);
 
         checkP = view.findViewById(R.id.checkP);

@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
     <Button
-        android:id="@+id/verBt"
+        android:id="@+id/ver"
         android:layout_width="110dp"
         android:layout_height="46dp"
         android:layout_marginTop="16dp"

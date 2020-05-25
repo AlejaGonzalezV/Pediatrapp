@@ -1,15 +1,21 @@
 package com.example.pediatrapp.fragments;
 
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,14 +23,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.dialog.DatePickerFragment;
+import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.view.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,8 +40,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+//fragment_new_child
 
-public class ChildRegisterFragment extends Fragment implements View.OnClickListener {
+public class NewChildFragment extends Fragment implements View.OnClickListener{
 
     private ArrayAdapter<String> doctorsAdapter;
     private OnDataSubmitted listener;
@@ -57,7 +63,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_child_register,container,false);
+        view = inflater.inflate(R.layout.fragment_new_child,container,false);
         name = view.findViewById(R.id.name);
         id = view.findViewById(R.id.id);
         date = view.findViewById(R.id.date);
@@ -88,9 +94,18 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
                     boolean gen = gender.getSelectedItem().toString().equals("Género");
 
 
-                    if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
+                    if(nombre == false && ident == false && fecha == false && doc == false && gen == false){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1), edad);
+
+                        String idPadre = FirebaseAuth.getInstance().getUid();
+                        String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").push().getKey();
+                        Hijo hijo = new Hijo(idH, id.getText().toString(), fechaNac, gender.getSelectedItem().toString(), name.getText().toString(), edad);
+                        FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").child(idH).setValue(hijo);
+                        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ids.get(doctor.getSelectedItemPosition()-1)).child("Padres_asignados").child(idPadre).setValue(idPadre);
+                        Toast.makeText(getContext(), "El nuevo hijo se ha añadido con éxito", Toast.LENGTH_SHORT).show();;
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+
 
                     }else {
 
@@ -223,32 +238,4 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
         edad = String.valueOf(periodo.getYears());
 
     }
-
-    /*
-    public void configureSpinner(){
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, names);
-        doctor.setAdapter(adapter);
-        doctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                selected = doctor.getSelectedItem().toString();
-                indice = doctor.getSelectedItemPosition();
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
-
-     */
-
-
 }

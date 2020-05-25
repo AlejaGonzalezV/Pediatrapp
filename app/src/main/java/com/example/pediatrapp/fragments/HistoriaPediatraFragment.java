@@ -46,7 +46,7 @@ public class HistoriaPediatraFragment extends Fragment {
         back = view.findViewById(R.id.back);
         addRegistro = view.findViewById(R.id.addRegistro);
         lista = view.findViewById(R.id.lista);
-        adapter = new HistoriaAdapter();
+        adapter = new HistoriaAdapter(this);
         lista.setAdapter(adapter);
 
         return view;

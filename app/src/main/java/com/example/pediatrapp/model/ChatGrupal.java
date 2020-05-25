@@ -10,7 +10,6 @@ public class ChatGrupal {
     public static final int DURACION = 2;
     public static final int ALARMA = 1;
 
-
     private long fecha_creacion;
     private String id_padre;
     private HashMap<String, String> pediatras;
@@ -29,6 +28,7 @@ public class ChatGrupal {
     }
 
     public ChatGrupal(long fecha_creacion, String id_padre, HashMap<String, String> pediatras, HashMap<String, Mensaje> mensajes, String nombre_padre, String nombre, String id) {
+
         this.fecha_creacion = fecha_creacion;
         this.id_padre = id_padre;
         this.pediatras = pediatras;
@@ -95,5 +95,10 @@ public class ChatGrupal {
 
     public void setMensajes(HashMap<String, Mensaje> mensajes) {
         this.mensajes = mensajes;
+    }
+
+    public void addPediatra(String key, String value){
+
+        pediatras.put(key, value);
     }
 }

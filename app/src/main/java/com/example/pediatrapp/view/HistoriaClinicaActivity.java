@@ -31,6 +31,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             consultaRegistroFragment, consultaFormulaFragment, listaHijosFragment;
 
     private String hijoId;
+    private String diagnostico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +147,15 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             }
 
 
+        } else if(fragment.equals(historiaPadreFragment)){
+
+            if(type.equals("next")){
+
+                diagnostico = args[0];
+                showFragment(consultaRegistroFragment);
+            }
+
+
         }
 
 
@@ -153,5 +163,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
     public String getHijoId() {
         return hijoId;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
     }
 }

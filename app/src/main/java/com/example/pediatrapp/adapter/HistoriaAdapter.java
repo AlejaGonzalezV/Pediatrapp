@@ -8,20 +8,26 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.fragments.HistoriaPadreFragment;
 import com.example.pediatrapp.fragments.HistoriaPediatraFragment;
 import com.example.pediatrapp.model.Diagnostico;
-import com.example.pediatrapp.view.HistoriaClinicaActivity;
 
 import java.util.ArrayList;
 
 public class HistoriaAdapter extends BaseAdapter {
 
     private ArrayList<Diagnostico> diagnosticos;
-    private HistoriaPediatraFragment historiaFrag;
+    private HistoriaPediatraFragment historiaPed;
+    private HistoriaPadreFragment historiaPadre;
 
-    public HistoriaAdapter() {
+    public HistoriaAdapter(HistoriaPediatraFragment historiaPed) {
         diagnosticos = new ArrayList<>();
+        this.historiaPed = historiaPed;
+    }
 
+    public HistoriaAdapter(HistoriaPadreFragment historiaPadre) {
+        diagnosticos = new ArrayList<>();
+        this.historiaPadre = historiaPadre;
     }
 
     @Override
@@ -49,6 +55,34 @@ public class HistoriaAdapter extends BaseAdapter {
         titulo.setText(diagnosticos.get(position).getTitulo());
         fecha.setText(diagnosticos.get(position).getFecha());
 
+        Button ver = row.findViewById(R.id.ver);
+
+
+        if(historiaPed != null){
+
+            ver.setOnClickListener(
+
+                    (v) -> {
+
+
+
+                    }
+
+            );
+
+        }else if(historiaPadre != null){
+
+            ver.setOnClickListener(
+
+                    (v) -> {
+
+                        historiaPadre.recibo(position);
+
+                    }
+
+            );
+
+        }
 
 
         return row;
