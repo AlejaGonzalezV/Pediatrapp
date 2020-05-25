@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,19 +16,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.view.ActivityMainPediatra;
+import com.example.pediatrapp.view.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PediatraFragment_Perfil extends Fragment {
 
-    private ImageView pediatra_foto;
+    private CircleImageView pediatra_foto;
     private TextView nombre_pediatra;
     private TextView cedula_pediatra;
     private TextView email_pediatra;
@@ -51,6 +57,21 @@ public class PediatraFragment_Perfil extends Fragment {
         numeroUnico_pediatra = view.findViewById(R.id.numeroID);
         cerrarSesion = view.findViewById(R.id.cerrarSesion);
         editarFoto = view.findViewById(R.id.editarFoto);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        cerrarSesion.setOnClickListener(
+
+                (v)-> {
+
+                    FirebaseAuth.getInstance().signOut();
+                    Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+
+                }
+
+        );
 
 
         editarFoto.setOnClickListener(
@@ -85,6 +106,11 @@ public class PediatraFragment_Perfil extends Fragment {
                         email_pediatra.setText(pediatra.getCorreo());
                         numeroUnico_pediatra.setText(pediatra.getIdV());
                         nombre_pediatra.setText(pediatra.getNombre());
+                        storage.getReference().child("Doctor").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                uri -> {
+                                    Glide.with(getContext()).load(uri).centerCrop().into(pediatra_foto);
+                                }
+                        );
 
                     }
 

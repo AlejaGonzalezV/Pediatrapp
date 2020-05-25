@@ -15,8 +15,11 @@ import com.google.firebase.database.ValueEventListener;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class InitialActivity extends AppCompatActivity {
+
+    private final int DURACION_SPLASH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +30,12 @@ public class InitialActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
 
-
+        /*
         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
         startActivity(intent);
+         */
 
-        /*
+
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
 
             String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -45,8 +49,14 @@ public class InitialActivity extends AppCompatActivity {
 
                         if(child.getKey().equals(id)){
 
-                            Intent intent = new Intent(getApplicationContext(), ActivityMainPediatra.class);
-                            startActivity(intent);
+
+                            new Handler().postDelayed(() -> {
+                                Intent intent = new Intent(getApplicationContext(), ActivityMainPediatra.class);
+                                startActivity(intent);
+                                finish();
+                            }, DURACION_SPLASH);
+
+
 
                         }
 
@@ -69,8 +79,14 @@ public class InitialActivity extends AppCompatActivity {
 
                         if(child.getKey().equals(id)){
 
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
+
+                            new Handler().postDelayed(() -> {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }, DURACION_SPLASH);
+
+
 
                         }
 
@@ -86,12 +102,17 @@ public class InitialActivity extends AppCompatActivity {
 
         }else {
 
-            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-            startActivity(intent);
+
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                startActivity(intent);
+                finish();
+            }, DURACION_SPLASH);
+
 
         }
 
-         */
+
 
     }
 }
