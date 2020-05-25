@@ -97,7 +97,6 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     public void actualizarVacunas(){
 
-       /// listaVacunas.add(new Vacuna("res","12","Asmet","Jair","AlgoSerio",null));
 
         if(listaVacunas.size() != 0) {
 
