@@ -10,6 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -54,6 +56,7 @@ public class NewChildFragment extends Fragment implements View.OnClickListener{
     private ArrayList<String> names;
     private String fechaNac;
     private String edad;
+    private Fragment padrePerfil;
 
     public void setListener(OnDataSubmitted listener){
 
@@ -103,8 +106,12 @@ public class NewChildFragment extends Fragment implements View.OnClickListener{
                         FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").child(idH).setValue(hijo);
                         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ids.get(doctor.getSelectedItemPosition()-1)).child("Padres_asignados").child(idPadre).setValue(idPadre);
                         Toast.makeText(getContext(), "El nuevo hijo se ha añadido con éxito", Toast.LENGTH_SHORT).show();;
-                        Intent intent = new Intent(getContext(), MainActivity.class);
-                        startActivity(intent);
+                        padrePerfil = new ParentFragment_Perfil();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
 
 
                     }else {
@@ -138,11 +145,12 @@ public class NewChildFragment extends Fragment implements View.OnClickListener{
 
                 (v) -> {
 
-                    if(listener != null){
-
-                        listener.onData(this, "back", null);
-
-                    }
+                    padrePerfil = new ParentFragment_Perfil();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
                 }
 

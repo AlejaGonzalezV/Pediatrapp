@@ -39,7 +39,7 @@ public class ChangePhotoFragment extends Fragment {
     private ImageView photoIV, checkP;
     private Button profilePhoto, cambiar, back;
     private Uri uri;
-    private Fragment pediatraPerfil;
+    private Fragment pediatraPerfil, padrePerfil;
 
 
     @Override
@@ -118,8 +118,12 @@ public class ChangePhotoFragment extends Fragment {
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
                                         storage.getReference().child("Padre").child(id).putFile(uri);
                                         Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
-                                        Intent intent = new Intent(getContext(), MainActivity.class);
-                                        startActivity(intent);
+                                        padrePerfil = new ParentFragment_Perfil();
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                        fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
+                                        fragmentTransaction.addToBackStack(null);
+                                        fragmentTransaction.commit();
 
                                     }
 
@@ -148,13 +152,67 @@ public class ChangePhotoFragment extends Fragment {
 
                 (v) ->{
 
-                    Log.e("<<<<<<<<<<<<", "BACK");
-                    pediatraPerfil = new PediatraFragment_Perfil();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+
+                    String id = FirebaseAuth.getInstance().getUid();
+
+                    Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                if(child.getKey().equals(id)){
+
+                                    pediatraPerfil = new PediatraFragment_Perfil();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    Query query2 = FirebaseDatabase.getInstance().getReference().child("Padres");
+                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                if(child.getKey().equals(id)){
+
+                                    padrePerfil = new ParentFragment_Perfil();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
 
                 }
 
