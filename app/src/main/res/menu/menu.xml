@@ -3,14 +3,20 @@
 
     <item android:id="@+id/padres"
         android:title="Padres"
-        android:icon="@drawable/ic_people_black_24dp"/>
+        android:icon="@drawable/ic_wc_black_24dp"/>
 
     <item android:id="@+id/chat"
         android:title="Chat"
         android:icon="@drawable/ic_chat_black_24dp"/>
 
+    <item android:id="@+id/chatG"
+        android:title="Grupos"
+        android:icon="@drawable/ic_people_black_24dp"/>
+
     <item android:id="@+id/perfil"
         android:title="Perfil"
         android:icon="@drawable/ic_account_circle_black_24dp"/>
+
+
 
 </menu>

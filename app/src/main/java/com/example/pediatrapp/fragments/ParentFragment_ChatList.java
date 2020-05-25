@@ -11,14 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.adapter.Adapter_ChatG;
 import com.example.pediatrapp.adapter.PadreAdapter_ChatList;
+import com.example.pediatrapp.model.ChatGrupal;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.view.MessageActivity;
@@ -31,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class ParentFragment_ChatList extends Fragment {
 
@@ -38,8 +42,14 @@ public class ParentFragment_ChatList extends Fragment {
     private ImageButton SearchChatPaBT;
     private ListView padre_ChatList;
     private Button FiltroChatPaBT;
+    private Button chatGrupalBT;
     private ArrayList<Pediatra> pediatras;
     private PadreAdapter_ChatList adapter;
+    private Adapter_ChatG adapterG;
+    private ListView padre_chatGrupal;
+    private String chatGrup;
+    private  HashMap<String, String> pedia;
+
 
     public ParentFragment_ChatList() {
     }
@@ -54,11 +64,18 @@ public class ParentFragment_ChatList extends Fragment {
         SearchChatPaBT = view.findViewById(R.id.SearchChatPaBT);
         padre_ChatList = view.findViewById(R.id.padre_ChatList);
         FiltroChatPaBT = view.findViewById(R.id.FiltroChatPaBT);
+        padre_chatGrupal = view.findViewById(R.id.padre_chatGrupal);
+        chatGrupalBT = view.findViewById(R.id.chatGrupalBT);
 
         pediatras = new ArrayList<>();
         adapter = new PadreAdapter_ChatList();
         padre_ChatList.setAdapter(adapter);
 
+        adapterG = new Adapter_ChatG();
+        padre_chatGrupal.setAdapter(adapterG);
+
+        chatGrup = "";
+        readChatGrupal();
         readPediatras();
 
 
@@ -75,6 +92,25 @@ public class ParentFragment_ChatList extends Fragment {
                             intent.putExtra("type", "pediatra");
                             Log.e(">>>", "inicioIntent");
                             getActivity().startActivity(intent);
+                        }
+                ).start();
+
+            }
+        });
+
+        padre_chatGrupal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                ChatGrupal cg = (ChatGrupal) adapterG.getItem(i);
+                new Thread(
+                        () ->{
+
+//                            Intent intent = new Intent(getActivity(), MessageActivity.class);
+//                            intent.putExtra("userid", p.getId());
+//                            intent.putExtra("type", "pediatra");
+                            Log.e(">>>", "inicioIntent");
+//                            getActivity().startActivity(intent);
                         }
                 ).start();
 
@@ -98,7 +134,161 @@ public class ParentFragment_ChatList extends Fragment {
                     SearchChatPaET.setText("");
                 }
         );
+
+
+        chatGrupalBT.setOnClickListener(
+                (v) -> {
+
+                    if(adapterG.getCount() >0){
+
+                        Toast.makeText(getActivity().getApplicationContext(), "Ya existe un chat temporal activo", Toast.LENGTH_SHORT).show();
+                    }else{
+
+                        crearChatGrupal();
+
+                    }
+
+                }
+        );
         return view;
+    }
+
+    private void crearChatGrupal() {
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e(">>>", firebaseUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid());
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Padre p = dataSnapshot.getValue(Padre.class);
+
+                initializeChat(p);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void initializeChat(Padre p) {
+
+        pedia = new HashMap<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+
+                    pedia.put(child.getKey(), child.getKey());
+                }
+
+                String idc = FirebaseDatabase.getInstance().getReference().child("Chat_grupal").push().getKey();
+
+                ChatGrupal cg = new ChatGrupal(System.currentTimeMillis(),
+                    p.getId(),
+                    pedia,
+                    p.getNombre(), "Grupo: " + p.getNombre(),
+                    idc);
+
+                FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(idc).setValue(cg);
+                p.setChat_grupal_id(idc);
+                FirebaseDatabase.getInstance().getReference().child("Padres").child(p.getId()).setValue(p);
+
+                for(String pe : pedia.values()){
+
+                    FirebaseDatabase.getInstance().getReference().child("Pediatras").child(pe).child("chats_grupales").child(idc).setValue(idc);
+                }
+
+                adapterG.addChatG(cg);
+                padre_chatGrupal.setVisibility(View.VISIBLE);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void readChatGrupal() {
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e(">>>", firebaseUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid());
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Padre p = dataSnapshot.getValue(Padre.class);
+                if(p.getChat_grupal_id() != null){
+                    chatGrup = p.getChat_grupal_id();
+                    loadChatG(chatGrup);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void loadChatG(String chatGrup) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(chatGrup);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ChatGrupal c = dataSnapshot.getValue(ChatGrupal.class);
+                if(c != null){
+             //       chatGrup = p.getChat_grupal_id();
+                    Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) );
+
+                    if(getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) >= ChatGrupal.DURACION){
+                        Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) );
+                        padre_chatGrupal.setVisibility(View.GONE);
+                        borrarChatG();
+                    }else{
+                        adapterG.addChatG(c);
+                        padre_chatGrupal.setVisibility(View.VISIBLE);
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
+    private void borrarChatG() {
+
+        //IMPLEMENTAR
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid()).child("chat_grupal_id").removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(chatGrup).removeValue();
+        adapterG.remove();
+        Log.e(">>>", "CHAT GRUPAL ELIMINADO "+ adapterG.getCount());
     }
 
     public ArrayList<Pediatra> buscarChat(String nombre){
@@ -201,6 +391,35 @@ public class ParentFragment_ChatList extends Fragment {
         }
 
 
+    }
+
+
+    public long getDiferenciaDias(Date fechaInicial, Date fechaFinal){
+
+        long diferencia = fechaFinal.getTime() - fechaInicial.getTime();
+
+        Log.e(">>>>>", "fechaInicial : " + fechaInicial);
+        Log.e(">>>>>", "fechaFinal : " + fechaFinal);
+
+        long segsMilli = 1000;
+        long minsMilli = segsMilli * 60;
+        long horasMilli = minsMilli * 60;
+        long diasMilli = horasMilli * 24;
+
+        long diasTranscurridos = diferencia / diasMilli;
+        diferencia = diferencia % diasMilli;
+
+//        long horasTranscurridos = diferencia / horasMilli;
+//        diferencia = diferencia % horasMilli;
+//
+//        long minutosTranscurridos = diferencia / minsMilli;
+//        diferencia = diferencia % minsMilli;
+//
+//        long segsTranscurridos = diferencia / segsMilli;
+//        return "diasTranscurridos: " + diasTranscurridos + " , horasTranscurridos: " + horasTranscurridos +
+//                " , minutosTranscurridos: " + minutosTranscurridos + " , segsTranscurridos: " + segsTranscurridos;
+
+        return diasTranscurridos;
     }
 
 }

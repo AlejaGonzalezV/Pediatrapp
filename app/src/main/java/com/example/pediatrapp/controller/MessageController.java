@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -40,8 +41,13 @@ import com.google.gson.Gson;
 
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -312,7 +318,7 @@ public class MessageController implements View.OnClickListener{
 
     }
 
-    public void sendMessage(String body, String roomChat, String idUser, long time){
+    public void sendMessage(String body, String roomChat, String idUser, String time){
         //video 11.5 min 15:18 ejemplo
         //Generar ID
         //MIRAR SESION QUE NO SE CIERRA
@@ -367,7 +373,16 @@ public class MessageController implements View.OnClickListener{
             case R.id.btn_send:
                 String body = activity.getText_send().getText().toString();
                 if(!body.equals("")){
-                    sendMessage(body, chatroom, fuser.getUid(), Calendar.getInstance().getTime().getTime());
+
+                    Date da = new Date(System.currentTimeMillis());
+
+                    DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+
+                    String[] split = hourFormat.format(da).split(":");
+
+                    String data = split[0]+":"+split[1];
+
+                    sendMessage(body, chatroom, fuser.getUid(), data);
                     activity.getText_send().setText("");
                 }else {
                     Toast.makeText(activity.getApplicationContext(), "Escribe un mensaje", Toast.LENGTH_SHORT).show();
@@ -427,4 +442,5 @@ public class MessageController implements View.OnClickListener{
             activity.showImage();
         }
     }
+
 }

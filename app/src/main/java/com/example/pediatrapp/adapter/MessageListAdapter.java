@@ -2,6 +2,7 @@ package com.example.pediatrapp.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,13 @@ import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MessageListAdapter extends BaseAdapter {
 
@@ -55,7 +62,10 @@ public class MessageListAdapter extends BaseAdapter {
         }
 
         TextView message_row = root.findViewById(R.id.message_row);
+        TextView timeTV = root.findViewById(R.id.timeTV);
         message_row.setText(messages.get(position).getBody());
+
+        timeTV.setText(messages.get(position).getTimestamp());
 
         if(messages.get(position).getType() == Mensaje.TYPE_IMAGE){
             ImageView imageRow = root.findViewById(R.id.imageRow);
@@ -117,4 +127,7 @@ public class MessageListAdapter extends BaseAdapter {
         this.userID = userID;
         notifyDataSetChanged();
     }
+
+
+
 }

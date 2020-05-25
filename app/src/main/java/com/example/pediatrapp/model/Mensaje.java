@@ -12,9 +12,9 @@ public class Mensaje {
     private String body;
     private String nombre_usuario;
     private String user_id;
-    private long timestamp;
+    private String  timestamp;
 
-    public Mensaje(int type, String id, String body, String user_id, long timestamp) {
+    public Mensaje(int type, String id, String body, String user_id, String timestamp) {
         this.type = type;
         this.id = id;
         this.body = body;
@@ -22,7 +22,7 @@ public class Mensaje {
         this.timestamp = timestamp;
     }
 
-    public Mensaje(int type, String id, String body, String nombre_usuario, String user_id, long timestamp) {
+    public Mensaje(int type, String id, String body, String nombre_usuario, String user_id, String timestamp) {
         this.type = type;
         this.id = id;
         this.body = body;
@@ -66,11 +66,11 @@ public class Mensaje {
         this.user_id = user_id;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

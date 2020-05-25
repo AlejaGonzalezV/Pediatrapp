@@ -27,12 +27,26 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/shapeleft"
         android:padding="15dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies imperdiet diam, sed ornare turpis sollicitudin nec."
+        android:text="Lorem ipsum"
         android:textColor="@android:color/white"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageRow"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/timeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_row"
+        android:layout_marginStart="8dp"
+        android:text="4:00pm"
+        android:textColor="#000000"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_row" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
