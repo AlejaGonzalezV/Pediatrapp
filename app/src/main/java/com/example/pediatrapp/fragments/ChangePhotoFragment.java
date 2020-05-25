@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.view.ActivityMainPediatra;
 import com.example.pediatrapp.view.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -81,6 +82,9 @@ public class ChangePhotoFragment extends Fragment {
 
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
                                         storage.getReference().child("Doctor").child(id+"*"+"Foto").putFile(uri);
+                                        Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
+                                        Intent intent = new Intent(getContext(), ActivityMainPediatra.class);
+                                        startActivity(intent);
 
                                     }
 
@@ -105,6 +109,9 @@ public class ChangePhotoFragment extends Fragment {
 
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
                                         storage.getReference().child("Padre").child(id).putFile(uri);
+                                        Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
+                                        Intent intent = new Intent(getContext(), MainActivity.class);
+                                        startActivity(intent);
 
                                     }
 

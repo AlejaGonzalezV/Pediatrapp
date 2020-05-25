@@ -3,6 +3,7 @@ package com.example.pediatrapp.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import com.example.pediatrapp.adapter.OnDataSubmitted;
 import com.example.pediatrapp.dialog.DatePickerFragment;
 import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.view.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -100,7 +102,9 @@ public class NewChildFragment extends Fragment implements View.OnClickListener{
                         Hijo hijo = new Hijo(idH, id.getText().toString(), fechaNac, gender.getSelectedItem().toString(), name.getText().toString(), edad);
                         FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").child(idH).setValue(hijo);
                         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ids.get(doctor.getSelectedItemPosition()-1)).child("Padres_asignados").child(idPadre).setValue(idPadre);
-
+                        Toast.makeText(getContext(), "El nuevo hijo se ha añadido con éxito", Toast.LENGTH_SHORT).show();;
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
 
 
                     }else {
