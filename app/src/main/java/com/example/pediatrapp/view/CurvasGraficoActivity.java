@@ -38,7 +38,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         agregarCurvaBtn = findViewById(R.id.agregarCurva);
         listaCurvas = new ArrayList<>();
 
-        listaCurvas.add(new DatosCurva("jejej", 12, 13, 14));
+        listaCurvas.add(new DatosCurva("24/05/2020", 12, 13, 14, 12));
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
         if(savedInstanceState == null){

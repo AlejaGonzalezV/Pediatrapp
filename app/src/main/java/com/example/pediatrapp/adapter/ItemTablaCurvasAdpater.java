@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,22 @@ public class ItemTablaCurvasAdpater extends RecyclerView.Adapter<ItemTablaCurvas
     @Override
     public void onBindViewHolder(@NonNull ItemTablaCurvasAdpater.ViewHolderTablaCurva holder, int position) {
 
+        holder.talla.setText(""+listaCurvas.get(position).getTalla());
+        holder.peso.setText(""+listaCurvas.get(position).getPeso());
+        holder.cabeza.setText(""+listaCurvas.get(position).getMedida_cabeza());
+        holder.edad.setText(""+listaCurvas.get(position).getEdad());
+        holder.numeral.setText("(" + (position+1) +")");
+
+        holder.verCurva.setOnClickListener(
+
+                (v)->{
+
+
+                }
+
+        );
+
+
     }
 
     @Override
@@ -45,11 +63,26 @@ public class ItemTablaCurvasAdpater extends RecyclerView.Adapter<ItemTablaCurvas
     }
 
     public class ViewHolderTablaCurva extends RecyclerView.ViewHolder {
+
+
+        TextView numeral;
+        TextView cabeza;
+        TextView edad;
+        TextView talla;
+        TextView peso;
+        Button verCurva;
+
         public ViewHolderTablaCurva(@NonNull View itemView) {
             super(itemView);
+
+            talla = itemView.findViewById(R.id.fechaTablaTV);
+            cabeza = itemView.findViewById(R.id.cabezTablaTv);
+            edad =  itemView.findViewById(R.id.edadTablaTV);
+            peso = itemView.findViewById(R.id.pesoTablaTv);
+            verCurva = itemView.findViewById(R.id.verListaCur);
+            numeral =  itemView.findViewById(R.id.numeralTv);
+
         }
     }
 
-
-    //convertView = LayoutInflater.from(context).inflate(R.layout.item_tabla_curvas, null, false);
 }

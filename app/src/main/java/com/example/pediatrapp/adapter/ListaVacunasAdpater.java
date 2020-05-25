@@ -1,12 +1,11 @@
 package com.example.pediatrapp.adapter;
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Vacuna;
-import com.example.pediatrapp.view.ListaVacunasActivity;
 import com.example.pediatrapp.view.VerVacunaActivity;
 
 import java.util.List;

@@ -51,7 +51,7 @@ public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter
     @NonNull
     @Override
     public HijosCurvasAdapter.ViewHolderCurvasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hijos_curvas, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_hijos, null, false);
 
         return new HijosCurvasAdapter.ViewHolderCurvasHijo(view);
     }
@@ -60,11 +60,18 @@ public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter
     public void onBindViewHolder(@NonNull HijosCurvasAdapter.ViewHolderCurvasHijo holder, int position) {
 
         holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getNacimiento());
-        /*
-        Glide.with(context).load(
+        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getEdad());
+
+        if(hijos.get(position).getSexo().equals("Femenino")){
+
+            holder.imagenHijava.setImageResource(R.drawable.girl);
+        }else{
+
+            holder.imagenHijava.setImageResource(R.drawable.boy);
+        }
+       // Glide.with(context).load(
              //   hijos.get(position).get
-        ).centerCrop().into(holder.imagenHijava); */
+      //  ).centerCrop().into(holder.imagenHijava);
 
         holder.verVa.setOnClickListener(
 
@@ -98,10 +105,10 @@ public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter
         public ViewHolderCurvasHijo(@NonNull View itemView) {
             super(itemView);
 
-            nombreHijoVa = itemView.findViewById(R.id.nombreHijoCurvas);
-            edadHijoVa = itemView.findViewById(R.id.edadHijoCurvas);
-            verVa = itemView.findViewById(R.id.verCurvas);
-            imagenHijava = itemView.findViewById(R.id.imageHijoCurvas);
+            nombreHijoVa = itemView.findViewById(R.id.nombreHijoTV);
+            edadHijoVa = itemView.findViewById(R.id.edadHijoTV);
+            verVa = itemView.findViewById(R.id.verHijoBTN);
+            imagenHijava = itemView.findViewById(R.id.fotoHijo);
         }
     }
 }
