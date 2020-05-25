@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.fragments.PediatraFragment_ChatG;
 import com.example.pediatrapp.fragments.PediatraFragment_ChatList;
 import com.example.pediatrapp.fragments.PediatraFragment_PadreLista;
 import com.example.pediatrapp.fragments.PediatraFragment_Perfil;
@@ -43,6 +44,9 @@ public class ActivityMainPediatra extends AppCompatActivity {
                         break;
                     case R.id.perfil:
                         fragment = new PediatraFragment_Perfil();
+                        break;
+                    case R.id.chatG:
+                        fragment = new PediatraFragment_ChatG();
                         break;
 
                 }

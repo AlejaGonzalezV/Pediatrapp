@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -40,8 +41,12 @@ import com.google.gson.Gson;
 
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -369,23 +374,13 @@ public class MessageController implements View.OnClickListener{
                 String body = activity.getText_send().getText().toString();
                 if(!body.equals("")){
 
-                    int second, minute, hour, z;
-                    GregorianCalendar date = new GregorianCalendar();
+                    Date da = new Date(System.currentTimeMillis());
 
-                    minute = date.get(Calendar.MINUTE);
-                    hour = date.get(Calendar.HOUR);
-                    z = date.get(Calendar.AM_PM);
-                    String pm_am = "";
-                    if(z == Calendar.AM){
-                        pm_am = "a.m.";
-                    }else{
-                        pm_am = "p.m.";
-                    }
-                    String   data  =(hour+ ":"+ +minute+" "+pm_am);
-//                    Log.e(">>>>>>>>", Calendar.AM+"");
-//                    Log.e(">>>>>>>>", Calendar.PM+"");
-//                    Log.e(">>>>", z+"");
-//                    Log.e(">>>", data);
+                    DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+
+                    String[] split = hourFormat.format(da).split(":");
+
+                    String data = split[0]+":"+split[1];
 
                     sendMessage(body, chatroom, fuser.getUid(), data);
                     activity.getText_send().setText("");
@@ -447,4 +442,5 @@ public class MessageController implements View.OnClickListener{
             activity.showImage();
         }
     }
+
 }
