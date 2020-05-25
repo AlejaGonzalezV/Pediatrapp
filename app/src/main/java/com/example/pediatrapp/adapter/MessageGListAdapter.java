@@ -2,6 +2,7 @@ package com.example.pediatrapp.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class MessageGListAdapter extends BaseAdapter {
         }else{
             root = inflater.inflate(R.layout.message_item_othersg, null);
             TextView nombre_send = root.findViewById(R.id.nombre_send);
+        //    Log.e(">>>Nombre otri", messages.get(position).getNombre_usuario());
             nombre_send.setText(messages.get(position).getNombre_usuario());
         }
 

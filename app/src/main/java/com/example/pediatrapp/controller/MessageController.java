@@ -148,7 +148,6 @@ public class MessageController implements View.OnClickListener{
                                 FirebaseMessaging.getInstance().unsubscribeFromTopic(chatroom);
                                 Log.e(">>>", "no suscrito");
 
-
                                 loadMessages();
                             }
                         }

@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.gson.Gson;
@@ -58,7 +59,7 @@ public class MessageGController implements View.OnClickListener{
     public MessageGController(MessageGroupActivity activity) {
         this.activity = activity;
 
-
+        Log.e(">>>>", "CONTROLLERGGGG");
         activity.getBtn_send().setOnClickListener(this);
         activity.getBtn_media().setOnClickListener(this);
         if(activity.getType().equals("pediatra")){
@@ -66,6 +67,7 @@ public class MessageGController implements View.OnClickListener{
         }
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+        loadCurrentUser();
         adapter = new MessageGListAdapter();
         activity.getMessage_list().setAdapter(adapter);
         adapter.setUserID(fuser.getUid());
@@ -74,6 +76,39 @@ public class MessageGController implements View.OnClickListener{
         activity.getProfile_image().setImageResource(R.drawable.chatgrupal);
 
         loadMessages();
+
+    }
+
+    private void loadCurrentUser() {
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference  reference;
+        Log.e(">>>", firebaseUser.getUid());
+        if(activity.getType().equals("pediatra")){
+            reference = FirebaseDatabase.getInstance().getReference().child("Pediatras").child(firebaseUser.getUid());
+        }else{
+            reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid());
+        }
+
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(activity.getType().equals("pediatra")){
+
+                    CurrentPed = dataSnapshot.getValue(Pediatra.class);
+
+                }else{
+                    CurrentPad = dataSnapshot.getValue(Padre.class);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -121,9 +156,16 @@ public class MessageGController implements View.OnClickListener{
 
         String idMensaje = FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(roomChat).child("mensajes").push().getKey();
 
-        Mensaje message = new Mensaje(
-                tempUri == null ? Mensaje.TYPE_TEXT : Mensaje.TYPE_IMAGE,
-                idMensaje, body, idUser, time);
+        String nombre = "";
+        if(activity.getType().equals("pediatra")){
+            nombre = CurrentPed.getNombre();
+        }else{
+            nombre = CurrentPad.getNombre();
+        }
+
+
+        Mensaje message = new Mensaje(tempUri == null ? Mensaje.TYPE_TEXT : Mensaje.TYPE_IMAGE,
+                idMensaje, body,nombre, idUser, time);
 
 
         FCMMessage fcmMessage = new FCMMessage();
