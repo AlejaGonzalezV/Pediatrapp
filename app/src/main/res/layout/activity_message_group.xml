@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.pediatrapp.view.MessageActivity"
+    android:background="@drawable/fondochat1">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/profile_image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="20sp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#fff"
+                android:layout_marginStart="25dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ListView
+        android:id="@+id/message_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/separacion"
+        android:layout_below="@+id/bar_layout"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/separacion"
+        android:layout_above="@+id/send"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp"
+        android:background="#BAB5B5" />
+
+    <RelativeLayout
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp">
+
+
+        <EditText
+            android:id="@+id/text_send"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/messageIV"
+
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="78dp"
+            android:layout_marginRight="17dp"
+            android:layout_toStartOf="@+id/btn_send"
+            android:layout_toLeftOf="@id/btn_media"
+            android:background="@android:color/transparent"
+            android:hint="Escribe un mensaje"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_send_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/btn_media"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"
+            android:layout_toLeftOf="@id/btn_send"
+            android:background="@drawable/ic_add_a_photo_black_24dp" />
+
+        <ImageView
+            android:id="@+id/messageIV"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toStartOf="@+id/btn_media"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/text_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars[3]" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

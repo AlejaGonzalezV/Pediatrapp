@@ -95,7 +95,7 @@ public class Adapter_ChatG extends BaseAdapter {
         }
 
         //INSERTAR IMAGEN
-        //imagePediatraCIV.setImageResource(R.drawable.IMAGEN);
+        imagePediatraCIV.setImageResource(R.drawable.chatgrupal);
 
         return root ;
     }

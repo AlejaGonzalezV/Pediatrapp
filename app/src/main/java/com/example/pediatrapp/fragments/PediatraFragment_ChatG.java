@@ -22,6 +22,7 @@ import com.example.pediatrapp.adapter.Adapter_ChatG;
 import com.example.pediatrapp.adapter.PediatraAdapter_ChatList;
 import com.example.pediatrapp.model.ChatGrupal;
 import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.view.MessageGroupActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,11 +70,13 @@ public class PediatraFragment_ChatG extends Fragment {
                 new Thread(
                         () ->{
 
-//                            Intent intent = new Intent(getActivity(), MessageActivity.class);
-//                            intent.putExtra("userid", p.getId());
-//                            intent.putExtra("", "padre");
-                            Log.e(">>>", "inictypeioIntent");
-//                            getActivity().startActivity(intent);
+                            Intent intent = new Intent(getActivity(), MessageGroupActivity.class);
+                            intent.putExtra("chat", cg.getId());
+                            intent.putExtra("idpadre", cg.getId_padre());
+                            intent.putExtra("nombre_chat", cg.getNombre());
+                            intent.putExtra("type", "pediatra");
+                            Log.e(">>>", "inicioIntent");
+                            getActivity().startActivity(intent);
                         }
                 ).start();
 

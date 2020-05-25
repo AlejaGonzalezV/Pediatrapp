@@ -397,7 +397,6 @@ public class MessageController implements View.OnClickListener{
                 if(activity.getType().equals("padre")){
                     Intent intent = new Intent(activity, ParentPerfil.class);
                     intent.putExtra("userid", activity.getUserid());
-////                    intent.putExtra("type", "padre");
                     Log.e(">>>", "inicioIntent");
                     activity.startActivity(intent);
 

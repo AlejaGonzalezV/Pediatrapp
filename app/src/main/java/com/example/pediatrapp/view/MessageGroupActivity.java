@@ -1,6 +1,5 @@
 package com.example.pediatrapp.view;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,45 +14,37 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
-import com.example.pediatrapp.controller.MessageController;
-import com.example.pediatrapp.model.Padre;
-import com.example.pediatrapp.model.Pediatra;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
+import com.example.pediatrapp.controller.MessageGController;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageGroupActivity extends AppCompatActivity {
 
     private CircleImageView profile_image;
     private TextView username;
-
-
-
     private EditText text_send;
     private ImageButton btn_send;
     private ImageButton btn_media;
     private ImageView messageIV;
     private String type;
-    private String userid;
+    private String chatGrup;
+    private String idPadre;
+    private String nombre_Chat;
     private ListView message_list;
-    private MessageController controller;
+    private MessageGController controller;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_message_group);
+
         Intent intent = getIntent();
-         userid = intent.getStringExtra("userid");
+        chatGrup = intent.getStringExtra("chat");
         type = intent.getStringExtra("type");
+        idPadre = intent.getStringExtra("idpadre");
+        nombre_Chat = intent.getStringExtra("nombre_chat");
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -75,9 +66,35 @@ public class MessageActivity extends AppCompatActivity {
         message_list = findViewById(R.id.message_list);
         messageIV = findViewById(R.id.messageIV);
 
-        controller = new MessageController(this);
-
+        controller = new MessageGController(this);
     }
+
+    @Override
+    protected void onPause() {
+        controller.beforePause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e(">>>", "On Resume");
+        controller.beforeResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        controller.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void hideImage(){
+        messageIV.setVisibility(View.GONE);
+    }
+
+    public void showImage(){
+        messageIV.setVisibility(View.VISIBLE);
+    }
+
 
     public CircleImageView getProfile_image() {
         return profile_image;
@@ -119,6 +136,14 @@ public class MessageActivity extends AppCompatActivity {
         this.btn_media = btn_media;
     }
 
+    public ImageView getMessageIV() {
+        return messageIV;
+    }
+
+    public void setMessageIV(ImageView messageIV) {
+        this.messageIV = messageIV;
+    }
+
     public String getType() {
         return type;
     }
@@ -127,20 +152,12 @@ public class MessageActivity extends AppCompatActivity {
         this.type = type;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getChatGrup() {
+        return chatGrup;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public MessageController getController() {
-        return controller;
-    }
-
-    public void setController(MessageController controller) {
-        this.controller = controller;
+    public void setChatGrup(String chatGrup) {
+        this.chatGrup = chatGrup;
     }
 
     public ListView getMessage_list() {
@@ -151,37 +168,27 @@ public class MessageActivity extends AppCompatActivity {
         this.message_list = message_list;
     }
 
-    public ImageView getMessageIV() {
-        return messageIV;
+    public MessageGController getController() {
+        return controller;
     }
 
-    public void setMessageIV(ImageView messageIV) {
-        this.messageIV = messageIV;
+    public void setController(MessageGController controller) {
+        this.controller = controller;
     }
 
-    @Override
-    protected void onPause() {
-        controller.beforePause();
-        super.onPause();
+    public String getIdPadre() {
+        return idPadre;
     }
 
-    @Override
-    protected void onResume() {
-        Log.e(">>>", "On Resume");
-        controller.beforeResume();
-        super.onResume();
+    public void setIdPadre(String idPadre) {
+        this.idPadre = idPadre;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        controller.onActivityResult(requestCode, resultCode, data);
+    public String getNombre_Chat() {
+        return nombre_Chat;
     }
 
-    public void hideImage(){
-        messageIV.setVisibility(View.GONE);
-    }
-
-    public void showImage(){
-        messageIV.setVisibility(View.VISIBLE);
+    public void setNombre_Chat(String nombre_Chat) {
+        this.nombre_Chat = nombre_Chat;
     }
 }
