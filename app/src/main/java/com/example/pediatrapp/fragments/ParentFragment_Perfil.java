@@ -1,6 +1,7 @@
 package com.example.pediatrapp.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Chat;
+import com.example.pediatrapp.model.ChatGrupal;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.view.LoginActivity;
@@ -26,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -63,6 +67,58 @@ public class ParentFragment_Perfil extends Fragment {
 
                 (v)-> {
 
+                    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    Query query = FirebaseDatabase.getInstance().getReference().child("chat");
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                Chat chat = child.getValue(Chat.class);
+                                if(chat.getId_padre().equals(id)){
+
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(chat.getId());
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                ChatGrupal chatG = child.getValue(ChatGrupal.class);
+                                if(chatG.getId_padre().equals(id)){
+
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
+
+
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
                     FirebaseAuth.getInstance().signOut();
                     Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), LoginActivity.class);
@@ -83,6 +139,7 @@ public class ParentFragment_Perfil extends Fragment {
                     fragmentTransaction.replace(R.id.fragmentContainer2, newChildFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+
 
                 }
 
@@ -141,4 +198,5 @@ public class ParentFragment_Perfil extends Fragment {
 
         return view;
     }
+
 }

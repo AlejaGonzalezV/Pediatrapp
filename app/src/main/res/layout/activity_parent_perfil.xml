@@ -91,10 +91,4 @@
             android:text="Información" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>
