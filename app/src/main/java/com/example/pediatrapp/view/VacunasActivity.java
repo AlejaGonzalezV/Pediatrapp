@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,12 @@ import android.widget.Toast;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.HijosVacunasAdapter;
 import com.example.pediatrapp.model.Hijo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +51,20 @@ public class VacunasActivity extends AppCompatActivity {
         ListaHijosVacuna.setAdapter(adapter);
 
         //Hijo de prueba
-        adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
+ //       adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
 
+
+
+        //        holder.verVa.setOnClickListener(
+//
+//                (v)->{
+//                    Intent intent = new Intent(context, ListaVacunasActivity.class);
+//                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
+//                    context.startActivity(intent);
+//
+//
+//                }
+//        );
 
 
         backBTN.setOnClickListener(
@@ -60,8 +79,28 @@ public class VacunasActivity extends AppCompatActivity {
 
     //Método para buscar Hijo en la lsita de hijos Agregados
 
-    public void buscarHijoVacunas(String nombreHijo){
+    public void buscarHijoVacunas(){
 
+            String uid = FirebaseAuth.getInstance().getUid();
+            Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos");
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                        Hijo hijo = child.getValue(Hijo.class);
+                        adapter.addHijo(hijo);
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
     }
 

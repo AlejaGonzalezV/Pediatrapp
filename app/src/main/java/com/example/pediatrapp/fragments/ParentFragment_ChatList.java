@@ -80,9 +80,9 @@ public class ParentFragment_ChatList extends Fragment {
         idpediatras = new ArrayList<>();
 
         chatGrup = "";
-        readChatGrupal();
-        readPediatras();
 
+        readPediatras();
+        readChatGrupal();
 
         padre_ChatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
