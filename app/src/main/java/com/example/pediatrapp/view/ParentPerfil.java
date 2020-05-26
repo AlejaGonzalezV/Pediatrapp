@@ -31,7 +31,7 @@ public class ParentPerfil extends AppCompatActivity {
         idParent = intent.getStringExtra("userid");
 
         tabLayout = findViewById(R.id.tabLayout_parent);
-        viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPagerPerfil);
         tab1 = findViewById(R.id.tabHijos);
         tab2 = findViewById(R.id.tabInformacion);
         FirebaseStorage storage = FirebaseStorage.getInstance();
