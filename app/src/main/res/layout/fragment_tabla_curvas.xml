@@ -22,58 +22,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cabezTablaTv2"
-            android:layout_width="152dp"
-            android:layout_height="27dp"
-
-            android:fontFamily="@font/lato_bold"
-            android:text="Long Cabeza"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fechaTablaTV2"
-            android:layout_width="58dp"
-            android:layout_height="31dp"
-
-            android:fontFamily="@font/lato_bold"
-            android:text="Talla"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintStart_toEndOf="@+id/numeralTv2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/edadTablaTV2"
-            android:layout_width="73dp"
-            android:layout_height="31dp"
-
-            android:fontFamily="@font/lato_bold"
-            android:text="Edad"
-            android:textColor="#000000"
-            android:textSize="21sp"
-
-            app:layout_constraintStart_toEndOf="@+id/fechaTablaTV2"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/pesoTablaTv2"
-            android:layout_width="99dp"
+            android:layout_width="213dp"
             android:layout_height="29dp"
+            android:layout_marginEnd="168dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Peso (grs)"
+            android:text="Fecha  de la Curva"
             android:textColor="#000000"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cabezTablaTv2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/edadTablaTV2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.001" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaCurvasAgregadas"
