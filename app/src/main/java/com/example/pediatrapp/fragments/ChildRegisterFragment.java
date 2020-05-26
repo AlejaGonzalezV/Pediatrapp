@@ -202,7 +202,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
                 }
 
                 Log.e("<<<<<<<<<<<", fechaNac);
-                calcularEdad();
+
 
             }
         });
@@ -212,17 +212,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void calcularEdad(){
 
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaN = LocalDate.parse(fechaNac, fmt);
-        LocalDate hoy = LocalDate.now();
-
-        Period periodo = Period.between(fechaN, hoy);
-        edad = String.valueOf(periodo.getYears());
-
-    }
 
     /*
     public void configureSpinner(){

@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                                         authResult -> {
 
                                             String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                            Log.e("AUTENTICÓ", id);
                                             Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
                                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
@@ -90,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                                             });
 
                                                             //Lanzo
+
                                                             Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
                                                             startActivity(intent);
 
@@ -142,9 +144,33 @@ public class LoginActivity extends AppCompatActivity {
                                                                 }
                                                             });
 
+                                                            Query queryC2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                                                            queryC2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                    for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                                                        ChatGrupal chat = child.getValue(ChatGrupal.class);
+                                                                        if(chat.getId_padre().equals(id)){
+
+                                                                            FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
+
+                                                                        }
+
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+
 
                                                             //Lanzo
-                                                            Log.e("<<<<<<<<<<", "entrandooo");
+                                                            Log.e("<<<<<<<<<<" ,"Lanzandoooo");
                                                             Intent intent = new Intent(v.getContext(), MainActivity.class);
                                                             startActivity(intent);
 
