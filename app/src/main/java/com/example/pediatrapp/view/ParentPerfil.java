@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.pagercontroller.PagerController;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class ParentPerfil extends AppCompatActivity {
 
@@ -32,6 +34,7 @@ public class ParentPerfil extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tab1 = findViewById(R.id.tabHijos);
         tab2 = findViewById(R.id.tabInformacion);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
         pagerAdapater = new PagerController(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapater);
