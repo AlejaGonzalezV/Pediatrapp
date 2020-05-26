@@ -25,59 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cabezTablaTv"
-            android:layout_width="88dp"
-            android:layout_height="30dp"
-            android:background="@drawable/rectangle"
-            android:fontFamily="@font/lato_bold"
-            android:text="Long Cabeza"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fechaTablaTV"
-            android:layout_width="58dp"
-            android:layout_height="31dp"
-            android:background="@drawable/rectangle"
-            android:fontFamily="@font/lato_bold"
-            android:text="Talla"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintStart_toEndOf="@+id/numeralTv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/edadTablaTV"
-            android:layout_width="73dp"
-            android:layout_height="30dp"
-            android:background="@drawable/rectangle"
-            android:fontFamily="@font/lato_bold"
-            android:text="Edad"
-            android:textColor="#000000"
-            android:textSize="21sp"
-
-            app:layout_constraintStart_toEndOf="@+id/fechaTablaTV"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/pesoTablaTv"
-            android:layout_width="98dp"
-            android:layout_height="30dp"
-            android:background="@drawable/rectangle"
-            android:fontFamily="@font/lato_bold"
-            android:text="Peso (grs)"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cabezTablaTv"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/edadTablaTV"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,14 +32,26 @@
         android:id="@+id/verListaCur"
         android:layout_width="68dp"
         android:layout_height="30dp"
-        android:background="@drawable/rectangle"
+        android:layout_marginEnd="56dp"
+        android:background="#00FFFFFF"
         android:fontFamily="@font/lato_bold"
         android:stateListAnimator="@null"
         android:text="Ver"
         android:textColor="#2F80ED"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pesoTablaTv"
+        android:layout_width="131dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Fecha"
+        android:textColor="#000000"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toStartOf="@+id/verListaCur"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toEndOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
