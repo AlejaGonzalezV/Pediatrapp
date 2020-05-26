@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
@@ -23,9 +24,9 @@ import java.util.List;
 public class VacunasActivity extends AppCompatActivity {
 
     private String nombreHijo;
-    private RecyclerView recycler;
+    private ListView ListaHijosVacuna;
     private HijosVacunasAdapter adapter;
-    private ArrayList<Hijo> listaHijos;
+ //   private ArrayList<Hijo> listaHijos;
     private Button backBTN;
 
     @Override
@@ -34,19 +35,16 @@ public class VacunasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vacunas);
 
         backBTN = findViewById(R.id.backVacunas);
-         nombreHijo = "";
+        nombreHijo = "";
 
-        recycler = findViewById(R.id.recyclerListaHijosVacuna);
-        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        listaHijos = new ArrayList<>();
-        adapter = new HijosVacunasAdapter(this,listaHijos );
-        recycler.setAdapter(adapter);
+        ListaHijosVacuna = findViewById(R.id.ListaHijosVacuna);
+//        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        listaHijos = new ArrayList<>();
+        adapter = new HijosVacunasAdapter();
+        ListaHijosVacuna.setAdapter(adapter);
 
         //Hijo de prueba
-        listaHijos.add(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
-
-
-
+        adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui"));
 
 
 

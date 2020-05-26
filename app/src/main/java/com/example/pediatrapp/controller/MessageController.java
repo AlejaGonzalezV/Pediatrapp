@@ -26,6 +26,7 @@ import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
 import com.example.pediatrapp.utilities.UtilDomi;
 import com.example.pediatrapp.view.MessageActivity;
 import com.example.pediatrapp.view.ParentPerfil;
+import com.example.pediatrapp.view.PediatraPerfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -401,7 +402,10 @@ public class MessageController implements View.OnClickListener{
 
                 }else{
 
-                    //LLAMAR PERFIL DEL PEDIATRA
+                    Intent intent = new Intent(activity, PediatraPerfil.class);
+                    intent.putExtra("userid", activity.getUserid());
+                    Log.e(">>>", "inicioIntent");
+                    activity.startActivity(intent);
                 }
 
                 break;

@@ -7,21 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.pediatrapp.view.ListaVacunasActivity">
 
-    <TextView
-        android:id="@+id/tv_nameVaccine2"
-        android:layout_width="194dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="124dp"
-        android:text="Nombre de la Vacuna"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tv_nameVaccine"
-        app:layout_constraintHorizontal_bias="0.246"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="419dp"
@@ -31,23 +16,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fondolistas" />
 
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="52dp"
-        android:src="@drawable/vaccine_1"
-        app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_Vacunas2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/lato_bold"
         android:text="Lista de vacunas"
         android:textColor="#000000"
@@ -90,41 +63,26 @@
         android:id="@+id/agregarVacunaLista"
         android:layout_width="230dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton"
         android:text="Agregar vacuna"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tv_nameVaccine2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreHijoVaList" />
-
-    <TextView
-        android:id="@+id/tv_nameVaccine"
-        android:layout_width="60dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="76dp"
-        android:text="Fecha"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/listaVacunasAgregadas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/agregarVacunaLista" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaVacunasAgregadas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nameVaccine2" />
+        app:layout_constraintTop_toBottomOf="@+id/agregarVacunaLista" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

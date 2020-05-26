@@ -2,9 +2,12 @@ package com.example.pediatrapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,104 +18,93 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.model.Pediatra;
+import com.example.pediatrapp.utilities.HTTPSWebUtilDomi;
 import com.example.pediatrapp.view.ListaVacunasActivity;
 import com.example.pediatrapp.view.VacunasActivity;
+import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-public class HijosVacunasAdapter extends  RecyclerView.Adapter<HijosVacunasAdapter.ViewHolderVacunasHijo>  {
+import de.hdodenhof.circleimageview.CircleImageView;
 
+public class HijosVacunasAdapter extends BaseAdapter {
 
-    private Context context;
-    private View.OnClickListener listener;
-    private List<Hijo> hijos;
+    private ArrayList<Hijo> hijos;
 
-    public HijosVacunasAdapter(Context context, List<Hijo> hijos) {
-        this.context = context;
-        this.hijos = hijos;
-
+    public HijosVacunasAdapter() {
+        this.hijos = new ArrayList<>();
     }
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public List<Hijo> getHijos() {
+    public ArrayList<Hijo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(List<Hijo> hijos) {
+    public void setHijos(ArrayList<Hijo> hijos) {
         this.hijos = hijos;
+        notifyDataSetChanged();
     }
 
-    @NonNull
-    @Override
-    public HijosVacunasAdapter.ViewHolderVacunasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_hijos, null, false);
-
-        return new ViewHolderVacunasHijo(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull HijosVacunasAdapter.ViewHolderVacunasHijo holder, int position) {
-
-        holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getEdad());
-
-        if(hijos.get(position).getSexo().equals("Femenino")){
-
-            holder.imagenHijava.setImageResource(R.drawable.girl);
-        }else{
-
-            holder.imagenHijava.setImageResource(R.drawable.boy);
-        }
-
-
-        holder.verVa.setOnClickListener(
-
-                (v)->{
-                    Intent intent = new Intent(context, ListaVacunasActivity.class);
-                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
-                    context.startActivity(intent);
-
-
-                }
-        );
-
+    public void addHijo(Hijo hijo){
+        hijos.add(hijo);
+        notifyDataSetChanged();
     }
 
     @Override
-    public int getItemCount() {
+    public int getCount() {
         return hijos.size();
     }
 
-
-    public void setOnclickListener(View.OnClickListener listener){
-
-        this.listener = listener;
+    @Override
+    public Object getItem(int position) {
+        return hijos.get(position);
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-    public class  ViewHolderVacunasHijo extends RecyclerView.ViewHolder{
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View root = inflater.inflate(R.layout.list_item_hijos, null);
 
-        TextView nombreHijoVa;
-        TextView edadHijoVa;
-        Button verVa;
-        ImageView imagenHijava;
+        Hijo hijo = hijos.get(position);
 
+        TextView nombreHijoVa = root.findViewById(R.id.nombreHijoTV);
+        TextView edadHijoVa = root.findViewById(R.id.edadHijoTV);
+        Button verVa = root.findViewById(R.id.verHijoBTN);
+        ImageView imagenHijava = root.findViewById(R.id.fotoHijo);
 
-        public ViewHolderVacunasHijo(@NonNull View itemView) {
-            super(itemView);
+        if(hijos.get(position).getSexo().equals("Femenino")){
 
-            nombreHijoVa = itemView.findViewById(R.id.nombreHijoTV);
-            edadHijoVa = itemView.findViewById(R.id.edadHijoTV);
-             verVa = itemView.findViewById(R.id.verHijoBTN);
-            imagenHijava = itemView.findViewById(R.id.fotoHijo);
+            imagenHijava.setImageResource(R.drawable.girl);
+        }else{
+
+            imagenHijava.setImageResource(R.drawable.boy);
         }
+
+        nombreHijoVa.setText(""+ hijos.get(position).getNombre());
+        edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
+
+
+
+//        holder.verVa.setOnClickListener(
+//
+//                (v)->{
+//                    Intent intent = new Intent(context, ListaVacunasActivity.class);
+//                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
+//                    context.startActivity(intent);
+//
+//
+//                }
+//        );
+
+        return root ;
     }
+
 }

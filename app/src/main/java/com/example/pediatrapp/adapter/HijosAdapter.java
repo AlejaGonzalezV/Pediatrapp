@@ -1,5 +1,6 @@
 package com.example.pediatrapp.adapter;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.fragments.ListaHijosFragment;
 import com.example.pediatrapp.model.Hijo;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class HijosAdapter extends BaseAdapter {
@@ -40,6 +48,7 @@ public class HijosAdapter extends BaseAdapter {
         return position;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
@@ -50,13 +59,21 @@ public class HijosAdapter extends BaseAdapter {
         TextView edad = row.findViewById(R.id.edadHijoTV);
         nombre.setText(hijos.get(position).getNombre());
 
-        if(hijos.get(position).getEdad() == "1"){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaN = LocalDate.parse(hijos.get(position).getNacimiento(), fmt);
+        LocalDate hoy = LocalDate.now();
 
-            edad.setText(hijos.get(position).getEdad()+ " año");
+        Period periodo = Period.between(fechaN, hoy);
+        String edad1 = String.valueOf(periodo.getYears());
 
-        } else {
+        if(edad1.equals(0)){
 
-            edad.setText(hijos.get(position).getEdad()+ " años");
+            edad.setText(String.valueOf(periodo.getMonths()) + " Meses");
+
+
+        }else {
+
+            edad.setText(String.valueOf(periodo.getYears()) + " Años y " + String.valueOf(periodo.getMonths())+ " meses");
 
         }
 
