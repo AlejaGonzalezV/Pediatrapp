@@ -102,7 +102,7 @@ public class NewChildFragment extends Fragment implements View.OnClickListener{
 
                         String idPadre = FirebaseAuth.getInstance().getUid();
                         String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").push().getKey();
-                        Hijo hijo = new Hijo(idH, id.getText().toString(), fechaNac, gender.getSelectedItem().toString(), name.getText().toString(), edad);
+                        Hijo hijo = new Hijo(idH, id.getText().toString(), fechaNac, gender.getSelectedItem().toString(), name.getText().toString());
                         FirebaseDatabase.getInstance().getReference().child("Padres").child(idPadre).child("hijos").child(idH).setValue(hijo);
                         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ids.get(doctor.getSelectedItemPosition()-1)).child("Padres_asignados").child(idPadre).setValue(idPadre);
                         Toast.makeText(getContext(), "El nuevo hijo se ha añadido con éxito", Toast.LENGTH_SHORT).show();;

@@ -90,7 +90,7 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
 
                     if(listener != null && nombre == false && ident == false && fecha == false && doc == false && gen == false){
 
-                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1), edad);
+                        listener.onData(this,"next", name.getText().toString(), id.getText().toString(), fechaNac, gender.getSelectedItem().toString(),ids.get(doctor.getSelectedItemPosition()-1));
 
                     }else {
 

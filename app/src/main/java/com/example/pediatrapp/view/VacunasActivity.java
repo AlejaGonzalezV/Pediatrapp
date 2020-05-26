@@ -44,7 +44,7 @@ public class VacunasActivity extends AppCompatActivity {
         ListaHijosVacuna.setAdapter(adapter);
 
         //Hijo de prueba
-        adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
+        adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui"));
 
 
 

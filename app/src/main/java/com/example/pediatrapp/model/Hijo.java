@@ -9,27 +9,18 @@ public class Hijo {
     private String nacimiento;
     private String sexo;
     private String nombre;
-    private String edad;
 
-    public Hijo(String id, String documento, String nacimiento, String sexo, String nombre, String edad) {
+    public Hijo(String id, String documento, String nacimiento, String sexo, String nombre) {
         this.id = id;
         this.documento = documento;
         this.nacimiento = nacimiento;
         this.sexo = sexo;
         this.nombre = nombre;
-        this.edad = edad;
     }
 
     public Hijo() {
     }
 
-    public String getEdad() {
-        return edad;
-    }
-
-    public void setEdad(String edad) {
-        this.edad = edad;
-    }
 
     public String getNombre() {
         return nombre;

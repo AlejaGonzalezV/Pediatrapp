@@ -89,7 +89,7 @@ public class HijosVacunasAdapter extends BaseAdapter {
         }
 
         nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        edadHijoVa.setText("Edad: "+ hijos.get(position).getEdad());
+        edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
 
 
 

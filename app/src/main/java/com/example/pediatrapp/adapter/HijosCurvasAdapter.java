@@ -60,7 +60,7 @@ public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter
     public void onBindViewHolder(@NonNull HijosCurvasAdapter.ViewHolderCurvasHijo holder, int position) {
 
         holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        holder.edadHijoVa.setText("Edad: "+ hijos.get(position).getEdad());
+        holder.edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
 
         if(hijos.get(position).getSexo().equals("Femenino")){
 
