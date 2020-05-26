@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +51,7 @@ public class ParentFragment_ChatList extends Fragment {
     private ListView padre_chatGrupal;
     private String chatGrup;
     private  HashMap<String, String> pedia;
+    private ArrayList<String> idpediatras;
 
 
     public ParentFragment_ChatList() {
@@ -74,6 +76,8 @@ public class ParentFragment_ChatList extends Fragment {
 
         adapterG = new Adapter_ChatG();
         padre_chatGrupal.setAdapter(adapterG);
+
+        idpediatras = new ArrayList<>();
 
         chatGrup = "";
         readChatGrupal();
@@ -209,6 +213,8 @@ public class ParentFragment_ChatList extends Fragment {
 
                 adapterG.addChatG(cg);
                 padre_chatGrupal.setVisibility(View.VISIBLE);
+                FirebaseMessaging.getInstance().subscribeToTopic(idc);
+                chatGrup = idc;
 
 
             }
@@ -286,11 +292,44 @@ public class ParentFragment_ChatList extends Fragment {
     private void borrarChatG() {
 
         //IMPLEMENTAR
+        adapterG.remove();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid()).child("chat_grupal_id").removeValue();
         FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(chatGrup).removeValue();
-        adapterG.remove();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(chatGrup);
+        findAllPediatras();
+
         Log.e(">>>", "CHAT GRUPAL ELIMINADO "+ adapterG.getCount());
+    }
+
+    private void findAllPediatras() {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+
+                    String id = data.getKey();
+                    if(id != null){
+                        idpediatras.add(id);
+                    }
+                }
+
+                for(int i = 0; i < idpediatras.size(); i++){
+                    FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idpediatras.get(i)).child("chats_grupales").child(chatGrup).removeValue();
+                }
+
+                idpediatras.clear();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public ArrayList<Pediatra> buscarChat(String nombre){

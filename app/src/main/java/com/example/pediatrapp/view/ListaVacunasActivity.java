@@ -41,7 +41,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
        //Recibe nombre del Hijo
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
-         listaVacunas.add(new Vacuna("res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020"));
+         listaVacunas.add(new Vacuna("res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020", "", ""));
 
         // Con este método se cargan todas las vacunas de la base de datos
         cargarVacunas();

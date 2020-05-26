@@ -11,14 +11,18 @@ public class Vacuna implements Serializable {
     private String nombre_aplicador;
     private String nombre_vacuna;
     private String fecha_aplicacion;
+    private String labortorio;
+    private String lote;
 
-    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion) {
+    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion, String laboratrio, String lote) {
         this.dosis = dosis;
         this.edad_aplicacion = edad_aplicacion;
         this.ips = ips;
         this.nombre_aplicador = nombre_aplicador;
         this.nombre_vacuna = nombre_vacuna;
         this.fecha_aplicacion = fecha_aplicacion;
+        this.labortorio = laboratrio;
+        this.lote = lote;
     }
 
     public Vacuna() {
@@ -70,5 +74,21 @@ public class Vacuna implements Serializable {
 
     public void setFecha_aplicacion(String fecha_aplicacion) {
         this.fecha_aplicacion = fecha_aplicacion;
+    }
+
+    public String getLabortorio() {
+        return labortorio;
+    }
+
+    public void setLabortorio(String labortorio) {
+        this.labortorio = labortorio;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
     }
 }

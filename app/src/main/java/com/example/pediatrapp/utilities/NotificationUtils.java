@@ -13,6 +13,7 @@ import com.example.pediatrapp.R;
 public class NotificationUtils {
 
     public static final String CHANNEL_ID = "PediatrApp";
+    public static final String CHANNEL_IDG = "PediatrAppG";
     public static final String CHANNEL_NAME = "Messages";
     public static final String CHANNEL_NAMEG = "Messages Group";
     public static final int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
@@ -43,11 +44,11 @@ public class NotificationUtils {
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAMEG, CHANNEL_IMPORTANCE);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_IDG, CHANNEL_NAMEG, CHANNEL_IMPORTANCE);
             manager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_IDG)
                 .setContentTitle("Nuevo mensaje de grupo")
                 .setContentText(mensaje)
                 .setSmallIcon(R.mipmap.ic_launcher);

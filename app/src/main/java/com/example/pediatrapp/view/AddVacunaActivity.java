@@ -90,7 +90,7 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                             LocalDate localDate = (LocalDate) LocalDate.now();
 
-                            Vacuna laVacuna = new Vacuna(dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, fechaET.getText().toString());
+                            Vacuna laVacuna = new Vacuna(dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, fechaET.getText().toString(), "", "");
 
                             Intent i = new Intent();
                             i.putExtra("marcador", laVacuna);
