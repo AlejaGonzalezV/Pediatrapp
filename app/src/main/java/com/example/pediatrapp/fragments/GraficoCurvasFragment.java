@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.DatosCurva;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -31,7 +32,13 @@ import java.util.Map;
 public class GraficoCurvasFragment extends Fragment {
 
     private LineChart lineaPrueba;
-    private ArrayList<String>  puntos;
+    private ArrayList<DatosCurva>  listaCurvas;
+
+    public GraficoCurvasFragment (ArrayList<DatosCurva>  listaCurvas){
+
+        this.listaCurvas = listaCurvas;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,14 +52,9 @@ public class GraficoCurvasFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_grafico_curvas, container, false);
 
         lineaPrueba = (LineChart) view.findViewById(R.id.lineprueba);
-        puntos = new ArrayList<>();
 
-        puntos.add("1");
-        puntos.add("2");
-        puntos.add("3");
-        puntos.add("4");
 
-      cargarLineas();
+      cargarLineas(4);
 
 
         return view;
@@ -60,144 +62,210 @@ public class GraficoCurvasFragment extends Fragment {
 
 
 
-    public void cargarLineas(){
+    public void cargarLineas(int tipoGrafica){
 
 
-        LineDataSet lineDataSet = new LineDataSet(dataValues(), "Sata set");
-        LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Sata set 1");
-        LineDataSet lineDataSet2 = new LineDataSet(dataValues2(), "Sata set  2");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
-        dataSets.add(lineDataSet1);
-        dataSets.add(lineDataSet2);
 
-        LineData data = new LineData(dataSets);
+        Description ds = new Description();
+        ds.setTextSize(20);
         lineaPrueba.setDrawGridBackground(false);
         lineaPrueba.setBorderColor(Color.BLUE);
-        lineaPrueba.setData(data);
-        Description ds = new Description();
-        ds.setText("");
-        lineaPrueba.setDescription(ds);
+
+        switch (tipoGrafica) {
+            case 1:
+            lineaPrueba.setData(dataSetsPesoTalla());
+            ds.setText("Peso/Talla");
+            lineaPrueba.setDescription(ds);
+            break;
+            case 2:
+                lineaPrueba.setData(dataSetsEdadTalla());
+                ds.setText("Talla/EDad");
+                lineaPrueba.setDescription(ds);
+
+                break;
+
+            case 3:
+                lineaPrueba.setData(dataSetsCabezaEdad());
+                ds.setText("Medida Cabeza/Edad");
+                lineaPrueba.setDescription(ds);
+
+                break;
+            case 4:
+                lineaPrueba.setData(dataSetsPesoEdad());
+                ds.setText("Peso/Edad");
+                lineaPrueba.setDescription(ds);
+                break;
+        }
         lineaPrueba.invalidate();
 
     }
 
 
 
-    private ArrayList<Entry> dataValues() {
+    public LineData  dataSetsPesoTalla(){
+        LineDataSet lineDataSet2 = new LineDataSet(pesoTalla(), "Referencia");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet2);
+        LineData data = new LineData(dataSets);
 
-        ArrayList<Entry> entries = new ArrayList<>();
+        return data;
+    }
+    public LineData  dataSetsEdadTalla(){
+        LineDataSet lineDataSet2 = new LineDataSet(edadTalla(), "Referencia");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet2);
+        LineData data = new LineData(dataSets);
 
-
-        entries.add(new Entry(0, 5));
-        entries.add(new Entry(1, 15));
-        entries.add(new Entry(2, 25));
-        entries.add(new Entry(3, 35));
-        entries.add(new Entry(4, 25));
-
-
-        return entries;
+        return data;
     }
 
-    private ArrayList<Entry> dataValues1() {
+    public LineData  dataSetsCabezaEdad(){
+        LineDataSet lineDataSet2 = new LineDataSet(cabezaEdad(), "Referencia");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet2);
+        LineData data = new LineData(dataSets);
 
-        ArrayList<Entry> entries = new ArrayList<>();
-
-
-        entries.add(new Entry(0, 8));
-        entries.add(new Entry(1, 18));
-        entries.add(new Entry(2, 28));
-        entries.add(new Entry(3, 38));
-        entries.add(new Entry(4, 28));
-
-
-        return entries;
-    }
-    private ArrayList<Entry> dataValues2() {
-
-        ArrayList<Entry> entries = new ArrayList<>();
-
-
-        entries.add(new Entry(0, 10));
-        entries.add(new Entry(1, 20));
-        entries.add(new Entry(2, 30));
-        entries.add(new Entry(3, 40));
-        entries.add(new Entry(4, 45));
-
-
-        return entries;
+        return data;
     }
 
-/*
-    public Chart gameCharts(Chart chart, String description, int background, int animaY ){
+    public LineData  dataSetsPesoEdad(){
+        LineDataSet lineDataSet2 = new LineDataSet(pesoEdad(), "Referencia");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet2);
 
-        chart.getDescription().setText(description);
-        chart.setBackgroundColor(background);
-        chart.getDescription().setTextSize(15);
-        chart.animateX(animaY);
+        if(listaCurvas.size() != 0){
 
-        return chart;
-    }
-
-    public void legend(Chart chart){
-
-        Legend legend = chart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
-
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        ArrayList<LegendEntry> entires = new ArrayList<>();
-
-        for (int i = 0; i <puntos.size(); i++){
-
-            LegendEntry entry = new LegendEntry();
-            entry.label = puntos.get(i);
-            entires.add(entry);
-
+            LineDataSet lineDataSet3 = new LineDataSet(puntosPesosEdades(),"Medida Actual");
+            lineDataSet3.setCircleColor(Color.RED);
+            lineDataSet3.setCircleRadius(5);
+            dataSets.add(lineDataSet3);
         }
-        legend.setCustom(entires);
 
-    }
+        LineData data = new LineData(dataSets);
 
-    public void asix(XAxis axis){
-
-
-        axis.setGranularityEnabled(true);
-        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setValueFormatter(new IndexAxisValueFormatter(puntos));
-    }
-
-    private void axisLeft(YAxis axis){
-
-        axis.setSpaceTop(38);
-        axis.setAxisMinimum(0);
-    }
-    private void axiRight(YAxis axis){
-
-        axis.setEnabled(false);
+        return data;
     }
 
 
+    private ArrayList<Entry> pesoTalla() {
 
-    public void creatChart(){
+        ArrayList<Entry> entries = new ArrayList<>();
 
-        lineaPrueba = (LineChart) gameCharts( lineaPrueba, "Prueba", Color.RED, 300);
 
-        cargarLineas();
-        asix(lineaPrueba.getXAxis());
-        axisLeft(lineaPrueba.getAxisLeft());
-        axiRight(lineaPrueba.getAxisRight());
+        entries.add(new Entry(50, 4));
+        entries.add(new Entry(70,11 ));
+        entries.add(new Entry(90, 16));
+        entries.add(new Entry(110, 24));
+        entries.add(new Entry(80, 14));
+        entries.add(new Entry(60, 8));
+        entries.add(new Entry(100, 20));
 
+
+        return entries;
+    }
+
+    private ArrayList<Entry> edadTalla() {
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+
+        entries.add(new Entry(2, 63));
+        entries.add(new Entry(4,68 ));
+        entries.add(new Entry(6, 73));
+        entries.add(new Entry(8, 75));
+        entries.add(new Entry(10, 78));
+        entries.add(new Entry(12, 82));
+
+
+
+        return entries;
+    }
+
+    private ArrayList<Entry> cabezaEdad() {
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+
+        entries.add(new Entry(0, 37));
+        entries.add(new Entry(1,49));
+        entries.add(new Entry(2, 51));
+        entries.add(new Entry(3, 53));
+        entries.add(new Entry(4, 54));
+        entries.add(new Entry(5, 56));
+
+
+
+        return entries;
+    }
+
+    private ArrayList<Entry> pesoEdad() {
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+
+        entries.add(new Entry(0, 4));
+        entries.add(new Entry(1,12));
+        entries.add(new Entry(2, 16));
+        entries.add(new Entry(3, 18));
+        entries.add(new Entry(4, 21));
+        entries.add(new Entry(5, 24));
+
+
+
+        return entries;
+    }
+
+    private ArrayList<Entry>  puntosPesosEdades(){
+        //Relacion Edad en x,  peso en y
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        for(int i = 0; i<listaCurvas.size();i++){
+
+            entries.add(new Entry(listaCurvas.get(i).getEdad(), listaCurvas.get(i).getPeso()));
+        }
+        return entries;
 
     }
 
-    private DataSet dataSet(DataSet dataSet){
+    private ArrayList<Entry>  PuntosCabezaEdades(){
+        //Relacion cabeza en y , edad en x
 
-        dataSet.setColor(Color.BLUE);
-        dataSet.setValueTextSize(Color.YELLOW);
-        dataSet.setValueTextSize(10);
+        ArrayList<Entry> entries = new ArrayList<>();
 
-        return dataSet;
-    }*/
+        for(int i = 0; i<listaCurvas.size();i++){
+
+            entries.add(new Entry(listaCurvas.get(i).getEdad(), listaCurvas.get(i).getMedida_cabeza()));
+        }
+        return entries;
+
+    }
+
+    private ArrayList<Entry>  PuntosEdadesTalla(){
+        //Relacion Talla en y , edad en x
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        for(int i = 0; i<listaCurvas.size();i++){
+
+            entries.add(new Entry(listaCurvas.get(i).getEdad(), listaCurvas.get(i).getTalla()));
+        }
+        return entries;
+
+    }
+
+    private ArrayList<Entry>  PuntosPesoTalla(){
+        //Relacion Peso en y , talla en x
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        for(int i = 0; i<listaCurvas.size();i++){
+
+            entries.add(new Entry(listaCurvas.get(i).getTalla(), listaCurvas.get(i).getPeso()));
+        }
+        return entries;
+
+    }
 
 
 

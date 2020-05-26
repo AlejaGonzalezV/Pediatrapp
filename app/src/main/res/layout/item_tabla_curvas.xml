@@ -32,7 +32,7 @@
         android:id="@+id/verListaCur"
         android:layout_width="68dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="24dp"
         android:background="#00FFFFFF"
         android:fontFamily="@font/lato_bold"
         android:stateListAnimator="@null"

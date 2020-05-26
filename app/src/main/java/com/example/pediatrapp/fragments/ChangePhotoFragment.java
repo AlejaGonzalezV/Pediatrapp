@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Padre;
+import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.view.ActivityMainPediatra;
 import com.example.pediatrapp.view.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -83,9 +87,14 @@ public class ChangePhotoFragment extends Fragment {
                                 for(DataSnapshot child: dataSnapshot.getChildren()){
 
                                     if(child.getKey().equals(id)){
+                                        Pediatra ped = child.getValue(Pediatra.class);
 
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
-                                        storage.getReference().child("Doctor").child(id+"*"+"Foto").putFile(uri);
+                                        storage.getReference().child("Doctor").child(id+"*"+"Foto").delete();
+                                        String nuevo = UUID.randomUUID().toString();
+                                        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ped.getId()).child("foto").setValue(nuevo + "*Foto");
+                                        storage.getReference().child("Padre").child(nuevo).putFile(uri);
+
                                         Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
                                         pediatraPerfil = new PediatraFragment_Perfil();
                                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -115,15 +124,23 @@ public class ChangePhotoFragment extends Fragment {
 
                                     if(child.getKey().equals(id)){
 
+                                        Padre pad = child.getValue(Padre.class);
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
-                                        storage.getReference().child("Padre").child(id).putFile(uri);
-                                        Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
-                                        padrePerfil = new ParentFragment_Perfil();
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                        fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
-                                        fragmentTransaction.addToBackStack(null);
-                                        fragmentTransaction.commit();
+                                        storage.getReference().child("Padre").child(pad.getFoto()).delete();
+                                        String nuevo = UUID.randomUUID().toString();
+                                        FirebaseDatabase.getInstance().getReference().child("Padres").child(pad.getId()).child("foto").setValue(nuevo);
+                                        storage.getReference().child("Padre").child(nuevo).putFile(uri).addOnSuccessListener(uri -> {
+
+                                            Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
+                                            padrePerfil = new ParentFragment_Perfil();
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragmentContainer2, padrePerfil);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+
+                                        });
+
 
                                     }
 

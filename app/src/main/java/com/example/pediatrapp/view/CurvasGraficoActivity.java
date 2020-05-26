@@ -52,7 +52,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
                     fragment = new TablaCurvasFragment(listaCurvas);
                     break;
                 case R.id.grafica:
-                    fragment = new GraficoCurvasFragment();
+                    fragment = new GraficoCurvasFragment(listaCurvas);
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();

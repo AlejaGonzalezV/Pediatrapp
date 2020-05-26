@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pediatrapp.view.ParentPerfil">
+    tools:context="com.example.pediatrapp.view.ParentPerfil"
+    android:background="#FFFFFF">
 
 
 
@@ -18,7 +19,7 @@
         app:srcCompat="@drawable/fondolistas" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/pediatra_foto2"
+        android:id="@+id/padre_foto"
         android:layout_width="117dp"
         android:layout_height="109dp"
         android:layout_marginTop="52dp"
@@ -30,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nombre_pediatra2"
+        android:id="@+id/nombre_padre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -44,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <Button
-        android:id="@+id/backPerfil2"
+        android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
@@ -72,7 +73,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombre_pediatra2"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_padre"
         app:tabIndicatorColor="#2196F3">
 
         <com.google.android.material.tabs.TabItem

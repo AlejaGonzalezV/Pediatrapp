@@ -7,5 +7,6 @@
     <ListView
         android:id="@+id/listViewHijos"
         android:layout_width="match_parent"
-        android:layout_height="746dp"></ListView>
+        android:layout_height="746dp"
+        android:divider="@null"></ListView>
 </FrameLayout>
