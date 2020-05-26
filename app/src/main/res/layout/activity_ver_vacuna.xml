@@ -20,17 +20,6 @@
         app:layout_constraintTop_toBottomOf="@+id/verEdadVa" />
 
     <TextView
-        android:id="@+id/verFechaVa2"
-        android:layout_width="133dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
-        android:text="TextView"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verEdadVa" />
-
-    <TextView
         android:id="@+id/loteET"
         android:layout_width="133dp"
         android:layout_height="28dp"
