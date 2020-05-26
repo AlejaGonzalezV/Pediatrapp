@@ -28,7 +28,6 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-//activity_pediatra_perfil
 public class PediatraPerfil extends AppCompatActivity {
 
     private CircleImageView pediatra_foto;
