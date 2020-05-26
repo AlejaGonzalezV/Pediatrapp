@@ -218,8 +218,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             String fechaH = str[8];
             String generoH = str[9];
             String idDoc = str[10];
-            String edad = str[11];
-            String foto1 = str[12];
+            String foto1 = str[11];
 
 
             //Registro en firebase
@@ -230,7 +229,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 String id = user.getUid();
 
                 String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(id).child("Hijos").push().getKey();
-                Hijo hijo = new Hijo(idH, identH, fechaH, generoH, nombreH, edad);
+                Hijo hijo = new Hijo(idH, identH, fechaH, generoH, nombreH);
 
                 HashMap<String, Hijo> hijos = new HashMap<>();
                 hijos.put(idH, hijo);

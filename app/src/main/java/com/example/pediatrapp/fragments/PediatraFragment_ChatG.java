@@ -120,7 +120,7 @@ public class PediatraFragment_ChatG extends Fragment {
                         if(g != null) {
                             chats.add(g);
                             adapterG.addChatG(g);
-                            FirebaseMessaging.getInstance().subscribeToTopic(g.getId());
+                         //   FirebaseMessaging.getInstance().subscribeToTopic(g.getId());
                         }
                     }
 

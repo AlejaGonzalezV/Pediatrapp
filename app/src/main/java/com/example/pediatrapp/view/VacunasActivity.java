@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,26 +46,29 @@ public class VacunasActivity extends AppCompatActivity {
         nombreHijo = "";
 
         ListaHijosVacuna = findViewById(R.id.ListaHijosVacuna);
-//        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//        listaHijos = new ArrayList<>();
         adapter = new HijosVacunasAdapter();
         ListaHijosVacuna.setAdapter(adapter);
+        buscarHijoVacunas();
 
-        //Hijo de prueba
- //       adapter.addHijo(new Hijo("", "", "2001", "Masculino", "Melqui", "3"));
+        ListaHijosVacuna.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                Hijo h = (Hijo) adapter.getItem(i);
+                new Thread(
+                        () ->{
 
+                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
+                            intent.putExtra("idhijo", h.getId());
+                            intent.putExtra("elnombre", h.getNombre());
+                            Log.e(">>>", "inicioIntent");
 
-        //        holder.verVa.setOnClickListener(
-//
-//                (v)->{
-//                    Intent intent = new Intent(context, ListaVacunasActivity.class);
-//                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
-//                    context.startActivity(intent);
-//
-//
-//                }
-//        );
+                            VacunasActivity.this.startActivity(intent);
+                        }
+                ).start();
+
+            }
+        });
 
 
         backBTN.setOnClickListener(

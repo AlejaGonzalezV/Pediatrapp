@@ -13,8 +13,10 @@ public class Vacuna implements Serializable {
     private String fecha_aplicacion;
     private String labortorio;
     private String lote;
+    private String id;
 
-    public Vacuna(String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion, String laboratrio, String lote) {
+    public Vacuna(String id, String dosis, String edad_aplicacion, String ips, String nombre_aplicador, String nombre_vacuna, String fecha_aplicacion, String laboratrio, String lote) {
+        this.id = id;
         this.dosis = dosis;
         this.edad_aplicacion = edad_aplicacion;
         this.ips = ips;
@@ -26,6 +28,14 @@ public class Vacuna implements Serializable {
     }
 
     public Vacuna() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDosis() {

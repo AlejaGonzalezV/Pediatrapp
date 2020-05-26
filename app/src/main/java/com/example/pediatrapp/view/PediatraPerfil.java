@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class PediatraPerfil extends AppCompatActivity {
 
         Intent intent = getIntent();
         idPediatra = intent.getStringExtra("userid");
+        Log.e("<<<<<<<<<<<ID", idPediatra);
 
         pediatra_foto = findViewById(R.id.pediatra_foto);
         nombre_pediatra = findViewById(R.id.nombre_pediatra);
@@ -53,7 +55,7 @@ public class PediatraPerfil extends AppCompatActivity {
         back = findViewById(R.id.back);
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-        Query query = FirebaseDatabase.getInstance().getReference().child("Pediatra");
+        Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -89,7 +91,7 @@ public class PediatraPerfil extends AppCompatActivity {
 
                 (v)->{
 
-
+                    this.finish();
 
                 }
 

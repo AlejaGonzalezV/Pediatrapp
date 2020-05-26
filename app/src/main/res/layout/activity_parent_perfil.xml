@@ -33,16 +33,15 @@
         android:id="@+id/nombre_pediatra2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/lato_bold"
         android:text="Nombre de Padre"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <Button
         android:id="@+id/backPerfil2"
@@ -70,12 +69,10 @@
         android:id="@+id/tabLayout_parent"
         android:layout_width="384dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_pediatra2"
         app:tabIndicatorColor="#2196F3">
 
         <com.google.android.material.tabs.TabItem
@@ -90,5 +87,13 @@
             android:layout_height="wrap_content"
             android:text="Información" />
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerPerfil"
+        android:layout_width="384dp"
+        android:layout_height="449dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
