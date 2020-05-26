@@ -5,11 +5,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class PagerController extends FragmentPagerAdapter {
-    int numoftabs;
+    private int numoftabs;
+    private String id;
 
-    public PagerController(FragmentManager fm, int behavior) {
+    public PagerController(FragmentManager fm, int behavior, String id) {
         super(fm);
 
+        this.id = id;
         this.numoftabs =  behavior;
     }
 
@@ -17,11 +19,11 @@ public class PagerController extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new Hijos();
+                return new Hijos(id);
 
 
             case 1:
-                return new Informacion();
+                return new Informacion(id);
 
             default:
                 return null;

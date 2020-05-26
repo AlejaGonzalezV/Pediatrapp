@@ -34,8 +34,7 @@ public class ListaHijosFragment extends Fragment {
     private Button back;
     private HijosAdapter adapter;
     private String ident;
-    private boolean selec;
-    private ArrayList<Hijo> hijos;
+
 
     private OnDataSubmitted listener;
 
@@ -53,7 +52,6 @@ public class ListaHijosFragment extends Fragment {
         lista = view.findViewById(R.id.ListaHijos);
         adapter = new HijosAdapter(this);
         lista.setAdapter(adapter);
-        hijos = new ArrayList<>();
         cargarHijos();
 
 

@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.fragments.ListaHijosFragment;
 import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.pagercontroller.Hijos;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -25,11 +26,19 @@ public class HijosAdapter extends BaseAdapter {
 
     private ArrayList<Hijo> hijos;
     private ListaHijosFragment view;
+    private Hijos viewH;
 
     public HijosAdapter(ListaHijosFragment view) {
 
         hijos = new ArrayList<>();
         this.view = view;
+
+    }
+
+    public HijosAdapter(Hijos viewH) {
+
+        hijos = new ArrayList<>();
+        this.viewH = viewH;
 
     }
 
@@ -79,12 +88,20 @@ public class HijosAdapter extends BaseAdapter {
 
 
         Button verHijoBTN = row.findViewById(R.id.verHijoBTN);
-
         verHijoBTN.setOnClickListener(
 
                 (v) -> {
 
+                    if(view != null){
+
                         view.recibo(position);
+
+                    }else{
+
+                        viewH.recibo(position);
+
+                    }
+
 
                 }
 
