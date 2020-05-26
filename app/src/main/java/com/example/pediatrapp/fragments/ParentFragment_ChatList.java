@@ -80,9 +80,9 @@ public class ParentFragment_ChatList extends Fragment {
         idpediatras = new ArrayList<>();
 
         chatGrup = "";
-        readChatGrupal();
-        readPediatras();
 
+        readPediatras();
+        readChatGrupal();
 
         padre_ChatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -213,7 +213,7 @@ public class ParentFragment_ChatList extends Fragment {
 
                 adapterG.addChatG(cg);
                 padre_chatGrupal.setVisibility(View.VISIBLE);
-                FirebaseMessaging.getInstance().subscribeToTopic(idc);
+               // FirebaseMessaging.getInstance().subscribeToTopic(idc);
                 chatGrup = idc;
 
 
@@ -237,10 +237,11 @@ public class ParentFragment_ChatList extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Padre p = dataSnapshot.getValue(Padre.class);
-                if(p.getChat_grupal_id() != null){
-                    chatGrup = p.getChat_grupal_id();
-                    loadChatG(chatGrup);
-                }
+                Log.e(">>>>","el padre si existe" + p.getNombre() );
+//                if(p.getChat_grupal_id() != null){
+//                    chatGrup = p.getChat_grupal_id();
+//                    loadChatG(chatGrup);
+//                }
 
             }
 

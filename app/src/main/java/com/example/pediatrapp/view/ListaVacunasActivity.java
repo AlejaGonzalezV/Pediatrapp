@@ -25,6 +25,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
     private RecyclerView recyclerView;
     private ArrayList<Vacuna> listaVacunas;
     private ListaVacunasAdpater adapter;
+    private String idhijo;
 
     public static final int request_code = 1;
     @Override
@@ -40,8 +41,9 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
        listaVacunas = new ArrayList<>() ;
        //Recibe nombre del Hijo
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
+        idhijo = getIntent().getStringExtra("idhijo");
 
-         listaVacunas.add(new Vacuna("res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020", "", ""));
+         listaVacunas.add(new Vacuna("id", "res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020", "", ""));
 
         // Con este método se cargan todas las vacunas de la base de datos
         cargarVacunas();
