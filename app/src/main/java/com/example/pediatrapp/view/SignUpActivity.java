@@ -3,6 +3,7 @@ package com.example.pediatrapp.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -180,8 +181,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 }
 
                 createUserDoctor();
-                Intent intent = new Intent(this, ActivityMainPediatra.class);
-                startActivity(intent);
+
 
             }else if(type.equals("back")){
 
@@ -195,8 +195,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
                 datos += args[0];
                 createUserParent();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+
 
             }
 
@@ -206,6 +205,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
 
     public void createUserParent(){
 
+            Log.e("ENTRE AQUI HOLA", "eNTREEEEEEEEEEEEEEEEEEEEEEEE");
             String[] str = datos.split(",");
             String nombre = str[0];
             String cedula = str[1];
@@ -225,10 +225,11 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
 
+
                 FirebaseUser user = auth.getCurrentUser();
                 String id = user.getUid();
 
-                String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(id).child("Hijos").push().getKey();
+                String idH = FirebaseDatabase.getInstance().getReference().child("Padres").child(id).child("hijos").push().getKey();
                 Hijo hijo = new Hijo(idH, identH, fechaH, generoH, nombreH);
 
                 HashMap<String, Hijo> hijos = new HashMap<>();
@@ -278,6 +279,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                                 FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("Padres_asignados").child(id).setValue(id);
                                 FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idDoc).child("chats").child(idc).setValue(idc);
                                 FirebaseDatabase.getInstance().getReference().child("chat").child(idc).setValue(chat);
+                                cargar();
 
                             }
 
@@ -296,6 +298,20 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 });
 
+
+    }
+
+    public void cargar(){
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void cargarPed(){
+
+        Intent intent = new Intent(this, ActivityMainPediatra.class);
+        startActivity(intent);
 
     }
 
@@ -364,7 +380,7 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
                 //Se sube hash chat grupal. por revisar
                 FirebaseDatabase.getInstance().getReference().child("Chat_grupal").setValue(objChatGrupal);
                 FirebaseDatabase.getInstance().getReference().child("Pediatras").child(id).setValue(pediatra);
-
+                cargarPed();
 
             }).addOnFailureListener(e -> {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();

@@ -230,9 +230,8 @@ public class ParentFragment_ChatList extends Fragment {
 
     private void readChatGrupal() {
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.e(">>>", firebaseUser.getUid());
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(firebaseUser.getUid());
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Padres").child(id);
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

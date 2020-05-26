@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,8 @@ public class HistoriaPadreFragment extends Fragment {
         adapter = new HistoriaAdapter(this);
         lista.setAdapter(adapter);
         obtenerHijo();
-        nombre.setText(hijo.getNombre());
+        Log.e("YOOOOO", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Log.e("<<<<<<<<<<<HIJOOOOO", hijoId);
         obtenerRegistros();
 
         back.setOnClickListener(
@@ -111,14 +113,19 @@ public class HistoriaPadreFragment extends Fragment {
 
     public void obtenerHijo(){
 
-        String uid = FirebaseAuth.getInstance().getUid();
-        Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos").child(hijoId);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                hijo = dataSnapshot.getValue(Hijo.class);
-                nombre.setText(hijo.getNombre());
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    hijo = child.getValue(Hijo.class);
+                    Log.e("<<<<<<<<<<NULL?", String.valueOf(hijo == null));
+                    nombre.setText(hijo.getNombre());
+
+                }
 
             }
 
