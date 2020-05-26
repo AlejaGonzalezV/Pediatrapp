@@ -52,7 +52,6 @@ public class GraficoCurvasFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_grafico_curvas, container, false);
 
         lineaPrueba = (LineChart) view.findViewById(R.id.lineprueba);
-        listaCurvas = new ArrayList<>();
 
 
       cargarLineas(4);
@@ -68,6 +67,7 @@ public class GraficoCurvasFragment extends Fragment {
 
 
         Description ds = new Description();
+        ds.setTextSize(20);
         lineaPrueba.setDrawGridBackground(false);
         lineaPrueba.setBorderColor(Color.BLUE);
 
