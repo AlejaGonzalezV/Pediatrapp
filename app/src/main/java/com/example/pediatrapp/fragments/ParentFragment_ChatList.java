@@ -148,7 +148,6 @@ public class ParentFragment_ChatList extends Fragment {
                     }else{
 
                         crearChatGrupal();
-
                     }
 
                 }

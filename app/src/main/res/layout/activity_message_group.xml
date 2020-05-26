@@ -64,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
         android:padding="5dp">
 
 
@@ -80,7 +81,7 @@
             android:layout_marginRight="17dp"
             android:layout_toStartOf="@+id/btn_send"
             android:layout_toLeftOf="@id/btn_media"
-            android:background="@android:color/transparent"
+            android:background="#FFFFFF"
             android:hint="Escribe un mensaje"
             android:textSize="20sp" />
 
