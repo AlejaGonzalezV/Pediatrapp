@@ -39,6 +39,8 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         listaCurvas = new ArrayList<>();
 
         listaCurvas.add(new DatosCurva("24/05/2020", 12, 13, 14, 12));
+
+
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
 
         if(savedInstanceState == null){
@@ -52,7 +54,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
                     fragment = new TablaCurvasFragment(listaCurvas);
                     break;
                 case R.id.grafica:
-                    fragment = new GraficoCurvasFragment(listaCurvas);
+                    fragment = new GraficoCurvasFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();

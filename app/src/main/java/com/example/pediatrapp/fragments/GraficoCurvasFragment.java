@@ -34,9 +34,9 @@ public class GraficoCurvasFragment extends Fragment {
     private LineChart lineaPrueba;
     private ArrayList<DatosCurva>  listaCurvas;
 
-    public GraficoCurvasFragment (ArrayList<DatosCurva>  listaCurvas){
+    public GraficoCurvasFragment (){
 
-        this.listaCurvas = listaCurvas;
+
     }
 
 
