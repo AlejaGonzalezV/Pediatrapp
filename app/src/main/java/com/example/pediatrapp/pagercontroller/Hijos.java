@@ -1,5 +1,6 @@
 package com.example.pediatrapp.pagercontroller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.HijosAdapter;
 import com.example.pediatrapp.model.Hijo;
+import com.example.pediatrapp.view.ActivityMainPediatra;
+import com.example.pediatrapp.view.HistoriaClinicaActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,16 +53,19 @@ public class Hijos extends Fragment {
         Log.e("IDDDDDDDDD", String.valueOf(id == null));
         cargarHijos();
 
-
-
-
         return view;
     }
 
-    public void recibo(int id){
+    public void recibo(int ident){
 
-        Hijo hijo = (Hijo) listaHijos.getItemAtPosition(id);
+        Hijo hijo = (Hijo) listaHijos.getItemAtPosition(ident);
         identHijo = hijo.getId();
+        Intent intent = new Intent(getContext(), HistoriaClinicaActivity.class);
+        intent.putExtra("idUser", id);
+        intent.putExtra("idHijo", identHijo);
+        startActivity(intent);
+        Log.e("ESTE ES EL ID REAAAAAL", id);
+
         //Mandar al activity de hc
 
     }

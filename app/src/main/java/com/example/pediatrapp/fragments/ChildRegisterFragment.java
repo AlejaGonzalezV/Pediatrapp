@@ -189,17 +189,28 @@ public class ChildRegisterFragment extends Fragment implements View.OnClickListe
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
 
-                if((month+1) >= 10){
+                if((month+1) >= 10 && (day>=10)){
 
                     fechaNac = day + "/" + (month+1) + "/" + year;
                     date.setText(fechaNac);
 
-                } else {
+                } else if((month+1) >= 10 && (day<10)) {
+
+                    fechaNac = "0" + day + "/" + (month+1) + "/" + year;
+                    date.setText(fechaNac);
+
+                } else if((month+1) < 10 && (day>=10)){
 
                     fechaNac = day + "/" + "0" + (month+1) + "/" + year;
                     date.setText(fechaNac);
 
+                }else if((month+1) < 10 && (day<10)){
+
+                    fechaNac = "0" + day + "/" + "0" + (month+1) + "/" + year;
+                    date.setText(fechaNac);
+
                 }
+
 
                 Log.e("<<<<<<<<<<<", fechaNac);
 

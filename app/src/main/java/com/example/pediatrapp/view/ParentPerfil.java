@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -60,9 +61,13 @@ public class ParentPerfil extends AppCompatActivity {
 
                 for(DataSnapshot child: dataSnapshot.getChildren()){
 
+
+                    Log.e("<<<<<<<<<", "ENTRE A LA CARGA");
                     Padre padre = child.getValue(Padre.class);
                     if(padre.getId().equals(idParent)){
 
+
+                        Log.e("<<<<<<<<<", "ENTRE A LA CARGA2");
                         nombre_padre.setText(padre.getNombre());
                         storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
                                 uri -> {

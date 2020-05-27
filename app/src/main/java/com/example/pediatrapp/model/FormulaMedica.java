@@ -5,12 +5,12 @@ import java.time.LocalDate;
 public class FormulaMedica {
 
     private String posologia;
-    private LocalDate fecha;
+    private String fecha;
     private String id_pediatra;
     private String nombre_pediatra;
     private String firma_pediatra;
 
-    public FormulaMedica(String posologia, LocalDate fecha, String id_pediatra, String nombre_pediatra, String firma_pediatra) {
+    public FormulaMedica(String posologia, String fecha, String id_pediatra, String nombre_pediatra, String firma_pediatra) {
         this.posologia = posologia;
         this.fecha = fecha;
         this.id_pediatra = id_pediatra;
@@ -29,11 +29,11 @@ public class FormulaMedica {
         this.posologia = posologia;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

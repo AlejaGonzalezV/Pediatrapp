@@ -76,7 +76,6 @@ public class ParentFragment_Perfil extends Fragment {
 
                     if(child.getKey().equals(id)){
 
-
                         Padre padre = child.getValue(Padre.class);
                         cedula_padre.setText(padre.getCedula());
                         email_padre.setText(padre.getCorreo());
