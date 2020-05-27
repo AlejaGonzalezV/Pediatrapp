@@ -246,6 +246,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
             } else if(type.equals("add")){
 
+                formula = false;
                 data = "";
                 Bundle args1 = new Bundle();
                 args1.putString("ids", hijoId);
@@ -287,9 +288,6 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             }
 
         }else if(fragment.equals(diagnosticoFragment)){
-
-            formula = false;
-
 
             if(type.equals("formula")){
 
@@ -354,6 +352,16 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             FormulaMedica formula = new FormulaMedica(posologia, fechaFormula, idPed, nombrePed,firma);
             String idDiagnostico = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).push().getKey();
             Diagnostico diagnos = new Diagnostico(idDiagnostico, diagnostico,fechaR,idPed,nombrePed,titulo,formula);
+            Log.e("<<<<<<<<<<", "----------------------------------");
+            Log.e("<<<<<<<<<<", fechaFormula);
+            Log.e("<<<<<<<<<<", posologia);
+            Log.e("<<<<<<<<<<", titulo);
+            Log.e("<<<<<<<<<<", fechaR);
+            Log.e("<<<<<<<<<<", diagnostico);
+            Log.e("<<<<<<<<<<", nombrePed);
+            Log.e("<<<<<<<<<<", idPed);
+            Log.e("<<<<<<<<<<", firma);
+            Log.e("<<<<<<<<<<", "----------------------------------");
             FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).child(idDiagnostico).setValue(diagnos);
             Toast.makeText(this, "El registro se ha añadido con éxito", Toast.LENGTH_SHORT);
             showFragment(historiaPediatraFragment);
@@ -370,6 +378,14 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
             String idDiagnostico = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).push().getKey();
             Diagnostico diagnos = new Diagnostico(idDiagnostico, diagnostico,fechaR,idPed,nombrePed,titulo);
+            Log.e("<<<<<<<<<<", "----------------------------------");
+            Log.e("<<<<<<<<<<", idDiagnostico);
+            Log.e("<<<<<<<<<<", diagnostico);
+            Log.e("<<<<<<<<<<", fechaR);
+            Log.e("<<<<<<<<<<", idPed);
+            Log.e("<<<<<<<<<<", nombrePed);
+            Log.e("<<<<<<<<<<", titulo);
+            Log.e("<<<<<<<<<<", "----------------------------------");
             FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).child(idDiagnostico).setValue(diagnos);
             Toast.makeText(this, "El registro se ha añadido con éxito", Toast.LENGTH_SHORT);
             showFragment(historiaPediatraFragment);

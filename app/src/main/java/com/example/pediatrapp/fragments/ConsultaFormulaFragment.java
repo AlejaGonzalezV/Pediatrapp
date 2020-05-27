@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
@@ -65,6 +66,13 @@ public class ConsultaFormulaFragment extends Fragment {
         return view;
     }
 
+    public void volver(){
+
+        listener.onData(this, "back", null);
+        Toast.makeText(getContext(), "No hay una fórmula médica", Toast.LENGTH_SHORT).show();
+
+    }
+
     public void cargarDatos(){
 
         Query query = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(idHijo).child(idDiag).child("formula_medica");
@@ -73,8 +81,19 @@ public class ConsultaFormulaFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 FormulaMedica formula = dataSnapshot.getValue(FormulaMedica.class);
-                fecha.setText(formula.getFecha());
-                posologia.setText(formula.getFecha());
+
+                if(formula != null){
+
+                    fecha.setText(formula.getFecha());
+                    posologia.setText(formula.getPosologia());
+
+                }else {
+
+                    volver();
+
+
+                }
+
 
             }
 
