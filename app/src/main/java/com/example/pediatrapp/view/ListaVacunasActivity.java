@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,23 +8,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.ListaVacunasAdpater;
+import com.example.pediatrapp.model.Pediatra;
 import com.example.pediatrapp.model.Vacuna;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaVacunasActivity extends AppCompatActivity implements Serializable {
 
+    public static final int AGREGAR = 11;
+    public static final int ELIMINAR = 12;
+
     private Button agregarVaunaBTN,  backBTN;
     private TextView nombreHijo;
-    private RecyclerView recyclerView;
-    private ArrayList<Vacuna> listaVacunas;
+
+    private ListView listaVacunasAgregadas;
+    private List<Vacuna> listaVacunas;
+
     private ListaVacunasAdpater adapter;
     private String idhijo;
 
@@ -33,29 +48,27 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vacunas);
 
-       agregarVaunaBTN = findViewById(R.id.agregarVacunaLista);
-       nombreHijo = findViewById(R.id.nombreHijoVaList);
-       recyclerView = findViewById(R.id.listaVacunasAgregadas);
-       recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-       backBTN = findViewById(R.id.backVacunasLista);
-       listaVacunas = new ArrayList<>() ;
-       //Recibe nombre del Hijo
+        agregarVaunaBTN = findViewById(R.id.agregarVacunaLista);
+        nombreHijo = findViewById(R.id.nombreHijoVaList);
+        listaVacunasAgregadas = findViewById(R.id.listaVacunasAgregadas);
+        backBTN = findViewById(R.id.backVacunasLista);
+        listaVacunas = new ArrayList<>();
+
+        //Recibe nombre del Hijo
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
         idhijo = getIntent().getStringExtra("idhijo");
 
-         listaVacunas.add(new Vacuna("id", "res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020", "", ""));
+        listaVacunas.add(new Vacuna("id", "res","12","Asmet Salud ","PeditraA","Covid-19","24/05/2020", "", ""));
+
+        adapter = new ListaVacunasAdpater(this);
+        listaVacunasAgregadas.setAdapter(adapter);
 
         // Con este método se cargan todas las vacunas de la base de datos
         cargarVacunas();
 
-        //Actualiza la lista de vacunas cuando se agraga una nueva
-        actualizarVacunas();
-
        agregarVaunaBTN.setOnClickListener(
 
                (v)->{
-
-                  // AddVacunaActivity añadir = new AddVacunaActivity(this);
 
                    Intent i= new Intent(this, AddVacunaActivity.class);
                    startActivityForResult(i, 11);
@@ -67,10 +80,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
                 (v)->{
                     this.finish();
                 }
-
         );
-
-
 
     }
 
@@ -79,12 +89,27 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 11 && resultCode == RESULT_OK) {
+        if (requestCode == AGREGAR && resultCode == RESULT_OK) {
 
             if (data != null) {
 
                 agregarVacunaALista(data);
             }
+        }else if(requestCode == ELIMINAR && resultCode == RESULT_OK){
+
+            eliminarVacuna(data);
+        }
+    }
+
+    private void eliminarVacuna(Intent data) {
+
+        Vacuna vacuna  =   (Vacuna) data.getExtras().getSerializable("marcador");
+
+        if(vacuna != null) {
+
+            adapter.remover(vacuna);
+            FirebaseDatabase.getInstance().getReference().child("Vacunas").child(idhijo).child("Vacunas").child(vacuna.getId()).removeValue();
+            Toast.makeText(this,"Se elimino: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -92,19 +117,29 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     public void cargarVacunas(){
 
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Vacunas").child(idhijo).child("Vacunas");
 
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-    }
+                        Vacuna vac = snapshot.getValue(Vacuna.class);
+                        if (vac != null) {
 
-    public void actualizarVacunas(){
+                            adapter.addVacuna(vac);
 
+                        }
 
-        if(listaVacunas.size() != 0) {
+                    }
+                }
 
-            adapter = new ListaVacunasAdpater(listaVacunas, this);
-            recyclerView.setAdapter(adapter);
-        }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
 
     }
@@ -113,15 +148,15 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     public void agregarVacunaALista(Intent data){
 
-        //Vacuna vacuna =  (Vacuna) data.getExtras().getSerializable("nuevaVacuna");
-
         Vacuna vacuna  =   (Vacuna) data.getExtras().getSerializable("marcador");
 
         if(vacuna != null) {
-            listaVacunas.add(vacuna);
-           ListaVacunasAdpater  adapter2 = new ListaVacunasAdpater( listaVacunas,this);
-           setAdapter(adapter2);
-            actualizarVacunas();
+
+            String idc = FirebaseDatabase.getInstance().getReference().child("Vacunas").child(idhijo).child("Vacunas").push().getKey();
+            vacuna.setId(idc);
+            adapter.addVacuna(vacuna);
+            FirebaseDatabase.getInstance().getReference().child("Vacunas").child(idhijo).child("Vacunas").child(idc).setValue(vacuna);
+
             Toast.makeText(this,"Se añadióZZZZZZ: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }else{
 
@@ -135,10 +170,6 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
 
     public void setAdapter(ListaVacunasAdpater adapter) {
         this.adapter = adapter;
-    }
-
-    public void setRecyclerView(RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
     }
 
     public Button getAgregarVaunaBTN() {

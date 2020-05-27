@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class AddVacunaActivity extends AppCompatActivity implements Serializable {
 
     private Spinner nombreVacunaSpinner,dosisSpinner, edadSpinner;
-    private EditText nombreAplicadorET, ipsET,fechaET ;
+    private EditText nombreAplicadorET, ipsET,fechaET, loteET, labET ;
     private Button guardarBTN, cancelarBTN, backBTN;
     private ArrayList<String> listaNombresVacunas, listaEdades, listaDosis;
 
@@ -50,6 +50,8 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
         guardarBTN = findViewById(R.id.guardarBTN);
         cancelarBTN = findViewById(R.id.cancelarBTN);
         backBTN = findViewById(R.id.backañadirVacunaBTN);
+        loteET = findViewById(R.id.loteET);
+        labET = findViewById(R.id.labET);
         listaNombresVacunas = new ArrayList<>();
         listaDosis = new ArrayList<>();
         listaEdades = new ArrayList<>();
@@ -61,12 +63,9 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
         listaDosis.add("Seleccionar");
         listaEdades.add("Seleccionar");
 
-        for (int i= 1; i<18;i++){
-
-            listaNombresVacunas.add("Vacuna: "+ i);
-            listaEdades.add(""+i);
-            listaDosis.add("dosis: "+i);
-        }
+        ListarDosis();
+        ListarEdad();
+        ListarVacunas();
 
         datosSpinnerDosis();
         datosSpinnerEdad();
@@ -76,11 +75,54 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
     }
 
+    public void ListarVacunas(){
 
+        listaNombresVacunas.add("Tuberculosis B.C.G.");
+        listaNombresVacunas.add("Hepatitis B");
+        listaNombresVacunas.add("Polio (Oral-IM)");
+        listaNombresVacunas.add("PENTAVALENTE");
+        listaNombresVacunas.add("Rotavirus");
+        listaNombresVacunas.add("Neumococo");
+        listaNombresVacunas.add("Influenza");
+        listaNombresVacunas.add("Sarampión Rubéola Paperas (SRP)");
+        listaNombresVacunas.add("Fiebre Amarilla");
+        listaNombresVacunas.add("Hepatitis A");
+        listaNombresVacunas.add("Difteria - Tosferina Tétano (DPT)");
+        listaNombresVacunas.add("VPH");
+
+
+    }
+
+    public void ListarEdad(){
+
+        listaEdades.add("Recién Nacido");
+        listaEdades.add("2 Meses");
+        listaEdades.add("4 Meses");
+        listaEdades.add("6 Meses");
+        listaEdades.add("7 Meses");
+        listaEdades.add("12 Meses");
+        listaEdades.add("18 Meses");
+        listaEdades.add("5 años");
+        listaEdades.add("9 años o más");
+
+    }
+
+    public void ListarDosis(){
+
+        listaDosis.add("Única");
+        listaDosis.add("Recién Nacido");
+        listaDosis.add("Primera");
+        listaDosis.add("Segunda");
+        listaDosis.add("Tercera");
+        listaDosis.add("Refuerzo");
+        listaDosis.add("Anual");
+        listaDosis.add("Primer Refuerzo");
+        listaDosis.add("Segundo Refuerzo");
+
+    }
     //Meétodo que contiene los botones
 
     public void darFuncionalidadBotones() {
-
 
         guardarBTN.setOnClickListener(
 
@@ -90,19 +132,16 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                             LocalDate localDate = (LocalDate) LocalDate.now();
 
-                            Vacuna laVacuna = new Vacuna("id", dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, fechaET.getText().toString(), "", "");
+                            Vacuna laVacuna = new Vacuna("id", dosisSelected, edadSelected, ipsET.getText().toString(), nombreAplicadorET.getText().toString(), vacunaSelected, fechaET.getText().toString(), labET.getText().toString(), loteET.getText().toString());
 
                             Intent i = new Intent();
                             i.putExtra("marcador", laVacuna);
                             setResult(RESULT_OK, i);
                             finish();
-
-                            // Toast.makeText(this, "Se añadió: " + laVacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
         );
-
 
         cancelarBTN.setOnClickListener(
 
@@ -125,7 +164,6 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
 
                     showDatePickerDialog();
                 }
-
         );
     }
 
@@ -137,7 +175,6 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             String selectedDate =  day + "/" + (month+1) + "/" + year;
 
             Log.e(">>>>>>>", selectedDate);
-            //Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
 
             fechaET.setText(selectedDate);
         });
@@ -153,6 +190,8 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
         String ips = ipsET.getText().toString();
         String aplicador = nombreAplicadorET.getText().toString();
         String fecha= fechaET.getText().toString();
+        String lote = loteET.getText().toString();
+        String lab = labET.getText().toString();
 
         if(dosisSelected.equals("Seleccionar")){
 
@@ -191,12 +230,22 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             retorno = false;
 
         }
+        if(lab.isEmpty()){
+
+            labET.setError("Vacío");
+            retorno = false;
+
+        }
+        if(lote.isEmpty()){
+
+            loteET.setError("Vacío");
+            retorno = false;
+
+        }
         return retorno;
     }
 
-
     // Metodo que toma dato de Spinner Vacunas
-
     public void datosSpinnerVacunas(){
         ArrayAdapter<CharSequence>  adapterNombreVacunas = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, listaNombresVacunas);
         nombreVacunaSpinner.setAdapter(adapterNombreVacunas);
@@ -206,7 +255,6 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-
                 vacunaSelected = parent.getItemAtPosition(position).toString();
             }
 

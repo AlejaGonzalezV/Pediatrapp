@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -73,8 +75,6 @@ public class HijosVacunasAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View root = inflater.inflate(R.layout.list_item_hijos, null);
 
-        Hijo hijo = hijos.get(position);
-
         TextView nombreHijoVa = root.findViewById(R.id.nombreHijoTV);
         TextView edadHijoVa = root.findViewById(R.id.edadHijoTV);
         Button verVa = root.findViewById(R.id.verHijoBTN);
@@ -88,21 +88,42 @@ public class HijosVacunasAdapter extends BaseAdapter {
             imagenHijava.setImageResource(R.drawable.boy);
         }
 
-        nombreHijoVa.setText(""+ hijos.get(position).getNombre());
+        nombreHijoVa.setText(hijos.get(position).getNombre());
         edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
 
+        verVa.setOnClickListener(
+
+                (v)->{
+                    Intent intent = new Intent(parent.getContext(), ListaVacunasActivity.class);
+                    intent.putExtra("idhijo", hijos.get(position).getId());
+                    intent.putExtra("elnombre", hijos.get(position).getNombre());
+                    parent.getContext().startActivity(intent);
 
 
-//        holder.verVa.setOnClickListener(
+                }
+        );
+
+//        ListaHijosVacuna.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //
-//                (v)->{
-//                    Intent intent = new Intent(context, ListaVacunasActivity.class);
-//                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
-//                    context.startActivity(intent);
+//                Hijo h = (Hijo) adapter.getItem(i);
+//                new Thread(
+//                        () ->{
 //
+//                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
+//                            intent.putExtra("idhijo", h.getId());
+//                            intent.putExtra("elnombre", h.getNombre());
+//                            Log.e(">>>", "inicioIntent");
 //
-//                }
-//        );
+//                            VacunasActivity.this.startActivity(intent);
+//                        }
+//                ).start();
+//
+//            }
+//        });
+
+
 
         return root ;
     }

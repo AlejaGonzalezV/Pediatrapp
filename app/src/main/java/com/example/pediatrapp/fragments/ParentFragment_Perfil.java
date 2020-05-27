@@ -3,6 +3,7 @@ package com.example.pediatrapp.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,14 +64,48 @@ public class ParentFragment_Perfil extends Fragment {
         agregarHijo = view.findViewById(R.id.agregarHijo);
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
+        Log.e("<<<<<<<<", "Entra al oncreate");
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("Padres");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    if(child.getKey().equals(id)){
+
+
+                        Padre padre = child.getValue(Padre.class);
+                        cedula_padre.setText(padre.getCedula());
+                        email_padre.setText(padre.getCorreo());
+                        numeroTel.setText(padre.getTelefono());
+                        nombre_padre.setText(padre.getNombre());
+                        storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                uri -> {
+                                    Glide.with(getContext()).load(uri).centerCrop().into(padre_foto);
+                                }
+                        );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         cerrarSesion.setOnClickListener(
 
                 (v)-> {
 
-                    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                    Query query = FirebaseDatabase.getInstance().getReference().child("chat");
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    Query query2 = FirebaseDatabase.getInstance().getReference().child("chat");
+                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -93,8 +128,8 @@ public class ParentFragment_Perfil extends Fragment {
                         }
                     });
 
-                    Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    Query query3 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                    query3.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -153,7 +188,9 @@ public class ParentFragment_Perfil extends Fragment {
                     fragmentFoto = new ChangePhotoFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.remove(this);
                     fragmentTransaction.replace(R.id.fragmentContainer2, fragmentFoto);
+
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
@@ -161,40 +198,6 @@ public class ParentFragment_Perfil extends Fragment {
                 }
 
         );
-
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        Query query = FirebaseDatabase.getInstance().getReference().child("Padres");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                    if(child.getKey().equals(id)){
-
-                        Padre padre = child.getValue(Padre.class);
-                        cedula_padre.setText(padre.getCedula());
-                        email_padre.setText(padre.getCorreo());
-                        numeroTel.setText(padre.getTelefono());
-                        nombre_padre.setText(padre.getNombre());
-                        storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
-                                uri -> {
-                                    Glide.with(getContext()).load(uri).centerCrop().into(padre_foto);
-                                }
-                        );
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         return view;
     }
