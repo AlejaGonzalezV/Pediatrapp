@@ -64,7 +64,7 @@ public class HistoriaAdapter extends BaseAdapter {
 
                     (v) -> {
 
-
+                    historiaPed.recibo(position);
 
                     }
 

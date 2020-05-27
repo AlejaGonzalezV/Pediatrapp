@@ -56,8 +56,6 @@ public class HistoriaPadreFragment extends Fragment {
         adapter = new HistoriaAdapter(this);
         lista.setAdapter(adapter);
         obtenerHijo();
-        Log.e("YOOOOO", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Log.e("<<<<<<<<<<<HIJOOOOO", hijoId);
         obtenerRegistros();
 
         back.setOnClickListener(
@@ -122,7 +120,6 @@ public class HistoriaPadreFragment extends Fragment {
                 for(DataSnapshot child: dataSnapshot.getChildren()){
 
                     hijo = child.getValue(Hijo.class);
-                    Log.e("<<<<<<<<<<NULL?", String.valueOf(hijo == null));
                     nombre.setText(hijo.getNombre());
 
                 }

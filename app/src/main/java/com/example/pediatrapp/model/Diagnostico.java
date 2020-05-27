@@ -11,9 +11,9 @@ public class Diagnostico {
     private String id_pediatra;
     private String nombre_pediatra;
     private String titulo;
-    private HashMap<String, FormulaMedica> formula_medica;
+    private FormulaMedica formula_medica;
 
-    public Diagnostico(String id, String diagnostico, String fecha, String id_pediatra, String nombre_pediatra, String titulo, HashMap<String, FormulaMedica> formula_medica) {
+    public Diagnostico(String id, String diagnostico, String fecha, String id_pediatra, String nombre_pediatra, String titulo, FormulaMedica formula_medica) {
         this.diagnostico = diagnostico;
         this.fecha = fecha;
         this.id_pediatra = id_pediatra;
@@ -51,11 +51,11 @@ public class Diagnostico {
         this.titulo = titulo;
     }
 
-    public HashMap<String, FormulaMedica> getFormula_medica() {
+    public FormulaMedica getFormula_medica() {
         return formula_medica;
     }
 
-    public void setFormula_medica(HashMap<String, FormulaMedica> formula_medica) {
+    public void setFormula_medica(FormulaMedica formula_medica) {
         this.formula_medica = formula_medica;
     }
 
