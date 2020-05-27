@@ -14,6 +14,7 @@ import com.example.pediatrapp.fragments.DiagnosticoFragment;
 import com.example.pediatrapp.fragments.FormulaFragment;
 import com.example.pediatrapp.fragments.HistoriaPadreFragment;
 import com.example.pediatrapp.fragments.HistoriaPediatraFragment;
+import com.example.pediatrapp.fragments.HistorialesPediatraFragment;
 import com.example.pediatrapp.fragments.ListaHijosFragment;
 import com.example.pediatrapp.model.Diagnostico;
 import com.example.pediatrapp.model.FormulaMedica;
@@ -34,7 +35,7 @@ import android.widget.Toast;
 public class HistoriaClinicaActivity extends AppCompatActivity implements OnDataSubmitted {
 
     private Fragment historiaPadreFragment, historiaPediatraFragment, diagnosticoFragment, formulaFragment,
-            consultaRegistroFragment, consultaFormulaFragment, listaHijosFragment;
+            consultaRegistroFragment, consultaFormulaFragment, listaHijosFragment, historiales;
 
     private String hijoId;
     private String padreId;
@@ -78,6 +79,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         listaHijosFragment = new ListaHijosFragment();
         ((ListaHijosFragment) listaHijosFragment).setListener(this);
 
+        historiales = new HistorialesPediatraFragment();
+        ((HistorialesPediatraFragment) historiales).setListener(this);
+
 
 
         findUser();
@@ -109,16 +113,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                     if(child.getKey().equals(id)){
 
-                        pediatra = child.getValue(Pediatra.class);
                         tipo = "Pediatra";
-                        Bundle args = new Bundle();
-
-                        args.putString("ids", padreId+"/"+hijoId);
-                        historiaPediatraFragment.setArguments(args);
-
-
-
-                        showFragment(historiaPediatraFragment);
+                        Log.e("SOY PEDIATRAAAAAA", "PEDIATRAAAAA");
+                        showFragment(historiales);
 
                         /*
                         Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(padreId);
@@ -242,7 +239,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
             } else if(type.equals("back")){
 
-                this.finish();
+                showFragment(historiales);
 
             } else if(type.equals("add")){
 
@@ -330,6 +327,29 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             }
 
 
+        }else if(fragment.equals(historiales)){
+
+            if(type.equals("historia")){
+
+                Bundle args1 = new Bundle();
+                args1.putString("ids", padreId+"/"+hijoId);
+                historiaPediatraFragment.setArguments(args1);
+                showFragment(historiaPediatraFragment);
+
+            }else if(type.equals("vacunas")){
+
+                //Llamar a las vacunas
+
+            }else if(type.equals("curvas")){
+
+                //Llamar las curvas
+
+            }else if(type.equals("back")){
+
+                finish();
+
+            }
+
         }
 
 
@@ -352,16 +372,6 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             FormulaMedica formula = new FormulaMedica(posologia, fechaFormula, idPed, nombrePed,firma);
             String idDiagnostico = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).push().getKey();
             Diagnostico diagnos = new Diagnostico(idDiagnostico, diagnostico,fechaR,idPed,nombrePed,titulo,formula);
-            Log.e("<<<<<<<<<<", "----------------------------------");
-            Log.e("<<<<<<<<<<", fechaFormula);
-            Log.e("<<<<<<<<<<", posologia);
-            Log.e("<<<<<<<<<<", titulo);
-            Log.e("<<<<<<<<<<", fechaR);
-            Log.e("<<<<<<<<<<", diagnostico);
-            Log.e("<<<<<<<<<<", nombrePed);
-            Log.e("<<<<<<<<<<", idPed);
-            Log.e("<<<<<<<<<<", firma);
-            Log.e("<<<<<<<<<<", "----------------------------------");
             FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).child(idDiagnostico).setValue(diagnos);
             Toast.makeText(this, "El registro se ha añadido con éxito", Toast.LENGTH_SHORT);
             showFragment(historiaPediatraFragment);
@@ -378,14 +388,6 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
             String idDiagnostico = FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).push().getKey();
             Diagnostico diagnos = new Diagnostico(idDiagnostico, diagnostico,fechaR,idPed,nombrePed,titulo);
-            Log.e("<<<<<<<<<<", "----------------------------------");
-            Log.e("<<<<<<<<<<", idDiagnostico);
-            Log.e("<<<<<<<<<<", diagnostico);
-            Log.e("<<<<<<<<<<", fechaR);
-            Log.e("<<<<<<<<<<", idPed);
-            Log.e("<<<<<<<<<<", nombrePed);
-            Log.e("<<<<<<<<<<", titulo);
-            Log.e("<<<<<<<<<<", "----------------------------------");
             FirebaseDatabase.getInstance().getReference().child("Historia_clinica").child(hijoId).child(idDiagnostico).setValue(diagnos);
             Toast.makeText(this, "El registro se ha añadido con éxito", Toast.LENGTH_SHORT);
             showFragment(historiaPediatraFragment);
