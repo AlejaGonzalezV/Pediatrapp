@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +29,9 @@ import com.example.pediatrapp.view.VacunasActivity;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +74,7 @@ public class HijosVacunasAdapter extends BaseAdapter {
         return position;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -89,7 +95,24 @@ public class HijosVacunasAdapter extends BaseAdapter {
         }
 
         nombreHijoVa.setText(hijos.get(position).getNombre());
-        edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaN = LocalDate.parse(hijos.get(position).getNacimiento(), fmt);
+        LocalDate hoy = LocalDate.now();
+
+        Period periodo = Period.between(fechaN, hoy);
+        String edad1 = String.valueOf(periodo.getYears());
+
+        if(edad1.equals("0")){
+
+            edadHijoVa.setText(String.valueOf(periodo.getMonths()) + " Meses");
+
+        }else {
+
+            edadHijoVa.setText(String.valueOf(periodo.getYears()) + " Años y " + String.valueOf(periodo.getMonths())+ " meses");
+
+        }
+
+
 
         verVa.setOnClickListener(
 

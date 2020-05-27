@@ -5,12 +5,12 @@ public class FCMMessage {
     private String to;
     private Mensaje data;
 
+    public FCMMessage() {
+    }
+
     public FCMMessage(String to, Mensaje data) {
         this.to = to;
         this.data = data;
-    }
-
-    public FCMMessage() {
     }
 
     public String getTo() {
@@ -28,4 +28,6 @@ public class FCMMessage {
     public void setData(Mensaje data) {
         this.data = data;
     }
+
+
 }

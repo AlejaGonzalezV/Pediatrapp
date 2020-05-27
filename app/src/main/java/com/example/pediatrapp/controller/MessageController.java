@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,13 +41,8 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -334,6 +327,7 @@ public class MessageController implements View.OnClickListener{
         FCMMessage fcmMessage = new FCMMessage();
         fcmMessage.setTo("/topics/"+roomChat);
         fcmMessage.setData(message);
+
         Gson gson = new Gson();
         String json = gson.toJson(fcmMessage);
 

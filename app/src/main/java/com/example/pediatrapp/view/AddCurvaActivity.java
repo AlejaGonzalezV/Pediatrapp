@@ -1,5 +1,6 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,14 +19,21 @@ import android.widget.Toast;
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.dialog.DatePickerFragment;
 import com.example.pediatrapp.model.DatosCurva;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AddCurvaActivity extends AppCompatActivity {
 
     private EditText peso, medidaCabeza, fecha, talla;
-    private Spinner edadSpinner;
-    private String edadSelected;
+    private String nacimiento;
     private ArrayList<String> listaEdades;
     private Button guardarBTN, cancelarBTN, backBTN;
 
@@ -37,15 +45,16 @@ public class AddCurvaActivity extends AppCompatActivity {
         peso = findViewById(R.id.pesoCurvaET);
         medidaCabeza =  findViewById(R.id.alturaCurvaET);
         fecha = findViewById(R.id.fechaCurvaET);
-        edadSpinner = findViewById(R.id.spinnerEdadCurva);
         guardarBTN = findViewById(R.id.guardarCurvaBTN);
         backBTN = findViewById(R.id.backAddCurva);
         cancelarBTN = findViewById(R.id.cancelarCurvaBTN);
         talla = findViewById(R.id.tallaCurvaET2);
 
-        edadSelected = "";
+        nacimiento = getIntent().getStringExtra("nacimiento");
+
         listaEdades = new ArrayList<>();
         listaEdades.add("Seleccionar");
+
 
 
 
@@ -54,13 +63,10 @@ public class AddCurvaActivity extends AppCompatActivity {
             listaEdades.add(""+i);
 
         }
-
-        datosSpinnerEdad();
         darFuncionalidadBotones();
 
-
-
     }
+
 
     //Meétodo que contiene los botones
 
@@ -76,7 +82,24 @@ public class AddCurvaActivity extends AppCompatActivity {
 
                             if( valiTiposDatos()){
 
-                            DatosCurva laCurva = new DatosCurva(fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),Integer.parseInt(edadSelected) );
+                                DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                LocalDate fechaN = LocalDate.parse(nacimiento, fmt);
+                                LocalDate hoy = LocalDate.parse(fecha.getText().toString(), fmt);;
+
+                                Period periodo = Period.between(fechaN, hoy);
+                                String edad1 = String.valueOf(periodo.getYears());
+                                DatosCurva laCurva;
+                                Log.e(">>>", edad1);
+
+                                if(edad1.equals("0")){
+
+                                    laCurva = new DatosCurva("id", fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),periodo.getMonths(), DatosCurva.MESES );
+
+                                }else {
+                                    laCurva = new DatosCurva("id", fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),periodo.getYears(), DatosCurva.AÑOS);
+                                    
+                                }
+
 
                             Intent i = new Intent();
                             i.putExtra("laCurva", laCurva);
@@ -119,12 +142,38 @@ public class AddCurvaActivity extends AppCompatActivity {
 
         DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker, year, month, day) -> {
             // +1 because January is zero
-            String selectedDate =  day + "/" + (month+1) + "/" + year;
+            String dateSelected = "";
 
-            Log.e(">>>>>>>", selectedDate);
-            //Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+            if((month+1) >= 10 && (day>=10)){
 
-            fecha.setText(selectedDate);
+                dateSelected = day + "/" + (month+1) + "/" + year;
+                fecha.setText(dateSelected);
+
+            } else if((month+1) >= 10 && (day<10)) {
+
+                dateSelected = "0" + day + "/" + (month+1) + "/" + year;
+                fecha.setText(dateSelected);
+
+            } else if((month+1) < 10 && (day>=10)){
+
+                dateSelected = day + "/" + "0" + (month+1) + "/" + year;
+                fecha.setText(dateSelected);
+
+            }else if((month+1) < 10 && (day<10)){
+
+                dateSelected = "0" + day + "/" + "0" + (month+1) + "/" + year;
+                fecha.setText(dateSelected);
+
+            }
+
+
+
+//            String selectedDate =  day + "/" + (month+1) + "/" + year;
+//
+//            Log.e(">>>>>>>", selectedDate);
+//            //Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+//
+//            fecha.setText(selectedDate);
         });
 
 
@@ -171,12 +220,6 @@ public class AddCurvaActivity extends AppCompatActivity {
         String fechaE= fecha.getText().toString();
         String tallaE = talla.getText().toString();
 
-        if(edadSelected.equals("Seleccionar")){
-
-            ((TextView)edadSpinner.getSelectedView()).setError("Vacío");
-            ((TextView)edadSpinner.getSelectedView()).setTextColor(Color.RED);
-            retorno = false;
-        }
         if(fechaE.isEmpty()){
 
             fecha.setError("Vacío");
@@ -204,27 +247,6 @@ public class AddCurvaActivity extends AppCompatActivity {
         return retorno;
     }
 
-
-    public void datosSpinnerEdad(){
-
-        ArrayAdapter<CharSequence> adapterEdadess = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, listaEdades);
-        edadSpinner.setAdapter(adapterEdadess);
-        edadSpinner.setSelection(0);
-        edadSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-
-                edadSelected = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     /* Intent i = new Intent();
                             i.putExtra("marcador", laVacuna);

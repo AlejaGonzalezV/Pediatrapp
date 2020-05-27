@@ -16,13 +16,16 @@ public class FCMService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         JSONObject object = new JSONObject(remoteMessage.getData());
+
         Gson gson = new Gson();
         Mensaje mensaje = gson.fromJson(object.toString(), Mensaje.class);
+
         if(mensaje.getNombre_usuario() != null){
             NotificationUtils.createNotificationG(this, mensaje.getNombre_usuario()+": "+mensaje.getBody());
         }else{
             NotificationUtils.createNotification(this, mensaje.getBody());
         }
+
 
     }
 }

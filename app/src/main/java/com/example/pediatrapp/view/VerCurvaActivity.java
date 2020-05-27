@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.model.DatosCurva;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class VerCurvaActivity extends AppCompatActivity {
 
     private DatosCurva curva;
     private TextView fecha, peso, talla, cabeza, edad;
     private Button salirBtn, backBTN, eliminar;
+    private String idhijo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +32,13 @@ public class VerCurvaActivity extends AppCompatActivity {
         backBTN =  findViewById(R.id.backVerCurva);
 
         curva = (DatosCurva) getIntent().getExtras().getSerializable("verCurva");
-
+        idhijo = getIntent().getStringExtra("idhijo");
 
         fecha.setText(curva.getFecha());
         peso.setText(""+curva.getPeso());
         talla.setText(""+curva.getTalla());
         cabeza.setText(""+curva.getMedida_cabeza());
-        edad.setText(""+curva.getEdad());
+        edad.setText(""+curva.getEdad() +" "+ curva.getEdadComplemento());
 
 
 
@@ -44,6 +46,9 @@ public class VerCurvaActivity extends AppCompatActivity {
 
                 (v)->{
 
+                    //eliminar de la base de datos y finish
+                    FirebaseDatabase.getInstance().getReference().child("Curvas_crecimiento").child(idhijo).child("Curvas_crecimiento").child(curva.getId()).removeValue();
+                    this.finish();
 
                 }
         );

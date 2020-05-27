@@ -1,19 +1,28 @@
 package com.example.pediatrapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.HijosCurvasAdapter;
 import com.example.pediatrapp.adapter.HijosVacunasAdapter;
 import com.example.pediatrapp.model.Hijo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -21,10 +30,9 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
 
     private Button backBTN;
     private String nombreHijo;
-    private RecyclerView recycler;
-
-    private ArrayList<Hijo> listaHijos;
+    private ListView listHijosCurvas;
     private HijosCurvasAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +42,11 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
 
         nombreHijo = "";
 
-        recycler = findViewById(R.id.recyclerHijosCurvas);
-        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        listaHijos = new ArrayList<>();
-        adapter = new HijosCurvasAdapter(this,listaHijos );
-        recycler.setAdapter(adapter);
+        listHijosCurvas = findViewById(R.id.listHijosCurvas);
+        adapter = new HijosCurvasAdapter();
+        listHijosCurvas.setAdapter(adapter);
 
-        listaHijos.add(new Hijo("", "", "String nacimiento", "Masculino", "Jair"));
-
-
-
+       readHijos();
 
         backBTN.setOnClickListener(
                 (v)->{
@@ -52,6 +55,30 @@ public class CurvasCrecimientoActivity extends AppCompatActivity {
 
         );
 
+    }
+
+    private void readHijos() {
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    Hijo hijo = child.getValue(Hijo.class);
+                    adapter.addHijo(hijo);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

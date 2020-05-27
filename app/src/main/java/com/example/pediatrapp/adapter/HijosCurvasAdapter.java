@@ -2,14 +2,17 @@ package com.example.pediatrapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pediatrapp.R;
@@ -17,98 +20,126 @@ import com.example.pediatrapp.model.Hijo;
 import com.example.pediatrapp.view.CurvasGraficoActivity;
 import com.example.pediatrapp.view.ListaVacunasActivity;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
-public class HijosCurvasAdapter extends  RecyclerView.Adapter<HijosCurvasAdapter.ViewHolderCurvasHijo>{
+public class HijosCurvasAdapter extends BaseAdapter {
 
+    private ArrayList<Hijo> hijos;
 
-    private Context context;
-    private View.OnClickListener listener;
-    private List<Hijo> hijos;
-
-    public HijosCurvasAdapter(Context context, List<Hijo> hijos) {
-        this.context = context;
-        this.hijos = hijos;
-
+    public HijosCurvasAdapter() {
+        this.hijos = new ArrayList<>();
     }
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public List<Hijo> getHijos() {
+    public ArrayList<Hijo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(List<Hijo> hijos) {
+    public void setHijos(ArrayList<Hijo> hijos) {
         this.hijos = hijos;
+        notifyDataSetChanged();
     }
 
-    @NonNull
-    @Override
-    public HijosCurvasAdapter.ViewHolderCurvasHijo onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_hijos, null, false);
-
-        return new HijosCurvasAdapter.ViewHolderCurvasHijo(view);
+    public void addHijo(Hijo hijo){
+        hijos.add(hijo);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HijosCurvasAdapter.ViewHolderCurvasHijo holder, int position) {
+    public int getCount() {
+        return hijos.size();
+    }
 
-        holder.nombreHijoVa.setText(""+ hijos.get(position).getNombre());
-        holder.edadHijoVa.setText("Edad: "+ "No hay edad hay que calcularla :v");
+    @Override
+    public Object getItem(int position) {
+        return hijos.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View root = inflater.inflate(R.layout.list_item_hijos, null);
+
+        TextView nombreHijoVa = root.findViewById(R.id.nombreHijoTV);
+        TextView edadHijoVa = root.findViewById(R.id.edadHijoTV);
+        Button verVa = root.findViewById(R.id.verHijoBTN);
+        ImageView imagenHijava = root.findViewById(R.id.fotoHijo);
 
         if(hijos.get(position).getSexo().equals("Femenino")){
 
-            holder.imagenHijava.setImageResource(R.drawable.girl);
+            imagenHijava.setImageResource(R.drawable.girl);
         }else{
 
-            holder.imagenHijava.setImageResource(R.drawable.boy);
+            imagenHijava.setImageResource(R.drawable.boy);
         }
-       // Glide.with(context).load(
-             //   hijos.get(position).get
-      //  ).centerCrop().into(holder.imagenHijava);
 
-        holder.verVa.setOnClickListener(
+        nombreHijoVa.setText(hijos.get(position).getNombre());
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaN = LocalDate.parse(hijos.get(position).getNacimiento(), fmt);
+        LocalDate hoy = LocalDate.now();
+
+        Period periodo = Period.between(fechaN, hoy);
+        String edad1 = String.valueOf(periodo.getYears());
+
+        if(edad1.equals("0")){
+
+            edadHijoVa.setText(String.valueOf(periodo.getMonths()) + " Meses");
+
+
+        }else {
+
+            edadHijoVa.setText(String.valueOf(periodo.getYears()) + " Años y " + String.valueOf(periodo.getMonths())+ " meses");
+
+        }
+
+
+
+        verVa.setOnClickListener(
 
                 (v)->{
+                    Intent intent = new Intent(parent.getContext(), CurvasGraficoActivity.class);
+                    intent.putExtra("idhijo", hijos.get(position).getId());
+                    intent.putExtra("elnombre", hijos.get(position).getNombre());
+                    intent.putExtra("nacimiento", hijos.get(position).getNacimiento());
+                    parent.getContext().startActivity(intent);
 
-                    Intent intent = new Intent(context, CurvasGraficoActivity.class);
-                    intent.putExtra("elnombre", holder.nombreHijoVa.getText().toString());
-                    context.startActivity(intent);
+
 
                 }
         );
 
+//        ListaHijosVacuna.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                Hijo h = (Hijo) adapter.getItem(i);
+//                new Thread(
+//                        () ->{
+//
+//                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
+//                            intent.putExtra("idhijo", h.getId());
+//                            intent.putExtra("elnombre", h.getNombre());
+//                            Log.e(">>>", "inicioIntent");
+//
+//                            VacunasActivity.this.startActivity(intent);
+//                        }
+//                ).start();
+//
+//            }
+//        });
+
+        return root ;
     }
 
-    @Override
-    public int getItemCount() {
-        return hijos.size();
-    }
 
-
-
-
-    public class  ViewHolderCurvasHijo extends RecyclerView.ViewHolder{
-
-        TextView nombreHijoVa;
-        TextView edadHijoVa;
-        Button verVa;
-        ImageView imagenHijava;
-
-
-        public ViewHolderCurvasHijo(@NonNull View itemView) {
-            super(itemView);
-
-            nombreHijoVa = itemView.findViewById(R.id.nombreHijoTV);
-            edadHijoVa = itemView.findViewById(R.id.edadHijoTV);
-            verVa = itemView.findViewById(R.id.verHijoBTN);
-            imagenHijava = itemView.findViewById(R.id.fotoHijo);
-        }
-    }
 }

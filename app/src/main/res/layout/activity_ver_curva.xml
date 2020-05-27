@@ -18,28 +18,16 @@
         app:srcCompat="@drawable/fondolistas" />
 
 
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="74dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/curva"
-        app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_Curvass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="60dp"
 
-        android:text="Ver Curva"
         android:fontFamily="@font/lato_bold"
+        android:text="Datos de las Medidas"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,161 +58,151 @@
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Fecha: "
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView25"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="48dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Edad:"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView26"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cabezaVerCur" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Peso (gr):"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView28"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edadVerCur" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Edad:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tallaVerCur" />
 
     <TextView
         android:id="@+id/textView28"
-        android:layout_width="135dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Medida Cabeza (cm):"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView29"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesoVerCur" />
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/lato_bold"
         android:text="Talla:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/salirBTNVerCur"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <Button
         android:id="@+id/eliminarBTNCurv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/boton_blanco"
         android:text="Eliminar"
         android:textAllCaps="false"
         android:textColor="#2F80ED"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.645"
-        app:layout_constraintStart_toEndOf="@+id/salirBTNVerCur" />
+        app:layout_constraintTop_toBottomOf="@+id/fechaVerCur" />
 
     <Button
         android:id="@+id/salirBTNVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/boton"
         android:text="Salir"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fechaVerCur" />
 
     <TextView
         android:id="@+id/fechaVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato_bold"
         android:text="Fecha"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/edadVerCur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.559"
-        app:layout_constraintStart_toEndOf="@+id/textView24" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
         android:id="@+id/tallaVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato_bold"
         android:text="Talla"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/eliminarBTNCurv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.887"
-        app:layout_constraintStart_toEndOf="@+id/textView29" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <TextView
         android:id="@+id/edadVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato_bold"
         android:text="Edad"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/pesoVerCur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.574"
-        app:layout_constraintStart_toEndOf="@+id/textView25" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
     <TextView
         android:id="@+id/pesoVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Fecha"
+        android:text="Peso"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/cabezaVerCur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toEndOf="@+id/textView26" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <TextView
         android:id="@+id/cabezaVerCur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato_bold"
         android:text="Cabeza"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tallaVerCur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.344"
-        app:layout_constraintStart_toEndOf="@+id/textView28" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,14 +17,16 @@ import com.example.pediatrapp.fragments.GraficoCurvasFragment;
 import com.example.pediatrapp.fragments.TablaCurvasFragment;
 import com.example.pediatrapp.model.DatosCurva;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class CurvasGraficoActivity extends AppCompatActivity {
     private TextView nombreHijo;
+    private String idhijo;
+    private String nacimiento;
     private Button backBTN, agregarCurvaBtn;
     private BottomNavigationView bottomNavigationView;
-    private ArrayList<DatosCurva> listaCurvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +38,28 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavCurvas);
         bottomNavigationView.setSelectedItemId(R.id.tabla);
         agregarCurvaBtn = findViewById(R.id.agregarCurva);
-        listaCurvas = new ArrayList<>();
-
-        listaCurvas.add(new DatosCurva("24/05/2020", 12, 13, 14, 12));
 
 
+        idhijo = getIntent().getStringExtra("idhijo");
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
+        nacimiento = getIntent().getStringExtra("nacimiento");
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, new TablaCurvasFragment(listaCurvas)).commit();
+            Fragment fragment = new TablaCurvasFragment();
+            Bundle args = new Bundle();
+            args.putString("idhijo",idhijo);
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             Fragment fragment = null;
 
             switch (menuItem.getItemId()) {
                 case R.id.tabla:
-                    fragment = new TablaCurvasFragment(listaCurvas);
+                    fragment = new TablaCurvasFragment();
+                    Bundle args = new Bundle();
+                    args.putString("idhijo",idhijo);
+                    fragment.setArguments(args);
                     break;
                 case R.id.grafica:
                     fragment = new GraficoCurvasFragment();
@@ -71,6 +79,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
                 (v)->{
 
                     Intent intent = new Intent(this, AddCurvaActivity.class);
+                    intent.putExtra("nacimiento", nacimiento);
                     startActivityForResult(intent, 11);
 
                 }
@@ -97,9 +106,17 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         DatosCurva curva  =   (DatosCurva) data.getExtras().getSerializable("laCurva");
 
         if(curva != null) {
-            listaCurvas.add(curva);
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, new TablaCurvasFragment(listaCurvas)).commit();
+           String id =  FirebaseDatabase.getInstance().getReference().child("Curvas_crecimiento").child(idhijo).child("Curvas_crecimiento").push().getKey();
+            curva.setId(id);
+            FirebaseDatabase.getInstance().getReference().child("Curvas_crecimiento").child(idhijo).child("Curvas_crecimiento").child(id).setValue(curva);
+
+            Fragment fragment = new TablaCurvasFragment();
+            Bundle args = new Bundle();
+            args.putString("idhijo",idhijo);
+            fragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();
 
             Toast.makeText(this,"Se añadió Curva: "+ curva.getPeso(), Toast.LENGTH_SHORT).show();
         }else{
