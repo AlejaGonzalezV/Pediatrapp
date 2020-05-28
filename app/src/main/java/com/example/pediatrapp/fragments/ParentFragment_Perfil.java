@@ -66,6 +66,21 @@ public class ParentFragment_Perfil extends Fragment {
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        cerrarSesion.setOnClickListener(
+
+                (v)-> {
+
+                    notif();
+                    Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
+                    //Intent intent = new Intent(getContext(), LoginActivity.class);
+                    //startActivity(intent);
+                    //getActivity().finish();
+                    //FirebaseAuth.getInstance().signOut();
+
+                }
+
+        );
+
         Query query = FirebaseDatabase.getInstance().getReference().child("Padres");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -86,6 +101,9 @@ public class ParentFragment_Perfil extends Fragment {
                                 }
                         );
 
+
+
+
                     }
 
                 }
@@ -98,69 +116,6 @@ public class ParentFragment_Perfil extends Fragment {
             }
         });
 
-        cerrarSesion.setOnClickListener(
-
-                (v)-> {
-
-                    Query query2 = FirebaseDatabase.getInstance().getReference().child("chat");
-                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                                Chat chat = child.getValue(Chat.class);
-                                if(chat.getId_padre().equals(id)){
-
-                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(chat.getId());
-
-                                }
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-                    Query query3 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-                    query3.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                                ChatGrupal chatG = child.getValue(ChatGrupal.class);
-                                if(chatG.getId_padre().equals(id)){
-
-                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
-
-
-                                }
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-
-                    FirebaseAuth.getInstance().signOut();
-                    Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-
-                }
-
-        );
 
         agregarHijo.setOnClickListener(
 
@@ -198,6 +153,78 @@ public class ParentFragment_Perfil extends Fragment {
         );
 
         return view;
+    }
+
+    public void notif(){
+
+
+
+        Log.e("DESUSCRIBE1", "DESUSCRIBE");
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Query query2 = FirebaseDatabase.getInstance().getReference().child("chat");
+        query2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    Chat chat = child.getValue(Chat.class);
+                    if(chat.getId_padre().equals(id)){
+
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(chat.getId());
+                        Log.e("DESUSCRIBEEEEEEEEEE", "DESUSCRIBEEEEEEEEEE");
+
+
+                    }
+
+                }
+                Query query3 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                query3.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        Log.e("DESUSCRIBEG1", "DESUSCRIBEG");
+                        for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                            ChatGrupal chatG = child.getValue(ChatGrupal.class);
+                            if(chatG.getId_padre().equals(id)){
+
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
+                                Log.e("DESUSCRIBEGGGGGGGGGGGG", "DESUSCRIBEGGGGGGGGGGGG");
+
+
+                            }
+
+                        }
+
+                        cerrar();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void cerrar(){
+
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+        FirebaseAuth.getInstance().signOut();
+        Log.e("CERROOO", "CERROOO");
+
     }
 
 }

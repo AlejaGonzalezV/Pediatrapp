@@ -79,6 +79,31 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                     }
 
+                                                                    Query queryCG = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                                                                    queryCG.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                            for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                                                                ChatGrupal chatG = child.getValue(ChatGrupal.class);
+
+                                                                                FirebaseMessaging.getInstance().subscribeToTopic(chatG.getId());
+
+                                                                                Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                                                startActivity(intent);
+
+
+                                                                            }
+
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                        }
+                                                                    });
+
                                                                 }
 
                                                                 @Override
@@ -86,33 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                 }
                                                             });
-
-                                                            Query queryCG = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-                                                            queryCG.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                @Override
-                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                                                    for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                                                                        ChatGrupal chatG = child.getValue(ChatGrupal.class);
-
-                                                                        FirebaseMessaging.getInstance().subscribeToTopic(chatG.getId());
-
-
-                                                                    }
-
-                                                                }
-
-                                                                @Override
-                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                                }
-                                                            });
-
-                                                            //Lanzo
-
-                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                            startActivity(intent);
 
                                                         }
 
@@ -155,29 +153,33 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                     }
 
-                                                                }
+                                                                    Query queryC2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                                                                    queryC2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                                @Override
-                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                            for(DataSnapshot child: dataSnapshot.getChildren()){
 
-                                                                }
-                                                            });
+                                                                                ChatGrupal chat = child.getValue(ChatGrupal.class);
+                                                                                if(chat.getId_padre().equals(id)){
 
-                                                            Query queryC2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-                                                            queryC2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                @Override
-                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                    FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
 
-                                                                    for(DataSnapshot child: dataSnapshot.getChildren()){
+                                                                                    Intent intent = new Intent(v.getContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                                                    startActivity(intent);
+                                                                                    finish();
 
-                                                                        ChatGrupal chat = child.getValue(ChatGrupal.class);
-                                                                        if(chat.getId_padre().equals(id)){
+                                                                                }
 
-                                                                            FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
+                                                                            }
 
                                                                         }
 
-                                                                    }
+                                                                        @Override
+                                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                        }
+                                                                    });
 
                                                                 }
 
@@ -186,12 +188,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                 }
                                                             });
-
-
-                                                            //Lanzo
-                                                            Intent intent = new Intent(v.getContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                            startActivity(intent);
-                                                            finish();
 
                                                         }
 

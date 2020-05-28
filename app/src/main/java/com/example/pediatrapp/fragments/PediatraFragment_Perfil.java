@@ -3,6 +3,7 @@ package com.example.pediatrapp.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,30 @@ public class PediatraFragment_Perfil extends Fragment {
 
                             }
 
+                            Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                            query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                        ChatGrupal chatG = child.getValue(ChatGrupal.class);
+
+                                        FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
+
+
+                                    }
+
+                                    cerrar();
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }
 
                         @Override
@@ -93,33 +118,9 @@ public class PediatraFragment_Perfil extends Fragment {
                         }
                     });
 
-                    Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                                ChatGrupal chatG = child.getValue(ChatGrupal.class);
-
-                                FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
 
 
-                            }
 
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-                    FirebaseAuth.getInstance().signOut();
-                    Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
 
                 }
 
@@ -180,6 +181,16 @@ public class PediatraFragment_Perfil extends Fragment {
         return view;
 
 
+
+    }
+
+    public void cerrar(){
+
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+        Toast.makeText(getContext(), "La sesión se ha cerrado con éxito", Toast.LENGTH_SHORT).show();
 
     }
 
