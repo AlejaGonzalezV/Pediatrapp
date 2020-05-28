@@ -62,12 +62,10 @@ public class ParentPerfil extends AppCompatActivity {
                 for(DataSnapshot child: dataSnapshot.getChildren()){
 
 
-                    Log.e("<<<<<<<<<", "ENTRE A LA CARGA");
                     Padre padre = child.getValue(Padre.class);
                     if(padre.getId().equals(idParent)){
 
 
-                        Log.e("<<<<<<<<<", "ENTRE A LA CARGA2");
                         nombre_padre.setText(padre.getNombre());
                         storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
                                 uri -> {

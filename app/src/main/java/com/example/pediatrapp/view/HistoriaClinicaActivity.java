@@ -44,6 +44,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
     private String tipo;
     private String idPed;
     private String data;
+    private String nameHijo;
     private boolean formula;
 
 
@@ -56,6 +57,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         Intent intent = getIntent();
         padreId = intent.getStringExtra("idUser");
         hijoId = intent.getStringExtra("idHijo");
+        nameHijo = intent.getStringExtra("nameHijo");
         Log.e("ANTEEEEES", String.valueOf(padreId == null));
 
         historiaPadreFragment = new HistoriaPadreFragment();
@@ -214,9 +216,10 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             if(type.equals("next")){
 
                 diagnostico = args[0];
-                Bundle args1 = new Bundle();
-                args1.putString("idDiag", diagnostico);
-                consultaRegistroFragment.setArguments(args1);
+                Log.e("DIAGNOS RECIBIDO PPAL", String.valueOf(diagnostico == null));
+                Bundle argsss = new Bundle();
+                argsss.putString("ids", diagnostico+"/"+hijoId);
+                consultaRegistroFragment.setArguments(argsss);
                 showFragment(consultaRegistroFragment);
 
 
@@ -233,6 +236,8 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                 diagnostico = args[0];
                 Bundle args1 = new Bundle();
+                Log.e("ESTEEEE AQUIIII", String.valueOf(diagnostico == null));
+                Log.e("ESTEEEE AQUIIII", String.valueOf(hijoId == null));
                 args1.putString("ids", diagnostico+"/"+hijoId);
                 consultaRegistroFragment.setArguments(args1);
                 showFragment(consultaRegistroFragment);
@@ -339,10 +344,18 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             }else if(type.equals("vacunas")){
 
                 //Llamar a las vacunas
+                Log.e("LLAMOOOOOOO2", "LLAMOOOOOO2");
+                Intent intent = new Intent(this, ListaVacunasActivity.class);
+                intent.putExtra("elnombre", nameHijo);
+                intent.putExtra("idhijo", hijoId);
+                startActivity(intent);
 
             }else if(type.equals("curvas")){
 
                 //Llamar las curvas
+                Intent intent = new Intent(this, CurvasGraficoActivity.class);
+                intent.putExtra("elnombre", nameHijo);
+                startActivity(intent);
 
             }else if(type.equals("back")){
 

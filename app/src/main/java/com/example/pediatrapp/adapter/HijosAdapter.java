@@ -75,7 +75,7 @@ public class HijosAdapter extends BaseAdapter {
         Period periodo = Period.between(fechaN, hoy);
         String edad1 = String.valueOf(periodo.getYears());
 
-        if(edad1.equals(0)){
+        if(edad1.equals("0")){
 
             edad.setText(String.valueOf(periodo.getMonths()) + " Meses");
 
