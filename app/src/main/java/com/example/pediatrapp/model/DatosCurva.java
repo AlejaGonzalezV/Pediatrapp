@@ -6,21 +6,36 @@ import java.io.Serializable;
 
 public class DatosCurva implements Serializable {
 
+    public static final String MESES = "Meses";
+    public static final String AÑOS = "Años";
+
+    private String id;
     private String fecha;
     private int medida_cabeza;
     private int peso;
     private int talla;
     private int edad;
+    private String edadComplemento;
 
-    public DatosCurva(String fecha, int medida_cabeza, int peso, int talla, int edad) {
+    public DatosCurva(String id, String fecha, int medida_cabeza, int peso, int talla, int edad, String edadComplemento) {
+        this.id = id;
         this.fecha = fecha;
         this.medida_cabeza = medida_cabeza;
         this.peso = peso;
         this.talla = talla;
         this.edad = edad;
+        this.edadComplemento = edadComplemento;
     }
 
     public DatosCurva() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getEdad() {
@@ -61,5 +76,13 @@ public class DatosCurva implements Serializable {
 
     public void setTalla(int talla) {
         this.talla = talla;
+    }
+
+    public String getEdadComplemento() {
+        return edadComplemento;
+    }
+
+    public void setEdadComplemento(String edadComplemento) {
+        this.edadComplemento = edadComplemento;
     }
 }

@@ -8,60 +8,43 @@
     tools:context="com.example.pediatrapp.view.AddCurvaActivity">
 
     <TextView
-        android:id="@+id/textView31"
-        android:layout_width="137dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="44dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Edad:"
-        android:textColor="#000000"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerEdadCurva"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/textView30"
-        android:layout_width="137dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Fecha:"
         android:textColor="#000000"
         android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/guardarCurvaBTN"
-        app:layout_constraintEnd_toStartOf="@+id/fechaCurvaET"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alturaCurvaET" />
 
     <TextView
         android:id="@+id/textView27"
-        android:layout_width="156dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Medida Cabeza:"
+        android:text="Medida Cabeza (cm):"
         android:textColor="#000000"
         android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView30"
-        app:layout_constraintEnd_toStartOf="@+id/alturaCurvaET"
-        app:layout_constraintHorizontal_bias="0.604"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesoCurvaET" />
 
     <EditText
         android:id="@+id/tallaCurvaET2"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginTop="226dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Talla"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerEdadCurva"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -73,28 +56,16 @@
         app:srcCompat="@drawable/fondolistas" />
 
 
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="74dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/curva"
-        app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_Curvass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="60dp"
 
         android:fontFamily="@font/lato_bold"
-        android:text="Añadir curva "
+        android:text="Añadir Dato"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,111 +92,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerEdadCurva"
-        android:layout_width="161dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/pesoCurvaET"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <EditText
         android:id="@+id/alturaCurvaET"
-        android:layout_width="154dp"
+        android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Medida Cabeza"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/fechaCurvaET"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
     <EditText
         android:id="@+id/fechaCurvaET"
-        android:layout_width="173dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
         android:hint="Año/Mes/Día"
         android:inputType="date"
         android:maxLines="1"
-        app:layout_constraintBottom_toTopOf="@+id/guardarCurvaBTN"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <EditText
         android:id="@+id/pesoCurvaET"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Peso"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/alturaCurvaET"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
         android:id="@+id/cancelarCurvaBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="80dp"
         android:background="@drawable/boton_blanco"
         android:text="Cancelar"
         android:textAllCaps="false"
         android:textColor="#2F80ED"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaCurvaET"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintTop_toBottomOf="@+id/fechaCurvaET" />
 
     <Button
         android:id="@+id/guardarCurvaBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/boton"
         android:text="Añadir"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cancelarCurvaBTN"
-        app:layout_constraintHorizontal_bias="0.065"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fechaCurvaET" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="135dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        android:layout_marginTop="228dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/lato_bold"
         android:text="Talla:"
         android:textColor="#000000"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView31"
-        app:layout_constraintEnd_toStartOf="@+id/tallaCurvaET2"
-        app:layout_constraintHorizontal_bias="0.49"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="137dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Peso (gr):"
         android:textColor="#000000"
         android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
-        app:layout_constraintEnd_toStartOf="@+id/pesoCurvaET"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tallaCurvaET2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

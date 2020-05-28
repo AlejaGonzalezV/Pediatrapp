@@ -186,4 +186,12 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
     public void setNombreHijo(TextView nombreHijo) {
         this.nombreHijo = nombreHijo;
     }
+
+    public String getIdhijo() {
+        return idhijo;
+    }
+
+    public void setIdhijo(String idhijo) {
+        this.idhijo = idhijo;
+    }
 }

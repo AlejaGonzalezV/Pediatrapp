@@ -171,6 +171,7 @@ public class MessageGController implements View.OnClickListener{
         FCMMessage fcmMessage = new FCMMessage();
         fcmMessage.setTo("/topics/"+roomChat);
         fcmMessage.setData(message);
+
         Gson gson = new Gson();
         String json = gson.toJson(fcmMessage);
 

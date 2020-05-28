@@ -10,41 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/numeralTv2"
-            android:layout_width="29dp"
-            android:layout_height="31dp"
 
-            android:fontFamily="@font/lato_bold"
-            android:text="#"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/pesoTablaTv2"
-            android:layout_width="213dp"
-            android:layout_height="29dp"
-            android:layout_marginEnd="168dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="Fecha  de la Curva"
-            android:textColor="#000000"
-            android:textSize="21sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.recyclerview.widget.RecyclerView
+        <ListView
             android:id="@+id/listaCurvasAgregadas"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:divider="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pesoTablaTv2" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

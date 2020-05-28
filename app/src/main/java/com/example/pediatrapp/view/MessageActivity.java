@@ -52,7 +52,7 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         Intent intent = getIntent();
-         userid = intent.getStringExtra("userid");
+        userid = intent.getStringExtra("userid");
         type = intent.getStringExtra("type");
 
         Toolbar toolbar = findViewById(R.id.toolBar);

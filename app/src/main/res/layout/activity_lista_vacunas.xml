@@ -24,7 +24,7 @@
         android:fontFamily="@font/lato_bold"
         android:text="Lista de vacunas"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

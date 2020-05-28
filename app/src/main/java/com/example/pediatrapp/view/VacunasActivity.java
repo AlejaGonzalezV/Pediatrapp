@@ -50,26 +50,6 @@ public class VacunasActivity extends AppCompatActivity {
         ListaHijosVacuna.setAdapter(adapter);
         buscarHijoVacunas();
 
-        ListaHijosVacuna.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Hijo h = (Hijo) adapter.getItem(i);
-                new Thread(
-                        () ->{
-
-                            Intent intent = new Intent(VacunasActivity.this, ListaVacunasActivity.class);
-                            intent.putExtra("idhijo", h.getId());
-                            intent.putExtra("elnombre", h.getNombre());
-                            Log.e(">>>", "inicioIntent");
-
-                            VacunasActivity.this.startActivity(intent);
-                        }
-                ).start();
-
-            }
-        });
-
 
         backBTN.setOnClickListener(
                 (v)->{

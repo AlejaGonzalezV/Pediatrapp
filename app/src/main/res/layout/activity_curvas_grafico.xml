@@ -17,27 +17,15 @@
         app:srcCompat="@drawable/fondolistas" />
 
 
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="74dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/curva"
-        app:layout_constraintEnd_toStartOf="@+id/tv_historial3"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_Curvass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/lato_bold"
         android:text="Curvas de crecimiento"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +56,6 @@
         android:id="@+id/nombreHijoCurvasGrafico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:fontFamily="@font/lato_bold"
         android:text="nombre hijo"
         android:textColor="#000000"
@@ -93,30 +80,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="10dp"
         android:background="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreHijoCurvasGrafico"
+        app:layout_constraintTop_toBottomOf="@+id/agregarCurva"
         app:menu="@menu/menu3" />
 
     <Button
         android:id="@+id/agregarCurva"
         android:layout_width="156dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/boton"
         android:fontFamily="@font/lato_bold"
-        android:text="Agregar curva"
+        android:text="Agregar Dato"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavCurvas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreHijoCurvasGrafico"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
