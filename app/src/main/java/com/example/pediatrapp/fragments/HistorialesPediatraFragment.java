@@ -55,7 +55,6 @@ public class HistorialesPediatraFragment extends Fragment {
 
                 (v)->{
 
-                    Log.e("LLAMOOOOOOO", "LLAMOOOOOO");
                     listener.onData(this, "vacunas", null);
 
                 }
