@@ -274,6 +274,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                 }else if(tipo.equals("Padre")){
 
+
                     showFragment(historiaPadreFragment);
 
                 }
@@ -306,6 +307,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
                     data+=args[i]+",";
 
                 }
+
 
                 agregarRegistro();
 
@@ -344,7 +346,6 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             }else if(type.equals("vacunas")){
 
                 //Llamar a las vacunas
-                Log.e("LLAMOOOOOOO2", "LLAMOOOOOO2");
                 Intent intent = new Intent(this, ListaVacunasActivity.class);
                 intent.putExtra("elnombre", nameHijo);
                 intent.putExtra("idhijo", hijoId);

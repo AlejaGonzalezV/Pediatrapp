@@ -64,7 +64,6 @@ public class ParentFragment_Perfil extends Fragment {
         agregarHijo = view.findViewById(R.id.agregarHijo);
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-        Log.e("<<<<<<<<", "Entra al oncreate");
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Query query = FirebaseDatabase.getInstance().getReference().child("Padres");

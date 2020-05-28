@@ -6,12 +6,15 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.pediatrapp.BuildConfig;
 import com.example.pediatrapp.R;
+import com.example.pediatrapp.model.Chat;
+import com.example.pediatrapp.model.ChatGrupal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,6 +26,7 @@ import android.os.Handler;
 public class InitialActivity extends AppCompatActivity {
 
     private final int DURACION_SPLASH = 1000;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class InitialActivity extends AppCompatActivity {
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
 
-            String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
             query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -65,12 +69,11 @@ public class InitialActivity extends AppCompatActivity {
 
 
                             new Handler().postDelayed(() -> {
+                                notifPediatra();
                                 Intent intent = new Intent(getApplicationContext(), ActivityMainPediatra.class);
                                 startActivity(intent);
                                 finish();
                             }, DURACION_SPLASH);
-
-
 
                         }
 
@@ -95,6 +98,7 @@ public class InitialActivity extends AppCompatActivity {
 
 
                             new Handler().postDelayed(() -> {
+                                notifPadre();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -140,6 +144,112 @@ public class InitialActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+    public void notifPadre(){
+
+        Query queryC = FirebaseDatabase.getInstance().getReference().child("chat");
+        queryC.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    Chat chat = child.getValue(Chat.class);
+
+                    if(chat.getId_padre().equals(id)){
+
+
+                        FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
+
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Query queryC2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+        queryC2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    ChatGrupal chat = child.getValue(ChatGrupal.class);
+                    if(chat.getId_padre().equals(id)){
+
+                        FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void notifPediatra(){
+
+        Query queryC = FirebaseDatabase.getInstance().getReference().child("chat");
+        queryC.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    Chat ch = child.getValue(Chat.class);
+                    if(ch.getId_pediatra().equals(id)){
+
+
+
+                        FirebaseMessaging.getInstance().subscribeToTopic(ch.getId());
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+        query2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                    ChatGrupal chatG = child.getValue(ChatGrupal.class);
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

@@ -76,7 +76,6 @@ public class HistoriaPadreFragment extends Fragment {
 
         Diagnostico diagn = (Diagnostico) lista.getItemAtPosition(pos);
         idDiag = diagn.getId();
-        Log.e("ENVIANDO DIAGNOS", String.valueOf(idDiag == null));
         enviar();
 
     }

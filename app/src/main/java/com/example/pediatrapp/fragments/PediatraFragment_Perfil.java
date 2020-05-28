@@ -93,9 +93,6 @@ public class PediatraFragment_Perfil extends Fragment {
                         }
                     });
 
-
-
-
                     Query query2 = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
                     query2.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

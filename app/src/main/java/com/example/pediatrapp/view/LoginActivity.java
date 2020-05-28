@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                                         authResult -> {
 
                                             String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                            Log.e("AUTENTICÓ", id);
                                             Query query = FirebaseDatabase.getInstance().getReference().child("Pediatras");
                                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
@@ -74,8 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                                                                         Chat ch = child.getValue(Chat.class);
                                                                         if(ch.getId_pediatra().equals(id)){
 
-
-
                                                                             FirebaseMessaging.getInstance().subscribeToTopic(ch.getId());
 
                                                                         }
@@ -90,9 +87,31 @@ public class LoginActivity extends AppCompatActivity {
                                                                 }
                                                             });
 
+                                                            Query queryCG = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
+                                                            queryCG.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                    for(DataSnapshot child: dataSnapshot.getChildren()){
+
+                                                                        ChatGrupal chatG = child.getValue(ChatGrupal.class);
+
+                                                                        FirebaseMessaging.getInstance().subscribeToTopic(chatG.getId());
+
+
+                                                                    }
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+
                                                             //Lanzo
 
-                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
+                                                            Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                                             startActivity(intent);
 
                                                         }
@@ -116,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                         if(child.getKey().equals(id)){
 
-                                                            Log.e("<<<<<<<<", "Encontradooo");
+
                                                             Query queryC = FirebaseDatabase.getInstance().getReference().child("chat");
                                                             queryC.addListenerForSingleValueEvent(new ValueEventListener() {
                                                                 @Override
@@ -125,10 +144,10 @@ public class LoginActivity extends AppCompatActivity {
                                                                     for(DataSnapshot child: dataSnapshot.getChildren()){
 
                                                                         Chat chat = child.getValue(Chat.class);
-                                                                        Log.e("CHAT NULO?", (chat==null)+"");
+
                                                                         if(chat.getId_padre().equals(id)){
 
-                                                                            Log.e("<<<<<<<<<<", "DESUSCRIBIENDO");
+
                                                                             FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
 
 
@@ -170,9 +189,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                                             //Lanzo
-                                                            Log.e("<<<<<<<<<<" ,"Lanzandoooo");
-                                                            Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                                            Intent intent = new Intent(v.getContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                                             startActivity(intent);
+                                                            finish();
 
                                                         }
 
@@ -320,27 +339,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-/*
-    verificar(id);
-
-                                            Log.e("<<<<<<<<<<<<<TIPO", type);
-                                            if (type.equals("Padre")) {
-
-        chatsPad(id);
-        Log.e("<<<<<<<<<<", "entrandooo");
-        Intent intent = new Intent(v.getContext(), MainActivity.class);
-        startActivity(intent);
-
-    } else if (type.equals("Pediatra")) {
-
-        chatsPed(id);
-        Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class);
-        startActivity(intent);
-
-    }
-
-
- */
 
 
 
