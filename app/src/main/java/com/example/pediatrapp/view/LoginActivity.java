@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                     Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                                                     startActivity(intent);
+                                                                    finish();
 
                                                                 }
 
