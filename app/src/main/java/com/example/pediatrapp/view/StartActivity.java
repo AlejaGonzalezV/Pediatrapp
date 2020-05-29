@@ -22,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private LinearLayout dotsLayout;
 
-    private String[] text = {"Aquí puedes llevar el seguimiento del desarrollo y crecimiento de tus hijos.", "Controla las curvas de crecimiento de tu hijo y manten actualizado a tu pediatra", "Podrás que llevar el control de las vacunas de tu hijo siempre en tu celular", "Puedes enviarle mesajes a tu pediatra y si te receta algo, se cargará a la historia clínica"};
+    private String[] text = {"Aquí puedes llevar el seguimiento del desarrollo y crecimiento de tus hijos.", "Controla las curvas de crecimiento de tu hijo y manten actualizado a tu pediatra", "Podrás llevar el control de las vacunas de tu hijo siempre en tu celular", "Puedes enviarle mesajes a tu pediatra y si te receta algo, se cargará a la historia clínica"};
     private String[] title = {"¡Bienvenido!","Curvas de crecimiento", "Carnet de vacunas", "Contacta a tu pediatra"};
     private int[] image = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
     private int colorDot;

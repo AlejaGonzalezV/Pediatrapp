@@ -35,7 +35,7 @@ public class Hijos extends Fragment {
     private ListView listaHijos;
     private HijosAdapter adapter;
     private String id;
-    private String identHijo;
+    private String identHijo, nameHijo;
 
     public Hijos(String id) {
         this.id = id;
@@ -50,7 +50,6 @@ public class Hijos extends Fragment {
         listaHijos = view.findViewById(R.id.listViewHijos);
         adapter = new HijosAdapter(this);
         listaHijos.setAdapter(adapter);
-        Log.e("IDDDDDDDDD", String.valueOf(id == null));
         cargarHijos();
 
         return view;
@@ -60,9 +59,11 @@ public class Hijos extends Fragment {
 
         Hijo hijo = (Hijo) listaHijos.getItemAtPosition(ident);
         identHijo = hijo.getId();
+        nameHijo = hijo.getNombre();
         Intent intent = new Intent(getContext(), HistoriaClinicaActivity.class);
         intent.putExtra("idUser", id);
         intent.putExtra("idHijo", identHijo);
+        intent.putExtra("nameHijo", nameHijo);
         startActivity(intent);
         Log.e("ESTE ES EL ID REAAAAAL", id);
 

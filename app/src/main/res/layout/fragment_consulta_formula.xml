@@ -56,9 +56,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="84dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Fecha"
+        android:text="Fecha:"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -74,7 +74,7 @@
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
         android:textColor="#000000"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         android:fontFamily="@font/lato_bold"
         android:text="Posología"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,8 +99,10 @@
         android:layout_width="276dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/lato"
+        android:hint="Fecha"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

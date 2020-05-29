@@ -304,14 +304,18 @@ public class SignUpActivity extends AppCompatActivity implements OnDataSubmitted
     public void cargar(){
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
 
     }
 
     public void cargarPed(){
 
         Intent intent = new Intent(this, ActivityMainPediatra.class);
+        intent.addFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
 
     }
 

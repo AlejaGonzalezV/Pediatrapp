@@ -6,11 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pediatrapp.R;
 import com.example.pediatrapp.adapter.OnDataSubmitted;
@@ -30,6 +32,7 @@ public class ConsultaRegistroFragment extends Fragment {
     private String ids;
     private TextView titulo, pediatra,fecha,diagnostico;
     private Button verFormulaBt, back;
+    private boolean formula;
 
     private OnDataSubmitted listener;
 
@@ -54,6 +57,9 @@ public class ConsultaRegistroFragment extends Fragment {
         diagnostico = view.findViewById(R.id.diagnostico);
         verFormulaBt = view.findViewById(R.id.verFormulaBt);
         back = view.findViewById(R.id.back);
+
+        llenarCampos();
+
         back.setOnClickListener(
 
                 (v)->{
@@ -68,12 +74,22 @@ public class ConsultaRegistroFragment extends Fragment {
 
                 (v)->{
 
-                    listener.onData(this, "next", null);
+                    if(formula){
+
+                        Toast.makeText(getContext(), "No hay fórmula médica para mostrar", Toast.LENGTH_SHORT).show();
+
+                    }else {
+
+                        listener.onData(this, "next", null);
+
+                    }
+
+
 
                 }
 
         );
-        llenarCampos();
+
 
         return view;
 
@@ -91,6 +107,7 @@ public class ConsultaRegistroFragment extends Fragment {
                 pediatra.setText(diag.getNombre_pediatra());
                 fecha.setText(diag.getFecha());
                 diagnostico.setText(diag.getDiagnostico());
+                formula = diag.getFormula_medica() == null;
 
             }
 

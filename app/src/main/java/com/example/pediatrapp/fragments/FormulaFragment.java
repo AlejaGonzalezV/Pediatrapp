@@ -43,6 +43,8 @@ public class FormulaFragment extends Fragment implements View.OnClickListener{
         addFormulaBt = view.findViewById(R.id.addFormulaBt);
         back = view.findViewById(R.id.back);
 
+
+
         fecha.setOnClickListener(this);
 
         back.setOnClickListener(
@@ -65,6 +67,8 @@ public class FormulaFragment extends Fragment implements View.OnClickListener{
                     if(fec == false && poso == false){
 
                         listener.onData(this, "next", fechaS,posologia.getText().toString());
+                        fecha.setText(null);
+                        posologia.setText(null);
 
                     }else {
 

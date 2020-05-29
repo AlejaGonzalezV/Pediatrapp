@@ -66,12 +66,6 @@ public class ConsultaFormulaFragment extends Fragment {
         return view;
     }
 
-    public void volver(){
-
-        listener.onData(this, "back", null);
-        Toast.makeText(getContext(), "No hay una fórmula médica", Toast.LENGTH_SHORT).show();
-
-    }
 
     public void cargarDatos(){
 
@@ -82,18 +76,8 @@ public class ConsultaFormulaFragment extends Fragment {
 
                 FormulaMedica formula = dataSnapshot.getValue(FormulaMedica.class);
 
-                if(formula != null){
-
-                    fecha.setText(formula.getFecha());
-                    posologia.setText(formula.getPosologia());
-
-                }else {
-
-                    volver();
-
-
-                }
-
+                fecha.setText(formula.getFecha());
+                posologia.setText(formula.getPosologia());
 
             }
 

@@ -58,6 +58,8 @@ public class DiagnosticoFragment extends Fragment implements View.OnClickListene
          addRegistroBt = view.findViewById(R.id.addRegistroBt);
          back = view.findViewById(R.id.back);
 
+
+
          fecha.setOnClickListener(this);
          findNombre();
 
@@ -82,6 +84,10 @@ public class DiagnosticoFragment extends Fragment implements View.OnClickListene
                      if(tit == false && fec == false && diag == false){
 
                          listener.onData(this, "next", titulo.getText().toString(), fecha.getText().toString(), diagnostico.getText().toString(), nombrePed, FirebaseAuth.getInstance().getCurrentUser().getUid(),firma);
+                         titulo.setText(null);
+                         fecha.setText(null);
+                         diagnostico.setText(null);
+
 
                      }else {
 
@@ -110,7 +116,15 @@ public class DiagnosticoFragment extends Fragment implements View.OnClickListene
 
          );
 
+        back.setOnClickListener(
 
+                (v)->{
+
+                    listener.onData(this, "back", null);
+
+                }
+
+        );
 
 
         return view;
