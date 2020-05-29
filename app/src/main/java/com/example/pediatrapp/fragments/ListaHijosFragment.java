@@ -33,7 +33,7 @@ public class ListaHijosFragment extends Fragment {
     private ListView lista;
     private Button back;
     private HijosAdapter adapter;
-    private String ident;
+    private String ident, nombre, nacimiento, sexo;
 
 
     private OnDataSubmitted listener;
@@ -75,13 +75,14 @@ public class ListaHijosFragment extends Fragment {
 
         Hijo hijo = (Hijo) lista.getItemAtPosition(id);
         ident = hijo.getId();
+        nombre = hijo.getNombre();
         enviar();
 
     }
 
     public void enviar(){
 
-        listener.onData(this, "next", ident);
+        listener.onData(this, "next", ident, nombre, nacimiento, sexo);
 
     }
 

@@ -37,7 +37,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
     private Fragment historiaPadreFragment, historiaPediatraFragment, diagnosticoFragment, formulaFragment,
             consultaRegistroFragment, consultaFormulaFragment, listaHijosFragment, historiales;
 
-    private String hijoId;
+    private String hijoId, nombre, nacimiento, sexo;
     private String padreId;
     private String diagnostico;
     private Pediatra pediatra;
@@ -58,6 +58,8 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         padreId = intent.getStringExtra("idUser");
         hijoId = intent.getStringExtra("idHijo");
         nameHijo = intent.getStringExtra("nameHijo");
+        nacimiento = intent.getStringExtra("nacimiento");
+        sexo = intent.getStringExtra("sexo");
         Log.e("ANTEEEEES", String.valueOf(padreId == null));
 
         historiaPadreFragment = new HistoriaPadreFragment();
@@ -355,7 +357,10 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                 //Llamar las curvas
                 Intent intent = new Intent(this, CurvasGraficoActivity.class);
-                intent.putExtra("elnombre", nameHijo);
+                intent.putExtra("idhijo", hijoId);
+                intent.putExtra("elnombre", nombre);
+                intent.putExtra("nacimiento", nacimiento);
+                intent.putExtra("sexo", sexo);
                 startActivity(intent);
 
             }else if(type.equals("back")){

@@ -64,6 +64,9 @@ public class Hijos extends Fragment {
         intent.putExtra("idUser", id);
         intent.putExtra("idHijo", identHijo);
         intent.putExtra("nameHijo", nameHijo);
+        intent.putExtra("nacimiento", hijo.getNacimiento());
+        intent.putExtra("sexo", hijo.getSexo());
+
         startActivity(intent);
         Log.e("ESTE ES EL ID REAAAAAL", id);
 
