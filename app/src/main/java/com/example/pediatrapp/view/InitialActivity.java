@@ -178,9 +178,7 @@ public class InitialActivity extends AppCompatActivity {
                                 FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
 
                                 Log.e("LLEGOOOO", "LLEGOOOO0");
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                                finish();
+
 
                             }
 
@@ -193,6 +191,10 @@ public class InitialActivity extends AppCompatActivity {
 
                     }
                 });
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 
@@ -235,9 +237,7 @@ public class InitialActivity extends AppCompatActivity {
 
                             ChatGrupal chatG = child.getValue(ChatGrupal.class);
                             FirebaseMessaging.getInstance().unsubscribeFromTopic(chatG.getId());
-                            Intent intent = new Intent(getApplicationContext(), ActivityMainPediatra.class);
-                            startActivity(intent);
-                            finish();
+
 
                         }
 
@@ -248,6 +248,10 @@ public class InitialActivity extends AppCompatActivity {
 
                     }
                 });
+
+                Intent intent = new Intent(getApplicationContext(), ActivityMainPediatra.class);
+                startActivity(intent);
+                finish();
 
             }
 

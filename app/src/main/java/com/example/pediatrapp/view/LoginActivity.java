@@ -90,10 +90,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                                 FirebaseMessaging.getInstance().subscribeToTopic(chatG.getId());
 
-                                                                                Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                                                startActivity(intent);
-
-
                                                                             }
 
                                                                         }
@@ -103,6 +99,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                         }
                                                                     });
+
+                                                                    Intent intent = new Intent(v.getContext(), ActivityMainPediatra.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                                    startActivity(intent);
 
                                                                 }
 
@@ -165,9 +164,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                                     FirebaseMessaging.getInstance().subscribeToTopic(chat.getId());
 
-                                                                                    Intent intent = new Intent(v.getContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                                                    startActivity(intent);
-                                                                                    finish();
+
 
                                                                                 }
 
@@ -181,6 +178,10 @@ public class LoginActivity extends AppCompatActivity {
                                                                         }
                                                                     });
 
+                                                                    Intent intent = new Intent(v.getContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                                    startActivity(intent);
+                                                                    finish();
+
                                                                 }
 
                                                                 @Override
@@ -188,6 +189,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                 }
                                                             });
+
+
 
                                                         }
 
