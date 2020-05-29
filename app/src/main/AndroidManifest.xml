@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.VerCurvaActivity"></activity>
+        <activity android:name=".view.CurvaActivity"></activity>
+        <activity android:name=".view.VerCurvaActivity" />
         <activity android:name=".view.PediatraPerfil" />
         <activity android:name=".view.MessageGroupActivity" />
         <activity android:name=".view.ParentPerfil" />

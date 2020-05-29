@@ -25,6 +25,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
     private TextView nombreHijo;
     private String idhijo;
     private String nacimiento;
+    private String sexo;
     private Button backBTN, agregarCurvaBtn;
     private BottomNavigationView bottomNavigationView;
 
@@ -43,6 +44,7 @@ public class CurvasGraficoActivity extends AppCompatActivity {
         idhijo = getIntent().getStringExtra("idhijo");
         nombreHijo.setText(getIntent().getStringExtra("elnombre"));
         nacimiento = getIntent().getStringExtra("nacimiento");
+        sexo = getIntent().getStringExtra("sexo");
 
         if(savedInstanceState == null){
             Fragment fragment = new TablaCurvasFragment();
@@ -63,6 +65,10 @@ public class CurvasGraficoActivity extends AppCompatActivity {
                     break;
                 case R.id.grafica:
                     fragment = new GraficoCurvasFragment();
+                    Bundle args1 = new Bundle();
+                    args1.putString("idhijo",idhijo);
+                    args1.putString("sexo", sexo);
+                    fragment.setArguments(args1);
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();
@@ -118,7 +124,6 @@ public class CurvasGraficoActivity extends AppCompatActivity {
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerCurvas, fragment).commit();
 
-            Toast.makeText(this,"Se añadió Curva: "+ curva.getPeso(), Toast.LENGTH_SHORT).show();
         }else{
 
             Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();

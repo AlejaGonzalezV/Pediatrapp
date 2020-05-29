@@ -2,29 +2,22 @@ package com.example.pediatrapp.model;
 
 import java.io.Serializable;
 
-
-
 public class DatosCurva implements Serializable {
-
-    public static final String MESES = "Meses";
-    public static final String AÑOS = "Años";
 
     private String id;
     private String fecha;
     private int medida_cabeza;
     private int peso;
     private int talla;
-    private int edad;
-    private String edadComplemento;
+    private String edad;
 
-    public DatosCurva(String id, String fecha, int medida_cabeza, int peso, int talla, int edad, String edadComplemento) {
+    public DatosCurva(String id, String fecha, int medida_cabeza, int peso, int talla, String edad) {
         this.id = id;
         this.fecha = fecha;
         this.medida_cabeza = medida_cabeza;
         this.peso = peso;
         this.talla = talla;
         this.edad = edad;
-        this.edadComplemento = edadComplemento;
     }
 
     public DatosCurva() {
@@ -38,11 +31,11 @@ public class DatosCurva implements Serializable {
         this.id = id;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
@@ -78,11 +71,4 @@ public class DatosCurva implements Serializable {
         this.talla = talla;
     }
 
-    public String getEdadComplemento() {
-        return edadComplemento;
-    }
-
-    public void setEdadComplemento(String edadComplemento) {
-        this.edadComplemento = edadComplemento;
-    }
 }

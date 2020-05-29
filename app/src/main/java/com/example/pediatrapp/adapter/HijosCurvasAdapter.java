@@ -111,6 +111,7 @@ public class HijosCurvasAdapter extends BaseAdapter {
                     intent.putExtra("idhijo", hijos.get(position).getId());
                     intent.putExtra("elnombre", hijos.get(position).getNombre());
                     intent.putExtra("nacimiento", hijos.get(position).getNacimiento());
+                    intent.putExtra("sexo", hijos.get(position).getSexo());
                     parent.getContext().startActivity(intent);
 
 

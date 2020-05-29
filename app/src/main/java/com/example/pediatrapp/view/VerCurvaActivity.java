@@ -38,7 +38,7 @@ public class VerCurvaActivity extends AppCompatActivity {
         peso.setText(""+curva.getPeso());
         talla.setText(""+curva.getTalla());
         cabeza.setText(""+curva.getMedida_cabeza());
-        edad.setText(""+curva.getEdad() +" "+ curva.getEdadComplemento());
+        edad.setText(""+curva.getEdad());
 
 
 

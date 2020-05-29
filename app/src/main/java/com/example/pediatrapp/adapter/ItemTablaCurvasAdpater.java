@@ -70,7 +70,7 @@ public class ItemTablaCurvasAdpater extends BaseAdapter {
         TextView titulo = row.findViewById(R.id.titulo);
         TextView fecha = row.findViewById(R.id.fecha);
         titulo.setText(listaCurvas.get(position).getFecha());
-        fecha.setText(listaCurvas.get(position).getEdad() + " "+ listaCurvas.get(position).getEdadComplemento());
+        fecha.setText(listaCurvas.get(position).getEdad());
 
         Button ver = row.findViewById(R.id.ver);
 

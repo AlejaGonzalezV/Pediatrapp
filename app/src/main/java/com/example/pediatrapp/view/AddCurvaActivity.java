@@ -90,17 +90,18 @@ public class AddCurvaActivity extends AppCompatActivity {
                                 String edad1 = String.valueOf(periodo.getYears());
                                 DatosCurva laCurva;
                                 Log.e(">>>", edad1);
+                                String edadR = "";
 
                                 if(edad1.equals("0")){
 
-                                    laCurva = new DatosCurva("id", fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),periodo.getMonths(), DatosCurva.MESES );
+                                    edadR = periodo.getMonths() + " Meses";
+
 
                                 }else {
-                                    laCurva = new DatosCurva("id", fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),periodo.getYears(), DatosCurva.AÑOS);
-                                    
+                                    edadR = periodo.getYears() + " Años y " + periodo.getMonths()+ " meses";
                                 }
 
-
+                                laCurva = new DatosCurva("id", fecha.getText().toString(), Integer.parseInt(medidaCabeza.getText().toString()), Integer.parseInt(peso.getText().toString()), Integer.parseInt(talla.getText().toString()),edadR );
                             Intent i = new Intent();
                             i.putExtra("laCurva", laCurva);
                             setResult(RESULT_OK, i);

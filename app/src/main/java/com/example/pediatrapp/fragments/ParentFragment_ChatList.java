@@ -238,10 +238,10 @@ public class ParentFragment_ChatList extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Padre p = dataSnapshot.getValue(Padre.class);
                 Log.e(">>>>","el padre si existe" + p.getNombre() );
-//                if(p.getChat_grupal_id() != null){
-//                    chatGrup = p.getChat_grupal_id();
-//                    loadChatG(chatGrup);
-//                }
+                if(p.getChat_grupal_id() != null){
+                    chatGrup = p.getChat_grupal_id();
+                    loadChatG(chatGrup);
+                }
 
             }
 
@@ -263,7 +263,7 @@ public class ParentFragment_ChatList extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ChatGrupal c = dataSnapshot.getValue(ChatGrupal.class);
                 if(c != null){
-             //       chatGrup = p.getChat_grupal_id();
+//                    chatGrup = p.getChat_grupal_id();
                     Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) );
 
                     if(getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) >= ChatGrupal.DURACION){
