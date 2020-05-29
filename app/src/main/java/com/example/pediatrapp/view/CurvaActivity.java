@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pediatrapp.R;
@@ -36,6 +37,7 @@ public class CurvaActivity extends AppCompatActivity {
     private String sexo;
     private String type;
     private TextView Titulo;
+    private Button backVerCurva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,13 @@ public class CurvaActivity extends AppCompatActivity {
         listaCurvas = new ArrayList<>();
         lineaPrueba = (LineChart) findViewById(R.id.lineprueba);
         Titulo = findViewById(R.id.tituloTV);
+        backVerCurva = findViewById(R.id.backVerCurva);
+
+        backVerCurva.setOnClickListener(
+                (v) ->{
+                    this.finish();
+                }
+        );
 
 //        lineaPrueba.setDragEnabled(true);
 //        lineaPrueba.setScaleEnabled(false);
