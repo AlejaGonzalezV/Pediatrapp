@@ -90,10 +90,11 @@ public class ChangePhotoFragment extends Fragment {
                                         Pediatra ped = child.getValue(Pediatra.class);
 
                                         FirebaseStorage storage = FirebaseStorage.getInstance();
-                                        storage.getReference().child("Doctor").child(id+"*"+"Foto").delete();
+                                        storage.getReference().child("Doctor").child(ped.getFoto()).delete();
                                         String nuevo = UUID.randomUUID().toString();
-                                        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ped.getId()).child("foto").setValue(nuevo + "*Foto");
-                                        storage.getReference().child("Padre").child(nuevo).putFile(uri);
+                                        String fot = nuevo+"*Foto";
+                                        FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ped.getId()).child("foto").setValue(fot);
+                                        storage.getReference().child("Doctor").child(fot).putFile(uri);
 
                                         Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
                                         pediatraPerfil = new PediatraFragment_Perfil();
