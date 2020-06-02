@@ -138,6 +138,7 @@ public class PediatraFragment_Perfil extends Fragment {
                     fragmentFoto = new ChangePhotoFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.remove(this);
                     fragmentTransaction.replace(R.id.fragmentContainer, fragmentFoto);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();

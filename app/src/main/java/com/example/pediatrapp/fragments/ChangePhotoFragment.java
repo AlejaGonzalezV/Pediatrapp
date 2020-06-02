@@ -94,15 +94,19 @@ public class ChangePhotoFragment extends Fragment {
                                         String nuevo = UUID.randomUUID().toString();
                                         String fot = nuevo+"*Foto";
                                         FirebaseDatabase.getInstance().getReference().child("Pediatras").child(ped.getId()).child("foto").setValue(fot);
-                                        storage.getReference().child("Doctor").child(fot).putFile(uri);
+                                        storage.getReference().child("Doctor").child(fot).putFile(uri).addOnSuccessListener(uri -> {
 
-                                        Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
-                                        pediatraPerfil = new PediatraFragment_Perfil();
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                        fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
-                                        fragmentTransaction.addToBackStack(null);
-                                        fragmentTransaction.commit();
+                                            Toast.makeText(getContext(), "La foto se ha cambiado con éxito", Toast.LENGTH_SHORT).show();;
+                                            pediatraPerfil = new PediatraFragment_Perfil();
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragmentContainer, pediatraPerfil);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+
+                                        });
+
+
 
                                     }
 
