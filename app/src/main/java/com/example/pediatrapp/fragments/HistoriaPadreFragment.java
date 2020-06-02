@@ -48,8 +48,8 @@ public class HistoriaPadreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_historia_padre, container, false);
-        HistoriaClinicaActivity activity = (HistoriaClinicaActivity) getActivity();
-        hijoId = activity.getHijoId();
+        hijoId = getArguments().getString("idHijo");
+        Log.e("IDDDDDDDDDDDDD", hijoId);
         nombre = view.findViewById(R.id.nombre);
         lista = view.findViewById(R.id.lista);
         back = view.findViewById(R.id.back);
@@ -112,17 +112,13 @@ public class HistoriaPadreFragment extends Fragment {
     public void obtenerHijo(){
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos");
+        Query query = FirebaseDatabase.getInstance().getReference().child("Padres").child(uid).child("hijos").child(hijoId);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-
-                    hijo = child.getValue(Hijo.class);
-                    nombre.setText(hijo.getNombre());
-
-                }
+                Hijo hijo = dataSnapshot.getValue(Hijo.class);
+                nombre.setText(hijo.getNombre());
 
             }
 

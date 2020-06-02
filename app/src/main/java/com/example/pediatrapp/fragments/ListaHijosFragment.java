@@ -76,7 +76,8 @@ public class ListaHijosFragment extends Fragment {
         Hijo hijo = (Hijo) lista.getItemAtPosition(id);
         ident = hijo.getId();
         nombre = hijo.getNombre();
-        enviar();
+        listener.onData(this, "next", hijo.getId());
+        //enviar();
 
     }
 

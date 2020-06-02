@@ -60,7 +60,6 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
         nameHijo = intent.getStringExtra("nameHijo");
         nacimiento = intent.getStringExtra("nacimiento");
         sexo = intent.getStringExtra("sexo");
-        Log.e("ANTEEEEES", String.valueOf(padreId == null));
 
         historiaPadreFragment = new HistoriaPadreFragment();
         ((HistoriaPadreFragment) historiaPadreFragment).setListener(this);
@@ -201,7 +200,9 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
             if(type.equals("next")){
 
                 hijoId = args[0];
-
+                Bundle arg = new Bundle();
+                arg.putString("idHijo", hijoId);
+                historiaPadreFragment.setArguments(arg);
                 showFragment(historiaPadreFragment);
 
 
