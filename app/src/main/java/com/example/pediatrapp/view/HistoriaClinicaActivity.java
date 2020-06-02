@@ -256,6 +256,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
                 args1.putString("ids", hijoId);
                 diagnosticoFragment.setArguments(args1);
                 showFragment(diagnosticoFragment);
+                data = "";
 
             }
 
@@ -296,6 +297,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
             if(type.equals("formula")){
 
+                data = "";
                 showFragment(formulaFragment);
 
             }else if(type.equals("back")){
@@ -306,7 +308,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                 for(int i=0; i<args.length; i++){
 
-                    data+=args[i]+",";
+                    data+=args[i]+"%";
 
                 }
 
@@ -327,7 +329,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
                 for(int i=0; i<args.length; i++){
 
-                    data+= args[i]+",";
+                    data+= args[i]+"%";
 
                 }
 
@@ -378,7 +380,16 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
         if(formula){
 
-            String[] val = data.split(",");
+            String[] val = data.split("%");
+            Log.e(">>>>>>>>>", val[0]);
+            Log.e(">>>>>>>>>", val[1]);
+            Log.e(">>>>>>>>>", val[2]);
+            Log.e(">>>>>>>>>", val[3]);
+            Log.e(">>>>>>>>>", val[4]);
+            Log.e(">>>>>>>>>", val[5]);
+            Log.e(">>>>>>>>>", val[6]);
+            Log.e(">>>>>>>>>", val[7]);
+
             String fechaFormula = val[0];
             String posologia = val[1];
             String titulo = val[2];
@@ -398,7 +409,7 @@ public class HistoriaClinicaActivity extends AppCompatActivity implements OnData
 
         }else {
 
-            String[] val = data.split(",");
+            String[] val = data.split("%");
             String titulo = val[0];
             String fechaR = val[1];
             String diagnostico = val[2];
