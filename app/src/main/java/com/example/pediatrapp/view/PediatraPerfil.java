@@ -21,10 +21,15 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,7 +50,6 @@ public class PediatraPerfil extends AppCompatActivity {
 
         Intent intent = getIntent();
         idPediatra = intent.getStringExtra("userid");
-        Log.e("<<<<<<<<<<<ID", idPediatra);
 
         pediatra_foto = findViewById(R.id.pediatra_foto);
         nombre_pediatra = findViewById(R.id.nombre_pediatra);
@@ -68,11 +72,21 @@ public class PediatraPerfil extends AppCompatActivity {
                         email_pediatra.setText(ped.getCorreo());
                         numeroUnico_pediatra.setText(ped.getIdV());
 
-                        storage.getReference().child("Doctor").child(ped.getFoto()).getDownloadUrl().addOnSuccessListener(
-                                uri -> {
-                                    Glide.with(getApplicationContext()).load(uri).centerCrop().into(pediatra_foto);
-                                }
-                        );
+                        File imageFile = new File(getApplicationContext().getExternalFilesDir(null) + "/" + ped.getFoto());
+
+                        if(imageFile.exists()){
+
+                            loadImage(pediatra_foto, imageFile);
+
+                        }else {
+
+                            storage.getReference().child("Doctor").child(ped.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                    uri -> {
+                                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(pediatra_foto);
+                                    }
+                            );
+
+                        }
 
                     }
 
@@ -95,6 +109,12 @@ public class PediatraPerfil extends AppCompatActivity {
                 }
 
         );
+
+    }
+
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
 
     }
 }

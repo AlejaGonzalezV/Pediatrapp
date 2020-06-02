@@ -1,6 +1,8 @@
 package com.example.pediatrapp.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParentFragment_Perfil extends Fragment {
@@ -45,6 +50,7 @@ public class ParentFragment_Perfil extends Fragment {
     private TextView numeroTel;
     private Button cerrarSesion, editarFoto, agregarHijo;
     private Fragment fragmentFoto, newChildFragment;
+    private File imageFile;
 
     public ParentFragment_Perfil() {
     }
@@ -63,6 +69,8 @@ public class ParentFragment_Perfil extends Fragment {
         editarFoto = view.findViewById(R.id.editarFoto);
         agregarHijo = view.findViewById(R.id.agregarHijo);
         FirebaseStorage storage = FirebaseStorage.getInstance();
+
+
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -95,14 +103,22 @@ public class ParentFragment_Perfil extends Fragment {
                         email_padre.setText(padre.getCorreo());
                         numeroTel.setText(padre.getTelefono());
                         nombre_padre.setText(padre.getNombre());
-                        storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
-                                uri -> {
-                                    Glide.with(getContext()).load(uri).centerCrop().into(padre_foto);
-                                }
-                        );
 
+                        File imageFile = new File(getContext().getExternalFilesDir(null) + "/" + padre.getFoto());
 
+                        if (imageFile.exists()) {
 
+                            loadImage(padre_foto, imageFile);
+
+                        } else {
+
+                            storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                    uri -> {
+                                        Glide.with(getContext()).load(uri).centerCrop().into(padre_foto);
+                                    }
+                            );
+
+                        }
 
                     }
 
@@ -155,11 +171,16 @@ public class ParentFragment_Perfil extends Fragment {
         return view;
     }
 
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
+
+    }
+
     public void notif(){
 
 
 
-        Log.e("DESUSCRIBE1", "DESUSCRIBE");
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Query query2 = FirebaseDatabase.getInstance().getReference().child("chat");
         query2.addListenerForSingleValueEvent(new ValueEventListener() {

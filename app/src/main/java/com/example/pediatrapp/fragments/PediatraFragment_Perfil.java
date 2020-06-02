@@ -1,6 +1,8 @@
 package com.example.pediatrapp.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -160,11 +164,27 @@ public class PediatraFragment_Perfil extends Fragment {
                         email_pediatra.setText(pediatra.getCorreo());
                         numeroUnico_pediatra.setText(pediatra.getIdV());
                         nombre_pediatra.setText(pediatra.getNombre());
-                        storage.getReference().child("Doctor").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
-                                uri -> {
-                                    Glide.with(getContext()).load(uri).centerCrop().into(pediatra_foto);
-                                }
-                        );
+
+
+                        File imageFile = new File(getContext().getExternalFilesDir(null) + "/" + pediatra.getFoto());
+
+                        if(imageFile.exists()){
+
+                            loadImage(pediatra_foto, imageFile);
+
+                        }else{
+
+                            storage.getReference().child("Doctor").child(pediatra.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                    uri -> {
+                                        Glide.with(getContext()).load(uri).centerCrop().into(pediatra_foto);
+                                    }
+                            );
+
+                        }
+
+
+
+
 
                     }
 
@@ -181,6 +201,12 @@ public class PediatraFragment_Perfil extends Fragment {
         return view;
 
 
+
+    }
+
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
 
     }
 

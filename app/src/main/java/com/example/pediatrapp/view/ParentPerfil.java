@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -67,12 +72,22 @@ public class ParentPerfil extends AppCompatActivity {
 
 
                         nombre_padre.setText(padre.getNombre());
-                        storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
-                                uri -> {
-                                    Glide.with(getApplicationContext()).load(uri).centerCrop().into(padre_foto);
-                                }
-                        );
 
+                        File imageFile = new File(getApplicationContext().getExternalFilesDir(null) + "/" + padre.getFoto());
+
+                        if(imageFile.exists()){
+
+                            loadImage(padre_foto, imageFile);
+
+                        }else {
+
+                            storage.getReference().child("Padre").child(padre.getFoto()).getDownloadUrl().addOnSuccessListener(
+                                    uri -> {
+                                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(padre_foto);
+                                    }
+                            );
+
+                        }
                     }
 
                 }
@@ -123,6 +138,12 @@ public class ParentPerfil extends AppCompatActivity {
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+    }
+
+    public void loadImage(ImageView imageView, File file){
+        Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+        imageView.setImageBitmap(bitmap);
 
     }
 
