@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Peso (gr):"
+        android:text="Peso (Kg):"
         android:textColor="#000000"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
