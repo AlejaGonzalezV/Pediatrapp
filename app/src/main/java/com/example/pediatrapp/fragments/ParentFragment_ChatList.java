@@ -241,6 +241,11 @@ public class ParentFragment_ChatList extends Fragment {
                 if(p.getChat_grupal_id() != null){
                     chatGrup = p.getChat_grupal_id();
                     loadChatG(chatGrup);
+                }else{
+                    if(adapterG.getCount() > 0){
+                        adapterG.remove();
+                    }
+
                 }
 
             }
@@ -265,14 +270,17 @@ public class ParentFragment_ChatList extends Fragment {
                 if(c != null){
 //                    chatGrup = p.getChat_grupal_id();
                     Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) );
-
+                    Log.e(">>>Fecha creacion", "" + new Date(c.getFecha_creacion()));
                     if(getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) >= ChatGrupal.DURACION){
                         Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(c.getFecha_creacion()), new Date(System.currentTimeMillis())) );
                         padre_chatGrupal.setVisibility(View.GONE);
                         borrarChatG();
                     }else{
-                        adapterG.addChatG(c);
-                        padre_chatGrupal.setVisibility(View.VISIBLE);
+                        if(adapterG.getCount() == 0){
+                            adapterG.addChatG(c);
+                            padre_chatGrupal.setVisibility(View.VISIBLE);
+                        }
+
 
                     }
                 }

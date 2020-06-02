@@ -254,7 +254,7 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
                 vacunaSelected = parent.getItemAtPosition(position).toString();
             }
 
@@ -277,7 +277,7 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
 
                 edadSelected = parent.getItemAtPosition(position).toString();
             }
@@ -298,7 +298,7 @@ public class AddVacunaActivity extends AppCompatActivity implements Serializable
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(parent.getContext(),"Se añadió: "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
                 dosisSelected = parent.getItemAtPosition(position).toString();
             }
 

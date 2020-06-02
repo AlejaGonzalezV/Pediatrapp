@@ -157,7 +157,7 @@ public class ListaVacunasActivity extends AppCompatActivity implements Serializa
             adapter.addVacuna(vacuna);
             FirebaseDatabase.getInstance().getReference().child("Vacunas").child(idhijo).child("Vacunas").child(idc).setValue(vacuna);
 
-            Toast.makeText(this,"Se añadióZZZZZZ: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,"Se añadióZZZZZZ: "+ vacuna.getNombre_vacuna(), Toast.LENGTH_SHORT).show();
         }else{
 
             Toast.makeText(this," Ingrese todos los datos", Toast.LENGTH_SHORT).show();

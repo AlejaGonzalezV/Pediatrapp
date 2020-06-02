@@ -23,6 +23,8 @@ import com.example.pediatrapp.adapter.PediatraAdapter_ChatList;
 import com.example.pediatrapp.model.ChatGrupal;
 import com.example.pediatrapp.model.Padre;
 import com.example.pediatrapp.view.MessageGroupActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PediatraFragment_ChatG extends Fragment {
 
@@ -40,6 +43,7 @@ public class PediatraFragment_ChatG extends Fragment {
     private Button FiltroChatBT;
     private Adapter_ChatG adapterG;
     private ArrayList<ChatGrupal> chats;
+    private ArrayList<String> idpediatras;
 
 
     public PediatraFragment_ChatG() {
@@ -58,9 +62,11 @@ public class PediatraFragment_ChatG extends Fragment {
         FiltroChatBT = view.findViewById(R.id.FiltroChatBT);
 
         chats = new ArrayList<>();
+        idpediatras = new ArrayList<>();
         adapterG = new Adapter_ChatG();
         pediatra_ChatG.setAdapter(adapterG);
 
+        Log.e(">>>", "ENTRA A CHATG");
         loadAllGroupChats();
 
         pediatra_ChatG.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,7 +114,7 @@ public class PediatraFragment_ChatG extends Fragment {
     private void loadAllGroupChats() {
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Chat_grupal");
-
+        Log.e(">>>", "bUSCA CHATS");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -118,9 +124,17 @@ public class PediatraFragment_ChatG extends Fragment {
                         Log.e(">>>Data snapshot", "" +dataSn.getValue());
                         ChatGrupal g = dataSn.getValue(ChatGrupal.class);
                         if(g != null) {
-                            chats.add(g);
-                            adapterG.addChatG(g);
-                         //   FirebaseMessaging.getInstance().subscribeToTopic(g.getId());
+
+                            if(getDiferenciaDias(new Date(g.getFecha_creacion()), new Date(System.currentTimeMillis())) >= ChatGrupal.DURACION){
+                                Log.e(">>>", "diferencia "+ getDiferenciaDias(new Date(g.getFecha_creacion()), new Date(System.currentTimeMillis())) );
+
+                                borrarChatG(g);
+                            }else{
+                                chats.add(g);
+                                adapterG.addChatG(g);
+                            }
+
+
                         }
                     }
 
@@ -131,9 +145,50 @@ public class PediatraFragment_ChatG extends Fragment {
 
                 }
             });
-
-
     }
+
+
+    private void borrarChatG(ChatGrupal chat) {
+
+        //IMPLEMENTAR
+        //adapterG.remove();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(chat.getId());
+        FirebaseDatabase.getInstance().getReference().child("Padres").child(chat.getId_padre()).child("chat_grupal_id").removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Chat_grupal").child(chat.getId()).removeValue();
+        findAllPediatras(chat.getId());
+    }
+
+    private void findAllPediatras(String id) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pediatras");
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+
+                    String id = data.getKey();
+                    if(id != null){
+                        idpediatras.add(id);
+                    }
+                }
+
+                for(int i = 0; i < idpediatras.size(); i++){
+                    FirebaseDatabase.getInstance().getReference().child("Pediatras").child(idpediatras.get(i)).child("chats_grupales").child(id).removeValue();
+                }
+
+                idpediatras.clear();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
 
     public ArrayList<ChatGrupal> buscarChat(String nombre){
@@ -146,6 +201,24 @@ public class PediatraFragment_ChatG extends Fragment {
         }
 
         return  resultado;
+    }
+
+    public long getDiferenciaDias(Date fechaInicial, Date fechaFinal){
+
+        long diferencia = fechaFinal.getTime() - fechaInicial.getTime();
+
+        Log.e(">>>>>", "fechaInicial : " + fechaInicial);
+        Log.e(">>>>>", "fechaFinal : " + fechaFinal);
+
+        long segsMilli = 1000;
+        long minsMilli = segsMilli * 60;
+        long horasMilli = minsMilli * 60;
+        long diasMilli = horasMilli * 24;
+
+        long diasTranscurridos = diferencia / diasMilli;
+        diferencia = diferencia % diasMilli;
+
+        return diasTranscurridos;
     }
 
 
